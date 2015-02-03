@@ -4,7 +4,7 @@
 <head>
 <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
 <meta name="generator" content="AsciiDoc 8.6.9" />
-<title></title>
+<title>谷歌大脑联合发起人解释为什么他要构造中文神经网络</title>
 <style type="text/css">
 /* Shared CSS for AsciiDoc xhtml11 and html5 backends */
 
@@ -733,14 +733,61 @@ asciidoc.install();
 </head>
 <body class="article">
 <div id="header">
+<h1>谷歌大脑联合发起人解释为什么他要构造中文神经网络</h1>
+<span id="author">Andrew Ng 谈百度深度学习的现状</span><br />
 </div>
 <div id="content">
-<div class="paragraph"><p><a href="Ng.html">Andrew Ng 谈百度深度学习的现状</a></p></div>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph"><p>采访Andrew Ng可不是件容易的事。在旧金山的深度学习峰会上，他在一伙慕名而来的计算机科学家的簇拥下（清嗓子）走下讲坛。他曾是斯坦福大学深度学习的教授，前“谷歌大脑”的领导人，Coursera的创始人，现在则是中国网络巨人百度的首席科学家。</p></div>
+<div class="paragraph"><p>深度学习已经成为了计算最热门的一个话题，这大部分归功于Geoff Hinton在过去十年所做的工作，他现在已经是<a href="https://medium.com/backchannel/google-search-will-be-your-next-brain-5207c26e4523">谷歌顶尖科学家</a>。其思想是如果你交给计算机一堆例如说狗的图片，计算机将最终能够学习如何从中识别出犬。如果我们可以让计算机做到这些，科技爱好者和商业人士会一致希望机器很快地能够理解语言和图像。这种方法也可以应用到其它完全不同的领域，例如让计算机
+<a href="http://www.technologyreview.com/news/530261/a-startup-hopes-to-teach-computers-to-spot-tumors-in-medical-scans/">识别肿瘤</a>，或者<a href="http://www.technologyreview.com/news/528846/travel-app-can-recommend-places-by-looking-at-them/">识别餐馆的气氛</a>。</p></div>
+<div class="paragraph"><p>Ng和我就他在领导“中国的谷歌”通过深度学习理解我们所处的世界时所遇到的挑战进行了交谈。Ng强调说，百度“只关心能够影响一亿用户的技术”。尽管有很大的目标，他还是很友好，语气很随和，是那种你不忍心打断他的人。</p></div>
+<div class="paragraph"><p><strong>[Caleb Garling] 人们经常把我们生物学的大脑和计算机神经网络混为一谈，你能解释为什么这是不精确的吗？</strong></p></div>
+<div class="paragraph"><p>大脑中的单个神经元是一个异常复杂的机器，直到今天我们仍不能理解它。而神经网络中的单个“神经元”则是相当简单的数学函数，它只能模仿生物学神经元的很少一部分功能。因此神经网络模仿人脑的这种说法并不严谨，只是为了易于理解，真实的人工神经网络跟生物学大脑没有什么关系。</p></div>
+<div class="paragraph"><p><strong>今天的机器可以识别，例如说狗的跳跃。但是如果有个人拿着一块肉在狗上面会怎样？我们能够理解其概念上的差别，逗狗的把戏。而那块肉不仅只是一块肉，它是奖赏——一个不同的语言学概念。我们能够让计算机理解这些概念吗？</strong></p></div>
+<div class="paragraph"><p>目前，深度学习算法十分擅长一种事情：对输入进行学习，并将其映射到输出。X到Y。学习概念将是很困难的。</p></div>
+<div class="paragraph"><p>百度几个月前做的一件事是，输入一幅图片，输出一个标语。我们展示了这些输入输出映射是可以学习的。尽管有很大的提升空间，但是这是让计算机理解这些高层概念很有前途的一种方法。</p></div>
+<div class="paragraph"><p><em>在会议之前我问了在Flickr负责用深度学习给图片贴标签的Simon Osindero同样的问题，他说：“我们需要采用一种完全不同的方法。”</em></p></div>
+<div class="paragraph"><p><strong>汉语普通话和英语在几乎所有方面都是非常不同的两种语言。那么理解这两种语言的机器框架会有什么不同呢？</strong></p></div>
+<div class="paragraph"><p>目前的技术还没有成熟到可以让我给出一个简明的回答。我们已经有了英语的框架。现在正在做汉语的框架。</p></div>
+<div class="paragraph"><p>英语字母表有26个字母，而汉语有大概5000个。一个中等大小的英语语义集中，所有字母都会出现。但是汉语语义集中可能有些字符只出现了一次。那么如何识别这些中文字符呢？</p></div>
+<div class="paragraph"><p>罗曼语系会更易处理。从法语到英语远比从汉语到英语的转换简单得多。</p></div>
+<div class="paragraph"><p><strong>那么你怎么给一副用英语打了标签的图片，用汉语打标签呢？</strong></p></div>
+<div class="paragraph"><p>我认为很多方法都可以尝试——目前它们还没有被完全开发。</p></div>
+<div class="paragraph"><p>可以预见的一点是多任务学习。例如你有一个用英语标签识别图片的神经网络，现在你想训练它来用汉语识别目标。如果你让一个网络同时做这两件事情，有可能会比用两个不同的网络分别处理这两个问题的效果更好。</p></div>
+<div class="paragraph"><p>虽然增益不是很明显，但还是有的。原因是，在第一次阶段，机器可能会检测图像的边缘，然后可能会检测角点。这些知识是两种语言共有的。一旦你在英语中识别了一个物体，就能帮助你在汉语中识别它，因为物体的边缘等信息已经有了。</p></div>
+<div class="paragraph"><p><strong>如何处理在另一种语言中不存在的单词呢？</strong></p></div>
+<div class="paragraph"><p>汉语中的姐姐和妹妹，在英语中都用sister来表示。这实际上会造成翻译上的困难，因为看到单词sister，你不知道要把它翻译成姐姐还是妹妹。但是我想如果从sister跟屋子里其它物体之间的不同来做区分，会比从头开始学习一个“姐姐”的概念更易处理。</p></div>
+<div class="paragraph"><p>训练会变得更昂贵——当然这在神经网络很小的时候不是问题。</p></div>
+<div class="paragraph"><p><strong>等等，什么是一个小的神经网络？</strong></p></div>
+<div class="paragraph"><p>（笑）这个每天都在变。一种度量是用神经网络中的连接数目。百度的神经网络经常会有百亿的连接。</p></div>
+<div class="paragraph"><p><strong>我们来谈谈语言识别。百度的工作是否基于特殊的声音或者字母组合，例如"th"(称作音素)？</strong></p></div>
+<div class="paragraph"><p>这是语音识别过去的做法。所有的语音识别过去都用这个标准的流程，输入音频文件然后试着预测音素。接着用另外一个系统把音素映射到单词。</p></div>
+<div class="paragraph"><p>但是最近有了争论：音素是语言固有的基本现象还是语言学家凭空造出来的？我用了<a href="http://web.eecs.umich.edu/~honglak/nips09-AudioConvolutionalDBN.pdf">很多年</a>来让人们相信，音素是人造的产物——它不是语言的基本现象，只是人类在描述语言时发明的东西。许多语言学家强烈反对我的看法，有时是公开地。</p></div>
+<div class="paragraph"><p>我们在百度做的语音系统中是不用音素的概念的。这跟婴儿的学习过程是一样的：我们提供音频和文本，然后让它自己做映射，而不用叫做音素的人工概念。</p></div>
+<div class="paragraph"><p>在别人告诉我什么叫做音素的很久以前，我就学会如何说英语了。</p></div>
+<div class="paragraph"><p><strong>电影呢？在百度你们在关心这个吗？</strong></p></div>
+<div class="paragraph"><p>关于视频的深度学习已经有了很多的工作。但是我不认为目前这些工作很成功，它们还是将时间作为基本维度。深度学习的研究人员中有一个争论：在系统智能的发展中，时间有多基本？</p></div>
+<div class="paragraph"><p><strong>额，你能详细解释下时间的研究吗？</strong></p></div>
+<div class="paragraph"><p>通过移动头部，就能对物体产生视差。（原理是你其实是在看不同时间下物体之间的关系。）一些是前景的移动，一些是背景的移动。我们不知道儿童是否学着对物体做区分，学着根据视差判断物体之间的距离。我不是很清楚，也不认为有人会清楚。</p></div>
+<div class="paragraph"><p>动物能看到一个运动的世界。如果动物只能看到静态的图片，它的视觉会如何发展呢？神经科学家对猫做了一个实验。他们把猫放在黑暗的环境中，加上一个闪光灯用来看静止的图片——这些猫的视觉其实上是发育不全的。因此运动是重要的，但是算法是怎眼规定呢？视觉系统要如何利用这些呢？</p></div>
+<div class="paragraph"><p>我认为时间是非常重要的，但是我们没有一个能够想出正确的算法来利用它。</p></div>
+<div class="paragraph"><p><em>以上是深度学习峰会上的所有采访内容。但是后续我又通过电子邮件联系到了Ng。</em></p></div>
+<div class="paragraph"><p><strong>你认为人工智能(AI)会是一个潜在的威胁吗？</strong></p></div>
+<div class="paragraph"><p>我对AI会使数以千万的的人们的生活变得更好的潜力是乐观的。如果我自己都不相信这是真的，那就不会去研究它了。想想如果我们能对计算机说话，让它理解“请为我安排下周与Bob的会面。”或者如果每个儿童能有一个个人化的导师。抑或者为我们剩下时间的自动驾驶汽车。</p></div>
+<div class="paragraph"><p>我认为对“邪恶杀手机器人”的恐惧是被夸大了的。在智能和感知之间还有很大的一个鸿沟。我们的软件正在变得更加智能，但是这并不意味着它会变得具有感知能力。</p></div>
+<div class="paragraph"><p>技术给国家带来的最大问题是对劳动者的挑战。举个例子，在美国有35万的卡车司机，如果我们能成功地开发出自动驾驶汽车，他们的工作都会受到影响。我想我们需要政府和商业领袖之间严肃地就这个问题进行讨论，而根本没必要对天花乱坠的关于“邪恶杀手机器人”的报道分心。</p></div>
+<div class="paragraph"><p><em><sup> <strong>bigeast</strong> 译自
+<a href="http://medium.com/backchannel/google-brains-co-inventor-tells-why-hes-building-chinese-neural-networks-662d03a8b548/">Google
+Brain’s Co-inventor Tells Why He’s Building Chinese Neural Networks</a></sup></em></p></div>
+</div>
+</div>
 </div>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-02-03 14:00:35 CST
+Last updated 2015-02-03 14:10:55 CST
 </div>
 </div>
 </body>
