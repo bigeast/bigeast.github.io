@@ -4,7 +4,7 @@
 <head>
 <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
 <meta name="generator" content="AsciiDoc 8.6.9" />
-<title></title>
+<title>用Vim阅读代码树</title>
 <style type="text/css">
 /* Shared CSS for AsciiDoc xhtml11 and html5 backends */
 
@@ -733,15 +733,76 @@ asciidoc.install();
 </head>
 <body class="article">
 <div id="header">
+<h1>用Vim阅读代码树</h1>
 </div>
 <div id="content">
-<div class="paragraph"><p><a href="Ng.html">Andrew Ng 谈百度深度学习的现状</a></p></div>
-<div class="paragraph"><p><a href="Source_Code_Tree_Navigation_in_Vim.html">Source Code Tree Navigation in Vim</a></p></div>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph"><p>用Vim已经很久了，但从来没有真正用它来看工程文件。也曾用过taglist，但感觉功能有限，或许是我没有仔细看文档，总之不能满足我的要求。</p></div>
+<div class="paragraph"><p>ctags也用过，但也没有深入研究过，因为需求也不是很强烈。然后现在只能是在VS2008（不要问我为什么用这么老的版本，那个某软件发布的工程文件就是vc9.sln，懒得改了）里看源码的关系。</p></div>
+<div class="paragraph"><p>我的基本要求是：</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_跨文件跳转到定义">跨文件跳转到定义</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>在VS中快捷键是 <em>F12</em> ，然后 <em>Ctrl+-</em> 返回。在Vim的内置功能中也有跳转到定义的功能，按 <em>gd</em> 即可，但这只是基于文本的搜索，没有分析语法，而且只能在当前文件中搜索，不是很实用。标准的解决方案应该是用 <a href="http://ctags.sourceforge.net/">ctags</a> 生成tags文件，然后在Vim中就可以用
+* <em>:tag &lt;varname&gt;</em>
+* 或者 <em>Ctrl+]</em> （写到这里突然想到了Vim的帮助文档的tags就是这么跳转的）
+* 甚至 <em>Ctrl+鼠标左键</em> 来跳转到定义了。具体做法如下：</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+首先系统需要安装ctags，这个通过软件源或者<a href="http://ctags.sourceforge.net/">ctags官方网站</a>都可以安装。
+</p>
+</li>
+<li>
+<p>
+在工程目录下生成tags文件：
+</p>
+</li>
+</ul></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.7
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="color: #009900">$ctags</span> -R <span style="font-style: italic"><span style="color: #9A1900"># 遍历所有目录，默认输出文件是 tags</span></span>
+<span style="color: #009900">$ctags</span> -e -R <span style="font-style: italic"><span style="color: #9A1900"># 同上，但是生成的TAGS是给Emacs用的</span></span></tt></pre></div></div>
+<div class="ulist"><ul>
+<li>
+<p>
+在 <em>~/.vimrc</em> 中添加
+</p>
+</li>
+</ul></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.7
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="font-weight: bold"><span style="color: #0000FF">set</span></span> <span style="color: #009900">tags</span><span style="color: #990000">=.</span>/tags<span style="color: #990000">;/</span></tt></pre></div></div>
+<div class="paragraph"><p>这是Stackoverflow上<a href="http://stackoverflow.com/questions/563616/vim-and-ctags-tips-and-tricks">有个答案</a>给出的解决方案，目的是先在当前目录下找tags，如果没有，就一直向上层目录搜索，直到根目录。这样就只需要生成一个tags文件就行了。</p></div>
+<div class="paragraph"><p>之所以要这样设置，是因为默认的<em>set tags=./tags,./TAGS,tags,TAGS</em> 不好用。实际的代码文件往往分散在工程文件下的多个子目录下，如果Vim默认只在当前目录下搜索tags或者TAGS，就需要分别为每个目录生成tags文件。另外如果没有设置 <em>set autochdir</em> ，在子目录A中，打开了另外子目录B中的某个源文件file.c，此时Vim并不会改变你的当前目录到B，而仍旧在A目录下寻找B/file.c的tags，当然不是想要的结果！不知道Vim的默认选项为什么这么设计（此处省略一万字吐槽）。</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_搜索某个变量或函数在工程内所有文件中出现的位置">搜索某个变量或函数在工程内所有文件中出现的位置</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>这个用Ack或者Ag插件可以完美实现。</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_函数的调用关系">函数的调用关系</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>在VS中要右键&#8594;调用浏览器。在Vim中需要用到cscope。</p></div>
+</div>
+</div>
 </div>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-02-04 01:10:24 CST
+Last updated 2015-02-04 01:06:15 CST
 </div>
 </div>
 </body>

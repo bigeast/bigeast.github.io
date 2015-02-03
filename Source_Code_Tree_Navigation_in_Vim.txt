@@ -1,0 +1,37 @@
+= 用Vim阅读代码树
+
+用Vim已经很久了，但从来没有真正用它来看工程文件。也曾用过taglist，但感觉功能有限，或许是我没有仔细看文档，总之不能满足我的要求。
+
+ctags也用过，但也没有深入研究过，因为需求也不是很强烈。然后现在只能是在VS2008（不要问我为什么用这么老的版本，那个某软件发布的工程文件就是vc9.sln，懒得改了）里看源码的关系。
+
+我的基本要求是：
+
+== 跨文件跳转到定义
+
+在VS中快捷键是 _F12_ ，然后 _Ctrl+-_ 返回。在Vim的内置功能中也有跳转到定义的功能，按 _gd_ 即可，但这只是基于文本的搜索，没有分析语法，而且只能在当前文件中搜索，不是很实用。标准的解决方案应该是用 http://ctags.sourceforge.net/[ctags] 生成tags文件，然后在Vim中就可以用 
+* _:tag <varname>_ 
+* 或者 _Ctrl+]_ （写到这里突然想到了Vim的帮助文档的tags就是这么跳转的）
+* 甚至 _Ctrl+鼠标左键_ 来跳转到定义了。具体做法如下：
+
+* 首先系统需要安装ctags，这个通过软件源或者http://ctags.sourceforge.net/[ctags官方网站]都可以安装。
+* 在工程目录下生成tags文件：
+[source,bash]
+$ctags -R # 遍历所有目录，默认输出文件是 tags
+$ctags -e -R # 同上，但是生成的TAGS是给Emacs用的
+
+* 在 _~/.vimrc_ 中添加
+[source,bash]
+set tags=./tags;/
+
+这是Stackoverflow上http://stackoverflow.com/questions/563616/vim-and-ctags-tips-and-tricks[有个答案]给出的解决方案，目的是先在当前目录下找tags，如果没有，就一直向上层目录搜索，直到根目录。这样就只需要生成一个tags文件就行了。
+
+之所以要这样设置，是因为默认的_set tags=./tags,./TAGS,tags,TAGS_ 不好用。实际的代码文件往往分散在工程文件下的多个子目录下，如果Vim默认只在当前目录下搜索tags或者TAGS，就需要分别为每个目录生成tags文件。另外如果没有设置 _set autochdir_ ，在子目录A中，打开了另外子目录B中的某个源文件file.c，此时Vim并不会改变你的当前目录到B，而仍旧在A目录下寻找B/file.c的tags，当然不是想要的结果！不知道Vim的默认选项为什么这么设计（此处省略一万字吐槽）。
+
+
+== 搜索某个变量或函数在工程内所有文件中出现的位置
+
+这个用Ack或者Ag插件可以完美实现。
+
+== 函数的调用关系
+
+在VS中要右键->调用浏览器。在Vim中需要用到cscope。
