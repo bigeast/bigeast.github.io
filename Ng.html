@@ -743,8 +743,8 @@ asciidoc.install();
 <div class="paragraph"><p>深度学习已经成为了计算最热门的一个话题，这大部分归功于Geoff Hinton在过去十年所做的工作，他现在已经是 <a href="https://medium.com/backchannel/google-search-will-be-your-next-brain-5207c26e4523">谷歌顶尖科学家</a>。其思想是如果你交给计算机一堆例如说狗的图片，计算机将最终能够学习如何从中识别出犬。如果我们可以让计算机做到这些，科技爱好者和商业人士会一致希望机器很快地能够理解语言和图像。这种方法也可以应用到其它完全不同的领域，例如让计算机 <a href="http://www.technologyreview.com/news/530261/a-startup-hopes-to-teach-computers-to-spot-tumors-in-medical-scans/">识别肿瘤</a>，或者<a href="http://www.technologyreview.com/news/528846/travel-app-can-recommend-places-by-looking-at-them/">识别餐馆的气氛</a>。</p></div>
 <div class="paragraph"><p>Ng和我就他在领导“中国的谷歌”通过深度学习理解我们所处的世界时所遇到的挑战进行了交谈。Ng强调说，百度“只关心能够影响一亿用户的技术”。尽管颇具雄心，他还是很友好，语气很随和，让你不忍心打断他。</p></div>
 <div class="paragraph"><p><strong>[Caleb Garling] 人们经常把我们生物学的大脑和计算机神经网络混为一谈，你能解释为什么这是不精确的吗？</strong></p></div>
-<div class="paragraph"><p>大脑中的单个神经元是一个异常复杂的机器，直到今天我们仍不能很好地理解它。而神经网络中的单个“神经元”则是有相当简单的数学模型，它只能模仿生物学神经元的很少一部分功能。因此神经网络模仿人脑的这种说法并不严谨，只是为了易于理解，真实的人工神经网络跟生物学大脑没有什么关系。</p></div>
-<div class="paragraph"><p><strong>今天的机器可以识别，例如说狗的跳跃。但是如果有个人拿着一块肉放在狗面前会怎样？我们能够理解其概念上的差别，_逗狗的把戏_。而那块肉不仅是一块肉，它是奖赏——一个不同的语言学概念。我们能够让计算机理解这些概念吗？</strong></p></div>
+<div class="paragraph"><p>大脑中的单个神经元是一个异常复杂的机器，直到今天我们仍不能很好地理解它。而神经网络中的单个“神经元”则是有相当简单的数学模型，它只能模仿生物学神经元的很少一部分功能。因此神经网络模仿人脑的这种说法并不严谨，只是为了易于理解，<em>真实的人工神经网络跟生物学大脑没有什么关系</em>。</p></div>
+<div class="paragraph"><p><strong>今天的机器可以识别，例如说狗的跳跃。但是如果有个人拿着一块肉放在狗面前会怎样？我们能够理解其概念上的差别，<em>逗狗的把戏</em>。而那块肉不仅是一块肉，它是奖赏——一个不同的语言学概念。我们能够让计算机理解这些概念吗？</strong></p></div>
 <div class="paragraph"><p>目前，深度学习算法十分擅长一种事情：对输入进行学习，并将其映射到输出。X到Y。学习概念将是很困难的。</p></div>
 <div class="paragraph"><p>百度几个月前做的一件事是，输入一幅图片，输出一个标语。我们展示了这些输入输出映射是可以学习的。尽管有很大的提升空间，但是这是让计算机理解这些高层概念很有前途的一种方法。</p></div>
 <div class="paragraph"><p><em>在会议之前我问了在Flickr负责用深度学习给图片贴标签的Simon Osindero同样的问题，他说：“我们需要采用一种完全不同的方法。”</em></p></div>
@@ -761,7 +761,7 @@ asciidoc.install();
 <div class="paragraph"><p>训练会变得更昂贵——当然这在神经网络很小的时候不是问题。</p></div>
 <div class="paragraph"><p><strong>等等，什么是一个小的神经网络？</strong></p></div>
 <div class="paragraph"><p>（笑）这个每天都在变。一种度量是用神经网络中的连接数目。百度的神经网络经常会有百亿的连接。</p></div>
-<div class="paragraph"><p><strong>我们来谈谈语言识别。百度的工作是否基于特殊的声音或者字母组合，例如"th"(称作音素)？</strong></p></div>
+<div class="paragraph"><p><strong>我们来谈谈语言识别。百度的工作是否基于特殊的声音或者字母组合，例如"th"(称作<em>音素</em>)？</strong></p></div>
 <div class="paragraph"><p>这是语音识别过去的做法。所有的语音识别过去都用这个标准的流程，输入音频文件然后试着预测音素。接着用另外一个系统把音素映射到单词。</p></div>
 <div class="paragraph"><p>但是最近有了争论：音素是语言固有的基本现象还是语言学家凭空造出来的？我用了<a href="http://web.eecs.umich.edu/~honglak/nips09-AudioConvolutionalDBN.pdf">很多年</a>来让人们相信，音素是人造的产物——它不是语言的基本现象，只是人类在描述语言时发明的东西。许多语言学家强烈反对我的看法，有时是公开地。</p></div>
 <div class="paragraph"><p>我们在百度做的语音系统中是不用音素的概念的。这跟婴儿的学习过程是一样的：我们提供音频和文本，然后让它自己做映射，而不用叫做音素的人工概念。</p></div>
@@ -784,7 +784,7 @@ asciidoc.install();
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-02-03 14:40:02 CST
+Last updated 2015-02-03 14:43:51 CST
 </div>
 </div>
 </body>
