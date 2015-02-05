@@ -735,15 +735,41 @@ asciidoc.install();
 <div id="header">
 </div>
 <div id="content">
-<div class="paragraph"><p><a href="Ng.html">Andrew Ng 谈百度深度学习的现状</a></p></div>
-<div class="paragraph"><p><a href="Source_Code_Tree_Navigation_in_Vim.html">Source Code Tree Navigation in Vim</a></p></div>
-<div class="paragraph"><p><a href="scrot.html">Scrot屏幕截图</a></p></div>
-<div class="paragraph"><p><a href="2015-02.html">2015-02 笔记</a></p></div>
+<div class="sect1">
+<h2 id="_15_02_05_09_42_08_thursday">15/02/05/09:42:08/Thursday</h2>
+<div class="sectionbody">
+<div class="ulist"><ul>
+<li>
+<p>
+浮点误差的普遍性
+</p>
+</li>
+</ul></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.7
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt>$ ruby -e <span style="color: #FF0000">'puts 0.1 + 0.2 - 0.3'</span>
+<span style="color: #993399">5.551115123125783e-17</span>
+$ python2 -c <span style="color: #FF0000">'print 0.1 + 0.2 - 0.3'</span>
+<span style="color: #993399">5.55111512313e-17</span>
+$ perl -E <span style="color: #FF0000">'say 0.1 + 0.2 - 0.3'</span>
+<span style="color: #993399">5.55111512312578e-17</span></tt></pre></div></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.7
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="font-weight: bold"><span style="color: #000000">printf</span></span><span style="color: #990000">(</span><span style="color: #FF0000">"%.15e</span><span style="color: #CC33CC">\n</span><span style="color: #FF0000">"</span><span style="color: #990000">,</span><span style="color: #993399">0.1</span> <span style="color: #990000">+</span> <span style="color: #993399">0.2</span> <span style="color: #990000">+</span><span style="color: #993399">0.3</span><span style="color: #990000">);</span> <span style="font-style: italic"><span style="color: #9A1900">/* 5.551115123e-17 */</span></span></tt></pre></div></div>
+<div class="paragraph"><p>perl 6中将用分数来表示小数，进行的是精确的计算，无浮点误差。</p></div>
+</div>
+</div>
 </div>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-02-05 09:49:27 CST
+Last updated 2015-02-05 09:50:41 CST
 </div>
 </div>
 </body>

@@ -1,0 +1,50 @@
+= Scrot屏幕截图
+
+**scrot** 是一个轻量级的屏幕截图程序，它的功能很简单，但都很实用。它的选项很容易看懂。
+
+* 直接对整个屏幕截图：
+[source, bash]
+$ scrot # 将图片保存在当前目录下
+$ scrot /tmp/screenshot.png #指定输出文件
+不指定输出文件时，默认输出文件格式是 "%Y-%m-%d-%H-%M-%S_$wx$h.png"，就是 _年-月-日-时-分-秒_宽x高.png_ 。其中以**%**开头的变量是strftime，在C库函数中也是通用的，date命令也遵循同样的格式。而**$**符号开头的变量则是**scrot**自己内部定义的，另外比较有用的一个是 **$f**，代表整个文件名，可以用这个变量对截好的图进行下一步操作。
+
+* 截图的后续处理
+[source, bash]
+$ scrot -e 'mv $f ~/Pictures/' # 所有截图都保存在同一个目录下
+
+* 选择区域截图
+[source, bash]
+$ scrot -s
+
+* 图像质量设定
+[source, bash]
+$ scrot -q 50 # 0-100，默认是75，其实1和10看不出什么差别，10和50也没什么差别。。
+
+有时候，可能希望在敲完命令，对窗口做一些改动后再开始截图，于是 _-d_ 选项就很有用了。
+
+* 延迟N秒后截图
+[source, bash]
+$ scrot -d 3 # delay
+$ scrot -d 3 -c # delay and count down 3..2..1..
+
+* 对当前获得焦点的窗口截图
+[source, bash]
+$ scrot -u -d 2 -c # 因为在终端输命令的时候肯定焦点在终端上啦，所以希望延迟几秒好有时间把焦点转移到要截图的窗口
+
+我现在是用**i3-dmenu-desktop**（其实是**j4-dmenu-desktop**)来启动程序，但是 **scrot** 是没有.desktop文件的，需要手动生成。
+* 生成 scrot.desktop 文件(_/usr/share/applications/scrot.desktop_)
+
+
+&#91;Desktop Entry&#93;
+[source, bash]
+Name=Scrot
+Comment=Take screen shots
+Exec=scrot -e "mv \$f ~/Pictures/Screenshots/"
+Terminal=false
+Type=Application
+
+注意比较坑的一点是，直接在shell中执行时，_-e_ 后面的命令需要用单引号包含，因为双引号会让bash展开例如说 **$f** 等 **scrot** 的内部变量。但在.desktop文件里不会去解析双引号，而且好像必须要用双引号才行。另外dollar符号要进行转义。这个试了好多遍才做对，还查了freedesktop上的官方文档 http://standards.freedesktop.org/desktop-entry-spec/latest/ar01s06.html[The Exec Key]。
+
+最后有一个没有解决的问题是，我现在有两块显示屏，**scrot** 默认是同时截取所有的屏幕，然后合成一个大文件。这个大文件当然不可能在任何一个单独的屏幕上完全显示！而且如果两块屏幕分辨率是不一样的，最终合成的图片看着也很别扭。
+
+我目前还不知道如何单独截取一个屏幕（想到了给**scrot**指定 http://askubuntu.com/questions/432255/what-is-display-environment-variable[DISPLAY变量]，但是在两块屏幕上这两个变量都是一样的。)
