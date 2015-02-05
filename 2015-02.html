@@ -738,13 +738,8 @@ asciidoc.install();
 <div class="sect1">
 <h2 id="_15_02_05_09_42_08_thursday">15/02/05/09:42:08/Thursday</h2>
 <div class="sectionbody">
-<div class="ulist"><ul>
-<li>
-<p>
-浮点误差的普遍性
-</p>
-</li>
-</ul></div>
+<div class="sect2">
+<h3 id="_浮点误差的普遍性">浮点误差的普遍性</h3>
 <div class="listingblock">
 <div class="content"><!-- Generator: GNU source-highlight 3.1.7
 by Lorenzo Bettini
@@ -764,12 +759,50 @@ http://www.gnu.org/software/src-highlite -->
 <pre><tt><span style="font-weight: bold"><span style="color: #000000">printf</span></span><span style="color: #990000">(</span><span style="color: #FF0000">"%.15e</span><span style="color: #CC33CC">\n</span><span style="color: #FF0000">"</span><span style="color: #990000">,</span><span style="color: #993399">0.1</span> <span style="color: #990000">+</span> <span style="color: #993399">0.2</span> <span style="color: #990000">+</span><span style="color: #993399">0.3</span><span style="color: #990000">);</span> <span style="font-style: italic"><span style="color: #9A1900">/* 5.551115123e-17 */</span></span></tt></pre></div></div>
 <div class="paragraph"><p>perl 6中将用分数来表示小数，进行的是精确的计算，无浮点误差。</p></div>
 </div>
+<div class="sect2">
+<h3 id="_用_strong_stat_strong_查看文件的某个属性">用<strong>stat</strong>查看文件的某个属性</h3>
+<div class="paragraph"><p><strong>ls</strong> 命令给出的文件信息有时不那么有可定制性，<strong>stat</strong> 的 <em>-c</em> 选项则可以很方便地获取想要的信息（应该是stat(2)的一个接口吧）</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.7
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt>$ stat -c <span style="color: #FF0000">"%a"</span> a<span style="color: #990000">.</span>txt
+<span style="color: #993399">644</span></tt></pre></div></div>
+</div>
+<div class="sect2">
+<h3 id="_cups">CUPS</h3>
+<div class="paragraph"><p>自从去年设置好 <a href="http://bigeast.tumblr.com/post/79261788417/archlinux-samba-cups-windows/">Archlinux中通过Samba和CUPS连接Windows打印机</a> 后，过了半年，就不能用了。现在有个任务还是去年七月份的，于是之后一直在 Win7 虚拟机里连打印机。</p></div>
+<div class="paragraph"><p>今天终于忍不住，又去Google上查了。</p></div>
+<div class="paragraph"><p>问题首先是 <em>http://localhost:631</em> 页面上的 <em>Administration</em> 里面，选择添加打印机的时候就会出现 <em>Forbidden</em> 错误。应该是权限不够，我试着用root用户打开浏览器，还是同样的错误。</p></div>
+<div class="paragraph"><p>然后先找到说 <em>/etc/cupsd.conf</em> 里的允许登录列表改成 <em>Allow all</em> ，先不管安全与否，这个方法不管用，我也没心思去看那么多选项，心想个打印机至于搞这么复杂吗。</p></div>
+<div class="paragraph"><p>然后还添加一个 <em>lpadmin</em> 组的。结果没什么效果，不过顺便复习了下创建组和添加用户到某个组。（这个是Archlinux中的，感觉不同的发行版中并不通用，有的是adduser，有的是useradd）</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.7
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt>$ sudo groupadd lpadmin <span style="font-style: italic"><span style="color: #9A1900"># 创建新的用户组lpadmin</span></span>
+$ sudo usrmod -G lpadmin bigeast <span style="font-style: italic"><span style="color: #9A1900"># 添加用户bigeast到组lpadmin</span></span>
+$ newgrp <span style="font-style: italic"><span style="color: #9A1900"># 更新组信息</span></span></tt></pre></div></div>
+<div class="paragraph"><p>最后找到了 <a href="http://www.linuxquestions.org/questions/linux-newbie-8/how-do-i-start-a-not-ready-cups-printer-168045/">这篇帖子</a>，说要运行 <em>enable 打印机名</em> 。果然有个cupsenable，我试着运行了下：</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.7
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt>$ cupsenable HP <span style="font-style: italic"><span style="color: #9A1900"># 激活打印机HP</span></span></tt></pre></div></div>
+<div class="paragraph"><p>结果 <em>lpq</em> 就显示 <em>HP is ready</em> 啦！</p></div>
+<div class="paragraph"><p>奇怪之前怎么没有手动enable也能打印。</p></div>
+<div class="paragraph"><p>总之，又一个bug被<strong><span class="red">不明不白地</span></strong>解决啦！虽然现在web页面里添加打印机还是Forbidden！应该是<strong>cups</strong>在哪次进行了较大的更新？我现在的版本是 <em>cups 2.0.1</em> 。</p></div>
+</div>
+</div>
 </div>
 </div>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-02-05 09:50:41 CST
+Last updated 2015-02-05 15:31:33 CST
 </div>
 </div>
 </body>

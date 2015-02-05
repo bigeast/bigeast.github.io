@@ -1,5 +1,5 @@
 == 15/02/05/09:42:08/Thursday
-* 浮点误差的普遍性
+=== 浮点误差的普遍性
 [source, bash]
 $ ruby -e 'puts 0.1 + 0.2 - 0.3'
 5.551115123125783e-17
@@ -12,3 +12,34 @@ $ perl -E 'say 0.1 + 0.2 - 0.3'
 printf("%.15e\n",0.1 + 0.2 +0.3); /* 5.551115123e-17 */
 
 perl 6中将用分数来表示小数，进行的是精确的计算，无浮点误差。
+
+=== 用**stat**查看文件的某个属性
+**ls** 命令给出的文件信息有时不那么有可定制性，**stat** 的 _-c_ 选项则可以很方便地获取想要的信息（应该是stat(2)的一个接口吧）
+[source, bash]
+$ stat -c "%a" a.txt
+644
+
+=== CUPS
+自从去年设置好 http://bigeast.tumblr.com/post/79261788417/archlinux-samba-cups-windows/[Archlinux中通过Samba和CUPS连接Windows打印机] 后，过了半年，就不能用了。现在有个任务还是去年七月份的，于是之后一直在 Win7 虚拟机里连打印机。
+
+今天终于忍不住，又去Google上查了。
+
+问题首先是 _http://localhost:631_ 页面上的 _Administration_ 里面，选择添加打印机的时候就会出现 _Forbidden_ 错误。应该是权限不够，我试着用root用户打开浏览器，还是同样的错误。
+
+然后先找到说 _/etc/cupsd.conf_ 里的允许登录列表改成 _Allow all_ ，先不管安全与否，这个方法不管用，我也没心思去看那么多选项，心想个打印机至于搞这么复杂吗。
+
+然后还添加一个 _lpadmin_ 组的。结果没什么效果，不过顺便复习了下创建组和添加用户到某个组。（这个是Archlinux中的，感觉不同的发行版中并不通用，有的是adduser，有的是useradd）
+[source, bash]
+$ sudo groupadd lpadmin # 创建新的用户组lpadmin
+$ sudo usrmod -G lpadmin bigeast # 添加用户bigeast到组lpadmin
+$ newgrp # 更新组信息
+
+最后找到了 http://www.linuxquestions.org/questions/linux-newbie-8/how-do-i-start-a-not-ready-cups-printer-168045/[这篇帖子]，说要运行 _enable 打印机名_ 。果然有个cupsenable，我试着运行了下：
+[source, bash]
+$ cupsenable HP # 激活打印机HP
+
+结果 _lpq_ 就显示 _HP is ready_ 啦！
+
+奇怪之前怎么没有手动enable也能打印。
+
+总之，又一个bug被**[red]#不明不白地#**解决啦！虽然现在web页面里添加打印机还是Forbidden！应该是**cups**在哪次进行了较大的更新？我现在的版本是 _cups 2.0.1_ 。
