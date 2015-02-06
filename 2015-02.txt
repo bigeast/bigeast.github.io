@@ -43,3 +43,43 @@ $ cupsenable HP # 激活打印机HP
 奇怪之前怎么没有手动enable也能打印。
 
 总之，又一个bug被**[red]#不明不白地#**解决啦！虽然现在web页面里添加打印机还是Forbidden！应该是**cups**在哪次进行了较大的更新？我现在的版本是 _cups 2.0.1_ 。
+
+=== irssi 
+
+==== 屏蔽登录、退出信息
+[source, bash]
+/ignore  * joins parts quits
+/ignore #firefox * joins parts quits
+/save
+
+==== 移动
+* 窗口移动
+_Alt-[0-9]_ 。如果加入的频道多于9个，那么 _Alt-[qwertyuio]_ 继续11到19个窗口，多于19个窗口，可以用 _Alt-Up,Down_ 来移动。如果嫌不方便，可以自己绑定快捷键：
+
+[source, bash]
+/bind meta-d chang_window 20
+
+其中 _meta_ 一般就是指 _Alt_ 键。
+
+* 屏幕移动
+_Alt-n,p_ 上、下滚屏。
+
+==== 搜索频道列表
+[source, bash]
+/msg alis list social -topic social
+
+也可以在一些http://irc.netsplit.de/channels/?net=freenode&num=10[网站]上搜。可以看到Freenode上排名靠前的都是 _开源软件/操作系统_ 相关的话题。开源软件的流行可能是在其他IRC网络都走向衰退的情况下，Freenode却能增长平稳扩张，成为现在http://royal.pingdom.com/2012/04/24/irc-is-dead-long-live-irc[可能是最大的IRC网络]的原因吧。
+
+Freenode虽然是最大，但最高同时在线人数也不超过十万，而且是全世界范围内的。而QQ都上亿了，差距不是一般的大。:)
+
+==== warez（盗版软件）
+我觉得IRC上一定有很多宝（la）藏（ji）有待发掘，或许这已经是历史的残留，但想起来却让人兴奋。
+
+==== IRC机器人有什么作用？
+
+==== channel前面一个和两个 '#' 有什么差别
+为什么有时加入的是一个 '\#' 的channel，进去却有两个 ？
+
+==== cloak
+等着 #freenode 上的管理员。
+
