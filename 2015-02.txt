@@ -61,6 +61,8 @@ _Alt-[0-9]_ 。如果加入的频道多于9个，那么 _Alt-[qwertyuio]_ 继续
 
 其中 _meta_ 一般就是指 _Alt_ 键。
 
+Note: 其实如果打开的窗口过多，更加实用的方法是直接输入频道的名字跳转： _/channel #some_channel_
+
 * 屏幕移动
 _Alt-n,p_ 上、下滚屏。
 
@@ -77,9 +79,9 @@ Freenode虽然是最大，但最高同时在线人数也不超过十万，而且
 
 ==== IRC机器人有什么作用？
 
-==== channel前面一个和两个 '#' 有什么差别
-为什么有时加入的是一个 '\#' 的channel，进去却有两个 ？
+==== channel前面一个和两个井号(hash) 有什么差别
+[line-through]#为什么有时加入的是一个井号的channel，进去却有两个？#
+在\#freenode上问了，其实Google _"freenode channel naming"_ 就有 https://freenode.net/policy.shtml#channelnaming[答案]。概括来说就是，一个hash的表明这是某个软件或者项目的官方频道，而两个hash则是非官方频道，例如 _##linux_ ，只是为了让游客寻求关于linux的帮助的地方，并不是linux官方的频道。
 
 ==== cloak
-等着 #freenode 上的管理员。
-
+[line-through]#等着 #freenode 上的管理员。# 已经有了unafflicated的cloak。

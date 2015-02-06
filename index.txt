@@ -1,7 +1,11 @@
-link:Ng.html[Andrew Ng 谈百度深度学习的现状]
+link:2015-02.html[2015-02 笔记]
 
+== Book Notes
+
+== Computer Hacks
 link:Source_Code_Tree_Navigation_in_Vim.html[Source Code Tree Navigation in Vim]
 
 link:scrot.html[Scrot屏幕截图]
 
-link:2015-02.html[2015-02 笔记]
+== Translate
+link:Ng.html[Andrew Ng 谈百度深度学习的现状]
