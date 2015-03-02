@@ -1,0 +1,53 @@
+Hints for http://www.pythonchallenge.com [Python Challenge]
+
+=== 0
+2**38
+
+[white]#274877906944#
+
+=== 1
+rot13
+
+[white]#ocr#
+
+=== 2
+**page source** means the current web page source.
+Open the html page source and note the comments.
+
+[white]#equality#
+
+=== 3
+Note the page title. It's a hint!
+Need to view the page source as above.
+
+[white]#linkedlist#
+
+=== 4
+The page title says "follow the chain", so click the image
+
+Need to get the page by program, and extract a number from the source.
+
+**Brillient problem!!** Follow the number and you'll get a page that doesn't has a number in it, but since the we write a loop to append the number to the url, this time we append **NULL**.
+
+The answer is lay in the page that has no number in it. It's a cyclic list and you'll get the page again and again, the length of the cycle is 194.
+
+[white]#nothing, 6711, ..., 66831 and then will get the answer peak#
+
+=== 5
+peak hell sounds familiar?
+Download a file whose name is in the source code and unpickle it.
+
+Then! The unpicked list is a character map!
+[white]#channel#
+
+=== 6
+The comment of the page source only has "zip", I googled and download channel.zip. Unzip it and there are many _num.txt_ files in it, other than a _readme_ file with two hints.
+
+It seems similar with **linkedlist** problem, but the last file in the list says "Collect the comments."
+
+Need to know that the comments here is in the zipfile, i.e. each file in the zip file can have a comment, here we need to collect these comments following the list order and will got the answer, say XXX.
+
+The final answer is the small characters which forms XXX!!! Amazing, I googled a lot!
+
+[white]#hockey oxygen#
+
