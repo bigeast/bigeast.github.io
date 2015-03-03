@@ -735,7 +735,8 @@ asciidoc.install();
 <div id="header">
 </div>
 <div id="content">
-<div class="paragraph"><p>Hints for <a href="http://www.pythonchallenge.com">http://www.pythonchallenge.com</a> [Python Challenge]</p></div>
+<div class="paragraph"><p>Hints for <a href="http://www.pythonchallenge.com">Python Challenge</a>
+<a href="http://www.pythonchallenge.com/">http://www.pythonchallenge.com/</a></p></div>
 <div class="sect2">
 <h3 id="_0">0</h3>
 <div class="paragraph"><p>2**38</p></div>
@@ -770,8 +771,8 @@ Need to view the page source as above.</p></div>
 <h3 id="_5">5</h3>
 <div class="paragraph"><p>peak hell sounds familiar?
 Download a file whose name is in the source code and unpickle it.</p></div>
-<div class="paragraph"><p>Then! The unpicked list is a character map!
-<span class="white">channel</span></p></div>
+<div class="paragraph"><p>Then! The unpicked list is a character map!</p></div>
+<div class="paragraph"><p><span class="white">channel</span></p></div>
 </div>
 <div class="sect2">
 <h3 id="_6">6</h3>
@@ -781,11 +782,238 @@ Download a file whose name is in the source code and unpickle it.</p></div>
 <div class="paragraph"><p>The final answer is the small characters which forms XXX!!! Amazing, I googled a lot!</p></div>
 <div class="paragraph"><p><span class="white">hockey oxygen</span></p></div>
 </div>
+<div class="sect2">
+<h3 id="_7">7</h3>
+<div class="paragraph"><p>Absolutely nothing other than an image with strange blocks in it. Note that the color are all gray, can the gray value represent a ascii value?</p></div>
+<div class="paragraph"><p>Need PIL library.</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.7
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="font-weight: bold"><span style="color: #000080">import</span></span> PIL
+img <span style="color: #990000">=</span> PIL<span style="color: #990000">.</span>Image<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">open</span></span><span style="color: #990000">(</span><span style="color: #FF0000">'oxygen.png'</span><span style="color: #990000">)</span>
+pix <span style="color: #990000">=</span> img<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">load</span></span><span style="color: #990000">()</span> <span style="font-style: italic"><span style="color: #9A1900"># pix is a list of (R,G,B,A), which can be accessed by pix[x,y]</span></span>
+<span style="font-weight: bold"><span style="color: #0000FF">print</span></span> img<span style="color: #990000">.</span>size <span style="font-style: italic"><span style="color: #9A1900"># (width, height)</span></span>
+<span style="color: #990000">[</span>pix<span style="color: #990000">[</span>x<span style="color: #990000">,</span>img<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">size</span></span><span style="color: #990000">(</span><span style="color: #993399">1</span><span style="color: #990000">)/</span><span style="color: #993399">2</span><span style="color: #990000">]</span> <span style="font-weight: bold"><span style="color: #0000FF">for</span></span> x <span style="font-weight: bold"><span style="color: #0000FF">in</span></span> <span style="font-weight: bold"><span style="color: #000000">xrange</span></span><span style="color: #990000">(</span><span style="color: #993399">30</span><span style="color: #990000">)]</span> <span style="font-style: italic"><span style="color: #9A1900"># print the RGB of the central line to see the block size in pixel, which is 7 pixel per width block, except the first block whose width is 5 pixsels</span></span>
+res <span style="color: #990000">=</span> <span style="color: #990000">[</span><span style="font-weight: bold"><span style="color: #000000">chr</span></span><span style="color: #990000">(</span>pix<span style="color: #990000">[</span><span style="color: #993399">4</span><span style="color: #990000">,</span><span style="color: #993399">47</span><span style="color: #990000">][</span><span style="color: #993399">0</span><span style="color: #990000">])]</span> <span style="color: #990000">+</span> <span style="color: #990000">[</span><span style="font-weight: bold"><span style="color: #000000">chr</span></span><span style="color: #990000">(</span>pix<span style="color: #990000">[</span><span style="color: #993399">5</span><span style="color: #990000">+</span><span style="color: #993399">7</span><span style="color: #990000">*</span>i<span style="color: #990000">,</span><span style="color: #993399">47</span><span style="color: #990000">][</span><span style="color: #993399">0</span><span style="color: #990000">])</span> <span style="font-weight: bold"><span style="color: #0000FF">for</span></span> i <span style="font-weight: bold"><span style="color: #0000FF">in</span></span> <span style="font-weight: bold"><span style="color: #000000">xrange</span></span><span style="color: #990000">(</span><span style="color: #993399">86</span><span style="color: #990000">)]</span>
+<span style="color: #FF0000">''</span><span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">join</span></span><span style="color: #990000">(</span>res<span style="color: #990000">)</span> <span style="font-style: italic"><span style="color: #9A1900"># not the final answer, but a hint, just follow it!</span></span></tt></pre></div></div>
+<div class="paragraph"><p><span class="white">integrity</span></p></div>
+</div>
+<div class="sect2">
+<h3 id="_8">8</h3>
+<div class="paragraph"><p>Follow the link in the image. username and password can be obtained by decompress the two strings in source page by bz2.</p></div>
+<div class="paragraph"><p><span class="white">username:huge password:file</span></p></div>
+</div>
+<div class="sect2">
+<h3 id="_9">9</h3>
+<div class="paragraph"><p>Download the image <em>good.jpg</em>, manipulate it accroding to comments in the page source, that is, draw lines using ImageDraw module from library PIL.</p></div>
+<div class="paragraph"><p><span class="white">cow, bull</span></p></div>
+</div>
+<div class="sect2">
+<h3 id="_10">10</h3>
+<div class="paragraph"><p>1, 11, 21, 1211, 111221
+1211 &#8594; 111221
+1&#8217;1' 1&#8217;2' 2&#8217;1' &#8594; 111221</p></div>
+<div class="paragraph"><p><span class="white">5808</span></p></div>
+</div>
+<div class="sect2">
+<h3 id="_11">11</h3>
+<div class="paragraph"><p>Another image manipulatation problem.</p></div>
+<div class="paragraph"><p>This time more advanced pixel access techniques are required. You&#8217;ll find numpy is very helpfull.</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.7
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="font-weight: bold"><span style="color: #000080">from</span></span> PIL <span style="font-weight: bold"><span style="color: #000080">import</span></span> Image<span style="color: #990000">,</span> ImageDraw
+<span style="font-weight: bold"><span style="color: #000080">import</span></span> numpy as np
+img <span style="color: #990000">=</span> Image<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">open</span></span><span style="color: #990000">(</span><span style="color: #FF0000">'cave.jpg'</span><span style="color: #990000">)</span>
+pdata <span style="color: #990000">=</span> np<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">asarray</span></span><span style="color: #990000">(</span>img<span style="color: #990000">)</span>
+w<span style="color: #990000">,</span>h <span style="color: #990000">=</span> img<span style="color: #990000">.</span>size
+odd <span style="color: #990000">=</span> <span style="color: #990000">[(</span> <span style="color: #993399">0</span><span style="color: #990000">,</span><span style="color: #993399">0</span><span style="color: #990000">,</span><span style="color: #993399">0</span> <span style="color: #990000">)</span> <span style="color: #990000">*</span> <span style="color: #990000">(</span>w<span style="color: #990000">/</span><span style="color: #993399">2</span><span style="color: #990000">)]</span> <span style="color: #990000">*</span> h
+even <span style="color: #990000">=</span> <span style="color: #990000">[(</span> <span style="color: #993399">0</span><span style="color: #990000">,</span><span style="color: #993399">0</span><span style="color: #990000">,</span><span style="color: #993399">0</span> <span style="color: #990000">)</span> <span style="color: #990000">*</span> <span style="color: #990000">(</span>w<span style="color: #990000">/</span><span style="color: #993399">2</span><span style="color: #990000">)]</span> <span style="color: #990000">*</span> h
+<span style="font-weight: bold"><span style="color: #0000FF">for</span></span> i <span style="font-weight: bold"><span style="color: #0000FF">in</span></span> <span style="font-weight: bold"><span style="color: #000000">xrange</span></span><span style="color: #990000">(</span><span style="color: #993399">480</span><span style="color: #990000">):</span>
+    odd<span style="color: #990000">[</span>i<span style="color: #990000">]</span> <span style="color: #990000">=</span> pdata<span style="color: #990000">[</span>i<span style="color: #990000">][::</span><span style="color: #993399">2</span><span style="color: #990000">]</span> <span style="font-weight: bold"><span style="color: #0000FF">if</span></span> i<span style="color: #990000">%</span><span style="color: #993399">2</span><span style="color: #990000">==</span><span style="color: #993399">0</span> <span style="font-weight: bold"><span style="color: #0000FF">else</span></span> pdata<span style="color: #990000">[</span>i<span style="color: #990000">][</span><span style="color: #993399">1</span><span style="color: #990000">::</span><span style="color: #993399">2</span><span style="color: #990000">]</span>
+    even<span style="color: #990000">[</span>i<span style="color: #990000">]</span> <span style="color: #990000">=</span> pdata<span style="color: #990000">[</span>i<span style="color: #990000">][::</span><span style="color: #993399">2</span><span style="color: #990000">]</span> <span style="font-weight: bold"><span style="color: #0000FF">if</span></span> i<span style="color: #990000">%</span><span style="color: #993399">2</span><span style="color: #990000">==</span><span style="color: #993399">1</span> <span style="font-weight: bold"><span style="color: #0000FF">else</span></span> pdata<span style="color: #990000">[</span>i<span style="color: #990000">][</span><span style="color: #993399">1</span><span style="color: #990000">::</span><span style="color: #993399">2</span><span style="color: #990000">]</span>
+odd <span style="color: #990000">=</span> np<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">array</span></span><span style="color: #990000">(</span>odd<span style="color: #990000">)</span>
+even <span style="color: #990000">=</span> np<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">array</span></span><span style="color: #990000">(</span>even<span style="color: #990000">)</span>
+Image<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">fromarray</span></span><span style="color: #990000">(</span>odd<span style="color: #990000">).</span><span style="font-weight: bold"><span style="color: #000000">show</span></span><span style="color: #990000">()</span>
+Image<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">fromarray</span></span><span style="color: #990000">(</span>even<span style="color: #990000">).</span><span style="font-weight: bold"><span style="color: #000000">show</span></span><span style="color: #990000">()</span></tt></pre></div></div>
+<div class="paragraph"><p><span class="white">evil</span></p></div>
+</div>
+<div class="sect2">
+<h3 id="_12">12</h3>
+<div class="paragraph"><p>I&#8217;ll never solve it all by my self! It&#8217;s just so evil!</p></div>
+<div class="paragraph"><p>You need to notice the image file name, why it&#8217;s <em>evil1.jpg</em> rather than just <em>evil.jpg</em>? So you&#8217;ll try if evil2.jpg exists. Turns out evil2.jpg says "rot jpg - _.gfx". Then try to download evil2.gfx which can&#8217;t be decoded directly.</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.7
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="color: #009900">$hexdump</span> -n <span style="color: #993399">100</span> -C evil2<span style="color: #990000">.</span>gfx
+<span style="color: #993399">00000000</span>  ff <span style="color: #993399">89</span> <span style="color: #993399">47</span> <span style="color: #993399">89</span> ff d8 <span style="color: #993399">50</span> <span style="color: #993399">49</span>  <span style="color: #993399">50</span> d8 ff 4e <span style="color: #993399">46</span> 4e ff e0  <span style="color: #990000">|..</span>G<span style="color: #990000">...</span>PIP<span style="color: #990000">..</span>NFN<span style="color: #990000">..|</span>
+<span style="color: #993399">00000010</span>  <span style="color: #993399">47</span> <span style="color: #993399">38</span> <span style="color: #993399">47</span> e0 <span style="color: #993399">00</span> 0d <span style="color: #993399">37</span> 0d  <span style="color: #993399">00</span> <span style="color: #993399">10</span> 0a <span style="color: #993399">61</span> 0a <span style="color: #993399">10</span> 4a 1a  <span style="color: #990000">|</span>G8G<span style="color: #990000">...</span><span style="color: #993399">7</span><span style="color: #990000">....</span>a<span style="color: #990000">..</span>J<span style="color: #990000">.|</span>
+<span style="color: #993399">00000020</span>  <span style="color: #993399">40</span> 1a 4a <span style="color: #993399">46</span> 0a <span style="color: #993399">01</span> 0a <span style="color: #993399">46</span>  <span style="color: #993399">49</span> <span style="color: #993399">00</span> f0 <span style="color: #993399">00</span> <span style="color: #993399">49</span> <span style="color: #993399">46</span> <span style="color: #993399">00</span> <span style="color: #993399">00</span>  <span style="color: #990000">|</span>@<span style="color: #990000">.</span>JF<span style="color: #990000">...</span>FI<span style="color: #990000">...</span>IF<span style="color: #990000">..|</span>
+<span style="color: #993399">00000030</span>  <span style="color: #993399">00</span> <span style="color: #993399">46</span> <span style="color: #993399">00</span> <span style="color: #993399">00</span> e7 <span style="color: #993399">00</span> <span style="color: #993399">00</span> <span style="color: #993399">01</span>  0d <span style="color: #993399">00</span> 0d <span style="color: #993399">01</span> <span style="color: #993399">01</span> <span style="color: #993399">49</span> <span style="color: #993399">00</span> <span style="color: #993399">49</span>  <span style="color: #990000">|.</span>F<span style="color: #990000">...........</span>I<span style="color: #990000">.</span>I<span style="color: #990000">|</span>
+<span style="color: #993399">00000040</span>  <span style="color: #993399">01</span> <span style="color: #993399">01</span> <span style="color: #993399">48</span> <span style="color: #993399">00</span> <span style="color: #993399">48</span> <span style="color: #993399">01</span> <span style="color: #993399">00</span> <span style="color: #993399">44</span>  <span style="color: #993399">01</span> <span style="color: #993399">44</span> <span style="color: #993399">00</span> b4 <span style="color: #993399">52</span> <span style="color: #993399">00</span> <span style="color: #993399">52</span> b4  <span style="color: #990000">|..</span>H<span style="color: #990000">.</span>H<span style="color: #990000">..</span>D<span style="color: #990000">.</span>D<span style="color: #990000">..</span>R<span style="color: #990000">.</span>R<span style="color: #990000">.|</span>
+<span style="color: #993399">00000050</span>  <span style="color: #993399">00</span> <span style="color: #993399">00</span> <span style="color: #993399">00</span> <span style="color: #993399">00</span> <span style="color: #993399">00</span> b4 <span style="color: #993399">00</span> <span style="color: #993399">01</span>  <span style="color: #993399">00</span> b4 <span style="color: #993399">00</span> <span style="color: #993399">01</span> <span style="color: #993399">04</span> <span style="color: #993399">01</span> <span style="color: #993399">00</span> <span style="color: #993399">00</span>  <span style="color: #990000">|................|</span>
+<span style="color: #993399">00000060</span>  <span style="color: #993399">90</span> <span style="color: #993399">02</span> <span style="color: #993399">40</span> <span style="color: #993399">00</span>                                       <span style="color: #990000">|..</span>@<span style="color: #990000">.|</span>
+<span style="color: #993399">00000064</span>
+<span style="color: #009900">$hexdump</span> -n <span style="color: #993399">100</span> -C evil2<span style="color: #990000">.</span>gfx <span style="color: #990000">|</span> cut -d<span style="color: #FF0000">'|'</span> -f<span style="color: #993399">2</span> <span style="color: #990000">|</span> xargs <span style="color: #990000">|</span> sed -e <span style="color: #FF0000">'s/ //g'</span> -e <span style="color: #FF0000">'s/...../&amp;</span><span style="color: #CC33CC">\n</span><span style="color: #FF0000">/g'</span>
+<span style="color: #990000">..</span>G<span style="color: #990000">..</span>
+<span style="color: #990000">.</span>PIP<span style="color: #990000">.</span>
+<span style="color: #990000">.</span>NFN<span style="color: #990000">.</span>
+<span style="color: #990000">.</span>G8G<span style="color: #990000">.</span>
+<span style="color: #990000">..</span><span style="color: #993399">7</span><span style="color: #990000">..</span>
+<span style="color: #990000">..</span>a<span style="color: #990000">..</span>
+J<span style="color: #990000">.</span>@<span style="color: #990000">.</span>J
+F<span style="color: #990000">...</span>F
+I<span style="color: #990000">...</span>I
+F<span style="color: #990000">...</span>F
+<span style="color: #990000">...</span></tt></pre></div></div>
+<div class="paragraph"><p>So there are five images in <em>evil2.gfx</em>.</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.7
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="font-weight: bold"><span style="color: #000080">from</span></span> PIL <span style="font-weight: bold"><span style="color: #000080">import</span></span> Image<span style="color: #990000">,</span> ImageDraw
+<span style="font-weight: bold"><span style="color: #000080">import</span></span> numpy as np
+data <span style="color: #990000">=</span> <span style="font-weight: bold"><span style="color: #000000">open</span></span><span style="color: #990000">(</span><span style="color: #FF0000">'evil2.gfx'</span><span style="color: #990000">,</span><span style="color: #FF0000">'rb'</span><span style="color: #990000">)</span>
+img <span style="color: #990000">=</span> <span style="color: #990000">[</span>None<span style="color: #990000">]</span> <span style="color: #990000">*</span> <span style="color: #993399">5</span>
+img<span style="color: #990000">[</span><span style="color: #993399">0</span><span style="color: #990000">]</span> <span style="color: #990000">=</span> <span style="font-weight: bold"><span style="color: #000000">open</span></span><span style="color: #990000">(</span><span style="color: #FF0000">'img0.jfif'</span><span style="color: #990000">,</span><span style="color: #FF0000">'wb'</span><span style="color: #990000">)</span>
+img<span style="color: #990000">[</span><span style="color: #993399">1</span><span style="color: #990000">]</span> <span style="color: #990000">=</span> <span style="font-weight: bold"><span style="color: #000000">open</span></span><span style="color: #990000">(</span><span style="color: #FF0000">'img1.png'</span><span style="color: #990000">,</span><span style="color: #FF0000">'wb'</span><span style="color: #990000">)</span>
+img<span style="color: #990000">[</span><span style="color: #993399">2</span><span style="color: #990000">]</span> <span style="color: #990000">=</span> <span style="font-weight: bold"><span style="color: #000000">open</span></span><span style="color: #990000">(</span><span style="color: #FF0000">'img2.gif'</span><span style="color: #990000">,</span><span style="color: #FF0000">'wb'</span><span style="color: #990000">)</span>
+img<span style="color: #990000">[</span><span style="color: #993399">3</span><span style="color: #990000">]</span> <span style="color: #990000">=</span> <span style="font-weight: bold"><span style="color: #000000">open</span></span><span style="color: #990000">(</span><span style="color: #FF0000">'img3.png'</span><span style="color: #990000">,</span><span style="color: #FF0000">'wb'</span><span style="color: #990000">)</span>
+img<span style="color: #990000">[</span><span style="color: #993399">4</span><span style="color: #990000">]</span> <span style="color: #990000">=</span> <span style="font-weight: bold"><span style="color: #000000">open</span></span><span style="color: #990000">(</span><span style="color: #FF0000">'img4.jfif'</span><span style="color: #990000">,</span><span style="color: #FF0000">'wb'</span><span style="color: #990000">)</span>
+<span style="font-weight: bold"><span style="color: #0000FF">for</span></span> i <span style="font-weight: bold"><span style="color: #0000FF">in</span></span> <span style="font-weight: bold"><span style="color: #000000">xrange</span></span><span style="color: #990000">(</span><span style="color: #993399">13515</span><span style="color: #990000">):</span>
+    img<span style="color: #990000">[</span><span style="color: #993399">0</span><span style="color: #990000">].</span><span style="font-weight: bold"><span style="color: #000000">write</span></span><span style="color: #990000">(</span>data<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">read</span></span><span style="color: #990000">(</span><span style="color: #993399">1</span><span style="color: #990000">))</span>
+    img<span style="color: #990000">[</span><span style="color: #993399">1</span><span style="color: #990000">].</span><span style="font-weight: bold"><span style="color: #000000">write</span></span><span style="color: #990000">(</span>data<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">read</span></span><span style="color: #990000">(</span><span style="color: #993399">1</span><span style="color: #990000">))</span>
+    img<span style="color: #990000">[</span><span style="color: #993399">2</span><span style="color: #990000">].</span><span style="font-weight: bold"><span style="color: #000000">write</span></span><span style="color: #990000">(</span>data<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">read</span></span><span style="color: #990000">(</span><span style="color: #993399">1</span><span style="color: #990000">))</span>
+    img<span style="color: #990000">[</span><span style="color: #993399">3</span><span style="color: #990000">].</span><span style="font-weight: bold"><span style="color: #000000">write</span></span><span style="color: #990000">(</span>data<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">read</span></span><span style="color: #990000">(</span><span style="color: #993399">1</span><span style="color: #990000">))</span>
+    img<span style="color: #990000">[</span><span style="color: #993399">4</span><span style="color: #990000">].</span><span style="font-weight: bold"><span style="color: #000000">write</span></span><span style="color: #990000">(</span>data<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">read</span></span><span style="color: #990000">(</span><span style="color: #993399">1</span><span style="color: #990000">))</span>
+<span style="font-weight: bold"><span style="color: #0000FF">for</span></span> i <span style="font-weight: bold"><span style="color: #0000FF">in</span></span> <span style="font-weight: bold"><span style="color: #000000">xrange</span></span><span style="color: #990000">(</span><span style="color: #993399">5</span><span style="color: #990000">):</span>
+    img<span style="color: #990000">[</span>i<span style="color: #990000">].</span><span style="font-weight: bold"><span style="color: #000000">close</span></span><span style="color: #990000">()</span></tt></pre></div></div>
+<div class="paragraph"><p>Each image has several characters in it, concat them will get the answer.</p></div>
+<div class="paragraph"><p>Note that the third image is damaged, nevertheless we can still get the right answer.</p></div>
+<div class="paragraph"><p><span class="white">disproportional</span></p></div>
+</div>
+<div class="sect2">
+<h3 id="_13">13</h3>
+<div class="paragraph"><p>No idea. Cheat with <a href="http://intelligentgeek.blogspot.jp/2006/03/python-challenge-13-level-13-shows.html">This</a>.</p></div>
+<div class="paragraph"><p>xmlrpclib is needed.</p></div>
+<div class="paragraph"><p><span class="white">italy</span></p></div>
+</div>
+<div class="sect2">
+<h3 id="_14">14</h3>
+<div class="paragraph"><p>Spiral matrix.
+Easy and easy to lose time in these problem!!</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.7
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="font-weight: bold"><span style="color: #000080">from</span></span> PIL <span style="font-weight: bold"><span style="color: #000080">import</span></span> Image<span style="color: #990000">,</span> ImageDraw
+<span style="font-weight: bold"><span style="color: #000080">import</span></span> numpy as np
+<span style="font-weight: bold"><span style="color: #000080">import</span></span> copy
+img <span style="color: #990000">=</span> Image<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">open</span></span><span style="color: #990000">(</span><span style="color: #FF0000">'wire.png'</span><span style="color: #990000">)</span>
+pdata <span style="color: #990000">=</span> np<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">asarray</span></span><span style="color: #990000">(</span>img<span style="color: #990000">)</span>
+w<span style="color: #990000">,</span>h <span style="color: #990000">=</span> img<span style="color: #990000">.</span>size
+deimg <span style="color: #990000">=</span> <span style="color: #990000">[[</span> <span style="color: #993399">0</span><span style="color: #990000">,</span><span style="color: #993399">0</span><span style="color: #990000">,</span><span style="color: #993399">0</span> <span style="color: #990000">]</span> <span style="color: #990000">*</span> <span style="color: #993399">100</span><span style="color: #990000">]</span> <span style="color: #990000">*</span> <span style="color: #993399">100</span>
+<span style="font-weight: bold"><span style="color: #0000FF">for</span></span> i <span style="font-weight: bold"><span style="color: #0000FF">in</span></span> <span style="font-weight: bold"><span style="color: #000000">xrange</span></span><span style="color: #990000">(</span><span style="color: #993399">100</span><span style="color: #990000">):</span>
+    deimg<span style="color: #990000">[</span>i<span style="color: #990000">]</span> <span style="color: #990000">=</span> pdata<span style="color: #990000">[</span><span style="color: #993399">0</span><span style="color: #990000">][</span><span style="color: #993399">100</span><span style="color: #990000">*</span>i<span style="color: #990000">:</span> <span style="color: #993399">100</span><span style="color: #990000">*</span>i<span style="color: #990000">+</span><span style="color: #993399">100</span><span style="color: #990000">]</span>
+<span style="font-style: italic"><span style="color: #9A1900">#Image.fromarray(np.array(deimg)).show() # bit.html says "you took the wrong curve."</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">#</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"># 329</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"># 418</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"># 567</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">#</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">#x,y = 0,0</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">#deimg_spiral = copy.deepcopy(deimg)</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">#direct = [(0,-1),(-1,0),(0,1),(1,0)]</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">#for i in xrange(1,50):</span></span>
+ <span style="font-style: italic"><span style="color: #9A1900">#   x += 1</span></span>
+ <span style="font-style: italic"><span style="color: #9A1900">#   y += 1 # above n^2</span></span>
+ <span style="font-style: italic"><span style="color: #9A1900">#   pos = (2*i + 1)**2</span></span>
+ <span style="font-style: italic"><span style="color: #9A1900">#   print "before",pos</span></span>
+ <span style="font-style: italic"><span style="color: #9A1900">#   for d in xrange(4):</span></span>
+ <span style="font-style: italic"><span style="color: #9A1900">#       for j in xrange(2*i):</span></span>
+ <span style="font-style: italic"><span style="color: #9A1900">#           pos -= 1</span></span>
+ <span style="font-style: italic"><span style="color: #9A1900">#           if pos &gt; (2*i-1)**2 and 0&lt;=x&lt;100 and 0&lt;=y&lt;100:</span></span>
+ <span style="font-style: italic"><span style="color: #9A1900">#               deimg_spiral[x][y] = pdata[0][pos]</span></span>
+ <span style="font-style: italic"><span style="color: #9A1900">#           x += direct[d][0]</span></span>
+ <span style="font-style: italic"><span style="color: #9A1900">#           y += direct[d][1]</span></span>
+ <span style="font-style: italic"><span style="color: #9A1900">#   print "after",pos</span></span>
+direct <span style="color: #990000">=</span> <span style="color: #990000">[(</span><span style="color: #993399">0</span><span style="color: #990000">,</span><span style="color: #993399">1</span><span style="color: #990000">),(</span><span style="color: #993399">1</span><span style="color: #990000">,</span><span style="color: #993399">0</span><span style="color: #990000">),(</span><span style="color: #993399">0</span><span style="color: #990000">,-</span><span style="color: #993399">1</span><span style="color: #990000">),(-</span><span style="color: #993399">1</span><span style="color: #990000">,</span><span style="color: #993399">0</span><span style="color: #990000">)]</span>
+deimg_spiral <span style="color: #990000">=</span> copy<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">deepcopy</span></span><span style="color: #990000">(</span>deimg<span style="color: #990000">)</span>
+pos <span style="color: #990000">=</span> <span style="color: #993399">0</span>
+x<span style="color: #990000">,</span>y <span style="color: #990000">=</span> <span style="color: #993399">0</span><span style="color: #990000">,</span><span style="color: #993399">0</span>
+<span style="font-weight: bold"><span style="color: #0000FF">for</span></span> i <span style="font-weight: bold"><span style="color: #0000FF">in</span></span> <span style="font-weight: bold"><span style="color: #000000">xrange</span></span><span style="color: #990000">(</span><span style="color: #993399">100</span><span style="color: #990000">,-</span><span style="color: #993399">1</span><span style="color: #990000">,-</span><span style="color: #993399">2</span><span style="color: #990000">):</span>
+    <span style="font-weight: bold"><span style="color: #0000FF">print</span></span> i
+    <span style="font-weight: bold"><span style="color: #0000FF">for</span></span> d <span style="font-weight: bold"><span style="color: #0000FF">in</span></span> <span style="font-weight: bold"><span style="color: #000000">xrange</span></span><span style="color: #990000">(</span><span style="color: #993399">4</span><span style="color: #990000">):</span>
+        <span style="font-weight: bold"><span style="color: #0000FF">for</span></span> j <span style="font-weight: bold"><span style="color: #0000FF">in</span></span> <span style="font-weight: bold"><span style="color: #000000">xrange</span></span><span style="color: #990000">(</span>i<span style="color: #990000">-</span><span style="color: #993399">1</span><span style="color: #990000">):</span>
+            deimg_spiral<span style="color: #990000">[</span>x<span style="color: #990000">][</span>y<span style="color: #990000">]</span> <span style="color: #990000">=</span> pdata<span style="color: #990000">[</span><span style="color: #993399">0</span><span style="color: #990000">][</span>pos<span style="color: #990000">]</span>
+            pos <span style="color: #990000">+=</span> <span style="color: #993399">1</span>
+            x <span style="color: #990000">+=</span> direct<span style="color: #990000">[</span>d<span style="color: #990000">][</span><span style="color: #993399">0</span><span style="color: #990000">]</span>
+            y <span style="color: #990000">+=</span> direct<span style="color: #990000">[</span>d<span style="color: #990000">][</span><span style="color: #993399">1</span><span style="color: #990000">]</span>
+    x <span style="color: #990000">+=</span> <span style="color: #993399">1</span>
+    y <span style="color: #990000">+=</span> <span style="color: #993399">1</span>
+Image<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">fromarray</span></span><span style="color: #990000">(</span>np<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">array</span></span><span style="color: #990000">(</span>deimg_spiral<span style="color: #990000">)).</span><span style="font-weight: bold"><span style="color: #000000">show</span></span><span style="color: #990000">()</span></tt></pre></div></div>
+<div class="paragraph"><p><span class="white">cat, and its name is uzi. you&#8217;ll hear from him later.</span></p></div>
+</div>
+<div class="sect2">
+<h3 id="_15">15</h3>
+<div class="paragraph"><p>It&#8217;s hard without search.</p></div>
+<div class="paragraph"><p>First point, you have to notice the next month has 29 days, so it&#8217;s a leap year.</p></div>
+<div class="paragraph"><p>Python datetime modular is for rescue. And find the year 1756, then google a lot and find what happend in 1756-01-27</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.7
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="font-weight: bold"><span style="color: #000080">import</span></span> datetime
+<span style="font-weight: bold"><span style="color: #0000FF">for</span></span> year <span style="font-weight: bold"><span style="color: #0000FF">in</span></span> <span style="font-weight: bold"><span style="color: #000000">range</span></span><span style="color: #990000">(</span><span style="color: #993399">1996</span><span style="color: #990000">,</span><span style="color: #993399">1582</span><span style="color: #990000">,-</span><span style="color: #993399">20</span><span style="color: #990000">):</span>
+    <span style="font-weight: bold"><span style="color: #0000FF">if</span></span> datetime<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">date</span></span><span style="color: #990000">(</span>year<span style="color: #990000">,</span> <span style="color: #993399">1</span><span style="color: #990000">,</span> <span style="color: #993399">1</span><span style="color: #990000">).</span><span style="font-weight: bold"><span style="color: #000000">weekday</span></span><span style="color: #990000">()</span> <span style="color: #990000">==</span> <span style="color: #993399">3</span><span style="color: #990000">:</span>   <span style="font-style: italic"><span style="color: #9A1900"># 3=Thursday</span></span>
+        <span style="font-weight: bold"><span style="color: #0000FF">print</span></span> year<span style="color: #990000">,</span></tt></pre></div></div>
+<div class="paragraph"><p><span class="white">mozart</span></p></div>
+</div>
+<div class="sect2">
+<h3 id="_16">16</h3>
+<div class="paragraph"><p>Cheated.:(
+Use GMIP to magnify the image and see the sticks in pixsel:
+- Press <em>'O'</em> to open color pick tool.
+- <em>Shift + Left Mouse</em> to see the color value.
+- Index means index in palette</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.7
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="font-weight: bold"><span style="color: #000080">from</span></span> PIL <span style="font-weight: bold"><span style="color: #000080">import</span></span> Image<span style="color: #990000">,</span> ImageDraw
+img <span style="color: #990000">=</span> Image<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">open</span></span><span style="color: #990000">(</span><span style="color: #FF0000">'mozart.gif'</span><span style="color: #990000">)</span>
+w<span style="color: #990000">,</span>h <span style="color: #990000">=</span> img<span style="color: #990000">.</span>size
+bars <span style="color: #990000">=</span> <span style="color: #990000">[]</span>
+<span style="font-weight: bold"><span style="color: #0000FF">for</span></span> j <span style="font-weight: bold"><span style="color: #0000FF">in</span></span> <span style="font-weight: bold"><span style="color: #000000">range</span></span><span style="color: #990000">(</span>h<span style="color: #990000">):</span>
+    <span style="font-weight: bold"><span style="color: #0000FF">for</span></span> i <span style="font-weight: bold"><span style="color: #0000FF">in</span></span> <span style="font-weight: bold"><span style="color: #000000">range</span></span><span style="color: #990000">(</span>w <span style="color: #990000">-</span> <span style="color: #993399">5</span><span style="color: #990000">):</span>
+        <span style="font-weight: bold"><span style="color: #0000FF">if</span></span> img<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">getpixel</span></span><span style="color: #990000">((</span>i<span style="color: #990000">,</span>j<span style="color: #990000">))</span> <span style="color: #990000">==</span> <span style="color: #993399">195</span> <span style="font-weight: bold"><span style="color: #0000FF">and</span></span> img<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">getpixel</span></span><span style="color: #990000">((</span>i<span style="color: #990000">+</span><span style="color: #993399">4</span><span style="color: #990000">,</span>j<span style="color: #990000">))</span> <span style="color: #990000">==</span> <span style="color: #993399">195</span><span style="color: #990000">:</span>
+            bars<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">append</span></span><span style="color: #990000">((</span>i<span style="color: #990000">,</span>j<span style="color: #990000">))</span>
+collect <span style="color: #990000">=</span> Image<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">new</span></span><span style="color: #990000">(</span>img<span style="color: #990000">.</span>mode<span style="color: #990000">,</span> <span style="color: #990000">(</span>w<span style="color: #990000">*</span><span style="color: #993399">2</span><span style="color: #990000">,</span> h<span style="color: #990000">),</span> <span style="color: #993399">0</span><span style="color: #990000">)</span>
+collect<span style="color: #990000">.</span>palette <span style="color: #990000">=</span> img<span style="color: #990000">.</span>palette
+<span style="font-weight: bold"><span style="color: #0000FF">for</span></span> j <span style="font-weight: bold"><span style="color: #0000FF">in</span></span> <span style="font-weight: bold"><span style="color: #000000">range</span></span><span style="color: #990000">(</span>h<span style="color: #990000">):</span>
+    <span style="font-weight: bold"><span style="color: #0000FF">for</span></span> i <span style="font-weight: bold"><span style="color: #0000FF">in</span></span> <span style="font-weight: bold"><span style="color: #000000">range</span></span><span style="color: #990000">(</span>w<span style="color: #990000">):</span>
+        collect<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">putpixel</span></span><span style="color: #990000">((</span>i <span style="color: #990000">+</span> w <span style="color: #990000">-</span> bars<span style="color: #990000">[</span>j<span style="color: #990000">][</span><span style="color: #993399">0</span><span style="color: #990000">],</span> j<span style="color: #990000">),</span> img<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">getpixel</span></span><span style="color: #990000">((</span>i<span style="color: #990000">,</span>j<span style="color: #990000">)))</span>
+collect<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">show</span></span><span style="color: #990000">()</span></tt></pre></div></div>
+<div class="paragraph"><p><span class="white">romance</span></p></div>
+</div>
+<div class="sect2">
+<h3 id="_17">17</h3>
+</div>
 </div>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-03-03 01:31:23 CST
+Last updated 2015-03-03 16:42:56 CST
 </div>
 </div>
 </body>
