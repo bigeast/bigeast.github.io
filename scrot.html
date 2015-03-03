@@ -752,8 +752,8 @@ by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
 <pre><tt>$ scrot <span style="font-style: italic"><span style="color: #9A1900"># 将图片保存在当前目录下</span></span>
-$ scrot /tmp/screenshot<span style="color: #990000">.</span>png <span style="font-style: italic"><span style="color: #9A1900">#指定输出文件</span></span>
-不指定输出文件时，默认输出文件格式是 <span style="color: #FF0000">"%Y-%m-%d-%H-%M-%S_$wx$h.png"</span>，就是 _年-月-日-时-分-秒_宽x高<span style="color: #990000">.</span>png_ 。其中以<span style="color: #990000">**%**</span>开头的变量是strftime，在C库函数中也是通用的，date命令也遵循同样的格式。而<span style="color: #990000">**</span><span style="color: #009900">$*</span><span style="color: #990000">*</span>符号开头的变量则是<span style="color: #990000">**</span>scrot<span style="color: #990000">**</span>自己内部定义的，另外比较有用的一个是 <span style="color: #990000">**</span><span style="color: #009900">$f</span><span style="color: #990000">**</span>，代表整个文件名，可以用这个变量对截好的图进行下一步操作。</tt></pre></div></div>
+$ scrot /tmp/screenshot<span style="color: #990000">.</span>png <span style="font-style: italic"><span style="color: #9A1900">#指定输出文件</span></span></tt></pre></div></div>
+<div class="paragraph"><p>不指定输出文件时，默认输出文件格式是 "%Y-%m-%d-%H-%M-%S_$wx$h.png"，就是 <em>年-月-日-时-分-秒_宽x高.png</em> 。其中以<strong>%</strong>开头的变量是strftime，在C库函数中也是通用的，date命令也遵循同样的格式。而<strong>$</strong>符号开头的变量则是<strong>scrot</strong>自己内部定义的，另外比较有用的一个是 <strong>$f</strong>，代表整个文件名，可以用这个变量对截好的图进行下一步操作。</p></div>
 <div class="ulist"><ul>
 <li>
 <p>
@@ -843,7 +843,7 @@ http://www.gnu.org/software/src-highlite -->
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-02-05 01:18:44 CST
+Last updated 2015-03-03 16:52:21 CST
 </div>
 </div>
 </body>

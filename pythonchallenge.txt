@@ -1,5 +1,4 @@
 Hints for http://www.pythonchallenge.com[Python Challenge]
-http://www.pythonchallenge.com/
 
 === 0
 2**38
