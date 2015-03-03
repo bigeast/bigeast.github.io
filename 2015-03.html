@@ -4,7 +4,7 @@
 <head>
 <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
 <meta name="generator" content="AsciiDoc 8.6.9" />
-<title>Scrot屏幕截图</title>
+<title></title>
 <style type="text/css">
 /* Shared CSS for AsciiDoc xhtml11 and html5 backends */
 
@@ -733,117 +733,33 @@ asciidoc.install();
 </head>
 <body class="article">
 <div id="header">
-<h1>Scrot屏幕截图</h1>
 </div>
 <div id="content">
-<div id="preamble">
+<div class="sect1">
+<h2 id="_2015_03_03_tuesday_20_02_29">2015-03-03 Tuesday 20:02:29</h2>
 <div class="sectionbody">
-<div class="paragraph"><p><strong>scrot</strong> 是一个轻量级的屏幕截图程序，它的功能很简单，但都很实用。它的选项很容易看懂。</p></div>
-<div class="ulist"><ul>
-<li>
-<p>
-直接对整个屏幕截图：
-</p>
-</li>
-</ul></div>
+<div class="sect2">
+<h3 id="_xdg_mime设置默认程序">xdg-mime设置默认程序</h3>
 <div class="listingblock">
 <div class="content"><!-- Generator: GNU source-highlight 3.1.7
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
-<pre><tt>$ scrot <span style="font-style: italic"><span style="color: #9A1900"># 将图片保存在当前目录下</span></span>
-$ scrot /tmp/screenshot<span style="color: #990000">.</span>png <span style="font-style: italic"><span style="color: #9A1900">#指定输出文件</span></span></tt></pre></div></div>
-<div class="paragraph"><p>不指定输出文件时，默认输出文件格式是 "%Y-%m-%d-%H-%M-%S_$wx$h.png"，就是 <em>年-月-日-时-分-秒_宽x高.png</em> 。其中以<strong>%</strong>开头的变量是strftime，在C库函数中也是通用的，date命令也遵循同样的格式。而<strong>$</strong>符号开头的变量则是<strong>scrot</strong>自己内部定义的，另外比较有用的一个是 <strong>$f</strong>，代表整个文件名，可以用这个变量对截好的图进行下一步操作。</p></div>
-<div class="ulist"><ul>
-<li>
-<p>
-截图的后续处理
-</p>
-</li>
-</ul></div>
-<div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.7
-by Lorenzo Bettini
-http://www.lorenzobettini.it
-http://www.gnu.org/software/src-highlite -->
-<pre><tt>$ scrot -e <span style="color: #FF0000">'mv $f ~/Pictures/'</span> <span style="font-style: italic"><span style="color: #9A1900"># 所有截图都保存在同一个目录下</span></span></tt></pre></div></div>
-<div class="ulist"><ul>
-<li>
-<p>
-选择区域截图
-</p>
-</li>
-</ul></div>
-<div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.7
-by Lorenzo Bettini
-http://www.lorenzobettini.it
-http://www.gnu.org/software/src-highlite -->
-<pre><tt>$ scrot -s</tt></pre></div></div>
-<div class="ulist"><ul>
-<li>
-<p>
-图像质量设定
-</p>
-</li>
-</ul></div>
-<div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.7
-by Lorenzo Bettini
-http://www.lorenzobettini.it
-http://www.gnu.org/software/src-highlite -->
-<pre><tt>$ scrot -q <span style="color: #993399">50</span> <span style="font-style: italic"><span style="color: #9A1900"># 0-100，默认是75，其实1和10看不出什么差别，10和50也没什么差别。。</span></span></tt></pre></div></div>
-<div class="paragraph"><p>有时候，可能希望在敲完命令，对窗口做一些改动后再开始截图，于是 <em>-d</em> 选项就很有用了。</p></div>
-<div class="ulist"><ul>
-<li>
-<p>
-延迟N秒后截图
-</p>
-</li>
-</ul></div>
-<div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.7
-by Lorenzo Bettini
-http://www.lorenzobettini.it
-http://www.gnu.org/software/src-highlite -->
-<pre><tt>$ scrot -d <span style="color: #993399">3</span> <span style="font-style: italic"><span style="color: #9A1900"># delay</span></span>
-$ scrot -d <span style="color: #993399">3</span> -c <span style="font-style: italic"><span style="color: #9A1900"># delay and count down 3..2..1..</span></span></tt></pre></div></div>
-<div class="ulist"><ul>
-<li>
-<p>
-对当前获得焦点的窗口截图
-</p>
-</li>
-</ul></div>
-<div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.7
-by Lorenzo Bettini
-http://www.lorenzobettini.it
-http://www.gnu.org/software/src-highlite -->
-<pre><tt>$ scrot -u -d <span style="color: #993399">2</span> -c <span style="font-style: italic"><span style="color: #9A1900"># 因为在终端输命令的时候肯定焦点在终端上啦，所以希望延迟几秒好有时间把焦点转移到要截图的窗口</span></span></tt></pre></div></div>
-<div class="paragraph"><p>我现在是用<strong>i3-dmenu-desktop</strong>（其实是<strong>j4-dmenu-desktop</strong>)来启动程序，但是 <strong>scrot</strong> 是没有.desktop文件的，需要手动生成。
-* 生成 scrot.desktop 文件(<em>/usr/share/applications/scrot.desktop</em>)</p></div>
-<div class="paragraph"><p>&#91;Desktop Entry&#93;</p></div>
-<div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.7
-by Lorenzo Bettini
-http://www.lorenzobettini.it
-http://www.gnu.org/software/src-highlite -->
-<pre><tt><span style="color: #009900">Name</span><span style="color: #990000">=</span>Scrot
-<span style="color: #009900">Comment</span><span style="color: #990000">=</span>Take screen shots
-<span style="color: #009900">Exec</span><span style="color: #990000">=</span>scrot -e <span style="color: #FF0000">"mv </span><span style="color: #CC33CC">\$</span><span style="color: #FF0000">f ~/Pictures/Screenshots/"</span>
-<span style="color: #009900">Terminal</span><span style="color: #990000">=</span><span style="font-weight: bold"><span style="color: #0000FF">false</span></span>
-<span style="color: #009900">Type</span><span style="color: #990000">=</span>Application</tt></pre></div></div>
-<div class="paragraph"><p>注意比较坑的一点是，直接在shell中执行时，<em>-e</em> 后面的命令需要用单引号包含，因为双引号会让bash展开例如说 <strong>$f</strong> 等 <strong>scrot</strong> 的内部变量。但在.desktop文件里不会去解析双引号，而且好像必须要用双引号才行。另外dollar符号要进行转义。这个试了好多遍才做对，还查了freedesktop上的官方文档 <a href="http://standards.freedesktop.org/desktop-entry-spec/latest/ar01s06.html">The Exec Key</a>。</p></div>
-<div class="paragraph"><p>最后有一个没有解决的问题是，我现在有两块显示屏，<strong>scrot</strong> 默认是同时截取所有的屏幕，然后合成一个大文件。这个大文件当然不可能在任何一个单独的屏幕上完全显示！而且如果两块屏幕分辨率是不一样的，最终合成的图片看着也很别扭。</p></div>
-<div class="paragraph"><p>我目前还不知道如何单独截取一个屏幕（想到了给<strong>scrot</strong>指定 <a href="http://askubuntu.com/questions/432255/what-is-display-environment-variable">DISPLAY变量</a>，但是在两块屏幕上这两个变量都是一样的。)</p></div>
+<pre><tt><span style="color: #009900">$xdg</span>-mime default firefox<span style="color: #990000">.</span>desktop x-scheme-handler/http <span style="font-style: italic"><span style="color: #9A1900">#默认用firefox打开http链接</span></span></tt></pre></div></div>
+<div class="paragraph"><p>其实是修改了 <em>~/.local/share/application/mimeapps.list</em> 文件</p></div>
+</div>
+<div class="sect2">
+<h3 id="_zsh与readline">zsh与readline</h3>
+<div class="paragraph"><p># zsh不用readline，因此 <em>~/.inputrc</em> 里的设置对其无效
+# zle与readline有一点不同的是，kill-word这个功能的默认快捷键， 虽然都为 <em>M-Backspace</em> 但zle对word的分界是非空白字符，/path/to/here对它来说是一个word。而readline中，会把/path/to/here当作三个单词。readline中把/path/to/here当作一个单词删除的快捷键是 <em>C-W</em> 。</p></div>
+</div>
 </div>
 </div>
 </div>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-03-03 19:51:03 CST
+Last updated 2015-03-03 21:14:15 CST
 </div>
 </div>
 </body>

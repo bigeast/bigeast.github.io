@@ -1,0 +1,10 @@
+== 2015-03-03 Tuesday 20:02:29
+=== xdg-mime设置默认程序
+[source, bash]
+$xdg-mime default firefox.desktop x-scheme-handler/http #默认用firefox打开http链接
+
+其实是修改了 _~/.local/share/application/mimeapps.list_ 文件
+
+=== zsh与readline
+# zsh不用readline，因此 _~/.inputrc_ 里的设置对其无效
+# zle与readline有一点不同的是，kill-word这个功能的默认快捷键， 虽然都为 _M-Backspace_ 但zle对word的分界是非空白字符，/path/to/here对它来说是一个word。而readline中，会把/path/to/here当作三个单词。readline中把/path/to/here当作一个单词删除的快捷键是 _C-W_ 。
