@@ -6,5 +6,14 @@ $xdg-mime default firefox.desktop x-scheme-handler/http #默认用firefox打开h
 其实是修改了 _~/.local/share/application/mimeapps.list_ 文件
 
 === zsh与readline
-# zsh不用readline，因此 _~/.inputrc_ 里的设置对其无效
-# zle与readline有一点不同的是，kill-word这个功能的默认快捷键， 虽然都为 _M-Backspace_ 但zle对word的分界是非空白字符，/path/to/here对它来说是一个word。而readline中，会把/path/to/here当作三个单词。readline中把/path/to/here当作一个单词删除的快捷键是 _C-W_ 。
+* zsh不用readline，因此 _~/.inputrc_ 里的设置对其无效
+
+* zle与readline有一点不同的是，kill-word这个功能的默认快捷键， 虽然都为 _M-Backspace_ 但zle对word的分界是非空白字符，/path/to/here对它来说是一个word。而readline中，会把/path/to/here当作三个单词。readline中把/path/to/here当作一个单词删除的快捷键是 _C-W_ 。
+
+== 2015-03-04 Wednesday 14:57:56
+=== youtube-dl
+下载youtube视频，很给力的一个工具，但好像不支持国内的视频网站，不过有 _you-get_ ，是日本人写的。
+[source, bash]
+$youtube-dl -F URL # 列出所有可供下载的格式，每个前面有一个ID
+$youtube-dl -f ID  # 下载指定格式的码流
+$youtube-dl -f bestaudio URL # 下载质量最好的音频码流，下载音乐和有声读物时很有用，之前不知道，还专门找从youtube上下mp3的网站，当时就怀疑，这些网站不可能是自己下载视频后再提取音频的，不然太慢了！

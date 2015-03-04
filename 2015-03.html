@@ -750,8 +750,34 @@ http://www.gnu.org/software/src-highlite -->
 </div>
 <div class="sect2">
 <h3 id="_zsh与readline">zsh与readline</h3>
-<div class="paragraph"><p># zsh不用readline，因此 <em>~/.inputrc</em> 里的设置对其无效
-# zle与readline有一点不同的是，kill-word这个功能的默认快捷键， 虽然都为 <em>M-Backspace</em> 但zle对word的分界是非空白字符，/path/to/here对它来说是一个word。而readline中，会把/path/to/here当作三个单词。readline中把/path/to/here当作一个单词删除的快捷键是 <em>C-W</em> 。</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+zsh不用readline，因此 <em>~/.inputrc</em> 里的设置对其无效
+</p>
+</li>
+<li>
+<p>
+zle与readline有一点不同的是，kill-word这个功能的默认快捷键， 虽然都为 <em>M-Backspace</em> 但zle对word的分界是非空白字符，/path/to/here对它来说是一个word。而readline中，会把/path/to/here当作三个单词。readline中把/path/to/here当作一个单词删除的快捷键是 <em>C-W</em> 。
+</p>
+</li>
+</ul></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_2015_03_04_wednesday_14_57_56">2015-03-04 Wednesday 14:57:56</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_youtube_dl">youtube-dl</h3>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.7
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="color: #009900">$youtube</span>-dl -F URL <span style="font-style: italic"><span style="color: #9A1900"># 列出所有可供下载的格式，每个前面有一个ID</span></span>
+<span style="color: #009900">$youtube</span>-dl -f ID  <span style="font-style: italic"><span style="color: #9A1900"># 下载指定格式的码流</span></span>
+<span style="color: #009900">$youtube</span>-dl -f bestaudio URL <span style="font-style: italic"><span style="color: #9A1900"># 下载质量最好的音频码流，下载音乐和有声读物时很有用，之前不知道，还专门找从youtube上下mp3的网站，当时就怀疑，这些网站不可能是自己下载视频后再提取音频的，不然太慢了！</span></span></tt></pre></div></div>
 </div>
 </div>
 </div>
@@ -759,7 +785,7 @@ http://www.gnu.org/software/src-highlite -->
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-03-03 21:19:46 CST
+Last updated 2015-03-04 15:07:14 CST
 </div>
 </div>
 </body>
