@@ -8,3 +8,19 @@ $xdg-mime default firefox.desktop x-scheme-handler/http #默认用firefox打开h
 === zsh与readline
 # zsh不用readline，因此 _~/.inputrc_ 里的设置对其无效
 # zle与readline有一点不同的是，kill-word这个功能的默认快捷键， 虽然都为 _M-Backspace_ 但zle对word的分界是非空白字符，/path/to/here对它来说是一个word。而readline中，会把/path/to/here当作三个单词。readline中把/path/to/here当作一个单词删除的快捷键是 _C-W_ 。
+
+=== https://github.com/soimort/you-get[you-get]
+# 下载视频网站的视频！神器！
+
+[source, bash]
+$pip3 install you-get # pip 安装
+$you-get -i URL # 查看视频信息，如标题，分辨率，大小等
+$you-get -F {hd2,mp4} URL # 选择某一个分辨率下载
+
+=== rlwrap
+# 不支持readline的程序，例如python，可以在前面加上 _rlwrap_ 来加上readline支持！
+
+[source, bash]
+alias python='rlwrap python'
+alias maxima='rlwrap maxima'
+alias guile='rlwrap guile'
