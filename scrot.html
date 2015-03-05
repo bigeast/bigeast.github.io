@@ -821,6 +821,16 @@ by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
 <pre><tt>$ scrot -u -d <span style="color: #993399">2</span> -c <span style="font-style: italic"><span style="color: #9A1900"># 因为在终端输命令的时候肯定焦点在终端上啦，所以希望延迟几秒好有时间把焦点转移到要截图的窗口</span></span></tt></pre></div></div>
+<div class="paragraph"><p>还可以用 <em>import</em> 命令，首先要获得活动窗口的id：</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.7
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="font-style: italic"><span style="color: #9A1900">#!/bin/sh</span></span>
+<span style="color: #009900">activeWinLine</span><span style="color: #990000">=</span><span style="color: #009900">$(</span>xprop -root <span style="color: #990000">|</span> grep <span style="color: #FF0000">"_NET_ACTIVE_WINDOW(WINDOW)"</span><span style="color: #990000">)</span>
+<span style="color: #009900">activeWinId</span><span style="color: #990000">=</span><span style="color: #009900">${activeWinLine:40}</span>
+<span style="font-weight: bold"><span style="color: #000080">import</span></span> -window <span style="color: #FF0000">"$activeWinId"</span> /tmp<span style="color: #990000">/</span><span style="color: #009900">$(</span>date <span style="color: #990000">+%</span>F_<span style="color: #990000">%</span>H<span style="color: #990000">%</span>M<span style="color: #990000">%</span>S_<span style="color: #990000">%</span>N<span style="color: #990000">).</span>png</tt></pre></div></div>
 <div class="paragraph"><p>我现在是用<strong>i3-dmenu-desktop</strong>（其实是<strong>j4-dmenu-desktop</strong>)来启动程序，但是 <strong>scrot</strong> 是没有.desktop文件的，需要手动生成。
 * 生成 scrot.desktop 文件(<em>/usr/share/applications/scrot.desktop</em>)</p></div>
 <div class="paragraph"><p>&#91;Desktop Entry&#93;</p></div>
@@ -836,14 +846,34 @@ http://www.gnu.org/software/src-highlite -->
 <span style="color: #009900">Type</span><span style="color: #990000">=</span>Application</tt></pre></div></div>
 <div class="paragraph"><p>注意比较坑的一点是，直接在shell中执行时，<em>-e</em> 后面的命令需要用单引号包含，因为双引号会让bash展开例如说 <strong>$f</strong> 等 <strong>scrot</strong> 的内部变量。但在.desktop文件里不会去解析双引号，而且好像必须要用双引号才行。另外dollar符号要进行转义。这个试了好多遍才做对，还查了freedesktop上的官方文档 <a href="http://standards.freedesktop.org/desktop-entry-spec/latest/ar01s06.html">The Exec Key</a>。</p></div>
 <div class="paragraph"><p>最后有一个没有解决的问题是，我现在有两块显示屏，<strong>scrot</strong> 默认是同时截取所有的屏幕，然后合成一个大文件。这个大文件当然不可能在任何一个单独的屏幕上完全显示！而且如果两块屏幕分辨率是不一样的，最终合成的图片看着也很别扭。</p></div>
-<div class="paragraph"><p>我目前还不知道如何单独截取一个屏幕（想到了给<strong>scrot</strong>指定 <a href="http://askubuntu.com/questions/432255/what-is-display-environment-variable">DISPLAY变量</a>，但是在两块屏幕上这两个变量都是一样的。)</p></div>
+<div class="paragraph"><p><span class="line-through">我目前还不知道如何单独截取一个屏幕（想到了给<strong>scrot</strong>指定 <a href="http://askubuntu.com/questions/432255/what-is-display-environment-variable">DISPLAY变量</a>，但是在两块屏幕上这两个变量都是一样的。)</span></p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+多屏幕时 <a href="https://wiki.archlinux.org/index.php/taking_a_screenshot#Screenshot_of_individual_Xinerama_heads">对单个物理屏幕的截屏</a>
+</p>
+</li>
+</ul></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.7
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="font-style: italic"><span style="color: #9A1900">#!/bin/sh</span></span>
+xdpyinfo -ext XINERAMA <span style="color: #990000">|</span> sed <span style="color: #FF0000">'/^  head #/!d;s///'</span> <span style="color: #990000">|</span>
+<span style="font-weight: bold"><span style="color: #0000FF">while</span></span> <span style="color: #009900">IFS</span><span style="color: #990000">=</span><span style="color: #FF0000">' :x@,'</span> <span style="font-weight: bold"><span style="color: #0000FF">read</span></span> i w h x y<span style="color: #990000">;</span> <span style="font-weight: bold"><span style="color: #0000FF">do</span></span>
+        <span style="font-weight: bold"><span style="color: #000080">import</span></span> -window root -crop <span style="color: #009900">${w}</span>x<span style="color: #009900">$h</span><span style="color: #990000">+</span><span style="color: #009900">$x</span><span style="color: #990000">+</span><span style="color: #009900">$y</span> head_<span style="color: #009900">$i</span><span style="color: #990000">.</span>png
+<span style="font-weight: bold"><span style="color: #0000FF">done</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">#  head #0: 1920x1080 @ 1280,0</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">#  head #1: 1280x1024 @ 0,0</span></span></tt></pre></div></div>
+<div class="paragraph"><p>其原理是对默认截下来的所有屏幕的拼接图片进行剪裁，通过给 <em>import</em> 的-crop选项指定参数，因为第一块屏幕是左上角坐标为(1280,0)，宽高是1920x1080，那么参数就应为1920x1080+1280+0。</p></div>
 </div>
 </div>
 </div>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-03-03 21:19:46 CST
+Last updated 2015-03-06 00:08:05 CST
 </div>
 </div>
 </body>

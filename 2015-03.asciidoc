@@ -49,3 +49,48 @@ $youtube-dl -f bestaudio URL # 下载质量最好的音频码流，下载音乐�
 * 开学后的 _pacman -Syu_ 好像更新了不该更新的东西，使得终端刷新的时候会把整个显示器搞乱。开始以为是i3wm的问题，但是回滚后还是不行。
 * 想起来xrandr显示的显示器名称也变了，之前是DVI-I-1和DVI-I-2，现在成了DVI-1和DVI-2。于是把xrandr也降级，问题依然存在。
 * 本来想去IRC上问一问，但是感觉这问题挺不好描述。才想起来去看Archlinux的更新公告 https://www.archlinux.org/news/xorg-server-1171-is-now-available[xorg-server 1.17.1 is now available]，然后把 _xorg-video-modesetting_ 装回来就好了。
+
+=== http://www.w3schools.com/jsref/prop_loc_hash.asp[Location hash Property]
+* 就是在URL后添加 _#section_ 来定位到html文件的某一部分的功能。wikipedia上很常见。如何在Asciidoc中实现呢？
+
+=== http://stackoverflow.com/questions/6667201/how-to-define-two-dimensional-array-in-python[Python中的二维数组定义]
+首先应该定义成列表的列表。
+[source, python]
+>>> arr = [[0] * 3] * 3
+ [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
+>>> arr[0][0] = 1
+>>> print arr
+ [[1, 0, 0], [1, 0, 0], [1, 0, 0]]
+
+明明只改了一个值，但却有三个位置的值改变了。看下它们是否是同一个对象：
+
+[source, python]
+>>> [id(x) for x in arr]
+ [140692558271840, 140692558271840, 140692558271840]
+
+但是注意
+[source, python]
+>>> a = [0] * 3
+>>> print a
+ [0, 0, 0]
+>>> a[1] = 1
+>>> print a
+ [0, 1, 0]
+
+当重复的对象类型是int时，就是复制了不同的实例了？其实不然，再看：
+[source, python]
+>>> [id(x) for x in arr]
+ [23646576, 23646576, 23646576]
+
+那既然如此，为什么改变一个值不会影响到其它三个呢？在 IRC上问了，马上得到了回答，大概是说，int类型是不可变的，你改变它，Python其实是生成了一个新的实例。而列表类型是可变的，你改变它，就会看到它的三个拷贝都变了。
+
+那么正确的方式应该是什么呢？用列表展开！
+
+[source, python]
+>>> arr = [[0 for i in xrange(3)] for j in xrange(3)] 
+>>> arr = [[0] * 3 for i in xrange(3) ] 
+
+用一个for的列表展开更简洁，但是不那么直观，包含了一些隐式行为。
+
+=== link:scrot.html[单个物理屏幕的截屏]
+

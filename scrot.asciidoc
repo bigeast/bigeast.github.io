@@ -29,8 +29,16 @@ $ scrot -d 3 # delay
 $ scrot -d 3 -c # delay and count down 3..2..1..
 
 * 对当前获得焦点的窗口截图
+
 [source, bash]
 $ scrot -u -d 2 -c # 因为在终端输命令的时候肯定焦点在终端上啦，所以希望延迟几秒好有时间把焦点转移到要截图的窗口
+
+还可以用 _import_ 命令，首先要获得活动窗口的id：
+[source, bash]
+#!/bin/sh
+activeWinLine=$(xprop -root | grep "_NET_ACTIVE_WINDOW(WINDOW)")
+activeWinId=${activeWinLine:40}
+import -window "$activeWinId" /tmp/$(date +%F_%H%M%S_%N).png
 
 我现在是用**i3-dmenu-desktop**（其实是**j4-dmenu-desktop**)来启动程序，但是 **scrot** 是没有.desktop文件的，需要手动生成。
 * 生成 scrot.desktop 文件(_/usr/share/applications/scrot.desktop_)
@@ -48,4 +56,19 @@ Type=Application
 
 最后有一个没有解决的问题是，我现在有两块显示屏，**scrot** 默认是同时截取所有的屏幕，然后合成一个大文件。这个大文件当然不可能在任何一个单独的屏幕上完全显示！而且如果两块屏幕分辨率是不一样的，最终合成的图片看着也很别扭。
 
-我目前还不知道如何单独截取一个屏幕（想到了给**scrot**指定 http://askubuntu.com/questions/432255/what-is-display-environment-variable[DISPLAY变量]，但是在两块屏幕上这两个变量都是一样的。)
+[line-through]#我目前还不知道如何单独截取一个屏幕（想到了给**scrot**指定 http://askubuntu.com/questions/432255/what-is-display-environment-variable[DISPLAY变量]，但是在两块屏幕上这两个变量都是一样的。)#
+
+* 多屏幕时 https://wiki.archlinux.org/index.php/taking_a_screenshot#Screenshot_of_individual_Xinerama_heads[对单个物理屏幕的截屏]
+
+[source, bash]
+#!/bin/sh
+xdpyinfo -ext XINERAMA | sed '/^  head #/!d;s///' |
+while IFS=' :x@,' read i w h x y; do
+        import -window root -crop ${w}x$h+$x+$y head_$i.png
+done
+#  head #0: 1920x1080 @ 1280,0
+#  head #1: 1280x1024 @ 0,0
+
+其原理是对默认截下来的所有屏幕的拼接图片进行剪裁，通过给 _import_ 的-crop选项指定参数，因为第一块屏幕是左上角坐标为(1280,0)，宽高是1920x1080，那么参数就应为1920x1080+1280+0。
+
+
