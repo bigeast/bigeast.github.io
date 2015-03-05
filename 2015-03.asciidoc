@@ -36,3 +36,16 @@ alias guile='rlwrap guile'
 $youtube-dl -F URL # 列出所有可供下载的格式，每个前面有一个ID
 $youtube-dl -f ID  # 下载指定格式的码流
 $youtube-dl -f bestaudio URL # 下载质量最好的音频码流，下载音乐和有声读物时很有用，之前不知道，还专门找从youtube上下mp3的网站，当时就怀疑，这些网站不可能是自己下载视频后再提取音频的，不然太慢了！
+
+== 2015-03-05 Thursday 18:54:39
+=== http://en.wikipedia.org/wiki/Fabrice_Bellard[Fabric Bellard]
+* 神人啊。_QEMU_ ， _ffmpeg_ 都是他写的。他还写过C编译器，整个代码只有不到4M，而且是ISO C99兼容的，编译速度比 _gcc_ 快7倍！
+* 还记得刚上大学那会儿看到过有人用个人电脑破了计算pi的记录，那个人就是他。而且是基于他自己发现的公式 http://en.wikipedia.org/wiki/Bellard%27s_formula[Bellard formula] 的！他不仅知道怎么做，而且做得比别人更快更好！ （通常发明公式的应该是数学家，而数学家一般不会自己去用代码实现。）
+* 前一段他还提出并实现了 http://bellard.org/bpg/[BGP] 图像编码格式，是基于HEVC的技术，对高分辨率的图像有更好的压缩效果。
+* 而且他的网站非常之简洁。看得我有些惭愧。
+* 或许专注一件事情才是成功之道吧！
+
+=== xorg-xserver
+* 开学后的 _pacman -Syu_ 好像更新了不该更新的东西，使得终端刷新的时候会把整个显示器搞乱。开始以为是i3wm的问题，但是回滚后还是不行。
+* 想起来xrandr显示的显示器名称也变了，之前是DVI-I-1和DVI-I-2，现在成了DVI-1和DVI-2。于是把xrandr也降级，问题依然存在。
+* 本来想去IRC上问一问，但是感觉这问题挺不好描述。才想起来去看Archlinux的更新公告 https://www.archlinux.org/news/xorg-server-1171-is-now-available[xorg-server 1.17.1 is now available]，然后把 _xorg-video-modesetting_ 装回来就好了。
