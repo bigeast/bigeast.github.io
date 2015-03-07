@@ -92,5 +92,13 @@ $youtube-dl -f bestaudio URL # 下载质量最好的音频码流，下载音乐�
 
 用一个for的列表展开更简洁，但是不那么直观，包含了一些隐式行为。
 
-=== link:scrot.html[单个物理屏幕的截屏]
+=== 单个物理屏幕的截屏
+见　link:scrot.html[Scrot屏幕截图]
 
+== 2015-03-07 Saturday 21:40:26
+=== py2exe, pyinsaller
+* py2exe 可以把.py程序转化成.exe程序，以在没有安装Python的Windows机器上运行，但必须在Windows中的Python中使用。:(
+* pyinstaller 支持多平台，但在Linux中，还是转化成ELF可执行文件，而不是exe。所以貌似不能用它来实现交叉编译？
+
+=== python中的排序算法
+* 用的是Timsort，具体方法在源代码的Objects/listsort.txt中有描述。
