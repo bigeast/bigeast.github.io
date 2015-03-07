@@ -955,6 +955,36 @@ pyinstaller 支持多平台，但在Linux中，还是转化成ELF可执行文件
 用的是Timsort，具体方法在源代码的Objects/listsort.txt中有描述。
 </p>
 </li>
+<li>
+<p>
+DSU模式，在Python 2.4之前，为列表指定cmp函数的一种方法。就是先将每个元素x与val(x)绑定（Decorate），然后对元组(val(x), x)进行默认的排序（Sort），最后再从排序后的元组中得到原来的元素（Undecorate）。
+</p>
+</li>
+<li>
+<p>
+在Python 2.4中，只需要为sort传入key=cmp就行了。cmp函数还可以用lambda表达式来做。
+</p>
+</li>
+</ul></div>
+</div>
+<div class="sect2">
+<h3 id="_查看man_page的n种方法">查看man page的N种方法</h3>
+<div class="ulist"><ul>
+<li>
+<p>
+在浏览器中查看： <em>man -Hfirefox ls</em> 有目录链接。
+</p>
+</li>
+<li>
+<p>
+在(g)Vim中查看：<em>:Man ls</em> 或者在关键字上按<em>Shift+k</em> 推荐前者，有语法高亮。
+</p>
+</li>
+<li>
+<p>
+用GNOME中的yelp： <em>yelp man:ls</em> 只是提供了一个图形界面，并不怎么方便。
+</p>
+</li>
 </ul></div>
 </div>
 </div>
@@ -963,7 +993,7 @@ pyinstaller 支持多平台，但在Linux中，还是转化成ELF可执行文件
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-03-07 21:48:40 CST
+Last updated 2015-03-07 22:52:25 CST
 </div>
 </div>
 </body>

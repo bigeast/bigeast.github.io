@@ -102,3 +102,10 @@ $youtube-dl -f bestaudio URL # 下载质量最好的音频码流，下载音乐�
 
 === python中的排序算法
 * 用的是Timsort，具体方法在源代码的Objects/listsort.txt中有描述。
+* DSU模式，在Python 2.4之前，为列表指定cmp函数的一种方法。就是先将每个元素x与val(x)绑定（Decorate），然后对元组(val(x), x)进行默认的排序（Sort），最后再从排序后的元组中得到原来的元素（Undecorate）。
+* 在Python 2.4中，只需要为sort传入key=cmp就行了。cmp函数还可以用lambda表达式来做。
+
+=== 查看man page的N种方法
+* 在浏览器中查看： _man -Hfirefox ls_ 有目录链接。
+* 在(g)Vim中查看：_:Man ls_ 或者在关键字上按_Shift+k_ 推荐前者，有语法高亮。
+* 用GNOME中的yelp： _yelp man:ls_ 只是提供了一个图形界面，并不怎么方便。
