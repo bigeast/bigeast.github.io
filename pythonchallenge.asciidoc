@@ -1,28 +1,21 @@
 Hints for http://www.pythonchallenge.com[Python Challenge]
 
-=== 0
+=== http://www.pythonchallenge.com/pc/def/0.html[0]
 2**38
 
-[white]#274877906944#
 
-=== 1
+=== http://www.pythonchallenge.com/pc/def/274877906944.html[1]
 rot13
 
-[white]#ocr#
-
-=== 2
+=== http://www.pythonchallenge.com/pc/def/ocr.html[2]
 **page source** means the current web page source.
 Open the html page source and note the comments.
 
-[white]#equality#
-
-=== 3
+=== http://www.pythonchallenge.com/pc/def/equality.html[3]
 Note the page title. It's a hint!
 Need to view the page source as above.
 
-[white]#linkedlist#
-
-=== 4
+=== http://www.pythonchallenge.com/pc/def/linkedlist.php[4]
 The page title says "follow the chain", so click the image
 
 Need to get the page by program, and extract a number from the source.
@@ -33,15 +26,13 @@ The answer is lay in the page that has no number in it. It's a cyclic list and y
 
 [white]#nothing, 6711, ..., 66831 and then will get the answer peak#
 
-=== 5
+=== http://www.pythonchallenge.com/pc/def/peak.html[5]
 peak hell sounds familiar?
 Download a file whose name is in the source code and unpickle it.
 
 Then! The unpicked list is a character map!
 
-[white]#channel#
-
-=== 6
+=== http://www.pythonchallenge.com/pc/def/channel.html[6]
 The comment of the page source only has "zip", I googled and download channel.zip. Unzip it and there are many _num.txt_ files in it, other than a _readme_ file with two hints.
 
 It seems similar with **linkedlist** problem, but the last file in the list says "Collect the comments."
@@ -52,7 +43,7 @@ The final answer is the small characters which forms XXX!!! Amazing, I googled a
 
 [white]#hockey oxygen#
 
-=== 7
+=== http://www.pythonchallenge.com/pc/def/oxygen.html[7]
 Absolutely nothing other than an image with strange blocks in it. Note that the color are all gray, can the gray value represent a ascii value?
 
 Need PIL library.
@@ -66,26 +57,53 @@ print img.size # (width, height)
 res = [chr(pix[4,47][0])] + [chr(pix[5+7*i,47][0]) for i in xrange(86)]
 ''.join(res) # not the final answer, but a hint, just follow it!
 
-[white]#integrity#
 
-=== 8
+=== http://www.pythonchallenge.com/pc/def/integrity.html[8]
 Follow the link in the image. username and password can be obtained by decompress the two strings in source page by bz2.
+
+Look at the strings' header, and compare them with .bz2 file header:
+
+[source, bash]
+$hexdump -c 10 -C test.bz2
+
+[source, python]
+import bz2
+un = 'BZh91AY&SYA\xaf\x82\r\x00\x00\x01\x01\x80\x02\xc0\x02\x00 \x00!\x9ah3M\x07<]\xc9\x14\xe1BA\x06\xbe\x084'
+pw = 'BZh91AY&SY\x94$|\x0e\x00\x00\x00\x81\x00\x03$ \x00!\x9ah3M\x13<]\xc9\x14\xe1BBP\x91\xf08'
+bz2.decompress(un)
+bz2.decompress(pw)
 
 [white]#username:huge password:file#
 
-=== 9
+=== http://www.pythonchallenge.com/pc/return/good.html[9]
 Download the image _good.jpg_, manipulate it accroding to comments in the page source, that is, draw lines using ImageDraw module from library PIL.
 
 [white]#cow, bull#
 
-=== 10
+=== http://www.pythonchallenge.com/pc/return/bull.html[10]
 1, 11, 21, 1211, 111221
 1211 -> 111221
 1'1' 1'2' 2'1' -> 111221
 
-[white]#5808#
+[source, python]
+res='1'
+for i in xrange(31):
+    next_str = ""
+    lenr = len(res)
+    pos = 0
+    idx = 0
+    while pos < lenr:
+        cnt = 0
+        while pos < lenr and res[pos] == res[idx]:
+            cnt += 1
+            pos += 1
+        next_str += str(cnt) + res[idx]
+        idx = pos
+    if i == 30:
+        print len(res)
+    res = next_str
 
-=== 11
+=== http://www.pythonchallenge.com/pc/return/5808.html[11]
 Another image manipulatation problem.
 
 This time more advanced pixel access techniques are required. You'll find numpy is very helpfull.
@@ -106,9 +124,7 @@ even = np.array(even)
 Image.fromarray(odd).show()
 Image.fromarray(even).show()
 
-[white]#evil#
-
-=== 12
+=== http://www.pythonchallenge.com/pc/return/evil.html[12]
 I'll never solve it all by my self! It's just so evil!
 
 You need to notice the image file name, why it's _evil1.jpg_ rather than just _evil.jpg_? So you'll try if evil2.jpg exists. Turns out evil2.jpg says "rot jpg - _.gfx". Then try to download evil2.gfx which can't be decoded directly.
@@ -163,68 +179,43 @@ Note that the third image is damaged, nevertheless we can still get the right an
 
 [white]#disproportional#
 
-=== 13
+=== http://www.pythonchallenge.com/pc/return/disproportional.html[13]
 No idea. Cheat with http://intelligentgeek.blogspot.jp/2006/03/python-challenge-13-level-13-shows.html[This].
 
 xmlrpclib is needed.
 
-[white]#italy#
-
-=== 14
+=== http://www.pythonchallenge.com/pc/return/italy.html[14]
 Spiral matrix.
 Easy and easy to lose time in these problem!!
 
 [source, Python]
-from PIL import Image, ImageDraw
+from PIL import Image
 import numpy as np
-import copy
 img = Image.open('wire.png')
 pdata = np.asarray(img)
-w,h = img.size
-deimg = [[ 0,0,0 ] * 100] * 100
-for i in xrange(100):
+w, h = img.size
+#deimg = [ [0 for i in range(100)] for j in range(100)]
+for i in range(100):
     deimg[i] = pdata[0][100*i: 100*i+100]
-#Image.fromarray(np.array(deimg)).show() # bit.html says "you took the wrong curve."
-#
-# 329  
-# 418
-# 567
-#
-#x,y = 0,0
-#deimg_spiral = copy.deepcopy(deimg)
-#direct = [(0,-1),(-1,0),(0,1),(1,0)]
-#for i in xrange(1,50):
- #   x += 1
- #   y += 1 # above n^2
- #   pos = (2*i + 1)**2
- #   print "before",pos
- #   for d in xrange(4):
- #       for j in xrange(2*i):
- #           pos -= 1
- #           if pos > (2*i-1)**2 and 0<=x<100 and 0<=y<100:
- #               deimg_spiral[x][y] = pdata[0][pos]
- #           x += direct[d][0]
- #           y += direct[d][1]
- #   print "after",pos
-direct = [(0,1),(1,0),(0,-1),(-1,0)]
-deimg_spiral = copy.deepcopy(deimg)
+# Image.fromarray(np.array(deimg)).show() # bit.html says "you took the wrong curve."
+direct = [(0, 1), (1, 0), (0, -1), (-1, 0)]
+deimg_spiral = [ [0 for i in range(100)] for j in range(100)]
 pos = 0
-x,y = 0,0
-for i in xrange(100,-1,-2):
-    print i
-    for d in xrange(4):
-        for j in xrange(i-1):
+x, y = 0, 0
+for i in range(100, -1, -2):
+    for d in range(4):
+        for j in range(i-1):
             deimg_spiral[x][y] = pdata[0][pos]
             pos += 1
             x += direct[d][0]
             y += direct[d][1]
     x += 1
     y += 1
-Image.fromarray(np.array(deimg_spiral)).show() 
+Image.fromarray(np.array(deimg_spiral)).show()
 
 [white]#cat, and its name is uzi. you'll hear from him later.#
 
-=== 15
+=== http://www.pythonchallenge.com/pc/return/uzi.html[15]
 It's hard without search.
 
 First point, you have to notice the next month has 29 days, so it's a leap year.
@@ -237,9 +228,7 @@ for year in range(1996,1582,-20):
     if datetime.date(year, 1, 1).weekday() == 3:   # 3=Thursday
         print year,
 
-[white]#mozart#
-
-=== 16
+=== http://www.pythonchallenge.com/pc/return/mozart.html[16]
 Cheated.:(
 Use GMIP to magnify the image and see the sticks in pixsel:
 - Press _'O'_ to open color pick tool.
@@ -262,6 +251,5 @@ for j in range(h):
         collect.putpixel((i + w - bars[j][0], j), img.getpixel((i,j)))
 collect.show()
 
-[white]#romance#
-
-=== 17
+=== http://www.pythonchallenge.com/pc/return/romance.html[17]
+'is it the 26th already? call his father and inform him that "the flowers are on their way". he\'ll understand.'
