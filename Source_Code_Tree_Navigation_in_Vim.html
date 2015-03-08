@@ -749,7 +749,8 @@ asciidoc.install();
 <div class="paragraph"><p>在VS中快捷键是 <em>F12</em> ，然后 <em>Ctrl+-</em> 返回。在Vim的内置功能中也有跳转到定义的功能，按 <em>gd</em> 即可，但这只是基于文本的搜索，没有分析语法，而且只能在当前文件中搜索，不是很实用。标准的解决方案应该是用 <a href="http://ctags.sourceforge.net/">ctags</a> 生成tags文件，然后在Vim中就可以用
 * <em>:tag &lt;varname&gt;</em>
 * 或者 <em>Ctrl+]</em> （写到这里突然想到了Vim的帮助文档的tags就是这么跳转的）
-* 甚至 <em>Ctrl+鼠标左键</em> 来跳转到定义了。具体做法如下：</p></div>
+* 甚至 <em>Ctrl+鼠标左键</em> 来跳转到定义了。具体做法如下：
+* 按　<em>Ctrl+t_　从一个tag返回到原来的位置。或者　_Ctrl+o</em> ，用Vim本身的上一个位置返回（如果移动了很多次，需要按好多次才能返回到原来位置）。</p></div>
 <div class="ulist"><ul>
 <li>
 <p>
@@ -796,13 +797,79 @@ http://www.gnu.org/software/src-highlite -->
 <h2 id="_函数的调用关系">函数的调用关系</h2>
 <div class="sectionbody">
 <div class="paragraph"><p>在VS中要右键&#8594;调用浏览器。在Vim中需要用到cscope。</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.7
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="color: #009900">$cscope</span> -R <span style="font-style: italic"><span style="color: #9A1900">#　在源文件根目录下生成cscope.out，并打开cscope自带的ncurse界面。但每次进行新的搜索时，需要退出vim</span></span>
+<span style="color: #009900">$cscope</span> -R -b <span style="font-style: italic"><span style="color: #9A1900"># 仅生成cscope.out，然后退出</span></span></tt></pre></div></div>
+<div class="ulist"><ul>
+<li>
+<p>
+源文件根目录下打开Vim，输入 <em>:cscope add cscope.out</em> 命令，连接到已生成的cscope数据库。
+</p>
+</li>
+<li>
+<p>
+<em>:cscope help</em> 查看帮助
+</p>
+</li>
+<li>
+<p>
+<em>:cscope find</em>
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+<em>c</em> 哪些函数调用了该函数
+</p>
+</li>
+<li>
+<p>
+<em>d</em> 该函数被哪些函数调用
+</p>
+</li>
+<li>
+<p>
+<em>e</em> egrep查找
+</p>
+</li>
+<li>
+<p>
+<em>g</em> 变量定义
+</p>
+</li>
+<li>
+<p>
+<em>f</em> 在该文件中查找
+</p>
+</li>
+<li>
+<p>
+<em>i</em> 哪些文件#include了本文件
+</p>
+</li>
+<li>
+<p>
+<em>s</em> 查找C符号
+</p>
+</li>
+<li>
+<p>
+<em>t</em> 查找文本
+</p>
+</li>
+</ul></div>
+</li>
+</ul></div>
 </div>
 </div>
 </div>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-03-03 21:19:46 CST
+Last updated 2015-03-08 14:16:28 CST
 </div>
 </div>
 </body>
