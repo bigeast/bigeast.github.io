@@ -1026,11 +1026,63 @@ DSU模式，在Python 2.4之前，为列表指定cmp函数的一种方法。就�
 </div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="_2015_03_09_monday_10_43_16">2015-03-09 Monday 10:43:16</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_zle">zle</h3>
+<div class="ulist"><ul>
+<li>
+<p>
+kill-buffer() 与 kill-whole-line()　有什么区别？
+</p>
+</li>
+<li>
+<p>
+<em>M-l</em> 与 <em>M-u</em> ，down-case-word, up-case-word 将光标到行尾的字符全部变成小写或者大写。
+</p>
+</li>
+<li>
+<p>
+<em>M-'</em> quote-line 引号括起当前行。
+</p>
+</li>
+<li>
+<p>
+<em>M-a</em> 执行当前行，并保留到下一行。
+</p>
+</li>
+<li>
+<p>
+<em>M-x</em> 执行命令，例如backward-delete-word之类。
+</p>
+</li>
+<li>
+<p>
+vi-backward-kill-word 会把/path/to/somewhere看作六个单词，就像readline中 <em>M-Backspace</em> 一样。而zsh默认是把backward-kill-word绑定到 <em>M-Backspace</em> 的。终于弄清了这个问题！现在的问题是如何在配置文件中表示 <em>M-Backspace</em> 。目前是将其绑定到了 <em>C-Backspace</em> 。
+=== readline的一些默认快捷键移植到Vim中
+</p>
+</li>
+<li>
+<p>
+又一个tpope的Vim插件！<a href="https://github.com/tpope/vim-rsi">vim-rsi</a>
+=== <a href="https://github.com/tpope/vim-fugitive">vim-fugitive</a>
+</p>
+</li>
+<li>
+<p>
+git的Vim前端插件！
+</p>
+</li>
+</ul></div>
+</div>
+</div>
+</div>
 </div>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-03-08 14:55:46 CST
+Last updated 2015-03-09 12:07:52 CST
 </div>
 </div>
 </body>
