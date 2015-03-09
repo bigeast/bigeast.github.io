@@ -6,11 +6,11 @@ $xdg-mime default firefox.desktop x-scheme-handler/http #默认用firefox打开h
 其实是修改了 _~/.local/share/application/mimeapps.list_ 文件
 
 === zsh与readline
-# zsh不用readline，因此 _~/.inputrc_ 里的设置对其无效
-# zle与readline有一点不同的是，kill-word这个功能的默认快捷键， 虽然都为 _M-Backspace_ 但zle对word的分界是非空白字符，/path/to/here对它来说是一个word。而readline中，会把/path/to/here当作三个单词。readline中把/path/to/here当作一个单词删除的快捷键是 _C-W_ 。
+* zsh不用readline，因此 _~/.inputrc_ 里的设置对其无效
+* zle与readline有一点不同的是，kill-word这个功能的默认快捷键， 虽然都为 _M-Backspace_ 但zle对word的分界是非空白字符，/path/to/here对它来说是一个word。而readline中，会把/path/to/here当作三个单词。readline中把/path/to/here当作一个单词删除的快捷键是 _C-W_ 。
 
 === https://github.com/soimort/you-get[you-get]
-# 下载视频网站的视频！神器！
+* 下载视频网站的视频！神器！
 
 [source, bash]
 $pip3 install you-get # pip 安装
@@ -18,7 +18,7 @@ $you-get -i URL # 查看视频信息，如标题，分辨率，大小等
 $you-get -F {hd2,mp4} URL # 选择某一个分辨率下载
 
 === rlwrap
-# 不支持readline的程序，例如python，可以在前面加上 _rlwrap_ 来加上readline支持！
+* 不支持readline的程序，例如python，可以在前面加上 _rlwrap_ 来加上readline支持！
 
 [source, bash]
 alias python='rlwrap python'
@@ -87,8 +87,8 @@ $youtube-dl -f bestaudio URL # 下载质量最好的音频码流，下载音乐�
 那么正确的方式应该是什么呢？用列表展开！
 
 [source, python]
->>> arr = [[0 for i in xrange(3)] for j in xrange(3)] 
->>> arr = [[0] * 3 for i in xrange(3) ] 
+>>> arr = [[ 0 for i in xrange(3)] for j in xrange(3)] 
+>>> arr = [[ 0] * 3 for i in xrange(3) ] 
 
 用一个for的列表展开更简洁，但是不那么直观，包含了一些隐式行为。
 
@@ -109,3 +109,7 @@ $youtube-dl -f bestaudio URL # 下载质量最好的音频码流，下载音乐�
 * 在浏览器中查看： _man -Hfirefox ls_ 有目录链接。
 * 在(g)Vim中查看：_:Man ls_ 或者在关键字上按_Shift+k_ 推荐前者，有语法高亮。
 * 用GNOME中的yelp： _yelp man:ls_ 只是提供了一个图形界面，并不怎么方便。
+
+== 2015-03-08 Sunday 14:53:57
+=== Vim的Syntastic插件对Python 2和Python 3的支持
+* 为了能够分别对待两个不同的版本，需要使用https://github.com/scrooloose/syntastic/issues/385[virtualenv]
