@@ -763,6 +763,54 @@ zle与readline有一点不同的是，kill-word这个功能的默认快捷键，
 </li>
 </ul></div>
 </div>
+<div class="sect2">
+<h3 id="_a_href_https_github_com_soimort_you_get_you_get_a"><a href="https://github.com/soimort/you-get">you-get</a></h3>
+<div class="ulist"><ul>
+<li>
+<p>
+下载视频网站的视频！神器！
+</p>
+</li>
+</ul></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.7
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="color: #009900">$pip3</span> install you-get <span style="font-style: italic"><span style="color: #9A1900"># pip 安装</span></span>
+<span style="color: #009900">$you</span>-get -i URL <span style="font-style: italic"><span style="color: #9A1900"># 查看视频信息，如标题，分辨率，大小等</span></span>
+<span style="color: #009900">$you</span>-get -F {hd2<span style="color: #990000">,</span>mp4} URL <span style="font-style: italic"><span style="color: #9A1900"># 选择某一个分辨率下载</span></span></tt></pre></div></div>
+</div>
+<div class="sect2">
+<h3 id="_rlwrap">rlwrap</h3>
+<div class="ulist"><ul>
+<li>
+<p>
+不支持readline的程序，例如python，可以在前面加上 <em>rlwrap</em> 来加上readline支持！
+</p>
+</li>
+</ul></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.7
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="font-weight: bold"><span style="color: #0000FF">alias</span></span> <span style="color: #009900">python</span><span style="color: #990000">=</span><span style="color: #FF0000">'rlwrap python'</span>
+<span style="font-weight: bold"><span style="color: #0000FF">alias</span></span> <span style="color: #009900">maxima</span><span style="color: #990000">=</span><span style="color: #FF0000">'rlwrap maxima'</span>
+<span style="font-weight: bold"><span style="color: #0000FF">alias</span></span> <span style="color: #009900">guile</span><span style="color: #990000">=</span><span style="color: #FF0000">'rlwrap guile'</span></tt></pre></div></div>
+<div class="ulist"><ul>
+<li>
+<p>
+zsh不用readline，因此 <em>~/.inputrc</em> 里的设置对其无效
+</p>
+</li>
+<li>
+<p>
+zle与readline有一点不同的是，kill-word这个功能的默认快捷键， 虽然都为 <em>M-Backspace</em> 但zle对word的分界是非空白字符，/path/to/here对它来说是一个word。而readline中，会把/path/to/here当作三个单词。readline中把/path/to/here当作一个单词删除的快捷键是 <em>C-W</em> 。
+</p>
+</li>
+</ul></div>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -770,6 +818,7 @@ zle与readline有一点不同的是，kill-word这个功能的默认快捷键，
 <div class="sectionbody">
 <div class="sect2">
 <h3 id="_youtube_dl">youtube-dl</h3>
+<div class="paragraph"><p>下载youtube视频，很给力的一个工具，但好像不支持国内的视频网站，不过有 <em>you-get</em> ，是日本人写的。</p></div>
 <div class="listingblock">
 <div class="content"><!-- Generator: GNU source-highlight 3.1.7
 by Lorenzo Bettini
@@ -781,11 +830,259 @@ http://www.gnu.org/software/src-highlite -->
 </div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="_2015_03_05_thursday_18_54_39">2015-03-05 Thursday 18:54:39</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_a_href_http_en_wikipedia_org_wiki_fabrice_bellard_fabric_bellard_a"><a href="http://en.wikipedia.org/wiki/Fabrice_Bellard">Fabric Bellard</a></h3>
+<div class="ulist"><ul>
+<li>
+<p>
+神人啊。<em>QEMU</em> ， <em>ffmpeg</em> 都是他写的。他还写过C编译器，整个代码只有不到4M，而且是ISO C99兼容的，编译速度比 <em>gcc</em> 快7倍！
+</p>
+</li>
+<li>
+<p>
+还记得刚上大学那会儿看到过有人用个人电脑破了计算pi的记录，那个人就是他。而且是基于他自己发现的公式 <a href="http://en.wikipedia.org/wiki/Bellard%27s_formula">Bellard formula</a> 的！他不仅知道怎么做，而且做得比别人更快更好！ （通常发明公式的应该是数学家，而数学家一般不会自己去用代码实现。）
+</p>
+</li>
+<li>
+<p>
+前一段他还提出并实现了 <a href="http://bellard.org/bpg/">BGP</a> 图像编码格式，是基于HEVC的技术，对高分辨率的图像有更好的压缩效果。
+</p>
+</li>
+<li>
+<p>
+而且他的网站非常之简洁。看得我有些惭愧。
+</p>
+</li>
+<li>
+<p>
+或许专注一件事情才是成功之道吧！
+</p>
+</li>
+</ul></div>
+</div>
+<div class="sect2">
+<h3 id="_xorg_xserver">xorg-xserver</h3>
+<div class="ulist"><ul>
+<li>
+<p>
+开学后的 <em>pacman -Syu</em> 好像更新了不该更新的东西，使得终端刷新的时候会把整个显示器搞乱。开始以为是i3wm的问题，但是回滚后还是不行。
+</p>
+</li>
+<li>
+<p>
+想起来xrandr显示的显示器名称也变了，之前是DVI-I-1和DVI-I-2，现在成了DVI-1和DVI-2。于是把xrandr也降级，问题依然存在。
+</p>
+</li>
+<li>
+<p>
+本来想去IRC上问一问，但是感觉这问题挺不好描述。才想起来去看Archlinux的更新公告 <a href="https://www.archlinux.org/news/xorg-server-1171-is-now-available">xorg-server 1.17.1 is now available</a>，然后把 <em>xorg-video-modesetting</em> 装回来就好了。
+</p>
+</li>
+</ul></div>
+</div>
+<div class="sect2">
+<h3 id="_a_href_http_www_w3schools_com_jsref_prop_loc_hash_asp_location_hash_property_a"><a href="http://www.w3schools.com/jsref/prop_loc_hash.asp">Location hash Property</a></h3>
+<div class="ulist"><ul>
+<li>
+<p>
+就是在URL后添加 <em>#section</em> 来定位到html文件的某一部分的功能。wikipedia上很常见。如何在Asciidoc中实现呢？
+</p>
+</li>
+</ul></div>
+</div>
+<div class="sect2">
+<h3 id="_a_href_http_stackoverflow_com_questions_6667201_how_to_define_two_dimensional_array_in_python_python中的二维数组定义_a"><a href="http://stackoverflow.com/questions/6667201/how-to-define-two-dimensional-array-in-python">Python中的二维数组定义</a></h3>
+<div class="paragraph"><p>首先应该定义成列表的列表。</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.7
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="color: #990000">&gt;&gt;&gt;</span> arr <span style="color: #990000">=</span> <span style="color: #990000">[[</span><span style="color: #993399">0</span><span style="color: #990000">]</span> <span style="color: #990000">*</span> <span style="color: #993399">3</span><span style="color: #990000">]</span> <span style="color: #990000">*</span> <span style="color: #993399">3</span>
+ <span style="color: #990000">[[</span><span style="color: #993399">0</span><span style="color: #990000">,</span> <span style="color: #993399">0</span><span style="color: #990000">,</span> <span style="color: #993399">0</span><span style="color: #990000">],</span> <span style="color: #990000">[</span><span style="color: #993399">0</span><span style="color: #990000">,</span> <span style="color: #993399">0</span><span style="color: #990000">,</span> <span style="color: #993399">0</span><span style="color: #990000">],</span> <span style="color: #990000">[</span><span style="color: #993399">0</span><span style="color: #990000">,</span> <span style="color: #993399">0</span><span style="color: #990000">,</span> <span style="color: #993399">0</span><span style="color: #990000">]]</span>
+<span style="color: #990000">&gt;&gt;&gt;</span> arr<span style="color: #990000">[</span><span style="color: #993399">0</span><span style="color: #990000">][</span><span style="color: #993399">0</span><span style="color: #990000">]</span> <span style="color: #990000">=</span> <span style="color: #993399">1</span>
+<span style="color: #990000">&gt;&gt;&gt;</span> <span style="font-weight: bold"><span style="color: #0000FF">print</span></span> arr
+ <span style="color: #990000">[[</span><span style="color: #993399">1</span><span style="color: #990000">,</span> <span style="color: #993399">0</span><span style="color: #990000">,</span> <span style="color: #993399">0</span><span style="color: #990000">],</span> <span style="color: #990000">[</span><span style="color: #993399">1</span><span style="color: #990000">,</span> <span style="color: #993399">0</span><span style="color: #990000">,</span> <span style="color: #993399">0</span><span style="color: #990000">],</span> <span style="color: #990000">[</span><span style="color: #993399">1</span><span style="color: #990000">,</span> <span style="color: #993399">0</span><span style="color: #990000">,</span> <span style="color: #993399">0</span><span style="color: #990000">]]</span></tt></pre></div></div>
+<div class="paragraph"><p>明明只改了一个值，但却有三个位置的值改变了。看下它们是否是同一个对象：</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.7
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="color: #990000">&gt;&gt;&gt;</span> <span style="color: #990000">[</span><span style="font-weight: bold"><span style="color: #000000">id</span></span><span style="color: #990000">(</span>x<span style="color: #990000">)</span> <span style="font-weight: bold"><span style="color: #0000FF">for</span></span> x <span style="font-weight: bold"><span style="color: #0000FF">in</span></span> arr<span style="color: #990000">]</span>
+ <span style="color: #990000">[</span><span style="color: #993399">140692558271840</span><span style="color: #990000">,</span> <span style="color: #993399">140692558271840</span><span style="color: #990000">,</span> <span style="color: #993399">140692558271840</span><span style="color: #990000">]</span></tt></pre></div></div>
+<div class="paragraph"><p>但是注意</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.7
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="color: #990000">&gt;&gt;&gt;</span> a <span style="color: #990000">=</span> <span style="color: #990000">[</span><span style="color: #993399">0</span><span style="color: #990000">]</span> <span style="color: #990000">*</span> <span style="color: #993399">3</span>
+<span style="color: #990000">&gt;&gt;&gt;</span> <span style="font-weight: bold"><span style="color: #0000FF">print</span></span> a
+ <span style="color: #990000">[</span><span style="color: #993399">0</span><span style="color: #990000">,</span> <span style="color: #993399">0</span><span style="color: #990000">,</span> <span style="color: #993399">0</span><span style="color: #990000">]</span>
+<span style="color: #990000">&gt;&gt;&gt;</span> a<span style="color: #990000">[</span><span style="color: #993399">1</span><span style="color: #990000">]</span> <span style="color: #990000">=</span> <span style="color: #993399">1</span>
+<span style="color: #990000">&gt;&gt;&gt;</span> <span style="font-weight: bold"><span style="color: #0000FF">print</span></span> a
+ <span style="color: #990000">[</span><span style="color: #993399">0</span><span style="color: #990000">,</span> <span style="color: #993399">1</span><span style="color: #990000">,</span> <span style="color: #993399">0</span><span style="color: #990000">]</span></tt></pre></div></div>
+<div class="paragraph"><p>当重复的对象类型是int时，就是复制了不同的实例了？其实不然，再看：</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.7
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="color: #990000">&gt;&gt;&gt;</span> <span style="color: #990000">[</span><span style="font-weight: bold"><span style="color: #000000">id</span></span><span style="color: #990000">(</span>x<span style="color: #990000">)</span> <span style="font-weight: bold"><span style="color: #0000FF">for</span></span> x <span style="font-weight: bold"><span style="color: #0000FF">in</span></span> arr<span style="color: #990000">]</span>
+ <span style="color: #990000">[</span><span style="color: #993399">23646576</span><span style="color: #990000">,</span> <span style="color: #993399">23646576</span><span style="color: #990000">,</span> <span style="color: #993399">23646576</span><span style="color: #990000">]</span></tt></pre></div></div>
+<div class="paragraph"><p>那既然如此，为什么改变一个值不会影响到其它三个呢？在 IRC上问了，马上得到了回答，大概是说，int类型是不可变的，你改变它，Python其实是生成了一个新的实例。而列表类型是可变的，你改变它，就会看到它的三个拷贝都变了。</p></div>
+<div class="paragraph"><p>那么正确的方式应该是什么呢？用列表展开！</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.7
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="color: #990000">&gt;&gt;&gt;</span> arr <span style="color: #990000">=</span> <span style="color: #990000">[[</span> <span style="color: #993399">0</span> <span style="font-weight: bold"><span style="color: #0000FF">for</span></span> i <span style="font-weight: bold"><span style="color: #0000FF">in</span></span> <span style="font-weight: bold"><span style="color: #000000">xrange</span></span><span style="color: #990000">(</span><span style="color: #993399">3</span><span style="color: #990000">)]</span> <span style="font-weight: bold"><span style="color: #0000FF">for</span></span> j <span style="font-weight: bold"><span style="color: #0000FF">in</span></span> <span style="font-weight: bold"><span style="color: #000000">xrange</span></span><span style="color: #990000">(</span><span style="color: #993399">3</span><span style="color: #990000">)]</span>
+<span style="color: #990000">&gt;&gt;&gt;</span> arr <span style="color: #990000">=</span> <span style="color: #990000">[[</span> <span style="color: #993399">0</span><span style="color: #990000">]</span> <span style="color: #990000">*</span> <span style="color: #993399">3</span> <span style="font-weight: bold"><span style="color: #0000FF">for</span></span> i <span style="font-weight: bold"><span style="color: #0000FF">in</span></span> <span style="font-weight: bold"><span style="color: #000000">xrange</span></span><span style="color: #990000">(</span><span style="color: #993399">3</span><span style="color: #990000">)</span> <span style="color: #990000">]</span></tt></pre></div></div>
+<div class="paragraph"><p>用一个for的列表展开更简洁，但是不那么直观，包含了一些隐式行为。</p></div>
+</div>
+<div class="sect2">
+<h3 id="_单个物理屏幕的截屏">单个物理屏幕的截屏</h3>
+<div class="paragraph"><p>见　<a href="scrot.html">Scrot屏幕截图</a></p></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_2015_03_07_saturday_21_40_26">2015-03-07 Saturday 21:40:26</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_py2exe_pyinsaller">py2exe, pyinsaller</h3>
+<div class="ulist"><ul>
+<li>
+<p>
+py2exe 可以把.py程序转化成.exe程序，以在没有安装Python的Windows机器上运行，但必须在Windows中的Python中使用。:(
+</p>
+</li>
+<li>
+<p>
+pyinstaller 支持多平台，但在Linux中，还是转化成ELF可执行文件，而不是exe。所以貌似不能用它来实现交叉编译？
+</p>
+</li>
+</ul></div>
+</div>
+<div class="sect2">
+<h3 id="_python中的排序算法">python中的排序算法</h3>
+<div class="ulist"><ul>
+<li>
+<p>
+用的是Timsort，具体方法在源代码的Objects/listsort.txt中有描述。
+</p>
+</li>
+<li>
+<p>
+DSU模式，在Python 2.4之前，为列表指定cmp函数的一种方法。就是先将每个元素x与val(x)绑定（Decorate），然后对元组(val(x), x)进行默认的排序（Sort），最后再从排序后的元组中得到原来的元素（Undecorate）。
+</p>
+</li>
+<li>
+<p>
+在Python 2.4中，只需要为sort传入key=cmp就行了。cmp函数还可以用lambda表达式来做。
+</p>
+</li>
+</ul></div>
+</div>
+<div class="sect2">
+<h3 id="_查看man_page的n种方法">查看man page的N种方法</h3>
+<div class="ulist"><ul>
+<li>
+<p>
+在浏览器中查看： <em>man -Hfirefox ls</em> 有目录链接。
+</p>
+</li>
+<li>
+<p>
+在(g)Vim中查看：<em>:Man ls</em> 或者在关键字上按<em>Shift+k</em> 推荐前者，有语法高亮。
+</p>
+</li>
+<li>
+<p>
+用GNOME中的yelp： <em>yelp man:ls</em> 只是提供了一个图形界面，并不怎么方便。
+</p>
+</li>
+</ul></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_2015_03_08_sunday_14_53_57">2015-03-08 Sunday 14:53:57</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_vim的syntastic插件对python_2和python_3的支持">Vim的Syntastic插件对Python 2和Python 3的支持</h3>
+<div class="ulist"><ul>
+<li>
+<p>
+为了能够分别对待两个不同的版本，需要使用<a href="https://github.com/scrooloose/syntastic/issues/385">virtualenv</a>
+</p>
+</li>
+</ul></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_2015_03_09_monday_10_43_16">2015-03-09 Monday 10:43:16</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_zle">zle</h3>
+<div class="ulist"><ul>
+<li>
+<p>
+kill-buffer() 与 kill-whole-line()　有什么区别？
+</p>
+</li>
+<li>
+<p>
+<em>M-l</em> 与 <em>M-u</em> ，down-case-word, up-case-word 将光标到行尾的字符全部变成小写或者大写。
+</p>
+</li>
+<li>
+<p>
+<em>M-'</em> quote-line 引号括起当前行。
+</p>
+</li>
+<li>
+<p>
+<em>M-a</em> 执行当前行，并保留到下一行。
+</p>
+</li>
+<li>
+<p>
+<em>M-x</em> 执行命令，例如backward-delete-word之类。
+</p>
+</li>
+<li>
+<p>
+vi-backward-kill-word 会把/path/to/somewhere看作六个单词，就像readline中 <em>M-Backspace</em> 一样。而zsh默认是把backward-kill-word绑定到 <em>M-Backspace</em> 的。终于弄清了这个问题！现在的问题是如何在配置文件中表示 <em>M-Backspace</em> 。目前是将其绑定到了 <em>C-Backspace</em> 。
+=== readline的一些默认快捷键移植到Vim中
+</p>
+</li>
+<li>
+<p>
+又一个tpope的Vim插件！<a href="https://github.com/tpope/vim-rsi">vim-rsi</a>
+=== <a href="https://github.com/tpope/vim-fugitive">vim-fugitive</a>
+</p>
+</li>
+<li>
+<p>
+git的Vim前端插件！
+</p>
+</li>
+</ul></div>
+</div>
+</div>
+</div>
 </div>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-03-04 15:07:14 CST
+Last updated 2015-03-09 12:07:52 CST
 </div>
 </div>
 </body>

@@ -12,26 +12,69 @@ ctags也用过，但也没有深入研究过，因为需求也不是很强烈。
 * _:tag <varname>_ 
 * 或者 _Ctrl+]_ （写到这里突然想到了Vim的帮助文档的tags就是这么跳转的）
 * 甚至 _Ctrl+鼠标左键_ 来跳转到定义了。具体做法如下：
+* 按　_Ctrl+t_　从一个tag返回到原来的位置。或者　_Ctrl+o_ ，用Vim本身的上一个位置返回（如果移动了很多次，需要按好多次才能返回到原来位置）。
 
 * 首先系统需要安装ctags，这个通过软件源或者http://ctags.sourceforge.net/[ctags官方网站]都可以安装。
 * 在工程目录下生成tags文件：
-[source,bash]
+[source, bash]
 $ctags -R # 遍历所有目录，默认输出文件是 tags
 $ctags -e -R # 同上，但是生成的TAGS是给Emacs用的
 
 * 在 _~/.vimrc_ 中添加
-[source,bash]
+[source, bash]
 set tags=./tags;/
 
 这是Stackoverflow上http://stackoverflow.com/questions/563616/vim-and-ctags-tips-and-tricks[有个答案]给出的解决方案，目的是先在当前目录下找tags，如果没有，就一直向上层目录搜索，直到根目录。这样就只需要生成一个tags文件就行了。
 
 之所以要这样设置，是因为默认的_set tags=./tags,./TAGS,tags,TAGS_ 不好用。实际的代码文件往往分散在工程文件下的多个子目录下，如果Vim默认只在当前目录下搜索tags或者TAGS，就需要分别为每个目录生成tags文件。另外如果没有设置 _set autochdir_ ，在子目录A中，打开了另外子目录B中的某个源文件file.c，此时Vim并不会改变你的当前目录到B，而仍旧在A目录下寻找B/file.c的tags，当然不是想要的结果！不知道Vim的默认选项为什么这么设计（此处省略一万字吐槽）。
 
+另外，还可以直接 _vim -t main_ 来直接打开含有main函数的文件并把光标也放到main上！
 
 == 搜索某个变量或函数在工程内所有文件中出现的位置
-
 这个用Ack或者Ag插件可以完美实现。
+
+https://github.com/ggreer/the_silver_searcher[Ag]相比Ack：
+
+* 使用了多线程, mmap()等技术，搜索速度有数量级的提升
+* 可以识别.gitignore, .hgignore, .agignore文件
+
+https://github.com/mileszs/ack.vim[ack.vim], https://github.com/rking/ag.vim[ag.vim]长得很像。其实ack.vim可以被配置成使用ag作为搜索引擎。
 
 == 函数的调用关系
 
 在VS中要右键->调用浏览器。在Vim中需要用到cscope。
+
+[source, bash]
+$cscope -R #　在源文件根目录下生成cscope.out，并打开cscope自带的ncurse界面。但每次进行新的搜索时，需要退出vim
+$cscope -R -b # 仅生成cscope.out，然后退出
+
+* 源文件根目录下打开Vim，输入 _:cscope add cscope.out_ 命令，连接到已生成的cscope数据库。
+* _:cscope help_ 查看帮助
+* _:cscope find_
+	** _c_ 哪些函数调用了该函数
+	** _d_ 该函数被哪些函数调用
+	** _e_ egrep查找
+	** _g_ 变量定义
+	** _f_ 在该文件中查找
+	** _i_ 哪些文件#include了本文件
+	** _s_ 查找C符号
+	** _t_ 查找文本
+
+* http://cscope.sourceforge.net/cscope_vim_tutorial.html[cscope的官方Vim教程]
+* http://cscope.sourceforge.net/cscope_maps.vim[cscope_maps.vim] 中的默认快捷键也比较好用。
+
+== 跳转到函数开始或者结尾
+有时在一个很长的函数中，希望定位到函数的开始或者结尾，以便知道自己的相对位置，或者跳转到下一个函数。taglist插件可以实现，但其实Vim内置就有此功能：
+
+* _[{_	跳转到前一个未匹配的_{_，即函数开始
+* _}]_	跳转到后一个未匹配的_}_，即函数结尾
+* _]]_	跳转到下一个以_{_ 开始的行。
+* _[[_ 和 _][_,_[]_ 都有类似的功能，多用就行，不需要记忆。
+* 在开始（结尾）大括号上，按 _%_ 可以跳转到结尾（开始）。自从我第一次设置 _nnoremap <Tab> %_ 后，就再也离不开它了。
+
+== 其它Vim的跳转功能
+* _H_	屏幕顶端
+* _M_	屏幕中间
+* _L_	屏幕底端
+* _:h 29.3_
+* _:h motion.txt_

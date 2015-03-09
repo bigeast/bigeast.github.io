@@ -749,7 +749,8 @@ asciidoc.install();
 <div class="paragraph"><p>在VS中快捷键是 <em>F12</em> ，然后 <em>Ctrl+-</em> 返回。在Vim的内置功能中也有跳转到定义的功能，按 <em>gd</em> 即可，但这只是基于文本的搜索，没有分析语法，而且只能在当前文件中搜索，不是很实用。标准的解决方案应该是用 <a href="http://ctags.sourceforge.net/">ctags</a> 生成tags文件，然后在Vim中就可以用
 * <em>:tag &lt;varname&gt;</em>
 * 或者 <em>Ctrl+]</em> （写到这里突然想到了Vim的帮助文档的tags就是这么跳转的）
-* 甚至 <em>Ctrl+鼠标左键</em> 来跳转到定义了。具体做法如下：</p></div>
+* 甚至 <em>Ctrl+鼠标左键</em> 来跳转到定义了。具体做法如下：
+* 按　<em>Ctrl+t_　从一个tag返回到原来的位置。或者　_Ctrl+o</em> ，用Vim本身的上一个位置返回（如果移动了很多次，需要按好多次才能返回到原来位置）。</p></div>
 <div class="ulist"><ul>
 <li>
 <p>
@@ -784,25 +785,181 @@ http://www.gnu.org/software/src-highlite -->
 <pre><tt><span style="font-weight: bold"><span style="color: #0000FF">set</span></span> <span style="color: #009900">tags</span><span style="color: #990000">=.</span>/tags<span style="color: #990000">;/</span></tt></pre></div></div>
 <div class="paragraph"><p>这是Stackoverflow上<a href="http://stackoverflow.com/questions/563616/vim-and-ctags-tips-and-tricks">有个答案</a>给出的解决方案，目的是先在当前目录下找tags，如果没有，就一直向上层目录搜索，直到根目录。这样就只需要生成一个tags文件就行了。</p></div>
 <div class="paragraph"><p>之所以要这样设置，是因为默认的<em>set tags=./tags,./TAGS,tags,TAGS</em> 不好用。实际的代码文件往往分散在工程文件下的多个子目录下，如果Vim默认只在当前目录下搜索tags或者TAGS，就需要分别为每个目录生成tags文件。另外如果没有设置 <em>set autochdir</em> ，在子目录A中，打开了另外子目录B中的某个源文件file.c，此时Vim并不会改变你的当前目录到B，而仍旧在A目录下寻找B/file.c的tags，当然不是想要的结果！不知道Vim的默认选项为什么这么设计（此处省略一万字吐槽）。</p></div>
+<div class="paragraph"><p>另外，还可以直接 <em>vim -t main</em> 来直接打开含有main函数的文件并把光标也放到main上！</p></div>
 </div>
 </div>
 <div class="sect1">
 <h2 id="_搜索某个变量或函数在工程内所有文件中出现的位置">搜索某个变量或函数在工程内所有文件中出现的位置</h2>
 <div class="sectionbody">
 <div class="paragraph"><p>这个用Ack或者Ag插件可以完美实现。</p></div>
+<div class="paragraph"><p><a href="https://github.com/ggreer/the_silver_searcher">Ag</a>相比Ack：</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+使用了多线程, mmap()等技术，搜索速度有数量级的提升
+</p>
+</li>
+<li>
+<p>
+可以识别.gitignore, .hgignore, .agignore文件
+</p>
+</li>
+</ul></div>
+<div class="paragraph"><p><a href="https://github.com/mileszs/ack.vim">ack.vim</a>, <a href="https://github.com/rking/ag.vim">ag.vim</a>长得很像。其实ack.vim可以被配置成使用ag作为搜索引擎。</p></div>
 </div>
 </div>
 <div class="sect1">
 <h2 id="_函数的调用关系">函数的调用关系</h2>
 <div class="sectionbody">
 <div class="paragraph"><p>在VS中要右键&#8594;调用浏览器。在Vim中需要用到cscope。</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.7
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="color: #009900">$cscope</span> -R <span style="font-style: italic"><span style="color: #9A1900">#　在源文件根目录下生成cscope.out，并打开cscope自带的ncurse界面。但每次进行新的搜索时，需要退出vim</span></span>
+<span style="color: #009900">$cscope</span> -R -b <span style="font-style: italic"><span style="color: #9A1900"># 仅生成cscope.out，然后退出</span></span></tt></pre></div></div>
+<div class="ulist"><ul>
+<li>
+<p>
+源文件根目录下打开Vim，输入 <em>:cscope add cscope.out</em> 命令，连接到已生成的cscope数据库。
+</p>
+</li>
+<li>
+<p>
+<em>:cscope help</em> 查看帮助
+</p>
+</li>
+<li>
+<p>
+<em>:cscope find</em>
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+<em>c</em> 哪些函数调用了该函数
+</p>
+</li>
+<li>
+<p>
+<em>d</em> 该函数被哪些函数调用
+</p>
+</li>
+<li>
+<p>
+<em>e</em> egrep查找
+</p>
+</li>
+<li>
+<p>
+<em>g</em> 变量定义
+</p>
+</li>
+<li>
+<p>
+<em>f</em> 在该文件中查找
+</p>
+</li>
+<li>
+<p>
+<em>i</em> 哪些文件#include了本文件
+</p>
+</li>
+<li>
+<p>
+<em>s</em> 查找C符号
+</p>
+</li>
+<li>
+<p>
+<em>t</em> 查找文本
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+<a href="http://cscope.sourceforge.net/cscope_vim_tutorial.html">cscope的官方Vim教程</a>
+</p>
+</li>
+<li>
+<p>
+<a href="http://cscope.sourceforge.net/cscope_maps.vim">cscope_maps.vim</a> 中的默认快捷键也比较好用。
+</p>
+</li>
+</ul></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_跳转到函数开始或者结尾">跳转到函数开始或者结尾</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>有时在一个很长的函数中，希望定位到函数的开始或者结尾，以便知道自己的相对位置，或者跳转到下一个函数。taglist插件可以实现，但其实Vim内置就有此功能：</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+<em>[{</em>  跳转到前一个未匹配的_{_，即函数开始
+</p>
+</li>
+<li>
+<p>
+<em>}]</em>  跳转到后一个未匹配的_}_，即函数结尾
+</p>
+</li>
+<li>
+<p>
+<em>]]</em>  跳转到下一个以<em>{</em> 开始的行。
+</p>
+</li>
+<li>
+<p>
+<em>[[</em> 和 <em>][</em>,<em>[]</em> 都有类似的功能，多用就行，不需要记忆。
+</p>
+</li>
+<li>
+<p>
+在开始（结尾）大括号上，按 <em>%</em> 可以跳转到结尾（开始）。自从我第一次设置 <em>nnoremap &lt;Tab&gt; %</em> 后，就再也离不开它了。
+</p>
+</li>
+</ul></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_其它vim的跳转功能">其它Vim的跳转功能</h2>
+<div class="sectionbody">
+<div class="ulist"><ul>
+<li>
+<p>
+<em>H</em>   屏幕顶端
+</p>
+</li>
+<li>
+<p>
+<em>M</em>   屏幕中间
+</p>
+</li>
+<li>
+<p>
+<em>L</em>   屏幕底端
+</p>
+</li>
+<li>
+<p>
+<em>:h 29.3</em>
+</p>
+</li>
+<li>
+<p>
+<em>:h motion.txt</em>
+</p>
+</li>
+</ul></div>
 </div>
 </div>
 </div>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-03-03 21:19:46 CST
+Last updated 2015-03-08 17:32:47 CST
 </div>
 </div>
 </body>

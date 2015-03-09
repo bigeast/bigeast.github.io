@@ -7,6 +7,25 @@ $xdg-mime default firefox.desktop x-scheme-handler/http #默认用firefox打开h
 
 === zsh与readline
 * zsh不用readline，因此 _~/.inputrc_ 里的设置对其无效
+* zle与readline有一点不同的是，kill-word这个功能的默认快捷键， 虽然都为 _M-Backspace_ 但zle对word的分界是非空白字符，/path/to/here对它来说是一个word。而readline中，会把/path/to/here当作三个单词。readline中把/path/to/here当作一个单词删除的快捷键是 _C-W_ 。
+
+=== https://github.com/soimort/you-get[you-get]
+* 下载视频网站的视频！神器！
+
+[source, bash]
+$pip3 install you-get # pip 安装
+$you-get -i URL # 查看视频信息，如标题，分辨率，大小等
+$you-get -F {hd2,mp4} URL # 选择某一个分辨率下载
+
+=== rlwrap
+* 不支持readline的程序，例如python，可以在前面加上 _rlwrap_ 来加上readline支持！
+
+[source, bash]
+alias python='rlwrap python'
+alias maxima='rlwrap maxima'
+alias guile='rlwrap guile'
+
+* zsh不用readline，因此 _~/.inputrc_ 里的设置对其无效
 
 * zle与readline有一点不同的是，kill-word这个功能的默认快捷键， 虽然都为 _M-Backspace_ 但zle对word的分界是非空白字符，/path/to/here对它来说是一个word。而readline中，会把/path/to/here当作三个单词。readline中把/path/to/here当作一个单词删除的快捷键是 _C-W_ 。
 
@@ -17,3 +36,93 @@ $xdg-mime default firefox.desktop x-scheme-handler/http #默认用firefox打开h
 $youtube-dl -F URL # 列出所有可供下载的格式，每个前面有一个ID
 $youtube-dl -f ID  # 下载指定格式的码流
 $youtube-dl -f bestaudio URL # 下载质量最好的音频码流，下载音乐和有声读物时很有用，之前不知道，还专门找从youtube上下mp3的网站，当时就怀疑，这些网站不可能是自己下载视频后再提取音频的，不然太慢了！
+
+== 2015-03-05 Thursday 18:54:39
+=== http://en.wikipedia.org/wiki/Fabrice_Bellard[Fabric Bellard]
+* 神人啊。_QEMU_ ， _ffmpeg_ 都是他写的。他还写过C编译器，整个代码只有不到4M，而且是ISO C99兼容的，编译速度比 _gcc_ 快7倍！
+* 还记得刚上大学那会儿看到过有人用个人电脑破了计算pi的记录，那个人就是他。而且是基于他自己发现的公式 http://en.wikipedia.org/wiki/Bellard%27s_formula[Bellard formula] 的！他不仅知道怎么做，而且做得比别人更快更好！ （通常发明公式的应该是数学家，而数学家一般不会自己去用代码实现。）
+* 前一段他还提出并实现了 http://bellard.org/bpg/[BGP] 图像编码格式，是基于HEVC的技术，对高分辨率的图像有更好的压缩效果。
+* 而且他的网站非常之简洁。看得我有些惭愧。
+* 或许专注一件事情才是成功之道吧！
+
+=== xorg-xserver
+* 开学后的 _pacman -Syu_ 好像更新了不该更新的东西，使得终端刷新的时候会把整个显示器搞乱。开始以为是i3wm的问题，但是回滚后还是不行。
+* 想起来xrandr显示的显示器名称也变了，之前是DVI-I-1和DVI-I-2，现在成了DVI-1和DVI-2。于是把xrandr也降级，问题依然存在。
+* 本来想去IRC上问一问，但是感觉这问题挺不好描述。才想起来去看Archlinux的更新公告 https://www.archlinux.org/news/xorg-server-1171-is-now-available[xorg-server 1.17.1 is now available]，然后把 _xorg-video-modesetting_ 装回来就好了。
+
+=== http://www.w3schools.com/jsref/prop_loc_hash.asp[Location hash Property]
+* 就是在URL后添加 _#section_ 来定位到html文件的某一部分的功能。wikipedia上很常见。如何在Asciidoc中实现呢？
+
+=== http://stackoverflow.com/questions/6667201/how-to-define-two-dimensional-array-in-python[Python中的二维数组定义]
+首先应该定义成列表的列表。
+[source, python]
+>>> arr = [[0] * 3] * 3
+ [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
+>>> arr[0][0] = 1
+>>> print arr
+ [[1, 0, 0], [1, 0, 0], [1, 0, 0]]
+
+明明只改了一个值，但却有三个位置的值改变了。看下它们是否是同一个对象：
+
+[source, python]
+>>> [id(x) for x in arr]
+ [140692558271840, 140692558271840, 140692558271840]
+
+但是注意
+[source, python]
+>>> a = [0] * 3
+>>> print a
+ [0, 0, 0]
+>>> a[1] = 1
+>>> print a
+ [0, 1, 0]
+
+当重复的对象类型是int时，就是复制了不同的实例了？其实不然，再看：
+[source, python]
+>>> [id(x) for x in arr]
+ [23646576, 23646576, 23646576]
+
+那既然如此，为什么改变一个值不会影响到其它三个呢？在 IRC上问了，马上得到了回答，大概是说，int类型是不可变的，你改变它，Python其实是生成了一个新的实例。而列表类型是可变的，你改变它，就会看到它的三个拷贝都变了。
+
+那么正确的方式应该是什么呢？用列表展开！
+
+[source, python]
+>>> arr = [[ 0 for i in xrange(3)] for j in xrange(3)] 
+>>> arr = [[ 0] * 3 for i in xrange(3) ] 
+
+用一个for的列表展开更简洁，但是不那么直观，包含了一些隐式行为。
+
+=== 单个物理屏幕的截屏
+见　link:scrot.html[Scrot屏幕截图]
+
+== 2015-03-07 Saturday 21:40:26
+=== py2exe, pyinsaller
+* py2exe 可以把.py程序转化成.exe程序，以在没有安装Python的Windows机器上运行，但必须在Windows中的Python中使用。:(
+* pyinstaller 支持多平台，但在Linux中，还是转化成ELF可执行文件，而不是exe。所以貌似不能用它来实现交叉编译？
+
+=== python中的排序算法
+* 用的是Timsort，具体方法在源代码的Objects/listsort.txt中有描述。
+* DSU模式，在Python 2.4之前，为列表指定cmp函数的一种方法。就是先将每个元素x与val(x)绑定（Decorate），然后对元组(val(x), x)进行默认的排序（Sort），最后再从排序后的元组中得到原来的元素（Undecorate）。
+* 在Python 2.4中，只需要为sort传入key=cmp就行了。cmp函数还可以用lambda表达式来做。
+
+=== 查看man page的N种方法
+* 在浏览器中查看： _man -Hfirefox ls_ 有目录链接。
+* 在(g)Vim中查看：_:Man ls_ 或者在关键字上按_Shift+k_ 推荐前者，有语法高亮。
+* 用GNOME中的yelp： _yelp man:ls_ 只是提供了一个图形界面，并不怎么方便。
+
+== 2015-03-08 Sunday 14:53:57
+=== Vim的Syntastic插件对Python 2和Python 3的支持
+* 为了能够分别对待两个不同的版本，需要使用https://github.com/scrooloose/syntastic/issues/385[virtualenv]
+
+== 2015-03-09 Monday 10:43:16
+=== zle
+* kill-buffer() 与 kill-whole-line()　有什么区别？
+* _M-l_ 与 _M-u_ ，down-case-word, up-case-word 将光标到行尾的字符全部变成小写或者大写。
+* _M-'_ quote-line 引号括起当前行。
+* _M-a_ 执行当前行，并保留到下一行。
+* _M-x_ 执行命令，例如backward-delete-word之类。
+* vi-backward-kill-word 会把/path/to/somewhere看作六个单词，就像readline中 _M-Backspace_ 一样。而zsh默认是把backward-kill-word绑定到 _M-Backspace_ 的。终于弄清了这个问题！现在的问题是如何在配置文件中表示 _M-Backspace_ 。目前是将其绑定到了 _C-Backspace_ 。
+=== readline的一些默认快捷键移植到Vim中
+* 又一个tpope的Vim插件！https://github.com/tpope/vim-rsi[vim-rsi]
+=== https://github.com/tpope/vim-fugitive[vim-fugitive]
+* git的Vim前端插件！
