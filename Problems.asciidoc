@@ -1,2 +1,4 @@
-* 如何妥善地保存gpg密钥？
 * 如何从物理上解释 Rate-Distortion函数的凸性。
+* **Firefox** 和 **Chromium** 的字体机制。
+* **JavaScript** 为什么那么有用？
+* 如何妥善地保存gpg密钥？

@@ -170,3 +170,6 @@ backend      : GTKAgg
 # "pyqt" and "pyside".  The "pyqt" setting has the side effect of
 # forcing the use of Version 2 API for QString and QVariant.
 
+== 2015-03-15 Sunday 00:20:06
+=== https://github.com/antiboredom/videogrep[videogrep]
+通过搜索字幕文件中的单词来定位到相应的视频处，并将其输出。
