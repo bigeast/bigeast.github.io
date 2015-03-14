@@ -1086,11 +1086,120 @@ git的Vim前端插件！
 </div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="_2015_03_11_wednesday_16_50_23">2015-03-11 Wednesday 16:50:23</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_python的初始化配置">Python的初始化配置</h3>
+<div class="ulist"><ul>
+<li>
+<p>
+<em>~/.pythonstartup</em>
+</p>
+</li>
+</ul></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.7
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="font-weight: bold"><span style="color: #000080">import</span></span> matplotlib as mpl
+mpl<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">use</span></span><span style="color: #990000">(</span><span style="color: #FF0000">'Qt5Agg'</span><span style="color: #990000">)</span>
+<span style="font-weight: bold"><span style="color: #000080">import</span></span> numpy as np
+<span style="font-weight: bold"><span style="color: #000080">import</span></span> matplotlib<span style="color: #990000">.</span>pylab as plt</tt></pre></div></div>
+<div class="ulist"><ul>
+<li>
+<p>
+matplotlib画图
+</p>
+<div class="olist arabic"><ol class="arabic">
+<li>
+<p>
+本来挺简单的事情，由于选择太多，反而搞得很复杂。
+</p>
+</li>
+<li>
+<p>
+首先python2还是python3？
+</p>
+</li>
+<li>
+<p>
+然后ipython2还是ipython3？
+</p>
+</li>
+<li>
+<p>
+用哪个图形后端？
+</p>
+</li>
+<li>
+<p>
+<em>matplotlibrc</em> 文件中，有 backend选项说明。
+</p>
+</li>
+<li>
+<p>
+一旦选定图形后端，应该是不可更改的，除非重启python shell。
+</p>
+</li>
+<li>
+<p>
+ipython中查看当前的图形后端可以用<em>%matplotlib</em> 命令。要想在notebook中显示图形，还需要 <em>%matplotlib inline</em>
+</p>
+</li>
+<li>
+<p>
+由于各种图形后端都依赖于不同的系统桌面环境，所以有时候通过pip安装matplotlib会不能显示图像。 <strong>最好用包管理来安装</strong>。
+</p>
+</li>
+<li>
+<p>
+在python shell中，plt.show()显示图像时，会阻塞shell。记得之前换了backend后就不阻塞了，跟Matlab中一样可以交互了。然而相当不稳定。<strong>可以先执行plt.ion()</strong>。
+</p>
+</li>
+<li>
+<p>
+pylab库相当于 <em>numpy</em> + <em>matplotlib.pyplot</em> ，画简单的图形demo时， <em>from pylab import *</em> 很方便。
+</p>
+</li>
+</ol></div>
+</li>
+</ul></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.7
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt>mpl<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">matplotlib_fname</span></span><span style="color: #990000">()</span> <span style="font-style: italic"><span style="color: #9A1900">#显示matplotlibrc文件的位置。</span></span></tt></pre></div></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.7
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="font-style: italic"><span style="color: #9A1900"># The default backend; one of GTK GTKAgg GTKCairo GTK3Agg GTK3Cairo</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"># CocoaAgg MacOSX Qt4Agg Qt5Agg TkAgg WX WXAgg Agg Cairo GDK PS PDF SVG</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"># Template.</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"># You can also deploy your own backend outside of matplotlib by</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"># referring to the module name (which must be in the PYTHONPATH) as</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"># 'module://my_backend'.</span></span>
+backend      <span style="color: #990000">:</span> GTKAgg
+<span style="font-style: italic"><span style="color: #9A1900"># If you are using the Qt4Agg backend, you can choose here</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"># to use the PyQt4 bindings or the newer PySide bindings to</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"># the underlying Qt4 toolkit.</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">#backend.qt4 : PyQt4        # PyQt4 | PySide</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"># Note that this can be overridden by the environment variable</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"># QT_API used by Enthought Tool Suite (ETS); valid values are</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"># "pyqt" and "pyside".  The "pyqt" setting has the side effect of</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"># forcing the use of Version 2 API for QString and QVariant.</span></span></tt></pre></div></div>
+</div>
+</div>
+</div>
 </div>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-03-09 12:11:31 CST
+Last updated 2015-03-11 17:57:01 CST
 </div>
 </div>
 </body>

@@ -128,3 +128,45 @@ $youtube-dl -f bestaudio URL # 下载质量最好的音频码流，下载音乐�
 
 === https://github.com/tpope/vim-fugitive[vim-fugitive]
 * git的Vim前端插件！
+
+== 2015-03-11 Wednesday 16:50:23
+=== Python的初始化配置
+* _~/.pythonstartup_
+[source, python]
+import matplotlib as mpl
+mpl.use('Qt5Agg')
+import numpy as np
+import matplotlib.pylab as plt
+
+* matplotlib画图
+	. 本来挺简单的事情，由于选择太多，反而搞得很复杂。
+	. 首先python2还是python3？
+	. 然后ipython2还是ipython3？
+	. 用哪个图形后端？
+	. _matplotlibrc_ 文件中，有 backend选项说明。
+	. 一旦选定图形后端，应该是不可更改的，除非重启python shell。
+	. ipython中查看当前的图形后端可以用_%matplotlib_ 命令。要想在notebook中显示图形，还需要 _%matplotlib inline_
+	. 由于各种图形后端都依赖于不同的系统桌面环境，所以有时候通过pip安装matplotlib会不能显示图像。 **最好用包管理来安装**。
+	. 在python shell中，plt.show()显示图像时，会阻塞shell。记得之前换了backend后就不阻塞了，跟Matlab中一样可以交互了。然而相当不稳定。**可以先执行plt.ion()**。
+	. pylab库相当于 _numpy_ + _matplotlib.pyplot_ ，画简单的图形demo时， _from pylab import *_ 很方便。
+
+[source, python]
+mpl.matplotlib_fname() #显示matplotlibrc文件的位置。
+
+[source, python]
+# The default backend; one of GTK GTKAgg GTKCairo GTK3Agg GTK3Cairo
+# CocoaAgg MacOSX Qt4Agg Qt5Agg TkAgg WX WXAgg Agg Cairo GDK PS PDF SVG
+# Template.
+# You can also deploy your own backend outside of matplotlib by
+# referring to the module name (which must be in the PYTHONPATH) as
+# 'module://my_backend'.
+backend      : GTKAgg
+# If you are using the Qt4Agg backend, you can choose here
+# to use the PyQt4 bindings or the newer PySide bindings to
+# the underlying Qt4 toolkit.
+#backend.qt4 : PyQt4        # PyQt4 | PySide
+# Note that this can be overridden by the environment variable
+# QT_API used by Enthought Tool Suite (ETS); valid values are
+# "pyqt" and "pyside".  The "pyqt" setting has the side effect of
+# forcing the use of Version 2 API for QString and QVariant.
+
