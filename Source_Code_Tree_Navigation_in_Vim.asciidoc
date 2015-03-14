@@ -78,3 +78,4 @@ $cscope -R -b # 仅生成cscope.out，然后退出
 * _L_	屏幕底端
 * _:h 29.3_
 * _:h motion.txt_
+* _:h tagsrch.txt_
