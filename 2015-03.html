@@ -1195,11 +1195,32 @@ backend      <span style="color: #990000">:</span> GTKAgg
 </div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="_2015_03_25_wednesday_22_42_29">2015-03-25 Wednesday 22:42:29</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_firefox字体渲染">Firefox字体渲染</h3>
+<div class="ulist"><ul>
+<li>
+<p>
+github网站的字体总是看着很难受，像是点阵字体。设置Firefox的Latin字体，并禁止网站自己选取字体可以解决，但是系统中没有什么字体能够正确显示图标。而Chromium是可以正常显示的。原因是github默认字体是Helvetica，而Firefox对该字体是先找点阵字体的。解决方法是：
+</p>
+</li>
+</ul></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.7
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt>ln -s /etc/fonts/conf<span style="color: #990000">.</span>avail<span style="color: #990000">/</span><span style="color: #993399">70</span>-no-bitmaps<span style="color: #990000">.</span>conf /etc/fonts/conf<span style="color: #990000">.</span>d</tt></pre></div></div>
+</div>
+</div>
+</div>
 </div>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-03-11 17:57:01 CST
+Last updated 2015-03-25 22:51:25 CST
 </div>
 </div>
 </body>
