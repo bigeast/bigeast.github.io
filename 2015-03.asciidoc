@@ -170,6 +170,10 @@ backend      : GTKAgg
 # "pyqt" and "pyside".  The "pyqt" setting has the side effect of
 # forcing the use of Version 2 API for QString and QVariant.
 
+== 2015-03-15 Sunday 00:20:06
+=== https://github.com/antiboredom/videogrep[videogrep]
+通过搜索字幕文件中的单词来定位到相应的视频处，并将其输出。
+
 == 2015-03-25 Wednesday 22:42:29
 === Firefox字体渲染
 * github网站的字体总是看着很难受，像是点阵字体。设置Firefox的Latin字体，并禁止网站自己选取字体可以解决，但是系统中没有什么字体能够正确显示图标。而Chromium是可以正常显示的。原因是github默认字体是Helvetica，而Firefox对该字体是先找点阵字体的。解决方法是：

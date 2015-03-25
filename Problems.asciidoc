@@ -1,5 +1,11 @@
-* 如何妥善地保存gpg密钥？
 * 如何从物理上解释 Rate-Distortion函数的凸性。
+
+* **Firefox** 和 **Chromium** 的字体机制。
+
+* **JavaScript** 为什么那么有用？
+
+* 如何妥善地保存gpg密钥？
+
 * https://projecteuler.net/problem=374[PE374 Maximum Integer Partition Product]。 把一个正整数N分成若干部分，使得其乘积最大，参考http://poj.org/showmessage?message_id=13543[POJ 1032]。
 
 令：
