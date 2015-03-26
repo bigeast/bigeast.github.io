@@ -180,3 +180,24 @@ backend      : GTKAgg
 
 [source, bash]
 ln -s /etc/fonts/conf.avail/70-no-bitmaps.conf /etc/fonts/conf.d 
+
+== 2015-03-26 Thursday 10:03:06
+=== TeX字体安装
+* TeX的字体安装在 _/usr/share/texmf-dist/fonts_ 目录中，fc-list的结果中是没有的。根据https://wiki.archlinux.org/index.php/TeX_Live#Fonts[Archwiki中的方法]，需要生成几个软链接：
+
+[source, bash]
+$ ln -s /etc/fonts/conf.avail/09-texlive-fonts.conf /etc/fonts/conf.d/09-texlive-fonts.conf
+
+=== 一些常用字体
+* _Consolas_ 不多说，可是不支持汉字，_YaHei Consolas Hybrid_ 是个备选
+* _Menlo_ 在自己显示器上效果不如别人的截图
+* _Monaco_ 终于找到了这个字体！不过效果也不如别人截图上那么好 :o
+* 官方源中的 _adobe-source-han-sans-cn-fonts_ 字体包。目前Firefox中的Latin字体就设置为这个，比YaHei Consolas Hybrid看起来还要舒服。
+
+=== Windows命令行编译
+* 有时候只有一个.c的源文件，要编译还要新建一个工程，有点麻烦。其实VS也是调用的命令行工具的。手动编译的方法如下(VS2008)：
+	** 把VS安装目录（这里是 _C:\Program Files (x86)\Microsoft Visual Studio 9.0\VC_ ）加入系统环境变量PATH中。
+	** 在命令行中运行 _vcvarsall_ 。
+	** 然后就可以用 _cl_ 来编译.c文件了。
+[NOTE]
+每次都要运行 _vcvarsall_ ，否则系统找不到 _cl_ 命令。如果要生成其它平台的代码，需要给 _vcvarsall_ 添加参数，例如要编译x64的程序，则运行 _vcvarsall x64_ 。

@@ -1225,11 +1225,92 @@ http://www.gnu.org/software/src-highlite -->
 </div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="_2015_03_26_thursday_10_03_06">2015-03-26 Thursday 10:03:06</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_tex字体安装">TeX字体安装</h3>
+<div class="ulist"><ul>
+<li>
+<p>
+TeX的字体安装在 <em>/usr/share/texmf-dist/fonts</em> 目录中，fc-list的结果中是没有的。根据<a href="https://wiki.archlinux.org/index.php/TeX_Live#Fonts">Archwiki中的方法</a>，需要生成几个软链接：
+</p>
+</li>
+</ul></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.7
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt>$ ln -s /etc/fonts/conf<span style="color: #990000">.</span>avail<span style="color: #990000">/</span><span style="color: #993399">09</span>-texlive-fonts<span style="color: #990000">.</span>conf /etc/fonts/conf<span style="color: #990000">.</span>d<span style="color: #990000">/</span><span style="color: #993399">09</span>-texlive-fonts<span style="color: #990000">.</span>conf</tt></pre></div></div>
+</div>
+<div class="sect2">
+<h3 id="_一些常用字体">一些常用字体</h3>
+<div class="ulist"><ul>
+<li>
+<p>
+<em>Consolas</em> 不多说，可是不支持汉字，<em>YaHei Consolas Hybrid</em> 是个备选
+</p>
+</li>
+<li>
+<p>
+<em>Menlo</em> 在自己显示器上效果不如别人的截图
+</p>
+</li>
+<li>
+<p>
+<em>Monaco</em> 终于找到了这个字体！不过效果也不如别人截图上那么好 :o
+</p>
+</li>
+<li>
+<p>
+官方源中的 <em>adobe-source-han-sans-cn-fonts</em> 字体包。目前Firefox中的Latin字体就设置为这个，比YaHei Consolas Hybrid看起来还要舒服。
+</p>
+</li>
+</ul></div>
+</div>
+<div class="sect2">
+<h3 id="_windows命令行编译">Windows命令行编译</h3>
+<div class="ulist"><ul>
+<li>
+<p>
+有时候只有一个.c的源文件，要编译还要新建一个工程，有点麻烦。其实VS也是调用的命令行工具的。手动编译的方法如下(VS2008)：
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+把VS安装目录（这里是 <em>C:\Program Files (x86)\Microsoft Visual Studio 9.0\VC</em> ）加入系统环境变量PATH中。
+</p>
+</li>
+<li>
+<p>
+在命令行中运行 <em>vcvarsall</em> 。
+</p>
+</li>
+<li>
+<p>
+然后就可以用 <em>cl</em> 来编译.c文件了。
+</p>
+</li>
+</ul></div>
+</li>
+</ul></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">每次都要运行 <em>vcvarsall</em> ，否则系统找不到 <em>cl</em> 命令。如果要生成其它平台的代码，需要给 <em>vcvarsall</em> 添加参数，例如要编译x64的程序，则运行 <em>vcvarsall x64</em> 。</td>
+</tr></table>
+</div>
+</div>
+</div>
+</div>
 </div>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-03-25 22:54:35 CST
+Last updated 2015-03-26 16:32:49 CST
 </div>
 </div>
 </body>
