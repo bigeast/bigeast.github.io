@@ -233,3 +233,36 @@ int b[10] = {[2 ... 5] = 4, [8 ... 9] = 13};
 
 [NOTE]
 微软的编译器就是不支持C99，不能在代码中间部分定义变量，不支持for循环中定义变量。除非用C++（其实就是扩展名从 _.c_ 变成 _.cc_ ）
+
+== 2015-03-28 Saturday 18:07:50
+=== Monaco字体
+https://gist.github.com/arkhan/229a0729ec79c6fcec81[Monaco for Powerline]才是正解！显示效果要比Monaco好。
+
+=== https://wiki.archlinux.org/index.php/Fortune[cowsay, cowthink, fortune]
+无聊的时候可以拿来玩～～
+[source, bash]
+$ fortune -c | cowthink -f $(find /usr/share/cows -type f | shuf -n 1)
+ _______________________________________ 
+( (songs-poems) % Volcanoes have a      )
+( grandeur that is grim And earthquakes )
+( only terrify the dolts, And to him    )
+( who's scientific There is nothing     )
+( that's terrific In the pattern of a   )
+( flight of thunderbolts!               )
+(                                       )
+( -- W.S. Gilbert, "The Mikado"         )
+ --------------------------------------- 
+o                             .       .
+ o                           / `.   .' " 
+  o                  .---.  <    > <    >  .---.
+   o                 |    \  \ - ~ ~ - /  /    |
+         _____          ..-~             ~-..-~
+        |     |   \~~~\.'                    `./~~~/
+       ---------   \__/                        \__/
+      .'  O    \     /               /       \  " 
+     (_____,    `._.'               |         }  \/~~~/
+      `----.          /       }     |        /    \__/
+            `-.      |       /      |       /      `. ,~~|
+                ~-.__|      /_ - ~ ^|      /- _      `..-'   
+                     |     /        |     /     ~-.     `-. _  _  _
+                     |_____|        |_____|         ~ - . _ _ _ _ _>
