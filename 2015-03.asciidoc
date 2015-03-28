@@ -45,7 +45,7 @@ $youtube-dl -f bestaudio URL # 下载质量最好的音频码流，下载音乐�
 * 而且他的网站非常之简洁。看得我有些惭愧。
 * 或许专注一件事情才是成功之道吧！
 
-=== xorg-xserver
+=== xorg-server
 * 开学后的 _pacman -Syu_ 好像更新了不该更新的东西，使得终端刷新的时候会把整个显示器搞乱。开始以为是i3wm的问题，但是回滚后还是不行。
 * 想起来xrandr显示的显示器名称也变了，之前是DVI-I-1和DVI-I-2，现在成了DVI-1和DVI-2。于是把xrandr也降级，问题依然存在。
 * 本来想去IRC上问一问，但是感觉这问题挺不好描述。才想起来去看Archlinux的更新公告 https://www.archlinux.org/news/xorg-server-1171-is-now-available[xorg-server 1.17.1 is now available]，然后把 _xorg-video-modesetting_ 装回来就好了。
@@ -233,3 +233,21 @@ int b[10] = {[2 ... 5] = 4, [8 ... 9] = 13};
 
 [NOTE]
 微软的编译器就是不支持C99，不能在代码中间部分定义变量，不支持for循环中定义变量。除非用C++（其实就是扩展名从 _.c_ 变成 _.cc_ ）
+
+== 2015-03-28 Saturday 22:47:50
+=== xorg-server 和 xf86-video-modesetting
+几周前更新后出现问题，现在问题又来了。还是重新做了一遍，完全没有长记性！主要习惯性 _pacman -Syu_ ，有时想不了那么多。
+
+这次把步骤记下来，然后把 _xorg-server_ Ignore掉。
+
+[source, bash]
+# 两个包有依赖，要同时卸载？
+$ pacman -U /var/cache/pacman/pkg/virtualbox-guest-utils-4.3.20-1-x86_64.pkg.tar.xz /var/cache/pacman/pkg/xorg-server-1.16.3-2-x86_64.pkg.tar.xz
+$ pacman -U /var/cache/pacman/pkg/xf86-video-modesetting-0.9.0-2-x86_64.pkg.tar.xz
+
+然后在 _/etc/pacman.conf_ 中加入
+
+[source ,bash]
+IgnorePkg = virtualbox xorg-server
+
+话说virtualbox从4.2.22以来，更新后总是有问题，干脆停掉算了！
