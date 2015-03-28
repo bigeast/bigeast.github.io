@@ -1438,13 +1438,90 @@ http://www.gnu.org/software/src-highlite -->
 <pre><tt>IgnorePkg <span style="color: #990000">=</span> virtualbox xorg-server</tt></pre></div></div>
 <div class="paragraph"><p>话说virtualbox从4.2.22以来，更新后总是有问题，干脆停掉算了！</p></div>
 </div>
+<div class="sect2">
+<h3 id="_psnr和mse的对应关系">PSNR和MSE的对应关系</h3>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.7
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="font-weight: bold"><span style="color: #000080">import</span></span> numpy as np
+<span style="font-weight: bold"><span style="color: #000080">import</span></span> matplotlib<span style="color: #990000">.</span>pylab as plt
+<span style="font-weight: bold"><span style="color: #0000FF">def</span></span> <span style="font-weight: bold"><span style="color: #000000">mse</span></span><span style="color: #990000">(</span>n<span style="color: #990000">):</span>
+    <span style="font-weight: bold"><span style="color: #0000FF">return</span></span> <span style="color: #993399">20</span> <span style="color: #990000">*</span> np<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">log10</span></span><span style="color: #990000">(</span><span style="color: #993399">255.0</span><span style="color: #990000">/</span>n<span style="color: #990000">)</span>
+x<span style="color: #990000">,</span> xx <span style="color: #990000">=</span> np<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">linspace</span></span><span style="color: #990000">(</span><span style="color: #993399">0.1</span><span style="color: #990000">,</span> <span style="color: #993399">10</span><span style="color: #990000">,</span> <span style="color: #993399">100</span><span style="color: #990000">),</span> np<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">linspace</span></span><span style="color: #990000">(</span><span style="color: #993399">1</span><span style="color: #990000">,</span> <span style="color: #993399">10</span><span style="color: #990000">,</span> <span style="color: #993399">10</span><span style="color: #990000">)</span>
+y<span style="color: #990000">,</span> yy <span style="color: #990000">=</span> <span style="font-weight: bold"><span style="color: #000000">mse</span></span><span style="color: #990000">(</span>x<span style="color: #990000">),</span> <span style="font-weight: bold"><span style="color: #000000">mse</span></span><span style="color: #990000">(</span>xx<span style="color: #990000">)</span>
+plt<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">plot</span></span><span style="color: #990000">(</span>x<span style="color: #990000">,</span> y<span style="color: #990000">,</span> xx<span style="color: #990000">,</span> yy<span style="color: #990000">,</span> <span style="color: #FF0000">"r*"</span><span style="color: #990000">)</span>
+plt<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">xlabel</span></span><span style="color: #990000">(</span><span style="color: #FF0000">"MSE"</span><span style="color: #990000">)</span>
+plt<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">ylabel</span></span><span style="color: #990000">(</span><span style="color: #FF0000">"PSNR(dB)"</span><span style="color: #990000">)</span>
+plt<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">grid</span></span><span style="color: #990000">(</span>True<span style="color: #990000">)</span>
+plt<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">show</span></span><span style="color: #990000">()</span></tt></pre></div></div>
+<div class="tableblock">
+<table rules="all"
+width="10%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="7%" />
+<col width="13%" />
+<col width="78%" />
+<thead>
+<tr>
+<th align="left" valign="top"> MSE   </th>
+<th align="left" valign="top"> PSNR(dB)      </th>
+<th align="left" valign="top"> Plot</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table">1</p></td>
+<td align="left" valign="top"><p class="table">48.13</p></td>
+<td rowspan="9" align="center" valign="top"><p class="table"><em><span class="image">
+<img src="images/psnr.png" alt="images/psnr.png" width="500" />
+</span></em></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">2</p></td>
+<td align="left" valign="top"><p class="table">42.08</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">3</p></td>
+<td align="left" valign="top"><p class="table">38.59</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">4</p></td>
+<td align="left" valign="top"><p class="table">35.99</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">5</p></td>
+<td align="left" valign="top"><p class="table">34.15</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">6</p></td>
+<td align="left" valign="top"><p class="table">32.46</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">7</p></td>
+<td align="left" valign="top"><p class="table">31.13</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">8</p></td>
+<td align="left" valign="top"><p class="table">29.83</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">9</p></td>
+<td align="left" valign="top"><p class="table">28.94</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 </div>
 </div>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-03-28 23:02:51 CST
+Last updated 2015-03-29 00:46:39 CST
 </div>
 </div>
 </body>
