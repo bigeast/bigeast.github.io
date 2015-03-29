@@ -1517,11 +1517,91 @@ cellspacing="0" cellpadding="4">
 </div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="_2015_03_29_sunday_21_12_52">2015-03-29 Sunday 21:12:52</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_统计程序执行时间的python模块">统计程序执行时间的Python模块</h3>
+<div class="paragraph"><p>方便地统计一个小程序的运行时间。在解决一个问题时，可能会有很多Python的库可供选择，如果不知道哪个更好，可以两个都用一下（Python就是这么任性？），然后看哪个胜出。</p></div>
+<div class="paragraph"><p>命令行中 <em>timeit</em> 模块的使用：</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.7
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt>$ python -m timeit -n <span style="color: #993399">1</span> -r <span style="color: #993399">10</span> <span style="color: #FF0000">"import myfun.py; myfun.foo()"</span></tt></pre></div></div>
+<div class="paragraph"><p><em>n</em> 参数指定每个循环运行这个程序多少遍， <em>r</em> 参数指定运行多少次循环。</p></div>
+<div class="paragraph"><p>最终会返回一个最快循环的运行时间。</p></div>
+</div>
+<div class="sect2">
+<h3 id="_大数据">大数据</h3>
+<div class="paragraph"><p>看了下实习的要求，好多公司的好多职位都是跟大数据相关的。还在犹豫要不要找实习。</p></div>
+<div class="paragraph"><p>突然就感到自己有点落伍了，对大数据一点概念都没有。准备先把Hadoop搭起来，统计个单词什么的。</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+软件源里没有 <em>hadoop</em> ，ABS里有。
+</p>
+</li>
+<li>
+<p>
+然后装了 <em>maven</em> , <em>scala</em>. 我都不知道 <em>maven</em> 是干嘛的。反正都跟Java相关吧。突然发现Java好像又火了（还是一直都很火只是我没有注意到）。
+</p>
+</li>
+<li>
+<p>
+装了 <em>intellij-idea-community-edition</em> 竟然不能启动。
+</p>
+</li>
+<li>
+<p>
+Java 都到 <em>JDK 8</em> 了。
+</p>
+</li>
+<li>
+<p>
+好久不用Java，还得重新设置环境变量。这么多年一直没变吗。这是为什么呢，为什么其它程序都能自动设置好环境变量而Java就不行呢，是不是跟它的特性有关呢？
+</p>
+</li>
+<li>
+<p>
+装了 <em>apache-spake</em> ，其实不知道它是干嘛的，Archlinux上要在自己机器上编译，眼看这它从 maven.org 下了好多文件。期间去知乎上看大数据相关的回答，好多都是几年前的了。
+</p>
+</li>
+<li>
+<p>
+啊，还记得第一次接触分布式的概念，是大一还是大二的时候，一个文献综述的征文，那时就看了Google的三篇经典文章，当然没看懂，只是字面意思过了一遍。。
+</p>
+</li>
+<li>
+<p>
+要不要试试看这些东西都是干嘛的呢？
+</p>
+</li>
+<li>
+<p>
+现在情况是， <strong>Hadoop, Spark, Strom</strong> 三个平台？
+</p>
+</li>
+<li>
+<p>
+目前对数据库的理解基本处于空白，需要恶补？
+</p>
+</li>
+<li>
+<p>
+名词太多，记不过来。程序员好无聊，起这么多名字。<strong>YARN, MPI</strong>
+</p>
+</li>
+</ul></div>
+</div>
+</div>
+</div>
 </div>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-03-29 00:46:39 CST
+Last updated 2015-03-30 00:45:33 CST
 </div>
 </div>
 </body>

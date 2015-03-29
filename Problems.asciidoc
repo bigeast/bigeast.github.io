@@ -1,20 +1,25 @@
 * 如何从物理上解释 Rate-Distortion函数的凸性。
 
-* **Firefox** 和 **Chromium** 的字体机制。
-
 * **JavaScript** 为什么那么有用？
+	** 网景浏览器时代就有了。
+	** 所有主流浏览器都支持。（**脑洞：为什么都要嵌入到浏览器中，有没有单独的JS解释器？**）
 
 * 如何妥善地保存gpg密钥？
 
-* https://projecteuler.net/problem=374[PE374 Maximum Integer Partition Product]。 把一个正整数N分成若干部分，使得其乘积最大，参考http://poj.org/showmessage?message_id=13543[POJ 1032]。
+* 外部排序。
 
-令：
-A = 2+3+4+...+(k-1)+k <= N < A + (k+1) = B
+* **Firefox** 和 **Chromium** 的字体机制。
 
-Suppose N = A + p, (0 <= p < k+1)
+* https://projecteuler.net/problem=374[_PE374 Maximum Integer Partition Product_]。把一个正整数N分成若干部分，使得其乘积最大，参考http://poj.org/showmessage?message_id=13543[POJ 1032]。
 
-1) p=0, then answer is Set A
+	令：
+	A = 2+3+4+...+(k-1)+k <= N < A + (k+1) = B
+	
+	Suppose N = A + p, (0 <= p < k+1)
+	
+	1) p=0, then answer is Set A
+	
+	2) 1<=p<=k-1 then answer is Set B - {k+1-p}
+	
+	3) p=k, then answer is Set A - {2} + {k+2}
 
-2) 1<=p<=k-1 then answer is Set B - {k+1-p}
-
-3) p=k, then answer is Set A - {2} + {k+2}
