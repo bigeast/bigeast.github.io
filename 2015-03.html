@@ -1597,11 +1597,33 @@ Java 都到 <em>JDK 8</em> 了。
 </div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="_2015_03_30_monday_10_03_33">2015-03-30 Monday 10:03:33</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_rfc_on_archlinux">RFC on Archlinux</h3>
+<div class="paragraph"><p><em>community</em> 源中，有一个包囊括了rfc的大部分文档（目前有7297份），安装在 <em>/usr/share/doc/rfc</em> 目录下，有 ps, pdf, txt 格式。当然大部分都是txt格式，提供pdf和ps格式的只有很少一部分。</p></div>
+<div class="paragraph"><p>为了方便阅读，给 shell 加上一个函数好了：</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.7
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="font-weight: bold"><span style="color: #000000">rfc()</span></span>{ gvim /usr/share/doc/rfc/txt<span style="color: #990000">/</span><span style="color: #009900">$1</span><span style="color: #990000">.</span>txt }</tt></pre></div></div>
+</div>
+<div class="sect2">
+<h3 id="_pacman_cache">Pacman Cache</h3>
+<div class="paragraph"><p>发现 <em>/var</em> 又满了，一看 <em>/var/cache</em> 有九个多G。所有通过 pacman 安装的软件的安装包都会存在这里，如果很久不清理，就会变得很大，但是如果全部清理掉，万一出现问题了，回滚就会很麻烦。记得之前（14年7月？）自己写过一个脚本，删除掉每个软件包最旧的几个版本，费了好大劲，用 <em>ls, cut, sort -V, sed</em> 最终只是勉强能用，不过后来竟然找不到那个脚本了！</p></div>
+<div class="paragraph"><p>其实有这个需求的人应该很多，所以 pacman 软包本身就有一个命令 <em>paccache</em> 是来干这个工作的。 <em>paccache -r</em> 就会只保留已安装软件最新的三个安装包。 <em>pacman -m</em> 是移动过旧的安装包到指定目录。</p></div>
+<div class="paragraph"><p>如果确定自己现在的系统不会出问题了，还可以只保留当前已安装的软件包。看 wiki 上的意思，好像可以根据这些软件包自动克隆出一个一模一样的系统。</p></div>
+</div>
+</div>
+</div>
 </div>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-03-30 00:45:33 CST
+Last updated 2015-03-30 11:44:50 CST
 </div>
 </div>
 </body>
