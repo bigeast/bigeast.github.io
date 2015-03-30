@@ -1,6 +1,7 @@
-[width="15%"]
+[width="30%"]
 |====================
-|link:2015-02.html[2015-02 笔记] |link:2015-03.html[2015-03 笔记]
+|link:2015-02.html[2015-02 笔记] 
+|link:2015-03.html[2015-03 笔记]
 |====================
 
 link:Problems.html[Problems to Solve]
