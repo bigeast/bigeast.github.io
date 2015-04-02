@@ -9,7 +9,7 @@ link:Problems.html[Problems to Solve]
 link:leetcode.html[Leetcode]
 
 == Book Notes
-link:YM.html[斯蒂芬·哈珀在读什么]
+link:books/YM.html[斯蒂芬·哈珀在读什么]
 
 == Computer Hacks
 link:Source_Code_Tree_Navigation_in_Vim.html[Source Code Tree Navigation in Vim]
