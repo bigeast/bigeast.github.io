@@ -1617,13 +1617,21 @@ http://www.gnu.org/software/src-highlite -->
 <div class="paragraph"><p>其实有这个需求的人应该很多，所以 pacman 软包本身就有一个命令 <em>paccache</em> 是来干这个工作的。 <em>paccache -r</em> 就会只保留已安装软件最新的三个安装包。 <em>pacman -m</em> 是移动过旧的安装包到指定目录。</p></div>
 <div class="paragraph"><p>如果确定自己现在的系统不会出问题了，还可以只保留当前已安装的软件包。看 wiki 上的意思，好像可以根据这些软件包自动克隆出一个一模一样的系统。</p></div>
 </div>
+<div class="sect2">
+<h3 id="_后台运行_终端脱离">后台运行，终端脱离</h3>
+<div class="paragraph"><p>在命令后加 <em>&amp;</em> 是后台运行（ <em>jobs</em> 命令查看当前终端的后台进程），但如果终端退出了，这个后台进程也就随之被kill掉了（准确点说，可能是<strong>HUP</strong>）。</p></div>
+<div class="paragraph"><p>为了使程序独立于启动它的终端，启动时可以在前面加上 <em>nohup</em> 。</p></div>
+<div class="paragraph"><p>如果启动时只是用 <em>&amp;</em> 后台运行，之后也可以用 disown 补救。先用 <em>jobs</em> 查看命令的job ID，然后 <em>disown %id</em> 就可以了。如果 <em>disown</em> 没有参数，那它就会将最后一个工作脱离当前终端。</p></div>
+<div class="paragraph"><p>但 nohup 和 disown 其实是有些微的差别的。 <em>type nohup</em> 和 <em>type disown</em> 是不一样的， <em>nohup</em> 是/usr/bin下的一个程序，而 <em>disown</em> 是 bash 的内置命令。</p></div>
+<div class="paragraph"><p>默认情况下终端退出时会对其下所有还在运行的 jobs 发送 HUP 信号（猜的），nohup 只能在程序开始执行的时候添加才有用，因此可能是启动程序时，改了该程序的信号处理程序（继续猜）。而 disown 是 bash 内置的，只需让 bash 记住退出的时候不要给相应程序发送HUP信号就可以了，这也说明了为什么可以在程序已经在运行了的时候再 disown 。</p></div>
+</div>
 </div>
 </div>
 </div>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-03-30 11:44:50 CST
+Last updated 2015-03-31 00:08:36 CST
 </div>
 </div>
 </body>
