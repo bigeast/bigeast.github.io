@@ -1,0 +1,11 @@
+== 2015-04-02 Thursday 23:16:18
+=== 自动给文件的某个pattern前加上某段文本
+在cnzz.com上注册了个帐号，想统计一下这个博客的访问流量。需要给每个html文件加上一段代码，肯定不能手动呀，首先想到用 _sed_ ：
+
+[source, bash]
+$ sed -i '/regexpattern/ i text' index.html
+
+然后希望写到makefile中，每次生成完html文件后就执行这条sed命令。但是不知道怎么在makefile里跨行执行shell代码。于是退而求其次，写到了一个外部脚本里，然后在makefile的all规则中加上这个脚本的名字。还有如果要插入的文本是在另一个文件中，需要：
+
+[source, bash]
+$ sed -i '/regexpattern/ r text.txt' index.html
