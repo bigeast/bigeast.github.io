@@ -740,7 +740,6 @@ asciidoc.install();
 <div class="sectionbody">
 <div class="sect2">
 <h3 id="_自动给文件的某个pattern前加上某段文本">自动给文件的某个pattern前加上某段文本</h3>
-<div class="paragraph"><p>在cnzz.com上注册了个帐号，想统计一下这个博客的访问流量。需要给每个html文件加上一段代码，肯定不能手动呀，首先想到用 <em>sed</em> ：</p></div>
 <div class="listingblock">
 <div class="content"><!-- Generator: GNU source-highlight 3.1.7
 by Lorenzo Bettini
@@ -755,13 +754,39 @@ http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
 <pre><tt>$ sed -i <span style="color: #FF0000">'/regexpattern/ r text.txt'</span> index<span style="color: #990000">.</span>html</tt></pre></div></div>
 </div>
+<div class="sect2">
+<h3 id="_命令行自动登录校园网">命令行自动登录校园网</h3>
+<div class="paragraph"><p>最开始尝试了用 <em>curl -F</em> 做表单提交，但是没有成功。网上搜到了说用 Firefox 的 Firebug 和 Firecurl 插件，可以得到每一步对应的curl命令。然后到 Firecurl 的下载页面又说：<em>don&#8217;t use this&#8201;&#8212;&#8201;use Chrome Developer Tools' "Copy as cURL", which is much more complete</em></p></div>
+<div class="paragraph"><p>可是最终这种方法的到的curl命令也不能成功登录。</p></div>
+<div class="paragraph"><p>继续Google，找到了github上有人三年前写的<a href="https://github.com/tianyang-li/TUNET">Python脚本</a>，挺简单的，没有用表单提交，直接跟cgi交互。</p></div>
+<div class="paragraph"><p>于是写了个 shell 版的。。</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.7
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="font-style: italic"><span style="color: #9A1900">#!/bin/bash</span></span>
+<span style="font-weight: bold"><span style="color: #0000FF">case</span></span> <span style="color: #FF0000">"$1"</span> <span style="font-weight: bold"><span style="color: #0000FF">in</span></span>
+        login<span style="color: #990000">)</span>
+                <span style="color: #009900">username</span><span style="color: #990000">=</span><span style="color: #009900">${2:wdd13}</span>
+                <span style="color: #009900">password</span><span style="color: #990000">=</span><span style="color: #009900">$(</span>echo -n <span style="color: #009900">$3</span> <span style="color: #990000">|</span> md5sum <span style="color: #990000">|</span> cut -d<span style="color: #FF0000">' '</span> -f<span style="color: #993399">1</span><span style="color: #990000">)</span>
+                curl -d <span style="color: #FF0000">"username=${username}&amp;password=${password}&amp;drop=0&amp;type=1&amp;n=100"</span> http<span style="color: #990000">:</span>//net<span style="color: #990000">.</span>tsinghua<span style="color: #990000">.</span>edu<span style="color: #990000">.</span>cn/cgi-bin/do_login
+                <span style="color: #990000">;;</span>
+        <span style="font-weight: bold"><span style="color: #0000FF">logout</span></span><span style="color: #990000">)</span>
+                curl http<span style="color: #990000">:</span>//net<span style="color: #990000">.</span>tsinghua<span style="color: #990000">.</span>edu<span style="color: #990000">.</span>cn/cgi-bin/do_logout
+                <span style="color: #990000">;;</span>
+        <span style="color: #990000">*)</span>
+                curl -d <span style="color: #FF0000">'action=check_online'</span> http<span style="color: #990000">:</span>//net<span style="color: #990000">.</span>tsinghua<span style="color: #990000">.</span>edu<span style="color: #990000">.</span>cn/cgi-bin/do_login
+                <span style="color: #990000">;;</span>
+<span style="font-weight: bold"><span style="color: #0000FF">esac</span></span></tt></pre></div></div>
+</div>
 </div>
 </div>
 </div>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-04-02 23:24:01 CST
+Last updated 2015-04-03 02:01:31 CST
 </div>
 </div>
 </body>

@@ -9,3 +9,27 @@ $ sed -i '/regexpattern/ i text' index.html
 
 [source, bash]
 $ sed -i '/regexpattern/ r text.txt' index.html
+
+=== 命令行自动登录校园网
+最开始尝试了用 _curl -F_ 做表单提交，但是没有成功。网上搜到了说用 Firefox 的 Firebug 和 Firecurl 插件，可以得到每一步对应的curl命令。然后到 Firecurl 的下载页面又说：_don't use this -- use Chrome Developer Tools' "Copy as cURL", which is much more complete_
+
+可是最终这种方法的到的curl命令也不能成功登录。
+
+继续Google，找到了github上有人三年前写的https://github.com/tianyang-li/TUNET[Python脚本]，挺简单的，没有用表单提交，直接跟cgi交互。
+
+于是写了个 shell 版的。。
+[source, bash]
+#!/bin/bash
+case "$1" in
+	login)
+		username=${2:wdd13}
+		password=$(echo -n $3 | md5sum | cut -d' ' -f1)
+		curl -d "username=${username}&password=${password}&drop=0&type=1&n=100" http://net.tsinghua.edu.cn/cgi-bin/do_login
+		;;
+	logout)
+		curl http://net.tsinghua.edu.cn/cgi-bin/do_logout
+		;;
+	*)
+		curl -d 'action=check_online' http://net.tsinghua.edu.cn/cgi-bin/do_login                                  
+		;;
+esac
