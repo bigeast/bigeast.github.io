@@ -10,7 +10,12 @@ link:Problems.html[Problems to Solve]
 link:leetcode.html[Leetcode]
 
 == Book Notes
+
+=== 人文
 link:books/YM.html[斯蒂芬·哈珀在读什么]
+
+=== 计算机
+link:books/linuxfaner.html[Linux就是这个范儿]
 
 == Computer Hacks
 link:Source_Code_Tree_Navigation_in_Vim.html[Source Code Tree Navigation in Vim]
