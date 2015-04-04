@@ -33,3 +33,30 @@ case "$1" in
 		curl -d 'action=check_online' http://net.tsinghua.edu.cn/cgi-bin/do_login                                  
 		;;
 esac
+
+== 2015-04-04 Saturday 19:58:45
+=== HTTP2
+* https://http2.github.io[官方博客]
+* https handshake
+* http/2和SPDY协议传的是二进制的，而http/1.1传的是文本。快速。
+* TLS everywhere
+* http/1.1是应用层协议，而http/2是会话层和应用层协议，不是完全替代1.1，而是进行了扩展。
+* HPACK
+	* http/2的header压缩协议
+	* 没有前缀匹配，（为了安全）
+	* 名称和值对于算法来说是不透明的
+	* 编码端决定哪一部分被压缩
+	* 静态表，动态表，huffman
+	* 不选用gzip是为了防止 _CRIME_ 。**CRIME会引诱浏览器把不同的文本内容发给目标网站，观察压缩后的header变化，如果对于某个特定的内容，header变小了，说明注入的内容中有与用户的cookies相同的部分，据此来推测出用户的cookie，劫持用户的会话。**
+* 一些边界情况
+	* 处理大的header
+	* 作为http/1.1的代理
+* 负载均衡时的优势。
+* Server push。预测用户的需要，在client发出请求前就做出回应。
+* 减少了TCP连接，使服务器能够处理更多的并发。
+* **FAQ上的问题**
+	** http/1.1的问题是，一个http请求会导致多个TCP连接同时发送请求。
+	** 与十几年前相比，现在的网页包含了更多的内容，例如js脚本，css信息，多媒体资源，而现在的http/1.1只能允许TCP一次发出一个资源请求。
+	** 以SPDY为基础。
+	** http/1.1中，浏览器会为每个来源网站建立四到八个连接，如果一个网站包含多个来源，连接可能会更多，这些连接容易触发TCP的拥塞控制和重传。http/2只需要一个连接。
+	** 关于server push，目前的情况是，客户端先收到html文档，解析后，如果其中有嵌入的JS脚本或者CSS样式，则再次发出请求。
