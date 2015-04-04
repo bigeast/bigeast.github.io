@@ -2,3 +2,5 @@
 *.swp
 !*.asciidoc
 !*.html
+!books/
+!images/
