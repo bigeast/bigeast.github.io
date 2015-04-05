@@ -1,7 +1,7 @@
 == Leetcode
-* https://leetcode.com/problems/maximum-gap[Maximum Gap] **一个无序的数组，在线性时间内找到排好序后，相邻两个元素之间最大的差值。**
+=== https://leetcode.com/problems/maximum-gap[Maximum Gap] **一个无序的数组，在线性时间内找到排好序后，相邻两个元素之间最大的差值。**
 
-* https://leetcode.com/problems/merge-two-sorted-lists[Merge Two Sorted Lists] **合并两个有序的链表。** 
+=== https://leetcode.com/problems/merge-two-sorted-lists[Merge Two Sorted Lists] **合并两个有序的链表。** 
 
 算法很清楚，主要是看怎么实现。如果用p指向要返回的列表当前位置，注意每次更新的时候是先改变p->next，然后p=p->next。
 
@@ -46,7 +46,7 @@ public:
     }
 };
 
-* https://leetcode.com/problems/search-for-a-range[Search for a range] **有序数组里的 lower_bound 和 upper_bound**
+=== https://leetcode.com/problems/search-for-a-range[Search for a range] **有序数组里的 lower_bound 和 upper_bound**
 
 [line-throuth]#突然发现自己好像还不会这个。想了一下也没想出来，应该是二分查找稍微变形一下？#
 
@@ -118,3 +118,30 @@ class Solution {
 			return range;
 		}
 };
+
+=== 链表反转
+https://leetcode.com/problems/reverse-linked-list-ii/
+https://leetcode.com/problems/swap-nodes-in-pairs/
+https://leetcode.com/problems/reverse-nodes-in-k-group/
+
+=== 连续整数
+https://leetcode.com/problems/first-missing-positive/
+https://leetcode.com/problems/longest-consecutive-sequence/
+
+=== next_permutation
+https://leetcode.com/problems/next-permutation/
+
+=== 两个有序数组的中值
+https://leetcode.com/problems/median-of-two-sorted-arrays/
+
+=== 子集和/DFS
+https://leetcode.com/problems/3sum/
+https://leetcode.com/problems/4sum/
+https://leetcode.com/problems/generate-parentheses/
+https://leetcode.com/problems/palindrome-partitioning/
+
+=== DP
+https://leetcode.com/problems/longest-palindromic-substring/
+
+=== 其它
+判断是否是回文数字，不能使用额外的空间。https://leetcode.com/problems/palindrome-number/
