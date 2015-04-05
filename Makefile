@@ -1,4 +1,4 @@
-ASCIIDOCS=$(wildcard */*.asciidoc)
+ASCIIDOCS=$(wildcard */*.asciidoc) $(wildcard *.asciidoc)
 HTMLS=$(ASCIIDOCS:.asciidoc=.html)
 all: $(HTMLS)
 	@./stat.sh
