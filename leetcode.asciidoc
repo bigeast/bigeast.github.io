@@ -131,11 +131,14 @@ https://leetcode.com/problems/first-missing-positive/
 
 https://leetcode.com/problems/longest-consecutive-sequence/
 
+https://leetcode.com/problems/maximum-gap/ O(n)时空复杂度下，找到一个无序数组排好序后相邻元素的最大差值。挺有意思，自己想想。
 === next_permutation
 https://leetcode.com/problems/next-permutation/
 
 === 两个有序数组的中值
 https://leetcode.com/problems/median-of-two-sorted-arrays/
+
+http://articles.leetcode.com/2011/01/find-k-th-smallest-element-in-union-of.html[答案说明]
 
 === 子集和/DFS
 https://leetcode.com/problems/3sum/
@@ -151,3 +154,4 @@ https://leetcode.com/problems/longest-palindromic-substring/
 
 === 其它
 判断是否是回文数字，不能使用额外的空间。https://leetcode.com/problems/palindrome-number/
+
