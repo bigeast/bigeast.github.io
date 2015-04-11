@@ -81,3 +81,37 @@ echo "<div>".$input."</div>"
 document.cookie = "name=whatever; domain=.google.com; path=/; expires=Thu, 2 Aug 2001 20:47:11 UTC;"
 
 Set-Cookie时如果加上HttpOnly字段，则该cookie不能被JavaScript读取。
+
+=== top
+top命令的显示结果跟以前不一样已经有一段时间了，有了颜色，还有跟 _htop_ 类似的CPU占用率动态显示，但我之前经常用的 `C`, `M` 将进程按cpu占用率或者内存占用排序的功能不在了。今天终于忍不住查了下到底怎么回事。原来这个变化是去年11月份， _procps-ng_ 的一次升级后开始的。
+
+[source, bash]
+4888:[2014-11-17 09:33] [PACMAN] upgraded procps-ng (3.3.9-3 -> 3.3.10-1)
+
+wiki上有https://bbs.archlinux.org/viewtopic.php?id=189757帖子讨论这个，而且有人给出了恢复到原来配置的方案：
+
+--------------------
+remove your ~/.toprc (if any)
+start "top"
+press z
+press V
+press 1
+press y
+press m m
+press t t t
+press W
+this will write a ~/.toprc fairly similar to what you are used to.
+--------------------
+
+查看了下 _procps-ng_ 下的命令，原来 _pgrep_ 和 _pkill_ 都是，还有 _free_ _pidof_ _pmap_ _ps_ _pwdx_ _uptime_ _vmstat_ _watch_ 等。
+_pwdx_ 之前没见过，是查看一个进程的当前工作目录的。
+
+=== ngrep
+查看http头，可以用万能的 _tcpdump_, 还有更合适的 _ngrep_ 。
+
+[source, bash]
+# To print all IPv4 HTTP packets to and from port 80, i.e. print only packets that contain data, not, for example, SYN and FIN
+# packets and ACK-only packets.  (IPv6 is left as an exercise for the reader.)
+$ tcpdump 'tcp port 80 and (((ip[2:2] - ((ip[0]&0xf)<<2)) - ((tcp[12]&0xf0)>>2)) != 0)'
+$ ngrep -q -W byline "GET|POST HTTP"
+$ ngrep -q -W byline tsinghua.edu.cn tcp port 80
