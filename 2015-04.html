@@ -742,14 +742,14 @@ asciidoc.install();
 <h3 id="_自动给文件的某个pattern前加上某段文本">自动给文件的某个pattern前加上某段文本</h3>
 <div class="paragraph"><p>在cnzz.com上注册了个帐号，想统计一下这个博客的访问流量。需要给每个html文件加上一段代码，肯定不能手动呀，首先想到用 <em>sed</em> ：</p></div>
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.7
+<div class="content"><!-- Generator: GNU source-highlight 3.1.8
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
 <pre><tt>$ sed -i <span style="color: #FF0000">'/regexpattern/ i text'</span> index<span style="color: #990000">.</span>html</tt></pre></div></div>
 <div class="paragraph"><p>然后希望写到makefile中，每次生成完html文件后就执行这条sed命令。但是不知道怎么在makefile里跨行执行shell代码。于是退而求其次，写到了一个外部脚本里，然后在makefile的all规则中加上这个脚本的名字。还有如果要插入的文本是在另一个文件中，需要：</p></div>
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.7
+<div class="content"><!-- Generator: GNU source-highlight 3.1.8
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
@@ -762,7 +762,7 @@ http://www.gnu.org/software/src-highlite -->
 <div class="paragraph"><p>继续Google，找到了github上有人三年前写的<a href="https://github.com/tianyang-li/TUNET">Python脚本</a>，挺简单的，没有用表单提交，直接跟cgi交互。</p></div>
 <div class="paragraph"><p>于是写了个 shell 版的。。</p></div>
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.7
+<div class="content"><!-- Generator: GNU source-highlight 3.1.8
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
@@ -915,11 +915,43 @@ http/1.1中，浏览器会为每个来源网站建立四到八个连接，如果
 </div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="_2015_04_11_saturday_15_23_15">2015-04-11 Saturday 15:23:15</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_php简单运行">php简单运行</h3>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.8
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="color: #990000">&lt;?php</span>
+<span style="color: #009900">$input</span> <span style="color: #990000">=</span> <span style="color: #009900">$_GET</span><span style="color: #990000">[</span><span style="color: #FF0000">"param"</span><span style="color: #990000">];</span>
+<span style="font-weight: bold"><span style="color: #0000FF">echo</span></span> <span style="color: #FF0000">"&lt;div&gt;"</span><span style="color: #990000">.</span><span style="color: #009900">$input</span><span style="color: #990000">.</span><span style="color: #FF0000">"&lt;/div&gt;"</span>
+<span style="color: #990000">?&gt;</span></tt></pre></div></div>
+<div class="paragraph"><p>存为a.php，然后进入到该目录下，运行 <code>php -S localhost:8000</code> ，然后在浏览器中输入 <code>localhost:8000/a.php?param=Hello PHP</code>
+<code>localhost:8000/a.php?param=&lt;script&gt;alert(/xss/)&lt;script&gt;</code></p></div>
+</div>
+<div class="sect2">
+<h3 id="_cookies">Cookies</h3>
+<div class="paragraph"><p><code>Ctrl+Shift+i</code> 调出浏览器的控制台，然后可以执行JavaScript脚本，例如查看当前的页面的Cookie： <em>document.cookie</em>
+* 修改document.cookie
+        ** document.cookie是一个string，以分号隔开的 <em>key=value</em> 值对。直接给它赋值并不会覆盖掉之前的值，而是添加到原来值之后。例如cookie里本来有一个 <em>name=bigeast</em> 的值，想要删除或者修改它，需要知道Set-Cookie时，它的一些属性信息，例如domain, path等，这些信息在document.cookie中是看不到的，但可以通过调试窗口找到。要删除一个cookie，只需设置好正确的domain, path, 然后把它的expires值设成过去的一个时间就可以了。</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.8
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt>document<span style="color: #990000">.</span>cookie <span style="color: #990000">=</span> <span style="color: #FF0000">"name=whatever; domain=.google.com; path=/; expires=Thu, 2 Aug 2001 20:47:11 UTC;"</span></tt></pre></div></div>
+<div class="paragraph"><p>Set-Cookie时如果加上HttpOnly字段，则该cookie不能被JavaScript读取。</p></div>
+</div>
+</div>
+</div>
 </div>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-04-04 21:33:21 CST
+Last updated 2015-04-11 18:21:48 CST
 </div>
 </div>
 </body>
