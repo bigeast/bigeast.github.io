@@ -61,6 +61,23 @@ esac
 	** http/1.1中，浏览器会为每个来源网站建立四到八个连接，如果一个网站包含多个来源，连接可能会更多，这些连接容易触发TCP的拥塞控制和重传。http/2只需要一个连接。
 	** 关于server push，目前的情况是，客户端先收到html文档，解析后，如果其中有嵌入的JS脚本或者CSS样式，则再次发出请求。
 
+== 2015-04-09 Thursday 09:49:58
+=== Java和C\++的new
+Java中没有指针的概念，可以在new的时候初始化，C++似乎不可以。
+[source, Java]
+int a[] = new int [] {8, 0, 5, 1}
+[source, C]
+int *a = new int[4];
+
+=== Bash中的方括号
+单层方括号是标准的shell，bash会支持双层方括号，功能更多。http://mywiki.wooledge.org/BashGuide/Practices#Bash_Tests
+[source, bash]
+var=''
+[ "$var" == '' ] && echo True
+[[ $var == '' ]] && echo True
+[[ $var =~  pre+ ]] && echo True
+[[ $var = pre*  ]] && echo True
+
 == 2015-04-11 Saturday 15:23:15
 === php简单运行
 [source, php]
@@ -118,3 +135,26 @@ $ ngrep -q -W byline tsinghua.edu.cn tcp port 80
 
 === JavaScript
 _js-beautify_, _js24_ 。网站中的JS脚本一般都是经过模糊处理的，就是把变量名替换成单字符的，单行，这种工具叫做 http://jsutility.pjoneil.net[**JavaScript Obfuscator**]
+
+== 2015-04-17 Friday 09:43:15
+=== i3wm + Virtualbox + Windows7 多屏显示
+现在有两台显示器，已经用xrandr做了多屏显示：
+
+.~/.xinitrc
+----------------------------------------
+xrandr --output DVI-0 --mode 1280x1024 &
+xrandr --output DVI-1 --mode 1920x1080 &
+xrandr --output DVI-0 --left-of DVI-1 &
+----------------------------------------
+
+[red]#但是最后一条命令好像不起作用，每次都要手动运行一遍，两台显示器才显示不同的内容。#
+
+由于我现在需要用Windows中的VS来debug，通常是开两个VS窗口，一个编码端，一个解码端，然后两边同时F10看哪里开始不一样。虽然27寸的显示器可以显示两个，如果Virtualbox支持多屏就好了。一查果然有这个功能，需要在设置里的Video选项中选定窗口个数，然后进入Windows虚拟机后，在桌面右键，然后选择分辨率，设置另外一个显示器的参数就好了。
+
+然后可以把其中的一个通过i3的命令移到另外一个显示器上，这样虽然会有i3的border，但是已经大体上已经差不多算是多屏了吧！
+
+对了，今天才注意到Virtualbox的 `Host` 键，就是切换键盘事件在主机和虚拟主机之间的分配，例如要把Virtualbox窗口用i3的快捷键移动到另外一个显示器上，快捷键会先被虚拟机捕获，所以命令是无效的。这时就按一下右边的 `Ctrl` 键，再运行i3快捷键就好了。
+
+还有Virtualbox的多屏其实还是一个屏做了扩展，例如Windows的任务栏只会在一个里面显示。先这么着吧。
+
+urxvt里用tmux多屏，桌面i3多屏，虚拟机Virtualbox多屏，再多我就吃不消了。。

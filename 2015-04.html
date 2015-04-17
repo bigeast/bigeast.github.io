@@ -916,6 +916,41 @@ http/1.1中，浏览器会为每个来源网站建立四到八个连接，如果
 </div>
 </div>
 <div class="sect1">
+<h2 id="_2015_04_09_thursday_09_49_58">2015-04-09 Thursday 09:49:58</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_java和c_的new">Java和C\++的new</h3>
+<div class="paragraph"><p>Java中没有指针的概念，可以在new的时候初始化，C++似乎不可以。</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.8
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="color: #009900">int</span> a<span style="color: #990000">[]</span> <span style="color: #990000">=</span> <span style="font-weight: bold"><span style="color: #0000FF">new</span></span> <span style="color: #009900">int</span> <span style="color: #990000">[]</span> <span style="color: #FF0000">{</span><span style="color: #993399">8</span><span style="color: #990000">,</span> <span style="color: #993399">0</span><span style="color: #990000">,</span> <span style="color: #993399">5</span><span style="color: #990000">,</span> <span style="color: #993399">1</span><span style="color: #FF0000">}</span></tt></pre></div></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.8
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="color: #009900">int</span> <span style="color: #990000">*</span>a <span style="color: #990000">=</span> <span style="font-weight: bold"><span style="color: #0000FF">new</span></span> <span style="color: #009900">int</span><span style="color: #990000">[</span><span style="color: #993399">4</span><span style="color: #990000">];</span></tt></pre></div></div>
+</div>
+<div class="sect2">
+<h3 id="_bash中的方括号">Bash中的方括号</h3>
+<div class="paragraph"><p>单层方括号是标准的shell，bash会支持双层方括号，功能更多。http://mywiki.wooledge.org/BashGuide/Practices#Bash_Tests</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.8
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="color: #009900">var</span><span style="color: #990000">=</span><span style="color: #FF0000">''</span>
+<span style="color: #990000">[</span> <span style="color: #FF0000">"$var"</span> <span style="color: #990000">==</span> <span style="color: #FF0000">''</span> <span style="color: #990000">]</span> <span style="color: #990000">&amp;&amp;</span> echo True
+<span style="color: #990000">[[</span> <span style="color: #009900">$var</span> <span style="color: #990000">==</span> <span style="color: #FF0000">''</span> <span style="color: #990000">]]</span> <span style="color: #990000">&amp;&amp;</span> echo True
+<span style="color: #990000">[[</span> <span style="color: #009900">$var</span> <span style="color: #990000">=~</span>  pre<span style="color: #990000">+</span> <span style="color: #990000">]]</span> <span style="color: #990000">&amp;&amp;</span> echo True
+<span style="color: #990000">[[</span> <span style="color: #009900">$var</span> <span style="color: #990000">=</span> pre<span style="color: #990000">*</span>  <span style="color: #990000">]]</span> <span style="color: #990000">&amp;&amp;</span> echo True</tt></pre></div></div>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="_2015_04_11_saturday_15_23_15">2015-04-11 Saturday 15:23:15</h2>
 <div class="sectionbody">
 <div class="sect2">
@@ -991,11 +1026,33 @@ $ ngrep -q -W byline tsinghua<span style="color: #990000">.</span>edu<span style
 </div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="_2015_04_17_friday_09_43_15">2015-04-17 Friday 09:43:15</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_i3wm_virtualbox_windows7_多屏显示">i3wm + Virtualbox + Windows7 多屏显示</h3>
+<div class="paragraph"><p>现在有两台显示器，已经用xrandr做了多屏显示：</p></div>
+<div class="listingblock">
+<div class="title">~/.xinitrc</div>
+<div class="content">
+<pre><code>xrandr --output DVI-0 --mode 1280x1024 &amp;
+xrandr --output DVI-1 --mode 1920x1080 &amp;
+xrandr --output DVI-0 --left-of DVI-1 &amp;</code></pre>
+</div></div>
+<div class="paragraph"><p><span class="red">但是最后一条命令好像不起作用，每次都要手动运行一遍，两台显示器才显示不同的内容。</span></p></div>
+<div class="paragraph"><p>由于我现在需要用Windows中的VS来debug，通常是开两个VS窗口，一个编码端，一个解码端，然后两边同时F10看哪里开始不一样。虽然27寸的显示器可以显示两个，如果Virtualbox支持多屏就好了。一查果然有这个功能，需要在设置里的Video选项中选定窗口个数，然后进入Windows虚拟机后，在桌面右键，然后选择分辨率，设置另外一个显示器的参数就好了。</p></div>
+<div class="paragraph"><p>然后可以把其中的一个通过i3的命令移到另外一个显示器上，这样虽然会有i3的border，但是已经大体上已经差不多算是多屏了吧！</p></div>
+<div class="paragraph"><p>对了，今天才注意到Virtualbox的 <code>Host</code> 键，就是切换键盘事件在主机和虚拟主机之间的分配，例如要把Virtualbox窗口用i3的快捷键移动到另外一个显示器上，快捷键会先被虚拟机捕获，所以命令是无效的。这时就按一下右边的 <code>Ctrl</code> 键，再运行i3快捷键就好了。</p></div>
+<div class="paragraph"><p>还有Virtualbox的多屏其实还是一个屏做了扩展，例如Windows的任务栏只会在一个里面显示。先这么着吧。</p></div>
+<div class="paragraph"><p>urxvt里用tmux多屏，桌面i3多屏，虚拟机Virtualbox多屏，再多我就吃不消了。。</p></div>
+</div>
+</div>
+</div>
 </div>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-04-12 00:47:45 CST
+Last updated 2015-04-17 10:00:29 CST
 </div>
 </div>
 </body>
