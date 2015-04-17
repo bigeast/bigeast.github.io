@@ -742,14 +742,14 @@ asciidoc.install();
 <h3 id="_自动给文件的某个pattern前加上某段文本">自动给文件的某个pattern前加上某段文本</h3>
 <div class="paragraph"><p>在cnzz.com上注册了个帐号，想统计一下这个博客的访问流量。需要给每个html文件加上一段代码，肯定不能手动呀，首先想到用 <em>sed</em> ：</p></div>
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.7
+<div class="content"><!-- Generator: GNU source-highlight 3.1.8
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
 <pre><tt>$ sed -i <span style="color: #FF0000">'/regexpattern/ i text'</span> index<span style="color: #990000">.</span>html</tt></pre></div></div>
 <div class="paragraph"><p>然后希望写到makefile中，每次生成完html文件后就执行这条sed命令。但是不知道怎么在makefile里跨行执行shell代码。于是退而求其次，写到了一个外部脚本里，然后在makefile的all规则中加上这个脚本的名字。还有如果要插入的文本是在另一个文件中，需要：</p></div>
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.7
+<div class="content"><!-- Generator: GNU source-highlight 3.1.8
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
@@ -762,7 +762,7 @@ http://www.gnu.org/software/src-highlite -->
 <div class="paragraph"><p>继续Google，找到了github上有人三年前写的<a href="https://github.com/tianyang-li/TUNET">Python脚本</a>，挺简单的，没有用表单提交，直接跟cgi交互。</p></div>
 <div class="paragraph"><p>于是写了个 shell 版的。。</p></div>
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.7
+<div class="content"><!-- Generator: GNU source-highlight 3.1.8
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
@@ -922,13 +922,13 @@ http/1.1中，浏览器会为每个来源网站建立四到八个连接，如果
 <h3 id="_java和c_的new">Java和C\++的new</h3>
 <div class="paragraph"><p>Java中没有指针的概念，可以在new的时候初始化，C++似乎不可以。</p></div>
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.7
+<div class="content"><!-- Generator: GNU source-highlight 3.1.8
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
 <pre><tt><span style="color: #009900">int</span> a<span style="color: #990000">[]</span> <span style="color: #990000">=</span> <span style="font-weight: bold"><span style="color: #0000FF">new</span></span> <span style="color: #009900">int</span> <span style="color: #990000">[]</span> <span style="color: #FF0000">{</span><span style="color: #993399">8</span><span style="color: #990000">,</span> <span style="color: #993399">0</span><span style="color: #990000">,</span> <span style="color: #993399">5</span><span style="color: #990000">,</span> <span style="color: #993399">1</span><span style="color: #FF0000">}</span></tt></pre></div></div>
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.7
+<div class="content"><!-- Generator: GNU source-highlight 3.1.8
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
@@ -938,7 +938,7 @@ http://www.gnu.org/software/src-highlite -->
 <h3 id="_bash中的方括号">Bash中的方括号</h3>
 <div class="paragraph"><p>单层方括号是标准的shell，bash会支持双层方括号，功能更多。http://mywiki.wooledge.org/BashGuide/Practices#Bash_Tests</p></div>
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.7
+<div class="content"><!-- Generator: GNU source-highlight 3.1.8
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
@@ -950,11 +950,109 @@ http://www.gnu.org/software/src-highlite -->
 </div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="_2015_04_11_saturday_15_23_15">2015-04-11 Saturday 15:23:15</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_php简单运行">php简单运行</h3>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.8
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="color: #990000">&lt;?php</span>
+<span style="color: #009900">$input</span> <span style="color: #990000">=</span> <span style="color: #009900">$_GET</span><span style="color: #990000">[</span><span style="color: #FF0000">"param"</span><span style="color: #990000">];</span>
+<span style="font-weight: bold"><span style="color: #0000FF">echo</span></span> <span style="color: #FF0000">"&lt;div&gt;"</span><span style="color: #990000">.</span><span style="color: #009900">$input</span><span style="color: #990000">.</span><span style="color: #FF0000">"&lt;/div&gt;"</span>
+<span style="color: #990000">?&gt;</span></tt></pre></div></div>
+<div class="paragraph"><p>存为a.php，然后进入到该目录下，运行 <code>php -S localhost:8000</code> ，然后在浏览器中输入 <code>localhost:8000/a.php?param=Hello PHP</code>
+<code>localhost:8000/a.php?param=&lt;script&gt;alert(/xss/)&lt;script&gt;</code></p></div>
+</div>
+<div class="sect2">
+<h3 id="_cookies">Cookies</h3>
+<div class="paragraph"><p><code>Ctrl+Shift+i</code> 调出浏览器的控制台，然后可以执行JavaScript脚本，例如查看当前的页面的Cookie： <em>document.cookie</em>
+* 修改document.cookie
+        ** document.cookie是一个string，以分号隔开的 <em>key=value</em> 值对。直接给它赋值并不会覆盖掉之前的值，而是添加到原来值之后。例如cookie里本来有一个 <em>name=bigeast</em> 的值，想要删除或者修改它，需要知道Set-Cookie时，它的一些属性信息，例如domain, path等，这些信息在document.cookie中是看不到的，但可以通过调试窗口找到。要删除一个cookie，只需设置好正确的domain, path, 然后把它的expires值设成过去的一个时间就可以了。</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.8
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt>document<span style="color: #990000">.</span>cookie <span style="color: #990000">=</span> <span style="color: #FF0000">"name=whatever; domain=.google.com; path=/; expires=Thu, 2 Aug 2001 20:47:11 UTC;"</span></tt></pre></div></div>
+<div class="paragraph"><p>Set-Cookie时如果加上HttpOnly字段，则该cookie不能被JavaScript读取。</p></div>
+</div>
+<div class="sect2">
+<h3 id="_top">top</h3>
+<div class="paragraph"><p>top命令的显示结果跟以前不一样已经有一段时间了，有了颜色，还有跟 <em>htop</em> 类似的CPU占用率动态显示，但我之前经常用的 <code>C</code>, <code>M</code> 将进程按cpu占用率或者内存占用排序的功能不在了。今天终于忍不住查了下到底怎么回事。原来这个变化是去年11月份， <em>procps-ng</em> 的一次升级后开始的。</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.8
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="color: #993399">4888</span><span style="color: #990000">:[</span><span style="color: #993399">2014</span>-<span style="color: #993399">11</span>-<span style="color: #993399">17</span> <span style="color: #993399">09</span><span style="color: #990000">:</span><span style="color: #993399">33</span><span style="color: #990000">]</span> <span style="color: #990000">[</span>PACMAN<span style="color: #990000">]</span> upgraded procps-ng <span style="color: #990000">(</span><span style="color: #993399">3.3</span><span style="color: #990000">.</span><span style="color: #993399">9</span>-<span style="color: #993399">3</span> -<span style="color: #990000">&gt;</span> <span style="color: #993399">3.3</span><span style="color: #990000">.</span><span style="color: #993399">10</span>-<span style="color: #993399">1</span><span style="color: #990000">)</span></tt></pre></div></div>
+<div class="paragraph"><p>wiki上有https://bbs.archlinux.org/viewtopic.php?id=189757帖子讨论这个，而且有人给出了恢复到原来配置的方案：</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>remove your ~/.toprc (if any)
+start "top"
+press z
+press V
+press 1
+press y
+press m m
+press t t t
+press W
+this will write a ~/.toprc fairly similar to what you are used to.</code></pre>
+</div></div>
+<div class="paragraph"><p>查看了下 <em>procps-ng</em> 下的命令，原来 <em>pgrep</em> 和 <em>pkill</em> 都是，还有 <em>free</em> <em>pidof</em> <em>pmap</em> <em>ps</em> <em>pwdx</em> <em>uptime</em> <em>vmstat</em> <em>watch</em> 等。
+<em>pwdx</em> 之前没见过，是查看一个进程的当前工作目录的。</p></div>
+</div>
+<div class="sect2">
+<h3 id="_ngrep">ngrep</h3>
+<div class="paragraph"><p>查看http头，可以用万能的 <em>tcpdump</em>, 还有更合适的 <em>ngrep</em> 。</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.8
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="font-style: italic"><span style="color: #9A1900"># To print all IPv4 HTTP packets to and from port 80, i.e. print only packets that contain data, not, for example, SYN and FIN</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"># packets and ACK-only packets.  (IPv6 is left as an exercise for the reader.)</span></span>
+$ tcpdump <span style="color: #FF0000">'tcp port 80 and (((ip[2:2] - ((ip[0]&amp;0xf)&lt;&lt;2)) - ((tcp[12]&amp;0xf0)&gt;&gt;2)) != 0)'</span>
+$ ngrep -q -W byline <span style="color: #FF0000">"GET|POST HTTP"</span>
+$ ngrep -q -W byline tsinghua<span style="color: #990000">.</span>edu<span style="color: #990000">.</span>cn tcp port <span style="color: #993399">80</span></tt></pre></div></div>
+</div>
+<div class="sect2">
+<h3 id="_javascript">JavaScript</h3>
+<div class="paragraph"><p><em>js-beautify</em>, <em>js24</em> 。网站中的JS脚本一般都是经过模糊处理的，就是把变量名替换成单字符的，单行，这种工具叫做 <a href="http://jsutility.pjoneil.net"><strong>JavaScript Obfuscator</strong></a></p></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_2015_04_17_friday_09_43_15">2015-04-17 Friday 09:43:15</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_i3wm_virtualbox_windows7_多屏显示">i3wm + Virtualbox + Windows7 多屏显示</h3>
+<div class="paragraph"><p>现在有两台显示器，已经用xrandr做了多屏显示：</p></div>
+<div class="listingblock">
+<div class="title">~/.xinitrc</div>
+<div class="content">
+<pre><code>xrandr --output DVI-0 --mode 1280x1024 &amp;
+xrandr --output DVI-1 --mode 1920x1080 &amp;
+xrandr --output DVI-0 --left-of DVI-1 &amp;</code></pre>
+</div></div>
+<div class="paragraph"><p><span class="red">但是最后一条命令好像不起作用，每次都要手动运行一遍，两台显示器才显示不同的内容。</span></p></div>
+<div class="paragraph"><p>由于我现在需要用Windows中的VS来debug，通常是开两个VS窗口，一个编码端，一个解码端，然后两边同时F10看哪里开始不一样。虽然27寸的显示器可以显示两个，如果Virtualbox支持多屏就好了。一查果然有这个功能，需要在设置里的Video选项中选定窗口个数，然后进入Windows虚拟机后，在桌面右键，然后选择分辨率，设置另外一个显示器的参数就好了。</p></div>
+<div class="paragraph"><p>然后可以把其中的一个通过i3的命令移到另外一个显示器上，这样虽然会有i3的border，但是已经大体上已经差不多算是多屏了吧！</p></div>
+<div class="paragraph"><p>对了，今天才注意到Virtualbox的 <code>Host</code> 键，就是切换键盘事件在主机和虚拟主机之间的分配，例如要把Virtualbox窗口用i3的快捷键移动到另外一个显示器上，快捷键会先被虚拟机捕获，所以命令是无效的。这时就按一下右边的 <code>Ctrl</code> 键，再运行i3快捷键就好了。</p></div>
+<div class="paragraph"><p>还有Virtualbox的多屏其实还是一个屏做了扩展，例如Windows的任务栏只会在一个里面显示。先这么着吧。</p></div>
+<div class="paragraph"><p>urxvt里用tmux多屏，桌面i3多屏，虚拟机Virtualbox多屏，再多我就吃不消了。。</p></div>
+</div>
+</div>
+</div>
 </div>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-04-09 11:55:22 CST
+Last updated 2015-04-17 10:00:29 CST
 </div>
 </div>
 </body>
