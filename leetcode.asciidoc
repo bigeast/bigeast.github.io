@@ -131,7 +131,10 @@ https://leetcode.com/problems/first-missing-positive/
 
 https://leetcode.com/problems/longest-consecutive-sequence/
 
-https://leetcode.com/problems/maximum-gap/ O(n)时空复杂度下，找到一个无序数组排好序后相邻元素的最大差值。挺有意思，自己想想。
+https://leetcode.com/problems/maximum-gap/ 
+
+O(n)时空复杂度下，找到一个无序数组排好序后相邻元素的最大差值。挺有意思，自己想想。
+
 === next_permutation
 https://leetcode.com/problems/next-permutation/
 
