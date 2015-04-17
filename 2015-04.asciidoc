@@ -60,3 +60,20 @@ esac
 	** 以SPDY为基础。
 	** http/1.1中，浏览器会为每个来源网站建立四到八个连接，如果一个网站包含多个来源，连接可能会更多，这些连接容易触发TCP的拥塞控制和重传。http/2只需要一个连接。
 	** 关于server push，目前的情况是，客户端先收到html文档，解析后，如果其中有嵌入的JS脚本或者CSS样式，则再次发出请求。
+
+== 2015-04-09 Thursday 09:49:58
+=== Java和C\++的new
+Java中没有指针的概念，可以在new的时候初始化，C++似乎不可以。
+[source, Java]
+int a[] = new int [] {8, 0, 5, 1}
+[source, C]
+int *a = new int[4];
+
+=== Bash中的方括号
+单层方括号是标准的shell，bash会支持双层方括号，功能更多。http://mywiki.wooledge.org/BashGuide/Practices#Bash_Tests
+[source, bash]
+var=''
+[ "$var" == '' ] && echo True
+[[ $var == '' ]] && echo True
+[[ $var =~  pre+ ]] && echo True
+[[ $var = pre*  ]] && echo True
