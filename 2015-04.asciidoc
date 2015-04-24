@@ -205,3 +205,31 @@ history | awk '{CMD[$4]++;count++;} END { for (a in CMD )print CMD[ a ]" " CMD[ 
 
 其中的$4跟history的输出格式有关，就是让这个指向命令所在的域就好了。
 
+== 2015-04-24 Friday 21:22:16
+=== xinitrc
+xinitrc里的配置其实一直是有问题的，例如 _setxkbmap -option caps:escape &_ 总是无效，还有xrandr命令也不能正确配置显示器，每次都要手动。今天解决了一下。
+
+.~/.xinitrc
+----------------------------------------
+exec setxkbmap -optioin caps:escape &
+----------------------------------------
+
+要加上 `exec` 。但是有的命令不需要，例如 _fcitx_ , _goldendict_ , _xcompmgr_ ，还有设置桌面背景的 _feh_ 。所以还是搞不懂，先这么着吧。
+
+然后xrandr是加了exec也不会正常工作的，要在 _/etc/X11/xorg.conf.d/_ 下面加一个文件：
+
+.55-xrandr.conf
+--------------------------------------------------
+Section "Monitor"
+	Identifier "DVI-1"
+	Option "PreferredMode" "1920x1080"
+	Option "Primary" "true"
+EndSection
+
+
+Section "Monitor"
+	Identifier "DVI-0"
+	Option "PreferredMode" "1280x1024"
+	Option "LeftOf" "DVI-1"
+EndSection
+--------------------------------------------------

@@ -1111,11 +1111,43 @@ $ curl ifconfig.me/all.json</code></pre>
 </div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="_2015_04_24_friday_21_22_16">2015-04-24 Friday 21:22:16</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_xinitrc">xinitrc</h3>
+<div class="paragraph"><p>xinitrc里的配置其实一直是有问题的，例如 <em>setxkbmap -option caps:escape &amp;</em> 总是无效，还有xrandr命令也不能正确配置显示器，每次都要手动。今天解决了一下。</p></div>
+<div class="listingblock">
+<div class="title">~/.xinitrc</div>
+<div class="content">
+<pre><code>exec setxkbmap -optioin caps:escape &amp;</code></pre>
+</div></div>
+<div class="paragraph"><p>要加上 <code>exec</code> 。但是有的命令不需要，例如 <em>fcitx</em> , <em>goldendict</em> , <em>xcompmgr</em> ，还有设置桌面背景的 <em>feh</em> 。所以还是搞不懂，先这么着吧。</p></div>
+<div class="paragraph"><p>然后xrandr是加了exec也不会正常工作的，要在 <em>/etc/X11/xorg.conf.d/</em> 下面加一个文件：</p></div>
+<div class="listingblock">
+<div class="title">55-xrandr.conf</div>
+<div class="content">
+<pre><code>Section "Monitor"
+        Identifier "DVI-1"
+        Option "PreferredMode" "1920x1080"
+        Option "Primary" "true"
+EndSection
+
+
+Section "Monitor"
+        Identifier "DVI-0"
+        Option "PreferredMode" "1280x1024"
+        Option "LeftOf" "DVI-1"
+EndSection</code></pre>
+</div></div>
+</div>
+</div>
+</div>
 </div>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-04-19 17:09:07 CST
+Last updated 2015-04-24 21:28:36 CST
 </div>
 </div>
 </body>
