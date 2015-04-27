@@ -158,3 +158,18 @@ xrandr --output DVI-0 --left-of DVI-1 &
 还有Virtualbox的多屏其实还是一个屏做了扩展，例如Windows的任务栏只会在一个里面显示。先这么着吧。
 
 urxvt里用tmux多屏，桌面i3多屏，虚拟机Virtualbox多屏，再多我就吃不消了。。
+
+== 2015-04-28 Tuesday 00:20:36
+=== GDB
+coolshell.cn博客上干货还是挺多的，重要的是上面会有很多作者自己翻译过来重新整理的文章。 
+
+逆向调试，就是不小心next过了，可以返回。
+* GDB的 **Reversable Debugging**
+* VS的 **Historical Debugging**
+* bash脚本调试
+--------------------
+$ bash -x script.sh #但是 man bash 没有找到 -x 选项。
+$ pacman -S bashdb
+--------------------
+
+* ldd的安全问题
