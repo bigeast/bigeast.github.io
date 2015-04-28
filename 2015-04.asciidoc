@@ -159,6 +159,93 @@ xrandr --output DVI-0 --left-of DVI-1 &
 
 urxvt里用tmux多屏，桌面i3多屏，虚拟机Virtualbox多屏，再多我就吃不消了。。
 
+发现一个特性，如果screen1, screen2上都有好几个i3标签页，而且各有Virutalbox的多窗口中的一个，如果鼠标screen1的Virtualbox窗口移动到screen2时，会自动定焦到screen2中的Virtualbox窗口！
+
+另外！Virtualbox的多个窗口可以从左边可右边拖动窗口到另外一个中去，只是一边是连续地进入，另一边有点不连续但是可以做到！！
+
+只是两个窗口时，`Host + f` 全屏模式不好用了。
+
+=== SIGINT, SIGTERM, SIGQUIT, SIGKILL
+* **SIGINT** `Ctrl-c`
+* **SIGTERM** 程序终止，可以等待程序关闭临时文件。
+* **SIGQUIT** `Ctrl-\` 退出前保存coredump文件。
+* **SIGKILL** 不可捕获，立即终止。
+
+== 2015-04-19 Sunday 10:45:38
+=== 获取本机的外部IP
+
+可以通过一些外部的服务，例如：
+
+--------------------------------------------------
+$ curl icanhazip.com
+$ curl ifconfig.me
+--------------------------------------------------
+
+但是这些服务可能并不稳定，而OpenDNS就比较让人放心一些，速度也比较快：
+
+--------------------------------------------------
+$ dig +short myip.opendns.com @resolver1.opendns.com
+--------------------------------------------------
+
+还有一个 _ifcfg.me_ 的服务，提供user-agent, method等信息的查询。
+
+--------------------------------------------------
+$ curl 'ifcfg.me/?'
+$ curl ifcfg.me/all
+$ curl ifconfig.me/all.json
+--------------------------------------------------
+
+还有个查询显示器分辨率的服务： http://whatismyresolution.com[whatismyresolution.com]，这个是什么原理呢？
+
+=== 最常用的命令
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+history | awk '{CMD[$4]++;count++;} END { for (a in CMD )print CMD[ a ]" " CMD[ a ]/count*100 "% " a }' | grep -v "./" | column -c3 -s " " -t |sort -nr | nl | head -n20
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+其中的$4跟history的输出格式有关，就是让这个指向命令所在的域就好了。
+
+== 2015-04-24 Friday 21:22:16
+=== xinitrc
+xinitrc里的配置其实一直是有问题的，例如 _setxkbmap -option caps:escape &_ 总是无效，还有xrandr命令也不能正确配置显示器，每次都要手动。今天解决了一下。
+
+.~/.xinitrc
+----------------------------------------
+exec setxkbmap -optioin caps:escape &
+----------------------------------------
+
+要加上 `exec` 。但是有的命令不需要，例如 _fcitx_ , _goldendict_ , _xcompmgr_ ，还有设置桌面背景的 _feh_ 。所以还是搞不懂，先这么着吧。
+
+然后xrandr是加了exec也不会正常工作的，要在 _/etc/X11/xorg.conf.d/_ 下面加一个文件：
+
+.55-xrandr.conf
+--------------------------------------------------
+Section "Monitor"
+	Identifier "DVI-1"
+	Option "PreferredMode" "1920x1080"
+	Option "Primary" "true"
+EndSection
+
+
+Section "Monitor"
+	Identifier "DVI-0"
+	Option "PreferredMode" "1280x1024"
+	Option "LeftOf" "DVI-1"
+EndSection
+--------------------------------------------------
+
+=== Virtualbox的问题
+再次更新后出错！！
+dkms的问题，之前都不知道它是什么也没出现什么问题啊！
+
+回退，失败。无数次失败后，还是看了日志，里面有一条是：
+
+----------------------------------------------------------------------------------------------------
+00:00:00.302028 ERROR [COM]: aRC=NS_ERROR_FAILURE (0x80004005) aIID={431685da-3618-4ebc-b038-833ba829b4b2} aComponent={ExtPack} aText={Failed to locate the module 'VDPluginCrypt' in extension pack 'Oracle VM VirtualBox Extension Pack'}, preserve=false
+----------------------------------------------------------------------------------------------------
+
+但是这个扩展包我都没有听说过，到Archlinux的wiki上搜，才知道是AUR中的一个包，装好后就可以了。但是为什么之前从来没有这个包的时候也没出现过问题呢！！
+
 == 2015-04-28 Tuesday 00:20:36
 === GDB
 coolshell.cn博客上干货还是挺多的，重要的是上面会有很多作者自己翻译过来重新整理的文章。 

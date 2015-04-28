@@ -1045,6 +1045,112 @@ xrandr --output DVI-0 --left-of DVI-1 &amp;</code></pre>
 <div class="paragraph"><p>对了，今天才注意到Virtualbox的 <code>Host</code> 键，就是切换键盘事件在主机和虚拟主机之间的分配，例如要把Virtualbox窗口用i3的快捷键移动到另外一个显示器上，快捷键会先被虚拟机捕获，所以命令是无效的。这时就按一下右边的 <code>Ctrl</code> 键，再运行i3快捷键就好了。</p></div>
 <div class="paragraph"><p>还有Virtualbox的多屏其实还是一个屏做了扩展，例如Windows的任务栏只会在一个里面显示。先这么着吧。</p></div>
 <div class="paragraph"><p>urxvt里用tmux多屏，桌面i3多屏，虚拟机Virtualbox多屏，再多我就吃不消了。。</p></div>
+<div class="paragraph"><p>发现一个特性，如果screen1, screen2上都有好几个i3标签页，而且各有Virutalbox的多窗口中的一个，如果鼠标screen1的Virtualbox窗口移动到screen2时，会自动定焦到screen2中的Virtualbox窗口！</p></div>
+<div class="paragraph"><p>另外！Virtualbox的多个窗口可以从左边可右边拖动窗口到另外一个中去，只是一边是连续地进入，另一边有点不连续但是可以做到！！</p></div>
+<div class="paragraph"><p>只是两个窗口时，<code>Host + f</code> 全屏模式不好用了。</p></div>
+</div>
+<div class="sect2">
+<h3 id="_sigint_sigterm_sigquit_sigkill">SIGINT, SIGTERM, SIGQUIT, SIGKILL</h3>
+<div class="ulist"><ul>
+<li>
+<p>
+<strong>SIGINT</strong> <code>Ctrl-c</code>
+</p>
+</li>
+<li>
+<p>
+<strong>SIGTERM</strong> 程序终止，可以等待程序关闭临时文件。
+</p>
+</li>
+<li>
+<p>
+<strong>SIGQUIT</strong> <code>Ctrl-\</code> 退出前保存coredump文件。
+</p>
+</li>
+<li>
+<p>
+<strong>SIGKILL</strong> 不可捕获，立即终止。
+</p>
+</li>
+</ul></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_2015_04_19_sunday_10_45_38">2015-04-19 Sunday 10:45:38</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_获取本机的外部ip">获取本机的外部IP</h3>
+<div class="paragraph"><p>可以通过一些外部的服务，例如：</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>$ curl icanhazip.com
+$ curl ifconfig.me</code></pre>
+</div></div>
+<div class="paragraph"><p>但是这些服务可能并不稳定，而OpenDNS就比较让人放心一些，速度也比较快：</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>$ dig +short myip.opendns.com @resolver1.opendns.com</code></pre>
+</div></div>
+<div class="paragraph"><p>还有一个 <em>ifcfg.me</em> 的服务，提供user-agent, method等信息的查询。</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>$ curl 'ifcfg.me/?'
+$ curl ifcfg.me/all
+$ curl ifconfig.me/all.json</code></pre>
+</div></div>
+<div class="paragraph"><p>还有个查询显示器分辨率的服务： <a href="http://whatismyresolution.com">whatismyresolution.com</a>，这个是什么原理呢？</p></div>
+</div>
+<div class="sect2">
+<h3 id="_最常用的命令">最常用的命令</h3>
+<div class="listingblock">
+<div class="content">
+<pre><code>history | awk '{CMD[$4]++;count++;} END { for (a in CMD )print CMD[ a ]" " CMD[ a ]/count*100 "% " a }' | grep -v "./" | column -c3 -s " " -t |sort -nr | nl | head -n20</code></pre>
+</div></div>
+<div class="paragraph"><p>其中的$4跟history的输出格式有关，就是让这个指向命令所在的域就好了。</p></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_2015_04_24_friday_21_22_16">2015-04-24 Friday 21:22:16</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_xinitrc">xinitrc</h3>
+<div class="paragraph"><p>xinitrc里的配置其实一直是有问题的，例如 <em>setxkbmap -option caps:escape &amp;</em> 总是无效，还有xrandr命令也不能正确配置显示器，每次都要手动。今天解决了一下。</p></div>
+<div class="listingblock">
+<div class="title">~/.xinitrc</div>
+<div class="content">
+<pre><code>exec setxkbmap -optioin caps:escape &amp;</code></pre>
+</div></div>
+<div class="paragraph"><p>要加上 <code>exec</code> 。但是有的命令不需要，例如 <em>fcitx</em> , <em>goldendict</em> , <em>xcompmgr</em> ，还有设置桌面背景的 <em>feh</em> 。所以还是搞不懂，先这么着吧。</p></div>
+<div class="paragraph"><p>然后xrandr是加了exec也不会正常工作的，要在 <em>/etc/X11/xorg.conf.d/</em> 下面加一个文件：</p></div>
+<div class="listingblock">
+<div class="title">55-xrandr.conf</div>
+<div class="content">
+<pre><code>Section "Monitor"
+        Identifier "DVI-1"
+        Option "PreferredMode" "1920x1080"
+        Option "Primary" "true"
+EndSection
+
+
+Section "Monitor"
+        Identifier "DVI-0"
+        Option "PreferredMode" "1280x1024"
+        Option "LeftOf" "DVI-1"
+EndSection</code></pre>
+</div></div>
+</div>
+<div class="sect2">
+<h3 id="_virtualbox的问题">Virtualbox的问题</h3>
+<div class="paragraph"><p>再次更新后出错！！
+dkms的问题，之前都不知道它是什么也没出现什么问题啊！</p></div>
+<div class="paragraph"><p>回退，失败。无数次失败后，还是看了日志，里面有一条是：</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>00:00:00.302028 ERROR [COM]: aRC=NS_ERROR_FAILURE (0x80004005) aIID={431685da-3618-4ebc-b038-833ba829b4b2} aComponent={ExtPack} aText={Failed to locate the module 'VDPluginCrypt' in extension pack 'Oracle VM VirtualBox Extension Pack'}, preserve=false</code></pre>
+</div></div>
+<div class="paragraph"><p>但是这个扩展包我都没有听说过，到Archlinux的wiki上搜，才知道是AUR中的一个包，装好后就可以了。但是为什么之前从来没有这个包的时候也没出现过问题呢！！</p></div>
 </div>
 </div>
 </div>
@@ -1077,7 +1183,7 @@ ldd的安全问题
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-04-28 01:17:32 CST
+Last updated 2015-04-28 17:09:31 CST
 </div>
 </div>
 </body>

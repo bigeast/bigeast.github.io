@@ -28,3 +28,14 @@
 	
 	3) p=k, then answer is Set A - {2} + {k+2}
 
+* https://projecteuler.net/problem=193[PE193 SquareFree Number]
+
+DFS
+
+* https://projecteuler.net/problem=185[PE185 Number Mind]
+
+给出一组（22个）16位的数字，及其与目标数字相同的数字个数，确定唯一的目标数字。
+
+* https://projecteuler.net/problem=196[PE196 Prime triplets]
+
+素数测试
