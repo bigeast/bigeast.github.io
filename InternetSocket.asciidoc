@@ -1,0 +1,64 @@
+== http://beej.us/guide/bgnet/output/html/multipage/index.html[Beej's Guide to Network Programming Using Internet Sockets] 
+
+* socket也用文件描述符来标记，与文件不同的是，它是用 recv(2) 和 send(2) 来读写。
+* telnet登录到80端口
+------------------------------
+$ telnet baidu.com 80
+Trying 180.149.132.47...
+Connected to baidu.com.
+Escape character is '^]'.
+GET / HTTP/1.0
+
+HTTP/1.1 200 OK
+Date: Tue, 28 Apr 2015 00:36:27 GMT
+Server: Apache
+Cache-Control: max-age=86400
+Expires: Wed, 29 Apr 2015 00:36:27 GMT
+Last-Modified: Tue, 12 Jan 2010 13:48:00 GMT
+ETag: "51-4b4c7d90"
+Accept-Ranges: bytes
+Content-Length: 81
+Connection: Close
+Content-Type: text/html
+
+<html>
+<meta http-equiv="refresh" content="0;url=http://www.baidu.com/">
+</html>
+Connection closed by foreign host.
+------------------------------
+* 两种主要的socket类型：SOCK_STREAM 和 SOCK_DGRAM 。stream套接字用send()发送，datagram套接字用sendto()发送。数据包的包装是内核与硬件的事情。
+* RFC793 TCP
+* RFC791 IP
+* RFC768 **UDP**, tftp, dhcpcd
+* ISO/OSI七层模型
+
+--------------------
+    Application
+    Presentation
+    Session
+    Transport
+    Network
+    Data Link
+    Physical
+--------------------
+
+* 实际系统中的网络模型更接近于
+
+--------------------
+    Application Layer (telnet, ftp, etc.)
+    Host-to-Host Transport Layer (TCP, UDP)
+    Internet Layer (IP and routing)
+    Network Access Layer (Ethernet, wi-fi, or whatever)
+--------------------
+
+'''
+
+* IPv4 2^32^，IPv6 2^128^
+
+* pipe系统调用的用法
+	** 参数是一个长度为2的整型数组，pipe()之后进行fork()，子进程和父进程一个读一个写。如果子进程读，父进程写，则在子进程中要先关闭fildes[1]（不会去写）, 父进程中要先关闭fildes[0]（不会去读）。
+	** 能否同时读写，即双向管道？
+	** 管道机制是怎么实现的，fork之后，两个进程中的描述符是如何保持联系的？
+	** 文件描述符和文件流的连接：fdopen
+	** 管道的典型使用方式是，pipe->fork->dup2->exec，这个流程实际上实现了将子进程的stdout或者stdin绑定到一个管道，从而与父进程进行通信。库函数popen()实现的功能与之类似，相当于用bash -c 执行一条命令，然后可以指定父进程对管道是读还是写。
+	** 管道I/O的原子性。当数据大小不超过PIPE_BUF时，管道的读或者写是原子的。 _如何理解?_
