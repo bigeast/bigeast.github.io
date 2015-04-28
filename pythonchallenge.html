@@ -735,7 +735,9 @@ asciidoc.install();
 <div id="header">
 </div>
 <div id="content">
-<div class="paragraph"><p>Hints for <a href="http://www.pythonchallenge.com">Python Challenge</a></p></div>
+<div class="sect1">
+<h2 id="_hints_for_a_href_http_www_pythonchallenge_com_python_challenge_a">Hints for <a href="http://www.pythonchallenge.com">Python Challenge</a></h2>
+<div class="sectionbody">
 <div class="sect2">
 <h3 id="_a_href_http_www_pythonchallenge_com_pc_def_0_html_0_a"><a href="http://www.pythonchallenge.com/pc/def/0.html">0</a></h3>
 <div class="paragraph"><p>2**38</p></div>
@@ -781,7 +783,7 @@ Download a file whose name is in the source code and unpickle it.</p></div>
 <div class="paragraph"><p>Absolutely nothing other than an image with strange blocks in it. Note that the color are all gray, can the gray value represent a ascii value?</p></div>
 <div class="paragraph"><p>Need PIL library.</p></div>
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.7
+<div class="content"><!-- Generator: GNU source-highlight 3.1.8
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
@@ -798,13 +800,13 @@ res <span style="color: #990000">=</span> <span style="color: #990000">[</span><
 <div class="paragraph"><p>Follow the link in the image. username and password can be obtained by decompress the two strings in source page by bz2.</p></div>
 <div class="paragraph"><p>Look at the strings' header, and compare them with .bz2 file header:</p></div>
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.7
+<div class="content"><!-- Generator: GNU source-highlight 3.1.8
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
 <pre><tt><span style="color: #009900">$hexdump</span> -c <span style="color: #993399">10</span> -C <span style="font-weight: bold"><span style="color: #0000FF">test</span></span><span style="color: #990000">.</span>bz2</tt></pre></div></div>
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.7
+<div class="content"><!-- Generator: GNU source-highlight 3.1.8
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
@@ -826,7 +828,7 @@ bz2<span style="color: #990000">.</span><span style="font-weight: bold"><span st
 1211 &#8594; 111221
 1&#8217;1' 1&#8217;2' 2&#8217;1' &#8594; 111221</p></div>
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.7
+<div class="content"><!-- Generator: GNU source-highlight 3.1.8
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
@@ -852,7 +854,7 @@ http://www.gnu.org/software/src-highlite -->
 <div class="paragraph"><p>Another image manipulatation problem.</p></div>
 <div class="paragraph"><p>This time more advanced pixel access techniques are required. You&#8217;ll find numpy is very helpfull.</p></div>
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.7
+<div class="content"><!-- Generator: GNU source-highlight 3.1.8
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
@@ -876,7 +878,7 @@ Image<span style="color: #990000">.</span><span style="font-weight: bold"><span 
 <div class="paragraph"><p>I&#8217;ll never solve it all by my self! It&#8217;s just so evil!</p></div>
 <div class="paragraph"><p>You need to notice the image file name, why it&#8217;s <em>evil1.jpg</em> rather than just <em>evil.jpg</em>? So you&#8217;ll try if evil2.jpg exists. Turns out evil2.jpg says "rot jpg - _.gfx". Then try to download evil2.gfx which can&#8217;t be decoded directly.</p></div>
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.7
+<div class="content"><!-- Generator: GNU source-highlight 3.1.8
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
@@ -903,7 +905,7 @@ F<span style="color: #990000">...</span>F
 <span style="color: #990000">...</span></tt></pre></div></div>
 <div class="paragraph"><p>So there are five images in <em>evil2.gfx</em>.</p></div>
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.7
+<div class="content"><!-- Generator: GNU source-highlight 3.1.8
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
@@ -938,7 +940,7 @@ img<span style="color: #990000">[</span><span style="color: #993399">4</span><sp
 <div class="paragraph"><p>Spiral matrix.
 Easy and easy to lose time in these problem!!</p></div>
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.7
+<div class="content"><!-- Generator: GNU source-highlight 3.1.8
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
@@ -973,7 +975,7 @@ Image<span style="color: #990000">.</span><span style="font-weight: bold"><span 
 <div class="paragraph"><p>First point, you have to notice the next month has 29 days, so it&#8217;s a leap year.</p></div>
 <div class="paragraph"><p>Python datetime modular is for rescue. And find the year 1756, then google a lot and find what happend in 1756-01-27</p></div>
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.7
+<div class="content"><!-- Generator: GNU source-highlight 3.1.8
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
@@ -990,7 +992,7 @@ Use GMIP to magnify the image and see the sticks in pixsel:
 - <em>Shift + Left Mouse</em> to see the color value.
 - Index means index in palette</p></div>
 <div class="listingblock">
-<div class="content"><!-- Generator: GNU source-highlight 3.1.7
+<div class="content"><!-- Generator: GNU source-highlight 3.1.8
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
@@ -1011,13 +1013,64 @@ collect<span style="color: #990000">.</span><span style="font-weight: bold"><spa
 </div>
 <div class="sect2">
 <h3 id="_a_href_http_www_pythonchallenge_com_pc_return_romance_html_17_a"><a href="http://www.pythonchallenge.com/pc/return/romance.html">17</a></h3>
-<div class="paragraph"><p><em>is it the 26th already? call his father and inform him that "the flowers are on their way". he'll understand.</em></p></div>
+<div class="paragraph"><p>An image of cookies, and an image from Level 4 in the lower left corner.</p></div>
+<div class="paragraph"><p>Go to check the cookies of <a href="http://www.pythonchallenge.com/pc/def/linkedlist.php">the page of Level 4</a>, this can be done by <strong>cookielib</strong> or devbug console of <strong>firefox</strong> or <strong>chromium</strong>.</p></div>
+<div class="paragraph"><p>The cookie&#8217;s value is <strong>"you+should+have+followed+busynothing&#8230;"</strong></p></div>
+<div class="paragraph"><p>In Level 4 we follow the link <strong>http://www.pythonchallenge.com/pc/def/linkedlist.php?nothing=12345</strong> and finally get the address to the next level, so accroding to the cookies, now we should follow <strong>http://www.pythonchallenge.com/pc/def/linkedlist.php?busynothing=12345</strong>. What&#8217;s more, the cookie of each page is to be checked.</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.8
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="font-weight: bold"><span style="color: #000080">import</span></span> urllib2
+<span style="font-weight: bold"><span style="color: #000080">import</span></span> cookielib</tt></pre></div></div>
+<div class="paragraph"><p>url = <em>http://www.pythonchallenge.com/pc/def/linkedlist.php?busynothing=</em>
+num = <em>12345</em>
+cookie = cookielib.CookieJar()
+handler = urllib2.HTTPCookieProcessor(cookie)
+opener = urllib2.build_opener(handler)</p></div>
+<div class="paragraph"><p>res = ""
+while True:
+    f = opener.open(url + num)
+    msg = f.read()
+    num = msg.split()[-1]
+    for ck in cookie:
+        res += ck.value
+    if not num.isdigit():
+        print(msg)
+        break
+print(res)</p></div>
+<div class="paragraph"><p>Collect all the cookies, yeild a string begins with <strong>"BZh91AY%26SY"</strong>, check the magic header of a typical <em>.bz2</em> file:</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.8
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt>$ head -c <span style="color: #993399">10</span> <span style="font-weight: bold"><span style="color: #0000FF">test</span></span><span style="color: #990000">.</span>bz2 <span style="font-style: italic"><span style="color: #9A1900"># yeild "BZh91AY&amp;SY"</span></span></tt></pre></div></div>
+<div class="paragraph"><p>So we need to decompress this string with bzip2, but first it need to be unquoted to change <strong>%26</strong> to <strong>&amp;</strong> (<a href="http://www.w3schools.com/tags/ref_urlencode.asp">HTML URL Decoding</a>). This can be done by <strong>urllib.unquote</strong>.</p></div>
+<div class="paragraph"><p>Soon we find that <strong>urllib.unquote</strong> didn&#8217;t give the right bzip2 encoded string, we need <strong>urllib.unquote_plus</strong> to change the <em>+</em> to space.</p></div>
+<div class="paragraph"><p>The decoded string is below:</p></div>
+<div class="paragraph"><p><strong>is it the 26th already? call his father and inform him that "the flowers are on their way". he'll understand.</strong></p></div>
+<div class="paragraph"><p>Recall that the phone in Level 13, and Mozart&#8217;s birthday is Jan 26th according to Level 15, we googled Mozart&#8217;s father, whose name is "Leopold Mozart".</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.8
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="font-weight: bold"><span style="color: #000080">import</span></span> xmlrpclib
+server <span style="color: #990000">=</span> xmlrpclib<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">Server</span></span><span style="color: #990000">(</span><span style="color: #FF0000">'http://www.pythonchallenge.com/pc/phonebook.php'</span><span style="color: #990000">)</span>
+server<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">phone</span></span><span style="color: #990000">(</span><span style="color: #FF0000">'Leopold'</span><span style="color: #990000">)</span></tt></pre></div></div>
+</div>
+<div class="sect2">
+<h3 id="_a_href_http_www_pythonchallenge_com_pc_stuff_violin_php_18_a"><a href="http://www.pythonchallenge.com/pc/stuff/violin.php">18</a></h3>
+</div>
+</div>
 </div>
 </div>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-03-07 21:50:09 CST
+Last updated 2015-04-28 12:10:35 CST
 </div>
 </div>
 </body>

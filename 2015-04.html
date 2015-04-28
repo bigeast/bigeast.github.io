@@ -1141,13 +1141,24 @@ Section "Monitor"
 EndSection</code></pre>
 </div></div>
 </div>
+<div class="sect2">
+<h3 id="_virtualbox的问题">Virtualbox的问题</h3>
+<div class="paragraph"><p>再次更新后出错！！
+dkms的问题，之前都不知道它是什么也没出现什么问题啊！</p></div>
+<div class="paragraph"><p>回退，失败。无数次失败后，还是看了日志，里面有一条是：</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>00:00:00.302028 ERROR [COM]: aRC=NS_ERROR_FAILURE (0x80004005) aIID={431685da-3618-4ebc-b038-833ba829b4b2} aComponent={ExtPack} aText={Failed to locate the module 'VDPluginCrypt' in extension pack 'Oracle VM VirtualBox Extension Pack'}, preserve=false</code></pre>
+</div></div>
+<div class="paragraph"><p>但是这个扩展包我都没有听说过，到Archlinux的wiki上搜，才知道是AUR中的一个包，装好后就可以了。但是为什么之前从来没有这个包的时候也没出现过问题呢！！</p></div>
+</div>
 </div>
 </div>
 </div>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-04-24 21:28:36 CST
+Last updated 2015-04-24 23:23:01 CST
 </div>
 </div>
 </body>

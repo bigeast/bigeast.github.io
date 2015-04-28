@@ -1,4 +1,4 @@
-Hints for http://www.pythonchallenge.com[Python Challenge]
+== Hints for http://www.pythonchallenge.com[Python Challenge]
 
 === http://www.pythonchallenge.com/pc/def/0.html[0]
 2**38
@@ -252,4 +252,54 @@ for j in range(h):
 collect.show()
 
 === http://www.pythonchallenge.com/pc/return/romance.html[17]
-'is it the 26th already? call his father and inform him that "the flowers are on their way". he\'ll understand.'
+An image of cookies, and an image from Level 4 in the lower left corner.
+
+Go to check the cookies of http://www.pythonchallenge.com/pc/def/linkedlist.php[the page of Level 4], this can be done by *cookielib* or devbug console of *firefox* or *chromium*.
+
+The cookie's value is *"you+should+have+followed+busynothing..."*
+
+In Level 4 we follow the link *http://www.pythonchallenge.com/pc/def/linkedlist.php?nothing=12345* and finally get the address to the next level, so accroding to the cookies, now we should follow *http://www.pythonchallenge.com/pc/def/linkedlist.php?busynothing=12345*. What's more, the cookie of each page is to be checked.
+
+[source, python]
+import urllib2
+import cookielib
+
+url = 'http://www.pythonchallenge.com/pc/def/linkedlist.php?busynothing='
+num = '12345'
+cookie = cookielib.CookieJar()
+handler = urllib2.HTTPCookieProcessor(cookie)
+opener = urllib2.build_opener(handler)
+
+res = ""
+while True:
+    f = opener.open(url + num)
+    msg = f.read()
+    num = msg.split()[-1]
+    for ck in cookie:
+        res += ck.value
+    if not num.isdigit():
+        print(msg)
+        break
+print(res)
+
+Collect all the cookies, yeild a string begins with *"BZh91AY%26SY"*, check the magic header of a typical _.bz2_ file:
+
+[source, bash]
+$ head -c 10 test.bz2 # yeild "BZh91AY&SY"
+
+So we need to decompress this string with bzip2, but first it need to be unquoted to change *%26* to *&* (http://www.w3schools.com/tags/ref_urlencode.asp[HTML URL Decoding]). This can be done by *urllib.unquote*.
+
+Soon we find that *urllib.unquote* didn't give the right bzip2 encoded string, we need *urllib.unquote_plus* to change the '+' to space.
+
+The decoded string is below:
+
+*is it the 26th already? call his father and inform him that "the flowers are on their way". he\'ll understand.*
+
+Recall that the phone in Level 13, and Mozart's birthday is Jan 26th according to Level 15, we googled Mozart's father, whose name is "Leopold Mozart".
+
+[source, python]
+import xmlrpclib
+server = xmlrpclib.Server('http://www.pythonchallenge.com/pc/phonebook.php')
+server.phone('Leopold')
+
+=== http://www.pythonchallenge.com/pc/stuff/violin.php[18]

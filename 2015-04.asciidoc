@@ -233,3 +233,15 @@ Section "Monitor"
 	Option "LeftOf" "DVI-1"
 EndSection
 --------------------------------------------------
+
+=== Virtualbox的问题
+再次更新后出错！！
+dkms的问题，之前都不知道它是什么也没出现什么问题啊！
+
+回退，失败。无数次失败后，还是看了日志，里面有一条是：
+
+----------------------------------------------------------------------------------------------------
+00:00:00.302028 ERROR [COM]: aRC=NS_ERROR_FAILURE (0x80004005) aIID={431685da-3618-4ebc-b038-833ba829b4b2} aComponent={ExtPack} aText={Failed to locate the module 'VDPluginCrypt' in extension pack 'Oracle VM VirtualBox Extension Pack'}, preserve=false
+----------------------------------------------------------------------------------------------------
+
+但是这个扩展包我都没有听说过，到Archlinux的wiki上搜，才知道是AUR中的一个包，装好后就可以了。但是为什么之前从来没有这个包的时候也没出现过问题呢！！
