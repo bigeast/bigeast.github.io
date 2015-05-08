@@ -330,4 +330,67 @@ ee 69 92 0d 5d ba b2 52 7d 22 22 fc 3e 78 e6 c7 6a 28   ee 69 92 0d 5d ba b2 52 
 
 _"50 4e 47"_ means _"PNG"_ , [line-through]#so these are two png files in hex format.#
 
-Well, I make a mistake, these two columns of hexadecimal are not themselves png files(though I they can be recognized by `file` as 620x200 png file), but need to be _diff_ use _difflib.ndiff_, 
+Well, I make a mistake, these two columns of hexadecimal are not themselves png files (although they can be recognized by `file` as 620x200 png file), but need to be _diff_ use _difflib.ndiff_.
+
+Here is the code I cheated:
+
+[source, python]
+import gzip
+import difflib
+ff = gzip.open('deltas.gz', 'r')
+deltas = ff.read()
+ff.close()
+deltas = deltas.splitlines()
+left, right = [], []
+for row in deltas:
+    left.append(row[:53])
+    right.append(row[56:])
+diff = list(difflib.ndiff(left, right))
+png = ['', '', '']
+for row in diff:
+    bytes = [chr(int(byte, 16)) for byte in row[2:].split()]
+    if row[0] == '-':
+        png[0] += ''.join(bytes)
+    elif row[0] == '+':
+        png[1] += ''.join(bytes)
+    elif row[0] == ' ':
+        png[2] += ''.join(bytes)
+for i in range(3):
+    open('out18_%d.png' % i, 'wb').write(png[i])
+
+=== http://www.pythonchallenge.com/pc/hex/bin.html[19]
+[white]#username and password is butter, fly#
+
+Again the first clue is in the page source. It's an email with an attachment, which is encoded by base64. Decode it by `base64 -d` and the wav file says _"sorry"_.
+
+Then sorry.html says _"what are you apologizing for?"_ 
+
+Note in the email it says "Maybe my computer is out of order." and recall the "hexbin" thing, does that means I need to change the wav file in the other endian order? And the `file indian.wav` does show that the file is little-endian!
+
+According to http://www.topherlee.com/software/pcm-tut-wavformat.html[this page], the header of wav file is 44, the rest is PCM sample value in 16 bit.
+
+[source, python]
+import struct
+f = open('indian.wav', 'rb')
+wav = f.read()
+f.close()
+s = len(wav[44:]) // 2
+res = wav[:44]
+for i in range(s):
+    t1 = struct.unpack('<h', wav[44 + 2 * i: 44 + 2 * i + 2])
+    print(t1)
+    res = res + struct.pack('>h', t1[0])
+f = open('indianx.wav', 'wb')
+f.write(res)
+f.close()
+
+In the wiki I also find a solution by `dd`:
+
+[source, bash]
+(head -c 44 indian.wav; tail -c +45 indian.wav | dd conv=swab) > tmp.wav
+
+Now the new wav file sounds [through-line]#"You've already get it, Ah..."# "You're a idiot, Ah'"
+
+Oh, the indian map is a clue for "endian"!
+
+=== http://www.pythonchallenge.com/pc/hex/idiot2.html[20]
