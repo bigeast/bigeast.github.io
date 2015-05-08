@@ -1014,43 +1014,43 @@ collect<span style="color: #990000">.</span><span style="font-weight: bold"><spa
 <div class="sect2">
 <h3 id="_a_href_http_www_pythonchallenge_com_pc_return_romance_html_17_a"><a href="http://www.pythonchallenge.com/pc/return/romance.html">17</a></h3>
 <div class="paragraph"><p>An image of cookies, and an image from Level 4 in the lower left corner.</p></div>
-<div class="paragraph"><p>Go to check the cookies of <a href="http://www.pythonchallenge.com/pc/def/linkedlist.php">the page of Level 4</a>, this can be done by <strong>cookielib</strong> or devbug console of <strong>firefox</strong> or <strong>chromium</strong>.</p></div>
-<div class="paragraph"><p>The cookie&#8217;s value is <strong>"you+should+have+followed+busynothing&#8230;"</strong></p></div>
-<div class="paragraph"><p>In Level 4 we follow the link <strong>http://www.pythonchallenge.com/pc/def/linkedlist.php?nothing=12345</strong> and finally get the address to the next level, so accroding to the cookies, now we should follow <strong>http://www.pythonchallenge.com/pc/def/linkedlist.php?busynothing=12345</strong>. What&#8217;s more, the cookie of each page is to be checked.</p></div>
+<div class="paragraph"><p>Go to check the cookies of <a href="http://www.pythonchallenge.com/pc/def/linkedlist.php">the page of Level 4</a>, this can be done by <em>cookielib</em> or devbug console of <em>firefox</em> or <em>chromium</em>.</p></div>
+<div class="paragraph"><p>The cookie&#8217;s value is <em>"you+should+have+followed+busynothing&#8230;"</em></p></div>
+<div class="paragraph"><p>In Level 4 we follow the link <em>http://www.pythonchallenge.com/pc/def/linkedlist.php?nothing=12345</em> and finally get the address to the next level, so accroding to the cookies, now we should follow <em>http://www.pythonchallenge.com/pc/def/linkedlist.php?busynothing=12345</em>. What&#8217;s more, the cookie of each page is to be checked.</p></div>
 <div class="listingblock">
 <div class="content"><!-- Generator: GNU source-highlight 3.1.8
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
 <pre><tt><span style="font-weight: bold"><span style="color: #000080">import</span></span> urllib2
-<span style="font-weight: bold"><span style="color: #000080">import</span></span> cookielib</tt></pre></div></div>
-<div class="paragraph"><p>url = <em>http://www.pythonchallenge.com/pc/def/linkedlist.php?busynothing=</em>
-num = <em>12345</em>
-cookie = cookielib.CookieJar()
-handler = urllib2.HTTPCookieProcessor(cookie)
-opener = urllib2.build_opener(handler)</p></div>
-<div class="paragraph"><p>res = ""
-while True:
-    f = opener.open(url + num)
-    msg = f.read()
-    num = msg.split()[-1]
-    for ck in cookie:
-        res += ck.value
-    if not num.isdigit():
-        print(msg)
-        break
-print(res)</p></div>
-<div class="paragraph"><p>Collect all the cookies, yeild a string begins with <strong>"BZh91AY%26SY"</strong>, check the magic header of a typical <em>.bz2</em> file:</p></div>
+<span style="font-weight: bold"><span style="color: #000080">import</span></span> cookielib
+url <span style="color: #990000">=</span> <span style="color: #FF0000">'http://www.pythonchallenge.com/pc/def/linkedlist.php?busynothing='</span>
+num <span style="color: #990000">=</span> <span style="color: #FF0000">'12345'</span>
+cookie <span style="color: #990000">=</span> cookielib<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">CookieJar</span></span><span style="color: #990000">()</span>
+handler <span style="color: #990000">=</span> urllib2<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">HTTPCookieProcessor</span></span><span style="color: #990000">(</span>cookie<span style="color: #990000">)</span>
+opener <span style="color: #990000">=</span> urllib2<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">build_opener</span></span><span style="color: #990000">(</span>handler<span style="color: #990000">)</span>
+res <span style="color: #990000">=</span> <span style="color: #FF0000">""</span>
+<span style="font-weight: bold"><span style="color: #0000FF">while</span></span> True<span style="color: #990000">:</span>
+    f <span style="color: #990000">=</span> opener<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">open</span></span><span style="color: #990000">(</span>url <span style="color: #990000">+</span> num<span style="color: #990000">)</span>
+    msg <span style="color: #990000">=</span> f<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">read</span></span><span style="color: #990000">()</span>
+    num <span style="color: #990000">=</span> msg<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">split</span></span><span style="color: #990000">()[-</span><span style="color: #993399">1</span><span style="color: #990000">]</span>
+    <span style="font-weight: bold"><span style="color: #0000FF">for</span></span> ck <span style="font-weight: bold"><span style="color: #0000FF">in</span></span> cookie<span style="color: #990000">:</span>
+        res <span style="color: #990000">+=</span> ck<span style="color: #990000">.</span>value
+    <span style="font-weight: bold"><span style="color: #0000FF">if</span></span> <span style="font-weight: bold"><span style="color: #0000FF">not</span></span> num<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">isdigit</span></span><span style="color: #990000">():</span>
+        <span style="font-weight: bold"><span style="color: #0000FF">print</span></span><span style="color: #990000">(</span>msg<span style="color: #990000">)</span>
+        <span style="font-weight: bold"><span style="color: #0000FF">break</span></span>
+<span style="font-weight: bold"><span style="color: #0000FF">print</span></span><span style="color: #990000">(</span>res<span style="color: #990000">)</span></tt></pre></div></div>
+<div class="paragraph"><p>Collect all the cookies, yield a string begins with <em>"BZh91AY%26SY"</em>, check the magic header of a typical <em>.bz2</em> file:</p></div>
 <div class="listingblock">
 <div class="content"><!-- Generator: GNU source-highlight 3.1.8
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
-<pre><tt>$ head -c <span style="color: #993399">10</span> <span style="font-weight: bold"><span style="color: #0000FF">test</span></span><span style="color: #990000">.</span>bz2 <span style="font-style: italic"><span style="color: #9A1900"># yeild "BZh91AY&amp;SY"</span></span></tt></pre></div></div>
-<div class="paragraph"><p>So we need to decompress this string with bzip2, but first it need to be unquoted to change <strong>%26</strong> to <strong>&amp;</strong> (<a href="http://www.w3schools.com/tags/ref_urlencode.asp">HTML URL Decoding</a>). This can be done by <strong>urllib.unquote</strong>.</p></div>
-<div class="paragraph"><p>Soon we find that <strong>urllib.unquote</strong> didn&#8217;t give the right bzip2 encoded string, we need <strong>urllib.unquote_plus</strong> to change the <em>+</em> to space.</p></div>
+<pre><tt>$ head -c <span style="color: #993399">10</span> <span style="font-weight: bold"><span style="color: #0000FF">test</span></span><span style="color: #990000">.</span>bz2 <span style="font-style: italic"><span style="color: #9A1900"># yield "BZh91AY&amp;SY"</span></span></tt></pre></div></div>
+<div class="paragraph"><p>So we need to decompress this string with bzip2, but first it need to be unquoted to change <strong>%26</strong> to <strong>&amp;</strong> (<a href="http://www.w3schools.com/tags/ref_urlencode.asp">HTML URL Decoding</a>). This can be done by <em>urllib.unquote</em>.</p></div>
+<div class="paragraph"><p>Soon we find that <em>urllib.unquote</em> didn&#8217;t give the right bzip2 encoded string, we need <em>urllib.unquote_plus</em> to change the <em>+</em> to space.</p></div>
 <div class="paragraph"><p>The decoded string is below:</p></div>
-<div class="paragraph"><p><strong>is it the 26th already? call his father and inform him that "the flowers are on their way". he'll understand.</strong></p></div>
+<div class="paragraph"><p><em>is it the 26th already? call his father and inform him that "the flowers are on their way". he'll understand.</em></p></div>
 <div class="paragraph"><p>Recall that the phone in Level 13, and Mozart&#8217;s birthday is Jan 26th according to Level 15, we googled Mozart&#8217;s father, whose name is "Leopold Mozart".</p></div>
 <div class="listingblock">
 <div class="content"><!-- Generator: GNU source-highlight 3.1.8
@@ -1060,9 +1060,36 @@ http://www.gnu.org/software/src-highlite -->
 <pre><tt><span style="font-weight: bold"><span style="color: #000080">import</span></span> xmlrpclib
 server <span style="color: #990000">=</span> xmlrpclib<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">Server</span></span><span style="color: #990000">(</span><span style="color: #FF0000">'http://www.pythonchallenge.com/pc/phonebook.php'</span><span style="color: #990000">)</span>
 server<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">phone</span></span><span style="color: #990000">(</span><span style="color: #FF0000">'Leopold'</span><span style="color: #990000">)</span></tt></pre></div></div>
+<div class="paragraph"><p>Not finished yet! The address is only mozart&#8217;s father&#8217;s "phone number", do remember to inform him "the flowers are on their way", but how? Maybe set cookies in HTTP header?</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.8
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt>url <span style="color: #990000">=</span> <span style="color: #FF0000">'http://www.pythonchallenge.com/pc/stuff/violin.php'</span>
+msg <span style="color: #990000">=</span> <span style="color: #FF0000">'the flowers are on their way'</span>
+req <span style="color: #990000">=</span> urllib2<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">Request</span></span><span style="color: #990000">(</span>url<span style="color: #990000">,</span> headers <span style="color: #990000">=</span> <span style="color: #990000">{</span><span style="color: #FF0000">"Cookies"</span><span style="color: #990000">:</span><span style="color: #FF0000">"info="</span> <span style="color: #990000">+</span> urllib<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">quote_plus</span></span><span style="color: #990000">(</span>msg<span style="color: #990000">)})</span>
+<span style="font-weight: bold"><span style="color: #0000FF">print</span></span> urllib2<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">urlopen</span></span><span style="color: #990000">(</span>req<span style="color: #990000">).</span><span style="font-weight: bold"><span style="color: #000000">read</span></span><span style="color: #990000">()</span></tt></pre></div></div>
 </div>
 <div class="sect2">
-<h3 id="_a_href_http_www_pythonchallenge_com_pc_stuff_violin_php_18_a"><a href="http://www.pythonchallenge.com/pc/stuff/violin.php">18</a></h3>
+<h3 id="_a_href_http_www_pythonchallenge_com_pc_return_balloons_html_18_a"><a href="http://www.pythonchallenge.com/pc/return/balloons.html">18</a></h3>
+<div class="paragraph"><p>The difference is brightness, so try <em>brightness.html</em></p></div>
+<div class="paragraph"><p>Turns out to be the same page, but in the comments, it says <em>maybe consider deltas.gz</em> ，so download deltas.gz</p></div>
+<div class="paragraph"><p>I Use <code>gunzip</code> to decompress it, and get a text file begins with:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>89 50 4e 47 0d 0a 1a 0a 00 00 00 0d 49 48 44 52 00 00   89 50 4e 47 0d 0a 1a 0a 00 00 00 0d 49 48 44 52 00 00
+02 8a 00 00 00 c8 08 02 00 00 00 e0 19 57 95 00 00 00   02 8a 00 00 00 c8 08 02 00 00 00 e0 19 57 95 00 00 00
+09 70 48 59 73 00 00 0b 13 00 00 0b 13 01 00 9a 9c 18   09 70 48 59 73 00 00 0b 13 00 00 0b 13 01 00 9a 9c 18
+00 00 00 07 74 49 4d 45 07 d5 05 07 0c 18 32 98 c6 a0   00 00 00 07 74 49 4d 45 07 d5 05 07 0c 18 32 98 c6 a0
+48 00 00 00 1d 74 45 58 74 43 6f 6d 6d 65 6e 74 00 43   48 00 00 00 1d 74 45 58 74 43 6f 6d 6d 65 6e 74 00 43
+72 65 61 74 65 64 20 77 69 74 68 20 54 68 65 20 47 49   72 65 61 74 65 64 20 77 69 74 68 20 54 68 65 20 47 49
+4d 50 ef 64 25 6e 00 00 20 00 49 44 41 54 78 da ec bd   4d 50 ef 64 25 6e 00 00 20 00 49 44 41 54 78 da ec bd
+57 93 9c 47 92 25 7a 3c c4 a7 53 55 96 42 01 20 9b 6c   57 93 9c 47 92 25 7a 3c c4 a7 53 55 96 42 01 20 9b 6c
+31 b3 63 bb 4f fb ff 1f ee d3 bd 2f d7 ae d9 8e d8 e9   31 b3 63 bb 4f fb ff 1f ee d3 bd 2f d7 ae d9 8e d8 e9
+ee 69 92 0d 5d ba b2 52 7d 22 22 fc 3e 78 e6 c7 6a 28   ee 69 92 0d 5d ba b2 52 7d 22 22 fc 3e 78 e6 c7 6a 28</code></pre>
+</div></div>
+<div class="paragraph"><p><em>"50 4e 47"</em> means <em>"PNG"</em> , <span class="line-through">so these are two png files in hex format.</span></p></div>
 </div>
 </div>
 </div>
@@ -1070,7 +1097,7 @@ server<span style="color: #990000">.</span><span style="font-weight: bold"><span
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-04-28 12:10:35 CST
+Last updated 2015-04-28 21:14:04 CST
 </div>
 </div>
 </body>

@@ -254,22 +254,20 @@ collect.show()
 === http://www.pythonchallenge.com/pc/return/romance.html[17]
 An image of cookies, and an image from Level 4 in the lower left corner.
 
-Go to check the cookies of http://www.pythonchallenge.com/pc/def/linkedlist.php[the page of Level 4], this can be done by *cookielib* or devbug console of *firefox* or *chromium*.
+Go to check the cookies of http://www.pythonchallenge.com/pc/def/linkedlist.php[the page of Level 4], this can be done by _cookielib_ or devbug console of _firefox_ or _chromium_.
 
-The cookie's value is *"you+should+have+followed+busynothing..."*
+The cookie's value is _"you+should+have+followed+busynothing..."_
 
-In Level 4 we follow the link *http://www.pythonchallenge.com/pc/def/linkedlist.php?nothing=12345* and finally get the address to the next level, so accroding to the cookies, now we should follow *http://www.pythonchallenge.com/pc/def/linkedlist.php?busynothing=12345*. What's more, the cookie of each page is to be checked.
+In Level 4 we follow the link _http://www.pythonchallenge.com/pc/def/linkedlist.php?nothing=12345_ and finally get the address to the next level, so accroding to the cookies, now we should follow _http://www.pythonchallenge.com/pc/def/linkedlist.php?busynothing=12345_. What's more, the cookie of each page is to be checked.
 
 [source, python]
 import urllib2
 import cookielib
-
 url = 'http://www.pythonchallenge.com/pc/def/linkedlist.php?busynothing='
 num = '12345'
 cookie = cookielib.CookieJar()
 handler = urllib2.HTTPCookieProcessor(cookie)
 opener = urllib2.build_opener(handler)
-
 res = ""
 while True:
     f = opener.open(url + num)
@@ -282,18 +280,18 @@ while True:
         break
 print(res)
 
-Collect all the cookies, yeild a string begins with *"BZh91AY%26SY"*, check the magic header of a typical _.bz2_ file:
+Collect all the cookies, yield a string begins with _"BZh91AY%26SY"_, check the magic header of a typical _.bz2_ file:
 
 [source, bash]
-$ head -c 10 test.bz2 # yeild "BZh91AY&SY"
+$ head -c 10 test.bz2 # yield "BZh91AY&SY"
 
-So we need to decompress this string with bzip2, but first it need to be unquoted to change *%26* to *&* (http://www.w3schools.com/tags/ref_urlencode.asp[HTML URL Decoding]). This can be done by *urllib.unquote*.
+So we need to decompress this string with bzip2, but first it need to be unquoted to change *%26* to *&* (http://www.w3schools.com/tags/ref_urlencode.asp[HTML URL Decoding]). This can be done by _urllib.unquote_.
 
-Soon we find that *urllib.unquote* didn't give the right bzip2 encoded string, we need *urllib.unquote_plus* to change the '+' to space.
+Soon we find that _urllib.unquote_ didn't give the right bzip2 encoded string, we need _urllib.unquote_plus_ to change the '+' to space.
 
 The decoded string is below:
 
-*is it the 26th already? call his father and inform him that "the flowers are on their way". he\'ll understand.*
+_is it the 26th already? call his father and inform him that "the flowers are on their way". he\'ll understand._
 
 Recall that the phone in Level 13, and Mozart's birthday is Jan 26th according to Level 15, we googled Mozart's father, whose name is "Leopold Mozart".
 
@@ -302,4 +300,34 @@ import xmlrpclib
 server = xmlrpclib.Server('http://www.pythonchallenge.com/pc/phonebook.php')
 server.phone('Leopold')
 
-=== http://www.pythonchallenge.com/pc/stuff/violin.php[18]
+Not finished yet! The address is only mozart's father's "phone number", do remember to inform him "the flowers are on their way", but how? Maybe set cookies in HTTP header?
+[source, python]
+url = 'http://www.pythonchallenge.com/pc/stuff/violin.php'
+msg = 'the flowers are on their way'
+req = urllib2.Request(url, headers = {"Cookies":"info=" + urllib.quote_plus(msg)})
+print urllib2.urlopen(req).read()
+
+=== http://www.pythonchallenge.com/pc/return/balloons.html[18]
+
+The difference is brightness, so try _brightness.html_
+
+Turns out to be the same page, but in the comments, it says _maybe consider deltas.gz_ ，so download deltas.gz
+
+I Use `gunzip` to decompress it, and get a text file begins with:
+
+--------------------------------------------------------------------------------------------------------------
+89 50 4e 47 0d 0a 1a 0a 00 00 00 0d 49 48 44 52 00 00   89 50 4e 47 0d 0a 1a 0a 00 00 00 0d 49 48 44 52 00 00
+02 8a 00 00 00 c8 08 02 00 00 00 e0 19 57 95 00 00 00   02 8a 00 00 00 c8 08 02 00 00 00 e0 19 57 95 00 00 00
+09 70 48 59 73 00 00 0b 13 00 00 0b 13 01 00 9a 9c 18   09 70 48 59 73 00 00 0b 13 00 00 0b 13 01 00 9a 9c 18
+00 00 00 07 74 49 4d 45 07 d5 05 07 0c 18 32 98 c6 a0   00 00 00 07 74 49 4d 45 07 d5 05 07 0c 18 32 98 c6 a0
+48 00 00 00 1d 74 45 58 74 43 6f 6d 6d 65 6e 74 00 43   48 00 00 00 1d 74 45 58 74 43 6f 6d 6d 65 6e 74 00 43
+72 65 61 74 65 64 20 77 69 74 68 20 54 68 65 20 47 49   72 65 61 74 65 64 20 77 69 74 68 20 54 68 65 20 47 49
+4d 50 ef 64 25 6e 00 00 20 00 49 44 41 54 78 da ec bd   4d 50 ef 64 25 6e 00 00 20 00 49 44 41 54 78 da ec bd
+57 93 9c 47 92 25 7a 3c c4 a7 53 55 96 42 01 20 9b 6c   57 93 9c 47 92 25 7a 3c c4 a7 53 55 96 42 01 20 9b 6c
+31 b3 63 bb 4f fb ff 1f ee d3 bd 2f d7 ae d9 8e d8 e9   31 b3 63 bb 4f fb ff 1f ee d3 bd 2f d7 ae d9 8e d8 e9
+ee 69 92 0d 5d ba b2 52 7d 22 22 fc 3e 78 e6 c7 6a 28   ee 69 92 0d 5d ba b2 52 7d 22 22 fc 3e 78 e6 c7 6a 28
+--------------------------------------------------------------------------------------------------------------
+
+_"50 4e 47"_ means _"PNG"_ , [line-through]#so these are two png files in hex format.#
+
+Well, I make a mistake, these two columns of hexadecimal are not themselves png files(though I they can be recognized by `file` as 620x200 png file), but need to be _diff_ use _difflib.ndiff_, 

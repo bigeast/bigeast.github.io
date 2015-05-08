@@ -260,3 +260,6 @@ $ pacman -S bashdb
 --------------------
 
 * ldd的安全问题
+
+=== autopep8
+pep8能够检查python代码的风格是否符合PEP8规范，但是不能自动纠正。
