@@ -735,63 +735,61 @@ asciidoc.install();
 <div id="header">
 </div>
 <div id="content">
-<div class="tableblock">
-<table rules="all"
-width="30%"
-frame="border"
-cellspacing="0" cellpadding="4">
-<col width="100%" />
-<tbody>
-<tr>
-<td align="left" valign="top"><p class="table"><a href="2015-02.html">2015-02 笔记</a></p></td>
-</tr>
-<tr>
-<td align="left" valign="top"><p class="table"><a href="2015-03.html">2015-03 笔记</a></p></td>
-</tr>
-<tr>
-<td align="left" valign="top"><p class="table"><a href="2015-04.html">2015-04 笔记</a></p></td>
-</tr>
-<tr>
-<td align="left" valign="top"><p class="table"><a href="2015-05.html">2015-05 笔记</a></p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="paragraph"><p><a href="Problems.html">Problems to Solve</a></p></div>
-<div class="paragraph"><p><a href="leetcode.html">Leetcode</a></p></div>
 <div class="sect1">
-<h2 id="_book_notes">Book Notes</h2>
+<h2 id="_2015_05_09_saturday_21_30_58">2015-05-09 Saturday 21:30:58</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_人文">人文</h3>
-<div class="paragraph"><p><a href="books/YM.html">斯蒂芬·哈珀在读什么</a></p></div>
+<h3 id="_node_js">Node.js</h3>
+<div class="ulist"><ul>
+<li>
+<p>
+看了《深入浅出Node.js》，理解是Node.js是一个基于V8引擎的JavaScript解释器，主要用来实现Web服务器，亮点是异步I/O，单线程，是一种处理<a href="http://www.kegel.com/c10k.html">C10k问题</a>的解决方案。
+</p>
+</li>
+<li>
+<p>
+Node之所以用JavaScript来实现，部分原因是其它语言中已经存在了同步I/O的库，而JavaScript没有类似的包袱。
+</p>
+</li>
+<li>
+<p>
+<code>npm -g install</code> 安装后可以用相应的命令行调用包。安装位置 <em>/usr/lib/node_modules</em>
+</p>
+</li>
+<li>
+<p>
+可以用来实现简单的HTTP服务器，与 <code>python -m http.server</code> 类似。
+</p>
+</li>
+</ul></div>
 </div>
 <div class="sect2">
-<h3 id="_计算机">计算机</h3>
-<div class="paragraph"><p><a href="books/linuxfaner.html">Linux就是这个范儿</a>
-<a href="InternetSocket.html">网络编程基础</a></p></div>
+<h3 id="_c">C++</h3>
+<div class="ulist"><ul>
+<li>
+<p>
+C+<code>中可以在程序的任意位置声明变量是因为声明是C\</code>+中的合法语句，而C中声明语句与其它语句是不同的。
+</p>
+</li>
+<li>
+<p>
+vector的初始化。
+</p>
+</li>
+</ul></div>
+<div class="exampleblock">
+<div class="content">
+<div class="paragraph"><p>vector&lt;int&gt; a(100, 0);</p></div>
+<div class="paragraph"><p>vector&lt;vector&lt;int&gt; &gt; matrix(M, vector&lt;int&gt;(N, 0));</p></div>
+</div></div>
 </div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_computer_hacks">Computer Hacks</h2>
-<div class="sectionbody">
-<div class="paragraph"><p><a href="Source_Code_Tree_Navigation_in_Vim.html">Source Code Tree Navigation in Vim</a></p></div>
-<div class="paragraph"><p><a href="scrot.html">Scrot屏幕截图</a></p></div>
-<div class="paragraph"><p><a href="pythonchallenge.html">Python Challenge Note</a></p></div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_translate">Translate</h2>
-<div class="sectionbody">
-<div class="paragraph"><p><a href="Ng.html">Andrew Ng 谈百度深度学习的现状</a></p></div>
 </div>
 </div>
 </div>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-05-09 21:30:36 CST
+Last updated 2015-05-09 21:49:14 CST
 </div>
 </div>
 </body>

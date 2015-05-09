@@ -833,6 +833,43 @@ ISO/OSI七层模型
 IPv4 2<sup>32</sup>，IPv6 2<sup>128</sup>
 </p>
 </li>
+<li>
+<p>
+pipe系统调用的用法
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+参数是一个长度为2的整型数组，pipe()之后进行fork()，子进程和父进程一个读一个写。如果子进程读，父进程写，则在子进程中要先关闭fildes[1]（不会去写）, 父进程中要先关闭fildes[0]（不会去读）。
+</p>
+</li>
+<li>
+<p>
+能否同时读写，即双向管道？
+</p>
+</li>
+<li>
+<p>
+管道机制是怎么实现的，fork之后，两个进程中的描述符是如何保持联系的？
+</p>
+</li>
+<li>
+<p>
+文件描述符和文件流的连接：fdopen
+</p>
+</li>
+<li>
+<p>
+管道的典型使用方式是，pipe&#8594;fork&#8594;dup2&#8594;exec，这个流程实际上实现了将子进程的stdout或者stdin绑定到一个管道，从而与父进程进行通信。库函数popen()实现的功能与之类似，相当于用bash -c 执行一条命令，然后可以指定父进程对管道是读还是写。
+</p>
+</li>
+<li>
+<p>
+管道I/O的原子性。当数据大小不超过PIPE_BUF时，管道的读或者写是原子的。 <em>如何理解?</em>
+</p>
+</li>
+</ul></div>
+</li>
 </ul></div>
 </div>
 </div>
@@ -840,7 +877,7 @@ IPv4 2<sup>32</sup>，IPv6 2<sup>128</sup>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-04-28 09:04:13 CST
+Last updated 2015-04-28 21:39:32 CST
 </div>
 </div>
 </body>

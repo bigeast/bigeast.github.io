@@ -3,6 +3,7 @@
 |link:2015-02.html[2015-02 笔记] 
 |link:2015-03.html[2015-03 笔记]
 |link:2015-04.html[2015-04 笔记]
+|link:2015-05.html[2015-05 笔记]
 |====================
 
 link:Problems.html[Problems to Solve]
@@ -16,6 +17,7 @@ link:books/YM.html[斯蒂芬·哈珀在读什么]
 
 === 计算机
 link:books/linuxfaner.html[Linux就是这个范儿]
+link:InternetSocket.html[网络编程基础]
 
 == Computer Hacks
 link:Source_Code_Tree_Navigation_in_Vim.html[Source Code Tree Navigation in Vim]

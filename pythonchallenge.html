@@ -1145,6 +1145,13 @@ res <span style="color: #990000">=</span> wav<span style="color: #990000">[:</sp
 f <span style="color: #990000">=</span> <span style="font-weight: bold"><span style="color: #000000">open</span></span><span style="color: #990000">(</span><span style="color: #FF0000">'indianx.wav'</span><span style="color: #990000">,</span> <span style="color: #FF0000">'wb'</span><span style="color: #990000">)</span>
 f<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">write</span></span><span style="color: #990000">(</span>res<span style="color: #990000">)</span>
 f<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">close</span></span><span style="color: #990000">()</span></tt></pre></div></div>
+<div class="paragraph"><p>In the wiki I also find a solution by <code>dd</code>:</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.8
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="color: #990000">(</span>head -c <span style="color: #993399">44</span> indian<span style="color: #990000">.</span>wav<span style="color: #990000">;</span> tail -c <span style="color: #990000">+</span><span style="color: #993399">45</span> indian<span style="color: #990000">.</span>wav <span style="color: #990000">|</span> dd <span style="color: #009900">conv</span><span style="color: #990000">=</span>swab<span style="color: #990000">)</span> <span style="color: #990000">&gt;</span> tmp<span style="color: #990000">.</span>wav</tt></pre></div></div>
 <div class="paragraph"><p>Now the new wav file sounds <span class="through-line">"You&#8217;ve already get it, Ah&#8230;"</span> "You&#8217;re a idiot, Ah'"</p></div>
 <div class="paragraph"><p>Oh, the indian map is a clue for "endian"!</p></div>
 </div>
@@ -1157,7 +1164,7 @@ f<span style="color: #990000">.</span><span style="font-weight: bold"><span styl
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-05-08 16:21:15 CST
+Last updated 2015-05-08 16:26:12 CST
 </div>
 </div>
 </body>
