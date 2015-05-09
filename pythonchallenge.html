@@ -1157,6 +1157,102 @@ http://www.gnu.org/software/src-highlite -->
 </div>
 <div class="sect2">
 <h3 id="_a_href_http_www_pythonchallenge_com_pc_hex_idiot2_html_20_a"><a href="http://www.pythonchallenge.com/pc/hex/idiot2.html">20</a></h3>
+<div class="paragraph"><p>This problem is amazing.</p></div>
+<div class="paragraph"><p>I cheated for hints, but I did googled a lot by myself and learned many things about <em>HTTP headers</em> and <em>Python libraries</em>, such as <code>requests</code></p></div>
+<div class="paragraph"><p>I also use <em>Firebug</em> to inspect the HTTP header.</p></div>
+<div class="paragraph"><p>The point is, when the image is transmitted by http, the header contains such an item: <em>Content-Range : bytes 0-30202/2123456789</em> , google for "Content-Range" and find <a href="http://benramsey.com/blog/2008/05/206-partial-content-and-range-requests/">a blog about it</a>, and to get the rest bytes, the http client need to add such an item to the header: <em>Range: bytes=30203-</em> , this can be done by the library <code>requests</code>.</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.8
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="font-weight: bold"><span style="color: #000080">import</span></span> requests
+<span style="font-weight: bold"><span style="color: #000080">import</span></span> zipfile
+r <span style="color: #990000">=</span> requests<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">get</span></span><span style="color: #990000">(</span><span style="color: #FF0000">'http://www.pythonchallenge.com/pc/hex/unreal.jpg'</span><span style="color: #990000">,</span>
+                 auth<span style="color: #990000">=</span>requests<span style="color: #990000">.</span>auth<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">HTTPBasicAuth</span></span><span style="color: #990000">(</span><span style="color: #FF0000">'butter'</span><span style="color: #990000">,</span> <span style="color: #FF0000">'fly'</span><span style="color: #990000">))</span>
+Begin <span style="color: #990000">=</span> r<span style="color: #990000">.</span>headers<span style="color: #990000">[</span><span style="color: #FF0000">'content-range'</span><span style="color: #990000">].</span><span style="font-weight: bold"><span style="color: #000000">split</span></span><span style="color: #990000">()[</span><span style="color: #993399">1</span><span style="color: #990000">].</span><span style="font-weight: bold"><span style="color: #000000">split</span></span><span style="color: #990000">(</span><span style="color: #FF0000">'-'</span><span style="color: #990000">)[</span><span style="color: #993399">1</span><span style="color: #990000">].</span><span style="font-weight: bold"><span style="color: #000000">split</span></span><span style="color: #990000">(</span><span style="color: #FF0000">'/'</span><span style="color: #990000">)[</span><span style="color: #993399">0</span><span style="color: #990000">]</span>
+End <span style="color: #990000">=</span> r<span style="color: #990000">.</span>headers<span style="color: #990000">[</span><span style="color: #FF0000">'content-range'</span><span style="color: #990000">].</span><span style="font-weight: bold"><span style="color: #000000">split</span></span><span style="color: #990000">()[</span><span style="color: #993399">1</span><span style="color: #990000">].</span><span style="font-weight: bold"><span style="color: #000000">split</span></span><span style="color: #990000">(</span><span style="color: #FF0000">'-'</span><span style="color: #990000">)[</span><span style="color: #993399">1</span><span style="color: #990000">].</span><span style="font-weight: bold"><span style="color: #000000">split</span></span><span style="color: #990000">(</span><span style="color: #FF0000">'/'</span><span style="color: #990000">)[</span><span style="color: #993399">1</span><span style="color: #990000">]</span>
+<span style="font-weight: bold"><span style="color: #0000FF">print</span></span><span style="color: #990000">(</span>Begin<span style="color: #990000">)</span>
+<span style="font-style: italic"><span style="color: #9A1900"># headers = {'Range':'bytes=30203-'}</span></span>
+p <span style="color: #990000">=</span> <span style="font-weight: bold"><span style="color: #000000">str</span></span><span style="color: #990000">(</span><span style="font-weight: bold"><span style="color: #000000">int</span></span><span style="color: #990000">(</span>Begin<span style="color: #990000">)</span> <span style="color: #990000">+</span> <span style="color: #993399">1</span><span style="color: #990000">)</span>
+<span style="font-weight: bold"><span style="color: #0000FF">while</span></span> r<span style="color: #990000">.</span>status_code <span style="color: #990000">!=</span> <span style="color: #993399">416</span><span style="color: #990000">:</span>
+    headers <span style="color: #990000">=</span> <span style="color: #990000">{</span><span style="color: #FF0000">'Range'</span><span style="color: #990000">:</span> <span style="color: #FF0000">'bytes='</span> <span style="color: #990000">+</span> p <span style="color: #990000">+</span> <span style="color: #FF0000">'-'</span><span style="color: #990000">}</span>
+    r <span style="color: #990000">=</span> requests<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">get</span></span><span style="color: #990000">(</span><span style="color: #FF0000">'http://www.pythonchallenge.com/pc/hex/unreal.jpg'</span><span style="color: #990000">,</span>
+                     auth<span style="color: #990000">=</span>requests<span style="color: #990000">.</span>auth<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">HTTPBasicAuth</span></span><span style="color: #990000">(</span><span style="color: #FF0000">'butter'</span><span style="color: #990000">,</span> <span style="color: #FF0000">'fly'</span><span style="color: #990000">),</span> headers<span style="color: #990000">=</span>headers<span style="color: #990000">)</span>
+    <span style="font-weight: bold"><span style="color: #0000FF">if</span></span> r<span style="color: #990000">.</span>status_code <span style="color: #990000">==</span> <span style="color: #993399">206</span><span style="color: #990000">:</span>
+        p <span style="color: #990000">=</span> r<span style="color: #990000">.</span>headers<span style="color: #990000">[</span><span style="color: #FF0000">'content-range'</span><span style="color: #990000">].</span><span style="font-weight: bold"><span style="color: #000000">split</span></span><span style="color: #990000">()[</span><span style="color: #993399">1</span><span style="color: #990000">].</span><span style="font-weight: bold"><span style="color: #000000">split</span></span><span style="color: #990000">(</span><span style="color: #FF0000">'-'</span><span style="color: #990000">)[</span><span style="color: #993399">1</span><span style="color: #990000">].</span><span style="font-weight: bold"><span style="color: #000000">split</span></span><span style="color: #990000">(</span><span style="color: #FF0000">'/'</span><span style="color: #990000">)[</span><span style="color: #993399">0</span><span style="color: #990000">]</span>
+<span style="font-style: italic"><span style="color: #9A1900">#        print(p, r.text, r.status_code, r.headers['content-type'])</span></span>
+        <span style="font-weight: bold"><span style="color: #0000FF">print</span></span><span style="color: #990000">(</span>p<span style="color: #990000">,</span> r<span style="color: #990000">.</span>text<span style="color: #990000">)</span>
+        p <span style="color: #990000">=</span> <span style="font-weight: bold"><span style="color: #000000">str</span></span><span style="color: #990000">(</span><span style="font-weight: bold"><span style="color: #000000">int</span></span><span style="color: #990000">(</span>p<span style="color: #990000">)</span> <span style="color: #990000">+</span> <span style="color: #993399">1</span><span style="color: #990000">)</span>
+<span style="font-style: italic"><span style="color: #9A1900"># 30202</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"># 30236 b"Why don't you respect my privacy?\n" 206 application/octet-stream</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"># 30283 b'we can go on in this way for really long time.\n' 206 application/octet-stream</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"># 30294 b'stop this!\n' 206 application/octet-stream</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"># 30312 b'invader! invader!\n' 206 application/octet-stream</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"># 30346 b'ok, invader. you are inside now. \n' 206 application/octet-stream</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"># 416 text/html</span></span></tt></pre></div></div>
+<div class="paragraph"><p>When it reached 30347, the hints ended.</p></div>
+<div class="paragraph"><p>I couldn&#8217;t figure out how to get the last <em>text/html</em> content, so I cheated for a hint that I need to request from the end.</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.8
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt>r <span style="color: #990000">=</span> requests<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">get</span></span><span style="color: #990000">(</span><span style="color: #FF0000">'http://www.pythonchallenge.com/pc/hex/unreal.jpg'</span><span style="color: #990000">,</span>
+                 auth<span style="color: #990000">=</span>requests<span style="color: #990000">.</span>auth<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">HTTPBasicAuth</span></span><span style="color: #990000">(</span><span style="color: #FF0000">'butter'</span><span style="color: #990000">,</span> <span style="color: #FF0000">'fly'</span><span style="color: #990000">),</span> headers<span style="color: #990000">={</span><span style="color: #FF0000">'Range'</span><span style="color: #990000">:</span> <span style="color: #FF0000">'bytes='</span> <span style="color: #990000">+</span> End <span style="color: #990000">+</span> <span style="color: #FF0000">'-'</span><span style="color: #990000">})</span>
+<span style="font-weight: bold"><span style="color: #0000FF">print</span></span><span style="color: #990000">(</span>r<span style="color: #990000">.</span>text<span style="color: #990000">)</span>
+<span style="font-weight: bold"><span style="color: #0000FF">print</span></span><span style="color: #990000">(</span><span style="color: #FF0000">''</span><span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">join</span></span><span style="color: #990000">(</span><span style="font-weight: bold"><span style="color: #000000">reversed</span></span><span style="color: #990000">(</span>r<span style="color: #990000">.</span>text<span style="color: #990000">)))</span>
+<span style="font-style: italic"><span style="color: #9A1900"># "the password is your new nickname in reverse"</span></span></tt></pre></div></div>
+<div class="paragraph"><p>My "new nickname" is "invader" from the hints above, and invader.html confirms that.</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.8
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt>p <span style="color: #990000">=</span> r<span style="color: #990000">.</span>headers<span style="color: #990000">[</span><span style="color: #FF0000">'content-range'</span><span style="color: #990000">].</span><span style="font-weight: bold"><span style="color: #000000">split</span></span><span style="color: #990000">()[</span><span style="color: #993399">1</span><span style="color: #990000">].</span><span style="font-weight: bold"><span style="color: #000000">split</span></span><span style="color: #990000">(</span><span style="color: #FF0000">'-'</span><span style="color: #990000">)[</span><span style="color: #993399">0</span><span style="color: #990000">]</span>
+p <span style="color: #990000">=</span> <span style="font-weight: bold"><span style="color: #000000">str</span></span><span style="color: #990000">(</span><span style="font-weight: bold"><span style="color: #000000">int</span></span><span style="color: #990000">(</span>p<span style="color: #990000">)</span> <span style="color: #990000">-</span> <span style="color: #993399">1</span><span style="color: #990000">)</span>
+r <span style="color: #990000">=</span> requests<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">get</span></span><span style="color: #990000">(</span><span style="color: #FF0000">'http://www.pythonchallenge.com/pc/hex/unreal.jpg'</span><span style="color: #990000">,</span>
+                 auth<span style="color: #990000">=</span>requests<span style="color: #990000">.</span>auth<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">HTTPBasicAuth</span></span><span style="color: #990000">(</span><span style="color: #FF0000">'butter'</span><span style="color: #990000">,</span> <span style="color: #FF0000">'fly'</span><span style="color: #990000">),</span> headers<span style="color: #990000">={</span><span style="color: #FF0000">'Range'</span><span style="color: #990000">:</span> <span style="color: #FF0000">'bytes='</span> <span style="color: #990000">+</span> p <span style="color: #990000">+</span> <span style="color: #FF0000">'-'</span><span style="color: #990000">})</span>
+<span style="font-weight: bold"><span style="color: #0000FF">print</span></span><span style="color: #990000">(</span>r<span style="color: #990000">.</span>text<span style="color: #990000">)</span>
+<span style="font-style: italic"><span style="color: #9A1900"># "and it is hiding at 1152983631."</span></span></tt></pre></div></div>
+<div class="paragraph"><p>So just run:</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.8
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt>r <span style="color: #990000">=</span> requests<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">get</span></span><span style="color: #990000">(</span><span style="color: #FF0000">'http://www.pythonchallenge.com/pc/hex/unreal.jpg'</span><span style="color: #990000">,</span>
+                 auth<span style="color: #990000">=</span>requests<span style="color: #990000">.</span>auth<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">HTTPBasicAuth</span></span><span style="color: #990000">(</span><span style="color: #FF0000">'butter'</span><span style="color: #990000">,</span> <span style="color: #FF0000">'fly'</span><span style="color: #990000">),</span> headers<span style="color: #990000">={</span><span style="color: #FF0000">'Range'</span><span style="color: #990000">:</span> <span style="color: #FF0000">'bytes=1152983631-'</span><span style="color: #990000">})</span>
+f <span style="color: #990000">=</span> <span style="font-weight: bold"><span style="color: #000000">open</span></span><span style="color: #990000">(</span><span style="color: #FF0000">'20.data'</span><span style="color: #990000">,</span> <span style="color: #FF0000">'wb'</span><span style="color: #990000">)</span>
+f<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">write</span></span><span style="color: #990000">(</span>r<span style="color: #990000">.</span>content<span style="color: #990000">)</span>
+f<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">close</span></span><span style="color: #990000">()</span></tt></pre></div></div>
+<div class="paragraph"><p>Turns out the content is an encrypted zip file, whose password is <em>invader</em> reversed.</p></div>
+<div class="paragraph"><p>Here I stuck for half an hour because the zip password parameter, it must be binary string.Though I can just extract it by <code>aunpack</code>.</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.8
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt>password <span style="color: #990000">=</span> <span style="color: #FF0000">'invader'</span>
+password <span style="color: #990000">=</span> <span style="color: #FF0000">''</span><span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">join</span></span><span style="color: #990000">(</span><span style="font-weight: bold"><span style="color: #000000">reversed</span></span><span style="color: #990000">(</span>password<span style="color: #990000">))</span>
+zf <span style="color: #990000">=</span> zipfile<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">ZipFile</span></span><span style="color: #990000">(</span><span style="color: #FF0000">'20.data'</span><span style="color: #990000">)</span>
+zf<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">extractall</span></span><span style="color: #990000">(</span>pwd<span style="color: #990000">=</span>password<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">encode</span></span><span style="color: #990000">(</span><span style="color: #FF0000">'utf-8'</span><span style="color: #990000">))</span></tt></pre></div></div>
+<div class="paragraph"><p>The final files are:</p></div>
+</div>
+<div class="sect2">
+<h3 id="_21">21</h3>
+<div class="listingblock">
+<div class="title">readme.txt</div>
+<div class="content">
+<pre><code>Yes! This is really level 21 in here.
+And yes, After you solve it, you'll be in level 22!
+
+Now for the level:
+
+* We used to play this game when we were kids
+* When I had no idea what to do, I looked backwards.</code></pre>
+</div></div>
+<div class="paragraph"><p>and <em>package.pack</em> , which is a <em>zlib compressed data</em> file.</p></div>
 </div>
 </div>
 </div>
@@ -1164,7 +1260,7 @@ http://www.gnu.org/software/src-highlite -->
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-05-08 16:26:12 CST
+Last updated 2015-05-10 00:53:59 CST
 </div>
 </div>
 </body>

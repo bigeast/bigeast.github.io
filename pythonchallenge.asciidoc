@@ -394,3 +394,94 @@ Now the new wav file sounds [through-line]#"You've already get it, Ah..."# "You'
 Oh, the indian map is a clue for "endian"!
 
 === http://www.pythonchallenge.com/pc/hex/idiot2.html[20]
+
+This problem is amazing.
+
+I cheated for hints, but I did googled a lot by myself and learned many things about _HTTP headers_ and _Python libraries_, such as `requests`
+
+I also use _Firebug_ to inspect the HTTP header.
+
+The point is, when the image is transmitted by http, the header contains such an item: _Content-Range :	bytes 0-30202/2123456789_ , google for "Content-Range" and find http://benramsey.com/blog/2008/05/206-partial-content-and-range-requests/[a blog about it], and to get the rest bytes, the http client need to add such an item to the header: _Range: bytes=30203-_ , this can be done by the library `requests`.
+[source, python]
+import requests
+import zipfile
+r = requests.get('http://www.pythonchallenge.com/pc/hex/unreal.jpg',
+                 auth=requests.auth.HTTPBasicAuth('butter', 'fly'))
+Begin = r.headers['content-range'].split()[1].split('-')[1].split('/')[0]
+End = r.headers['content-range'].split()[1].split('-')[1].split('/')[1]
+print(Begin)
+# headers = {'Range':'bytes=30203-'}
+p = str(int(Begin) + 1)
+while r.status_code != 416:
+    headers = {'Range': 'bytes=' + p + '-'}
+    r = requests.get('http://www.pythonchallenge.com/pc/hex/unreal.jpg',
+                     auth=requests.auth.HTTPBasicAuth('butter', 'fly'), headers=headers)
+    if r.status_code == 206:
+        p = r.headers['content-range'].split()[1].split('-')[1].split('/')[0]
+#        print(p, r.text, r.status_code, r.headers['content-type'])
+        print(p, r.text)
+        p = str(int(p) + 1)
+# 30202
+# 30236 b"Why don't you respect my privacy?\n" 206 application/octet-stream
+# 30283 b'we can go on in this way for really long time.\n' 206 application/octet-stream
+# 30294 b'stop this!\n' 206 application/octet-stream
+# 30312 b'invader! invader!\n' 206 application/octet-stream
+# 30346 b'ok, invader. you are inside now. \n' 206 application/octet-stream
+# 416 text/html
+
+When it reached 30347, the hints ended.
+
+I couldn't figure out how to get the last _text/html_ content, so I cheated for a hint that I need to request from the end.
+
+[source, python]
+r = requests.get('http://www.pythonchallenge.com/pc/hex/unreal.jpg',
+                 auth=requests.auth.HTTPBasicAuth('butter', 'fly'), headers={'Range': 'bytes=' + End + '-'})
+print(r.text)
+print(''.join(reversed(r.text)))
+# "the password is your new nickname in reverse"
+
+My "new nickname" is "invader" from the hints above, and invader.html confirms that.
+
+[source, python]
+p = r.headers['content-range'].split()[1].split('-')[0]
+p = str(int(p) - 1)
+r = requests.get('http://www.pythonchallenge.com/pc/hex/unreal.jpg',
+                 auth=requests.auth.HTTPBasicAuth('butter', 'fly'), headers={'Range': 'bytes=' + p + '-'})
+print(r.text)
+# "and it is hiding at 1152983631."
+
+So just run:
+
+[source, python]
+r = requests.get('http://www.pythonchallenge.com/pc/hex/unreal.jpg',
+                 auth=requests.auth.HTTPBasicAuth('butter', 'fly'), headers={'Range': 'bytes=1152983631-'})
+f = open('20.data', 'wb')
+f.write(r.content)
+f.close()
+
+Turns out the content is an encrypted zip file, whose password is 'invader' reversed.
+
+Here I stuck for half an hour because the zip password parameter, it must be binary string.Though I can just extract it by `aunpack`.
+
+[source, python]
+password = 'invader'
+password = ''.join(reversed(password))
+zf = zipfile.ZipFile('20.data')
+zf.extractall(pwd=password.encode('utf-8'))
+
+The final files are:
+
+=== 21
+
+.readme.txt
+--------------------------------------------------------------------------------
+Yes! This is really level 21 in here. 
+And yes, After you solve it, you'll be in level 22!
+
+Now for the level:
+
+* We used to play this game when we were kids
+* When I had no idea what to do, I looked backwards.
+--------------------------------------------------------------------------------
+
+and _package.pack_ , which is a _zlib compressed data_ file.
