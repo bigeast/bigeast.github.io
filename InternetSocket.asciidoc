@@ -62,3 +62,7 @@ Connection closed by foreign host.
 	** 文件描述符和文件流的连接：fdopen
 	** 管道的典型使用方式是，pipe->fork->dup2->exec，这个流程实际上实现了将子进程的stdout或者stdin绑定到一个管道，从而与父进程进行通信。库函数popen()实现的功能与之类似，相当于用bash -c 执行一条命令，然后可以指定父进程对管道是读还是写。
 	** 管道I/O的原子性。当数据大小不超过PIPE_BUF时，管道的读或者写是原子的。 _如何理解?_
+
+* 本机字节序与网络字节序之间的转换
+	** <arpa/inet.h>
+	** htons, htonl, ntohs, ntohl

@@ -777,11 +777,209 @@ vector的初始化。
 </p>
 </li>
 </ul></div>
-<div class="exampleblock">
+<div class="listingblock">
 <div class="content">
-<div class="paragraph"><p>vector&lt;int&gt; a(100, 0);</p></div>
-<div class="paragraph"><p>vector&lt;vector&lt;int&gt; &gt; matrix(M, vector&lt;int&gt;(N, 0));</p></div>
+<pre><code>vector&lt;int&gt; a(100, 0);
+vector&lt;vector&lt;int&gt; &gt; matrix(M, vector&lt;int&gt;(N, 0));</code></pre>
 </div></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_2015_05_10_sunday_18_55_51">2015-05-10 Sunday 18:55:51</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_a_href_https_developer_mozilla_org_en_us_docs_web_javascript_a_re_introduction_to_javascript_a_re_introduction_to_javascript_js_tutorial_a"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/A_re-introduction_to_JavaScript">A re-introduction to JavaScript (JS tutorial)</a></h3>
+<div class="ulist"><ul>
+<li>
+<p>
+JS的解释器
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+Mozilla SpiderMonkey 的 <code>js</code> ，用 print() 来打印。
+</p>
+</li>
+<li>
+<p>
+Node.js 的 <code>node</code> ，用 console.log() 来打印。
+</p>
+</li>
+<li>
+<p>
+浏览器中的 <code>Firebug</code> ， 用 alert() 来打印。
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+数字类型是双精度浮点数，
+</p>
+</li>
+<li>
+<p>
+两个字符串相加是字符串合并。数字与字符串相加时，会先转换为字符串，再做字符串合并。把数字转换成字符串的一种做法是加上空字符串。
+</p>
+</li>
+</ul></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.8
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="color: #FF0000">"big"</span> <span style="color: #990000">+</span> <span style="color: #FF0000">"east"</span> <span style="font-style: italic"><span style="color: #9A1900">// "bigeast"</span></span>
+<span style="color: #993399">3</span> <span style="color: #990000">+</span> <span style="color: #993399">4</span> <span style="color: #990000">+</span> <span style="color: #FF0000">"5"</span> <span style="font-style: italic"><span style="color: #9A1900">// "75"</span></span>
+<span style="color: #FF0000">"3"</span> <span style="color: #990000">+</span> <span style="color: #993399">4</span> <span style="color: #990000">+</span> <span style="color: #993399">5</span> <span style="font-style: italic"><span style="color: #9A1900">// "345"</span></span></tt></pre></div></div>
+<div class="ulist"><ul>
+<li>
+<p>
+三个等号与两个等号判断相等的区别
+</p>
+</li>
+</ul></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.8
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="color: #993399">1</span> <span style="color: #990000">==</span> <span style="font-weight: bold"><span style="color: #0000FF">true</span></span> # <span style="font-weight: bold"><span style="color: #0000FF">true</span></span>
+<span style="color: #993399">1</span> <span style="color: #990000">===</span> <span style="font-weight: bold"><span style="color: #0000FF">true</span></span> # <span style="font-weight: bold"><span style="color: #0000FF">false</span></span>
+<span style="font-weight: bold"><span style="color: #0000FF">true</span></span> <span style="color: #990000">===</span> <span style="font-weight: bold"><span style="color: #0000FF">true</span></span> # <span style="font-weight: bold"><span style="color: #0000FF">true</span></span></tt></pre></div></div>
+<div class="ulist"><ul>
+<li>
+<p>
+if&#8230;else, for loop, do&#8230;while, while, switch&#8230;case, 以及短路表达式。与C的语法类似。
+</p>
+</li>
+<li>
+<p>
+JavaScript中的对象可以看作简单的名字-值对，与Python中的字典、C\++中的map类似。类的定义类似于给字典赋值的函数。
+</p>
+</li>
+</ul></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.8
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="font-weight: bold"><span style="color: #0000FF">var</span></span> obj <span style="color: #990000">=</span> <span style="font-weight: bold"><span style="color: #0000FF">new</span></span> <span style="font-weight: bold"><span style="color: #000000">Object</span></span><span style="color: #990000">();</span>
+<span style="font-weight: bold"><span style="color: #0000FF">var</span></span> obj <span style="color: #990000">=</span> <span style="color: #FF0000">{}</span> # really like dict <span style="font-weight: bold"><span style="color: #0000FF">in</span></span> Python<span style="color: #990000">!</span>
+<span style="font-weight: bold"><span style="color: #0000FF">function</span></span> <span style="font-weight: bold"><span style="color: #000000">Point</span></span><span style="color: #990000">(</span>x<span style="color: #990000">,</span> y<span style="color: #990000">)</span> <span style="color: #FF0000">{</span>
+        <span style="font-weight: bold"><span style="color: #0000FF">this</span></span><span style="color: #990000">.</span>x <span style="color: #990000">=</span> x<span style="color: #990000">;</span>
+        <span style="font-weight: bold"><span style="color: #0000FF">this</span></span><span style="color: #990000">.</span>y <span style="color: #990000">=</span> y<span style="color: #990000">;</span>
+<span style="color: #FF0000">}</span></tt></pre></div></div>
+<div class="paragraph"><p>成员变量的访问其实就是访问哈希表。有两种方式：</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.8
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt>p <span style="color: #990000">=</span> <span style="font-weight: bold"><span style="color: #0000FF">new</span></span> <span style="font-weight: bold"><span style="color: #000000">Point</span></span><span style="color: #990000">(</span><span style="color: #993399">3</span><span style="color: #990000">,</span> <span style="color: #993399">4</span><span style="color: #990000">);</span>
+p<span style="color: #990000">.</span>x <span style="color: #990000">+=</span> <span style="color: #993399">1</span><span style="color: #990000">;</span>
+p<span style="color: #990000">[</span><span style="color: #FF0000">'x'</span><span style="color: #990000">]</span> <span style="color: #990000">+=</span> <span style="color: #993399">1</span><span style="color: #990000">;</span></tt></pre></div></div>
+<div class="ulist"><ul>
+<li>
+<p>
+数组是一个特殊的对象，有length成员。越界访问会返回"undefine"。除了用类似C的for循环遍历数组外，还可以用Python类似的for语法来遍历，只不过 _变量是数组的下标，而不是数组的元素_ 。
+</p>
+</li>
+</ul></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.8
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="font-weight: bold"><span style="color: #0000FF">for</span></span> <span style="color: #990000">(</span><span style="font-weight: bold"><span style="color: #0000FF">var</span></span> i <span style="font-weight: bold"><span style="color: #0000FF">in</span></span> a<span style="color: #990000">)</span> <span style="color: #FF0000">{</span>
+        <span style="font-style: italic"><span style="color: #9A1900">// process a[i]</span></span>
+<span style="color: #FF0000">}</span>
+a<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">push</span></span><span style="color: #990000">(</span><span style="color: #993399">3</span><span style="color: #990000">);</span></tt></pre></div></div>
+<div class="paragraph"><p><em>数组其实可以看作一种键值限制为整数的哈系表，在JavaScript中，Array对象也是用哈希来实现的。数组长度为3的情况下，可直接对a[10]赋值，a[3&#8230;9]的值是未定义的。这在其它语言中是不行的。</em></p></div>
+<div class="paragraph"><p>数组可以当作vector(push)，双端队列(pop, shift)。</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+函数。
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+每个函数的参数都可以通过 <em>arguments</em> 访问到，据此可实现可变参数函数。
+</p>
+</li>
+<li>
+<p>
+函数也是一个特殊的对象，每个函数都有 <em>apply</em> 方法。
+</p>
+</li>
+<li>
+<p>
+可以像给变量赋值一样定义函数：
+</p>
+</li>
+</ul></div>
+</li>
+</ul></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.8
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="font-weight: bold"><span style="color: #0000FF">var</span></span> avg <span style="color: #990000">=</span> <span style="font-weight: bold"><span style="color: #0000FF">function</span></span><span style="color: #990000">()</span> <span style="color: #FF0000">{</span>
+  <span style="font-weight: bold"><span style="color: #0000FF">var</span></span> sum <span style="color: #990000">=</span> <span style="color: #993399">0</span><span style="color: #990000">;</span>
+  <span style="font-weight: bold"><span style="color: #0000FF">for</span></span> <span style="color: #990000">(</span><span style="font-weight: bold"><span style="color: #0000FF">var</span></span> i <span style="color: #990000">=</span> <span style="color: #993399">0</span><span style="color: #990000">,</span> j <span style="color: #990000">=</span> arguments<span style="color: #990000">.</span>length<span style="color: #990000">;</span> i <span style="color: #990000">&lt;</span> j<span style="color: #990000">;</span> i<span style="color: #990000">++)</span> <span style="color: #FF0000">{</span>
+    sum <span style="color: #990000">+=</span> arguments<span style="color: #990000">[</span>i<span style="color: #990000">];</span>
+  <span style="color: #FF0000">}</span>
+  <span style="font-weight: bold"><span style="color: #0000FF">return</span></span> sum <span style="color: #990000">/</span> arguments<span style="color: #990000">.</span>length<span style="color: #990000">;</span>
+<span style="color: #FF0000">}</span></tt></pre></div></div>
+<div class="ulist"><ul>
+<li>
+<p>
+递归函数需要命名。
+</p>
+</li>
+<li>
+<p>
+JavaScript是基于原型的，它的类其实是用函数对象来实现的。通过给函数对象的prototype增加新的值，可以动态地为对象增加方法。
+</p>
+</li>
+</ul></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.8
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="font-weight: bold"><span style="color: #0000FF">function</span></span> <span style="font-weight: bold"><span style="color: #000000">makePerson</span></span><span style="color: #990000">(</span>first<span style="color: #990000">,</span> last<span style="color: #990000">)</span> <span style="color: #FF0000">{</span>
+  <span style="font-weight: bold"><span style="color: #0000FF">return</span></span> <span style="color: #FF0000">{</span>
+    first<span style="color: #990000">:</span> first<span style="color: #990000">,</span>
+    last<span style="color: #990000">:</span> last<span style="color: #990000">,</span>
+    fullName<span style="color: #990000">:</span> <span style="font-weight: bold"><span style="color: #0000FF">function</span></span><span style="color: #990000">()</span> <span style="color: #FF0000">{</span>
+      <span style="font-weight: bold"><span style="color: #0000FF">return</span></span> <span style="font-weight: bold"><span style="color: #0000FF">this</span></span><span style="color: #990000">.</span>first <span style="color: #990000">+</span> <span style="color: #FF0000">' '</span> <span style="color: #990000">+</span> <span style="font-weight: bold"><span style="color: #0000FF">this</span></span><span style="color: #990000">.</span>last<span style="color: #990000">;</span>
+    <span style="color: #FF0000">}</span><span style="color: #990000">,</span>
+    fullNameReversed<span style="color: #990000">:</span> <span style="font-weight: bold"><span style="color: #0000FF">function</span></span><span style="color: #990000">()</span> <span style="color: #FF0000">{</span>
+      <span style="font-weight: bold"><span style="color: #0000FF">return</span></span> <span style="font-weight: bold"><span style="color: #0000FF">this</span></span><span style="color: #990000">.</span>last <span style="color: #990000">+</span> <span style="color: #FF0000">', '</span> <span style="color: #990000">+</span> <span style="font-weight: bold"><span style="color: #0000FF">this</span></span><span style="color: #990000">.</span>first<span style="color: #990000">;</span>
+    <span style="color: #FF0000">}</span>
+  <span style="color: #FF0000">}</span><span style="color: #990000">;</span>
+<span style="color: #FF0000">}</span>
+s <span style="color: #990000">=</span> <span style="font-weight: bold"><span style="color: #000000">makePerson</span></span><span style="color: #990000">(</span><span style="color: #FF0000">"Simon"</span><span style="color: #990000">,</span> <span style="color: #FF0000">"Willison"</span><span style="color: #990000">)</span>
+s<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">fullName</span></span><span style="color: #990000">();</span> <span style="font-style: italic"><span style="color: #9A1900">// "Simon Willison"</span></span>
+s<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">fullNameReversed</span></span><span style="color: #990000">();</span> <span style="font-style: italic"><span style="color: #9A1900">// "Willison, Simon"</span></span>
+        <span style="color: #990000">**</span> 函数嵌套，可以缓解全局变量的问题。</tt></pre></div></div>
+<div class="ulist"><ul>
+<li>
+<p>
+<a href="https://stackoverflow.com/questions/111102/how-do-javascript-closures-work">闭包</a>
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+JavaScript的函数引用与C语言中的函数指针的区别在于，函数引用除了指针之外，还包含函数内部的变量，它们在函数返回后依然可以被访问到。
+</p>
+</li>
+</ul></div>
+</li>
+</ul></div>
 </div>
 </div>
 </div>
@@ -789,7 +987,7 @@ vector的初始化。
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-05-09 21:49:55 CST
+Last updated 2015-05-10 20:40:41 CST
 </div>
 </div>
 </body>

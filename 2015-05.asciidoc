@@ -9,8 +9,97 @@
 * C\++中可以在程序的任意位置声明变量是因为声明是C\++中的合法语句，而C中声明语句与其它语句是不同的。
 * vector的初始化。
 
-====================================================================================================
+----------------------------------------------------------------------------------------------------
 vector<int> a(100, 0);
-
 vector<vector<int> > matrix(M, vector<int>(N, 0));
-====================================================================================================
+----------------------------------------------------------------------------------------------------
+
+== 2015-05-10 Sunday 18:55:51
+=== https://developer.mozilla.org/en-US/docs/Web/JavaScript/A_re-introduction_to_JavaScript[A re-introduction to JavaScript (JS tutorial)]
+* JS的解释器
+	** Mozilla SpiderMonkey 的 `js` ，用 print() 来打印。
+   	** Node.js 的 `node` ，用 console.log() 来打印。
+	** 浏览器中的 `Firebug` ， 用 alert() 来打印。
+* 数字类型是双精度浮点数，
+* 两个字符串相加是字符串合并。数字与字符串相加时，会先转换为字符串，再做字符串合并。把数字转换成字符串的一种做法是加上空字符串。
+
+[source, javascript]
+"big" + "east" // "bigeast"
+3 + 4 + "5" // "75"
+"3" + 4 + 5 // "345"
+
+* 三个等号与两个等号判断相等的区别
+
+[source, javascript]
+1 == true # true
+1 === true # false
+true === true # true
+
+* if...else, for loop, do...while, while, switch...case, 以及短路表达式。与C的语法类似。
+* JavaScript中的对象可以看作简单的名字-值对，与Python中的字典、C\++中的map类似。类的定义类似于给字典赋值的函数。
+
+[source, javascript]
+var obj = new Object();
+var obj = {} # really like dict in Python!
+function Point(x, y) {
+	this.x = x;
+	this.y = y;
+}
+
+成员变量的访问其实就是访问哈希表。有两种方式：
+
+[source, javascript]
+p = new Point(3, 4);
+p.x += 1;
+p['x'] += 1;
+
+* 数组是一个特殊的对象，有length成员。越界访问会返回"undefine"。除了用类似C的for循环遍历数组外，还可以用Python类似的for语法来遍历，只不过 _变量是数组的下标，而不是数组的元素_ 。
+
+[source, javascript]
+for (var i in a) {
+	// process a[i]
+}
+a.push(3);
+
+_数组其实可以看作一种键值限制为整数的哈系表，在JavaScript中，Array对象也是用哈希来实现的。数组长度为3的情况下，可直接对a[10]赋值，a[3...9]的值是未定义的。这在其它语言中是不行的。_
+
+数组可以当作vector(push)，双端队列(pop, shift)。
+
+* 函数。
+	** 每个函数的参数都可以通过 _arguments_ 访问到，据此可实现可变参数函数。
+	** 函数也是一个特殊的对象，每个函数都有 _apply_ 方法。
+	** 可以像给变量赋值一样定义函数：
+
+[source, javascript]
+var avg = function() {
+  var sum = 0;
+  for (var i = 0, j = arguments.length; i < j; i++) {
+    sum += arguments[i];
+  }
+  return sum / arguments.length;
+}
+
+	** 递归函数需要命名。
+
+	** JavaScript是基于原型的，它的类其实是用函数对象来实现的。通过给函数对象的prototype增加新的值，可以动态地为对象增加方法。
+
+[source, javascript]
+function makePerson(first, last) {
+  return {
+    first: first,
+    last: last,
+    fullName: function() {
+      return this.first + ' ' + this.last;
+    },
+    fullNameReversed: function() {
+      return this.last + ', ' + this.first;
+    }
+  };
+}
+s = makePerson("Simon", "Willison")
+s.fullName(); // "Simon Willison"
+s.fullNameReversed(); // "Willison, Simon"
+	** 函数嵌套，可以缓解全局变量的问题。
+
+* https://stackoverflow.com/questions/111102/how-do-javascript-closures-work[闭包]
+	** JavaScript的函数引用与C语言中的函数指针的区别在于，函数引用除了指针之外，还包含函数内部的变量，它们在函数返回后依然可以被访问到。
