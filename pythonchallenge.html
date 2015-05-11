@@ -1297,13 +1297,74 @@ f2<span style="color: #990000">.</span><span style="font-weight: bold"><span sty
 <span style="font-weight: bold"><span style="color: #0000FF">print</span></span><span style="color: #990000">(</span>cnt<span style="color: #990000">)</span>
 <span style="font-weight: bold"><span style="color: #0000FF">print</span></span><span style="color: #990000">(</span><span style="color: #FF0000">''</span><span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">join</span></span><span style="color: #990000">(</span>log<span style="color: #990000">))</span></tt></pre></div></div>
 </div>
+<div class="sect2">
+<h3 id="_a_href_http_www_pythonchallenge_com_pc_hex_copper_html_22_a"><a href="http://www.pythonchallenge.com/pc/hex/copper.html">22</a></h3>
+<div class="paragraph"><p>It seems that Firebug hide the comments in the source, so I didn&#8217;t see it in the first time: <em>or maybe white.gif would be more bright</em></p></div>
+<div class="paragraph"><p>Download <em>white.gif</em> and it shows nothing, easily to deduce that some pixel must be exaggerated to be seen.</p></div>
+<div class="paragraph"><p>I use <em>PIL.Image</em> to handle the gif image:</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.8
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="font-weight: bold"><span style="color: #000080">from</span></span> PIL <span style="font-weight: bold"><span style="color: #000080">import</span></span> Image
+im <span style="color: #990000">=</span> Image<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">open</span></span><span style="color: #990000">(</span><span style="color: #FF0000">'white.gif'</span><span style="color: #990000">)</span>
+w<span style="color: #990000">,</span> h <span style="color: #990000">=</span> im<span style="color: #990000">.</span>size
+cnt <span style="color: #990000">=</span> <span style="color: #993399">0</span>
+x<span style="color: #990000">,</span> y <span style="color: #990000">=</span> <span style="color: #993399">0</span><span style="color: #990000">,</span> <span style="color: #993399">0</span>
+res <span style="color: #990000">=</span> Image<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">new</span></span><span style="color: #990000">(</span><span style="color: #FF0000">"RGB"</span><span style="color: #990000">,</span> <span style="color: #990000">(</span><span style="color: #993399">200</span><span style="color: #990000">,</span> <span style="color: #993399">200</span><span style="color: #990000">))</span>
+moves <span style="color: #990000">=</span> <span style="color: #990000">[]</span>
+<span style="font-weight: bold"><span style="color: #0000FF">while</span></span> True<span style="color: #990000">:</span>
+    rgb_im <span style="color: #990000">=</span> im<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">convert</span></span><span style="color: #990000">(</span><span style="color: #FF0000">"RGB"</span><span style="color: #990000">)</span>
+    a <span style="color: #990000">=</span> rgb_im<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">load</span></span><span style="color: #990000">()</span>
+    <span style="font-weight: bold"><span style="color: #0000FF">for</span></span> i <span style="font-weight: bold"><span style="color: #0000FF">in</span></span> <span style="font-weight: bold"><span style="color: #000000">range</span></span><span style="color: #990000">(</span>h<span style="color: #990000">):</span>
+        <span style="font-weight: bold"><span style="color: #0000FF">for</span></span> j <span style="font-weight: bold"><span style="color: #0000FF">in</span></span> <span style="font-weight: bold"><span style="color: #000000">range</span></span><span style="color: #990000">(</span>w<span style="color: #990000">):</span>
+            <span style="font-weight: bold"><span style="color: #0000FF">if</span></span> a<span style="color: #990000">[</span>i<span style="color: #990000">,</span> j<span style="color: #990000">]</span> <span style="color: #990000">!=</span> <span style="color: #990000">(</span><span style="color: #993399">0</span><span style="color: #990000">,</span> <span style="color: #993399">0</span><span style="color: #990000">,</span> <span style="color: #993399">0</span><span style="color: #990000">):</span>
+                moves<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">append</span></span><span style="color: #990000">((</span>i <span style="color: #990000">-</span> <span style="color: #993399">100</span><span style="color: #990000">,</span> j <span style="color: #990000">-</span> <span style="color: #993399">100</span><span style="color: #990000">))</span>
+    cnt <span style="color: #990000">+=</span> <span style="color: #993399">1</span>
+    <span style="font-weight: bold"><span style="color: #0000FF">try</span></span><span style="color: #990000">:</span>
+        im<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">seek</span></span><span style="color: #990000">(</span>im<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">tell</span></span><span style="color: #990000">()</span> <span style="color: #990000">+</span> <span style="color: #993399">1</span><span style="color: #990000">)</span>
+    <span style="font-weight: bold"><span style="color: #0000FF">except</span></span> EOFError<span style="color: #990000">:</span>
+        <span style="font-weight: bold"><span style="color: #0000FF">break</span></span></tt></pre></div></div>
+<div class="paragraph"><p>Some notes when handle the gif using PIL:
+* gif may contains multiple frames, all of them share the same palette.
+* <em>im.tile</em> shows the essensial info about the image.
+* If not <em>im.load()</em>, the pixel can be access by <em>im.getpixelx</em>
+* If <em>a = im.load()</em>, then <em>im.getpixelx</em> is same as <em>a[x, y]</em>
+* Frame number can not be seen until all the frames have been <em>seek</em> .
+* Gif can&#8217;t be saved the same way as <em>jpg</em> can.</p></div>
+<div class="paragraph"><p>Save as gif is not easy, so I save as multiple jpg fils. but the white pixel is too small.</p></div>
+<div class="paragraph"><p>Then I run out of ideas.</p></div>
+<div class="paragraph"><p>Again, I cheated. So, the picture is a <em>joystick</em>, whose English name I now known for the first time. So <em>joystick.html</em> says <em>are you in level 2, or level 22?</em>, I thought some clue is from Level 2, but turns out all I need to do is to visit <em>22.html</em>, which says <em>it was a rhetorical question!</em>. Well, now I have to figure out the meaning of <em>rhetorical</em> first.</p></div>
+<div class="paragraph"><p>In every frame, there are only one pixel that is not black. Their cordinates values are in <em>{98, 100, 102}</em>.</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.8
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt>t <span style="color: #990000">=</span> <span style="color: #993399">0</span>
+letter <span style="color: #990000">=</span> <span style="color: #993399">0</span>
+<span style="font-weight: bold"><span style="color: #0000FF">while</span></span> t <span style="color: #990000">&lt;</span> <span style="font-weight: bold"><span style="color: #000000">len</span></span><span style="color: #990000">(</span>moves<span style="color: #990000">):</span>
+    <span style="font-weight: bold"><span style="color: #0000FF">if</span></span> moves<span style="color: #990000">[</span>t<span style="color: #990000">]</span> <span style="color: #990000">==</span> <span style="color: #990000">(</span><span style="color: #993399">0</span><span style="color: #990000">,</span> <span style="color: #993399">0</span><span style="color: #990000">):</span>
+        letter <span style="color: #990000">+=</span> <span style="color: #993399">1</span>
+        x<span style="color: #990000">,</span> y <span style="color: #990000">=</span> letter <span style="color: #990000">*</span> <span style="color: #993399">30</span><span style="color: #990000">,</span> letter <span style="color: #990000">*</span> <span style="color: #993399">30</span>
+    dx<span style="color: #990000">,</span> dy <span style="color: #990000">=</span> moves<span style="color: #990000">[</span>t<span style="color: #990000">]</span>
+    x<span style="color: #990000">,</span> y <span style="color: #990000">=</span> x <span style="color: #990000">+</span> dx<span style="color: #990000">,</span> y <span style="color: #990000">+</span> dy
+    res<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">putpixel</span></span><span style="color: #990000">((</span>x<span style="color: #990000">,</span> y<span style="color: #990000">),</span> <span style="color: #990000">(</span><span style="color: #993399">0</span><span style="color: #990000">,</span> <span style="color: #993399">255</span><span style="color: #990000">,</span> <span style="color: #993399">0</span><span style="color: #990000">))</span>
+    t <span style="color: #990000">+=</span> <span style="color: #993399">1</span>
+res<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">save</span></span><span style="color: #990000">(</span><span style="color: #FF0000">'res.jpg'</span><span style="color: #990000">)</span>
+res<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">show</span></span><span style="color: #990000">()</span></tt></pre></div></div>
+</div>
+<div class="sect2">
+<h3 id="_a_href_http_www_pythonchallenge_com_pc_hex_bonus_html_23_a"><a href="http://www.pythonchallenge.com/pc/hex/bonus.html">23</a></h3>
+</div>
 </div>
 </div>
 </div>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-05-11 09:37:32 CST
+Last updated 2015-05-11 21:07:20 CST
 </div>
 </div>
 </body>

@@ -535,3 +535,64 @@ f1.close()
 f2.close()
 print(cnt)
 print(''.join(log))
+
+=== http://www.pythonchallenge.com/pc/hex/copper.html[22]
+
+It seems that Firebug hide the comments in the source, so I didn't see it in the first time: 'or maybe white.gif would be more bright'
+
+Download 'white.gif' and it shows nothing, easily to deduce that some pixel must be exaggerated to be seen.
+
+I use 'PIL.Image' to handle the gif image: 
+
+[source, python]
+from PIL import Image
+im = Image.open('white.gif')
+w, h = im.size
+cnt = 0
+x, y = 0, 0
+res = Image.new("RGB", (200, 200))
+moves = []
+while True:
+    rgb_im = im.convert("RGB")
+    a = rgb_im.load()
+    for i in range(h):
+        for j in range(w):
+            if a[i, j] != (0, 0, 0):
+                moves.append((i - 100, j - 100))
+    cnt += 1
+    try:
+        im.seek(im.tell() + 1)
+    except EOFError:
+        break
+
+Some notes when handle the gif using PIL:
+* gif may contains multiple frames, all of them share the same palette.
+* 'im.tile' shows the essensial info about the image.
+* If not 'im.load()', the pixel can be access by 'im.getpixel((x, y))'
+* If 'a = im.load()', then 'im.getpixel((x, y))' is same as 'a[x, y]'
+* Frame number can not be seen until all the frames have been 'seek' .
+* Gif can't be saved the same way as 'jpg' can.
+
+Save as gif is not easy, so I save as multiple jpg fils. but the white pixel is too small.
+
+Then I run out of ideas.
+
+Again, I cheated. So, the picture is a 'joystick', whose English name I now known for the first time. So 'joystick.html' says 'are you in level 2, or level 22?', I thought some clue is from Level 2, but turns out all I need to do is to visit '22.html', which says 'it was a rhetorical question!'. Well, now I have to figure out the meaning of 'rhetorical' first.
+
+In every frame, there are only one pixel that is not black. Their cordinates values are in '{98, 100, 102}'.
+
+[source, python]
+t = 0
+letter = 0
+while t < len(moves):
+    if moves[t] == (0, 0):
+        letter += 1
+        x, y = letter * 30, letter * 30
+    dx, dy = moves[t]
+    x, y = x + dx, y + dy
+    res.putpixel((x, y), (0, 255, 0))
+    t += 1
+res.save('res.jpg')
+res.show()
+
+=== http://www.pythonchallenge.com/pc/hex/bonus.html[23]
