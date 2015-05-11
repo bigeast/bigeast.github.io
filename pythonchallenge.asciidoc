@@ -484,4 +484,54 @@ Now for the level:
 * When I had no idea what to do, I looked backwards.
 --------------------------------------------------------------------------------
 
-and _package.pack_ , which is a _zlib compressed data_ file.
+and _package.pack_ , which is a _zlib compressed data_ file begin with `78 9c`.
+
+_zlib.decompress_ can decompress it, but the result is still zlib compressed data. Keep decompressing it until it begins with `BZh`, which is a _bz2_ file!
+
+Now keep _bz2.decompress_ it until it becomes _zlib file_ again, and then bz2...
+
+Finally I got a file begins with `80 8d`, which is _8086 relocatable (Microsoft)_ accroding to `file`.
+
+I googled it, and guessed that it may be an old executable file on DOS. I failed to http://gunkies.org/wiki/Installing_MS-DOS_on_Qemu[install _MS DOS 6.2.2_ on qemu], I didn't know how to insert the second floppy, _change fda DOS622_2.IMG_ didn't work.
+
+Then I http://en.wikibooks.org/wiki/QEMU/FreeDOS[install FreeDOS on qemu], and copy the '8086 relocatable' file to FreeDOS disk. But sadly found that it crashed before giving any usefull information.
+
+Then I cheated. The hint is in _readme.txt_ : _When I had no idea what to do, I looked backwards._ Oh it means reverse the decoded content and see what it is. The fake '8086 relocatable' file turns out to be an _zlib file_ again!
+
+Continue to decompress it and got the message: "look at your logs."
+
+There is no logs.
+
+But if the log means which method is used to decompress, there is.
+
+If not cheated, I would spend a lot of time to figure out how to arange the log to get usefull information. The answer is, when _zlib.decompress_, append a 'z'; when _bz2.decompress_, append a space; when _zlib.decompress_ backwards, append a new line. Then print the final string will show the address to the next level.
+
+[source, python]
+import zlib
+import bz2
+f1 = open('package.pack', 'rb')
+f2 = open('20.dec', 'wb')
+a = f1.read()
+cnt = 0
+log = []
+while True:
+    cnt += 1
+    if a.startswith(b'x\x9c'):
+        a = zlib.decompress(a)
+        print("zlib")
+        log.append(' ')
+    elif a.startswith(b'BZh'):
+        a = bz2.decompress(a)
+        print("bz2")
+        log.append('b')
+    elif a.endswith(b'\x9cx'):
+        a = zlib.decompress(a[::-1])
+        log.append('\n')
+    else:
+        f2.write(a)
+        print(a[::-1])
+        break
+f1.close()
+f2.close()
+print(cnt)
+print(''.join(log))

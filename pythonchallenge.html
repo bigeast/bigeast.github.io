@@ -1252,7 +1252,50 @@ Now for the level:
 * We used to play this game when we were kids
 * When I had no idea what to do, I looked backwards.</code></pre>
 </div></div>
-<div class="paragraph"><p>and <em>package.pack</em> , which is a <em>zlib compressed data</em> file.</p></div>
+<div class="paragraph"><p>and <em>package.pack</em> , which is a <em>zlib compressed data</em> file begin with <code>78 9c</code>.</p></div>
+<div class="paragraph"><p><em>zlib.decompress</em> can decompress it, but the result is still zlib compressed data. Keep decompressing it until it begins with <code>BZh</code>, which is a <em>bz2</em> file!</p></div>
+<div class="paragraph"><p>Now keep <em>bz2.decompress</em> it until it becomes <em>zlib file</em> again, and then bz2&#8230;</p></div>
+<div class="paragraph"><p>Finally I got a file begins with <code>80 8d</code>, which is <em>8086 relocatable (Microsoft)</em> accroding to <code>file</code>.</p></div>
+<div class="paragraph"><p>I googled it, and guessed that it may be an old executable file on DOS. I failed to <a href="http://gunkies.org/wiki/Installing_MS-DOS_on_Qemu">install <em>MS DOS 6.2.2</em> on qemu</a>, I didn&#8217;t know how to insert the second floppy, <em>change fda DOS622_2.IMG</em> didn&#8217;t work.</p></div>
+<div class="paragraph"><p>Then I <a href="http://en.wikibooks.org/wiki/QEMU/FreeDOS">install FreeDOS on qemu</a>, and copy the <em>8086 relocatable</em> file to FreeDOS disk. But sadly found that it crashed before giving any usefull information.</p></div>
+<div class="paragraph"><p>Then I cheated. The hint is in <em>readme.txt</em> : <em>When I had no idea what to do, I looked backwards.</em> Oh it means reverse the decoded content and see what it is. The fake <em>8086 relocatable</em> file turns out to be an <em>zlib file</em> again!</p></div>
+<div class="paragraph"><p>Continue to decompress it and got the message: "look at your logs."</p></div>
+<div class="paragraph"><p>There is no logs.</p></div>
+<div class="paragraph"><p>But if the log means which method is used to decompress, there is.</p></div>
+<div class="paragraph"><p>If not cheated, I would spend a lot of time to figure out how to arange the log to get usefull information. The answer is, when <em>zlib.decompress</em>, append a <em>z</em>; when <em>bz2.decompress</em>, append a space; when <em>zlib.decompress</em> backwards, append a new line. Then print the final string will show the address to the next level.</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.8
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="font-weight: bold"><span style="color: #000080">import</span></span> zlib
+<span style="font-weight: bold"><span style="color: #000080">import</span></span> bz2
+f1 <span style="color: #990000">=</span> <span style="font-weight: bold"><span style="color: #000000">open</span></span><span style="color: #990000">(</span><span style="color: #FF0000">'package.pack'</span><span style="color: #990000">,</span> <span style="color: #FF0000">'rb'</span><span style="color: #990000">)</span>
+f2 <span style="color: #990000">=</span> <span style="font-weight: bold"><span style="color: #000000">open</span></span><span style="color: #990000">(</span><span style="color: #FF0000">'20.dec'</span><span style="color: #990000">,</span> <span style="color: #FF0000">'wb'</span><span style="color: #990000">)</span>
+a <span style="color: #990000">=</span> f1<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">read</span></span><span style="color: #990000">()</span>
+cnt <span style="color: #990000">=</span> <span style="color: #993399">0</span>
+log <span style="color: #990000">=</span> <span style="color: #990000">[]</span>
+<span style="font-weight: bold"><span style="color: #0000FF">while</span></span> True<span style="color: #990000">:</span>
+    cnt <span style="color: #990000">+=</span> <span style="color: #993399">1</span>
+    <span style="font-weight: bold"><span style="color: #0000FF">if</span></span> a<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">startswith</span></span><span style="color: #990000">(</span>b<span style="color: #FF0000">'x\x9c'</span><span style="color: #990000">):</span>
+        a <span style="color: #990000">=</span> zlib<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">decompress</span></span><span style="color: #990000">(</span>a<span style="color: #990000">)</span>
+        <span style="font-weight: bold"><span style="color: #0000FF">print</span></span><span style="color: #990000">(</span><span style="color: #FF0000">"zlib"</span><span style="color: #990000">)</span>
+        log<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">append</span></span><span style="color: #990000">(</span><span style="color: #FF0000">' '</span><span style="color: #990000">)</span>
+    <span style="font-weight: bold"><span style="color: #0000FF">elif</span></span> a<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">startswith</span></span><span style="color: #990000">(</span>b<span style="color: #FF0000">'BZh'</span><span style="color: #990000">):</span>
+        a <span style="color: #990000">=</span> bz2<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">decompress</span></span><span style="color: #990000">(</span>a<span style="color: #990000">)</span>
+        <span style="font-weight: bold"><span style="color: #0000FF">print</span></span><span style="color: #990000">(</span><span style="color: #FF0000">"bz2"</span><span style="color: #990000">)</span>
+        log<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">append</span></span><span style="color: #990000">(</span><span style="color: #FF0000">'b'</span><span style="color: #990000">)</span>
+    <span style="font-weight: bold"><span style="color: #0000FF">elif</span></span> a<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">endswith</span></span><span style="color: #990000">(</span>b<span style="color: #FF0000">'\x9cx'</span><span style="color: #990000">):</span>
+        a <span style="color: #990000">=</span> zlib<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">decompress</span></span><span style="color: #990000">(</span>a<span style="color: #990000">[::-</span><span style="color: #993399">1</span><span style="color: #990000">])</span>
+        log<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">append</span></span><span style="color: #990000">(</span><span style="color: #FF0000">'\n'</span><span style="color: #990000">)</span>
+    <span style="font-weight: bold"><span style="color: #0000FF">else</span></span><span style="color: #990000">:</span>
+        f2<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">write</span></span><span style="color: #990000">(</span>a<span style="color: #990000">)</span>
+        <span style="font-weight: bold"><span style="color: #0000FF">print</span></span><span style="color: #990000">(</span>a<span style="color: #990000">[::-</span><span style="color: #993399">1</span><span style="color: #990000">])</span>
+        <span style="font-weight: bold"><span style="color: #0000FF">break</span></span>
+f1<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">close</span></span><span style="color: #990000">()</span>
+f2<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">close</span></span><span style="color: #990000">()</span>
+<span style="font-weight: bold"><span style="color: #0000FF">print</span></span><span style="color: #990000">(</span>cnt<span style="color: #990000">)</span>
+<span style="font-weight: bold"><span style="color: #0000FF">print</span></span><span style="color: #990000">(</span><span style="color: #FF0000">''</span><span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">join</span></span><span style="color: #990000">(</span>log<span style="color: #990000">))</span></tt></pre></div></div>
 </div>
 </div>
 </div>
@@ -1260,7 +1303,7 @@ Now for the level:
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-05-10 00:53:59 CST
+Last updated 2015-05-11 09:37:32 CST
 </div>
 </div>
 </body>
