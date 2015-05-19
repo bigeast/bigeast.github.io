@@ -1,0 +1,36 @@
+**通过虚拟主机科学、免费上网**
+
+最近买了一年的VPS，用上了自己的Shadowsocks服务。其实网上有好多免费的(v2ex相应板块)，但是很不稳定，我也是经过一番权衡，终于买了bandwagon的VPS。
+
+由于支持IPv6的VPS要贵出好多，有点浪费，而只支持IPv4的VPS不仅便宜，而且也可以用通过隧道的方法支持IPv6。
+
+bandwagon的3.99$/年的VPS很实惠了，折合人民币才二十多块钱，每月100G流量。我买了5.99$/年的，每月300G流量，内存150M。系统装的是CentOS，由于是虚拟主机，装系统鼠标一点就行了。。只是浏览器中的命令行窗口貌似功能有限，还是直接ssh比较靠谱。首先先新建一个用户，visudo加上sudo权限。然后配置sshd，主要是安全性，禁止密码登录，禁止root登录。
+
+./etc/ssh/sshd_config
+------------------------------
+PasswordAuthentication no
+PermitRootLogin no
+------------------------------
+
+但是在这之前记得把自己的ssh公钥复制到远程主机上：
+
+[source, bash]
+cat ~/.ssh/id_rsa.pub | ssh -p port bigeast@X.X.X.X 'cat >> ~/.ssh/authorized_keys'
+
+
+新申请了PayPal帐号付的款，不一定要绑定信用卡的，银联卡也可以，很方便。
+
+YouTube看视频不卡，速度大概1M左右，毕竟是通过了一层隧道。
+
+Shadowsocks不能设置全局代理，如果应用程序不支持设置外部代理，可以用proxychains等工具启动。我经常是
+
+[source, bash]
+proxychains youtube-dl "url"
+
+来下载YouTube视频。
+
+*参考* :
+
+http://wiki.ssnode.me/index.php?option=com_content&view=article&id=8:bandwagonhost-shadowsocks&catid=9&Itemid=101[VPS购买]
+
+http://www.cybermilitia.net/2013/07/22/ipv6-tunnel-on-openvz/[IPv6隧道]
