@@ -17,6 +17,7 @@ link:books/YM.html[斯蒂芬·哈珀在读什么]
 
 === 计算机
 link:books/linuxfaner.html[Linux就是这个范儿]
+
 link:InternetSocket.html[网络编程基础]
 
 == Computer Hacks
@@ -25,6 +26,8 @@ link:Source_Code_Tree_Navigation_in_Vim.html[Source Code Tree Navigation in Vim]
 link:scrot.html[Scrot屏幕截图]
 
 link:pythonchallenge.html[Python Challenge Note]
+
+link:VPS-Shadowsocks.html[VPS科学上网]
 
 == Translate
 link:Ng.html[Andrew Ng 谈百度深度学习的现状]
