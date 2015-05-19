@@ -596,3 +596,16 @@ res.save('res.jpg')
 res.show()
 
 === http://www.pythonchallenge.com/pc/hex/bonus.html[23]
+
+* Clue 0: The page title: 'what is this module?'
+* Clue 1: 'TODO: do you owe someone an apology? now it is a good time to tell him that you are sorry. Please show good manners although it has nothing to do with this level.'
+* Clue 2: 'it can't find it. this is an undocumented module.'
+* Clue 3:  'va gur snpr bs jung?' rot13 => 'in the face of what?'
+
+Well, although I know the 'import this' thing, I didn't find the answer by myself. I thought it was the cow is in the fase of 'road', 'grass' or something.
+
+And I also didn't expect that's all! 
+
+=== http://www.pythonchallenge.com/pc/hex/ambiguity.html[24]
+
+It's a maze, I think walk through it and mark the path out will show something usefull. 
