@@ -1,0 +1,1001 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
+<meta name="generator" content="AsciiDoc 8.6.9" />
+<title></title>
+<style type="text/css">
+/* Shared CSS for AsciiDoc xhtml11 and html5 backends */
+
+/* Default font. */
+body {
+  font-family: Georgia,serif;
+}
+
+/* Title font. */
+h1, h2, h3, h4, h5, h6,
+div.title, caption.title,
+thead, p.table.header,
+#toctitle,
+#author, #revnumber, #revdate, #revremark,
+#footer {
+  font-family: Arial,Helvetica,sans-serif;
+}
+
+body {
+  margin: 1em 5% 1em 5%;
+}
+
+a {
+  color: blue;
+  text-decoration: underline;
+}
+a:visited {
+  color: fuchsia;
+}
+
+em {
+  font-style: italic;
+  color: navy;
+}
+
+strong {
+  font-weight: bold;
+  color: #083194;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #527bbd;
+  margin-top: 1.2em;
+  margin-bottom: 0.5em;
+  line-height: 1.3;
+}
+
+h1, h2, h3 {
+  border-bottom: 2px solid silver;
+}
+h2 {
+  padding-top: 0.5em;
+}
+h3 {
+  float: left;
+}
+h3 + * {
+  clear: left;
+}
+h5 {
+  font-size: 1.0em;
+}
+
+div.sectionbody {
+  margin-left: 0;
+}
+
+hr {
+  border: 1px solid silver;
+}
+
+p {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+ul, ol, li > p {
+  margin-top: 0;
+}
+ul > li     { color: #aaa; }
+ul > li > * { color: black; }
+
+.monospaced, code, pre {
+  font-family: "Courier New", Courier, monospace;
+  font-size: inherit;
+  color: navy;
+  padding: 0;
+  margin: 0;
+}
+pre {
+  white-space: pre-wrap;
+}
+
+#author {
+  color: #527bbd;
+  font-weight: bold;
+  font-size: 1.1em;
+}
+#email {
+}
+#revnumber, #revdate, #revremark {
+}
+
+#footer {
+  font-size: small;
+  border-top: 2px solid silver;
+  padding-top: 0.5em;
+  margin-top: 4.0em;
+}
+#footer-text {
+  float: left;
+  padding-bottom: 0.5em;
+}
+#footer-badges {
+  float: right;
+  padding-bottom: 0.5em;
+}
+
+#preamble {
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+}
+div.imageblock, div.exampleblock, div.verseblock,
+div.quoteblock, div.literalblock, div.listingblock, div.sidebarblock,
+div.admonitionblock {
+  margin-top: 1.0em;
+  margin-bottom: 1.5em;
+}
+div.admonitionblock {
+  margin-top: 2.0em;
+  margin-bottom: 2.0em;
+  margin-right: 10%;
+  color: #606060;
+}
+
+div.content { /* Block element content. */
+  padding: 0;
+}
+
+/* Block element titles. */
+div.title, caption.title {
+  color: #527bbd;
+  font-weight: bold;
+  text-align: left;
+  margin-top: 1.0em;
+  margin-bottom: 0.5em;
+}
+div.title + * {
+  margin-top: 0;
+}
+
+td div.title:first-child {
+  margin-top: 0.0em;
+}
+div.content div.title:first-child {
+  margin-top: 0.0em;
+}
+div.content + div.title {
+  margin-top: 0.0em;
+}
+
+div.sidebarblock > div.content {
+  background: #ffffee;
+  border: 1px solid #dddddd;
+  border-left: 4px solid #f0f0f0;
+  padding: 0.5em;
+}
+
+div.listingblock > div.content {
+  border: 1px solid #dddddd;
+  border-left: 5px solid #f0f0f0;
+  background: #f8f8f8;
+  padding: 0.5em;
+}
+
+div.quoteblock, div.verseblock {
+  padding-left: 1.0em;
+  margin-left: 1.0em;
+  margin-right: 10%;
+  border-left: 5px solid #f0f0f0;
+  color: #888;
+}
+
+div.quoteblock > div.attribution {
+  padding-top: 0.5em;
+  text-align: right;
+}
+
+div.verseblock > pre.content {
+  font-family: inherit;
+  font-size: inherit;
+}
+div.verseblock > div.attribution {
+  padding-top: 0.75em;
+  text-align: left;
+}
+/* DEPRECATED: Pre version 8.2.7 verse style literal block. */
+div.verseblock + div.attribution {
+  text-align: left;
+}
+
+div.admonitionblock .icon {
+  vertical-align: top;
+  font-size: 1.1em;
+  font-weight: bold;
+  text-decoration: underline;
+  color: #527bbd;
+  padding-right: 0.5em;
+}
+div.admonitionblock td.content {
+  padding-left: 0.5em;
+  border-left: 3px solid #dddddd;
+}
+
+div.exampleblock > div.content {
+  border-left: 3px solid #dddddd;
+  padding-left: 0.5em;
+}
+
+div.imageblock div.content { padding-left: 0; }
+span.image img { border-style: none; vertical-align: text-bottom; }
+a.image:visited { color: white; }
+
+dl {
+  margin-top: 0.8em;
+  margin-bottom: 0.8em;
+}
+dt {
+  margin-top: 0.5em;
+  margin-bottom: 0;
+  font-style: normal;
+  color: navy;
+}
+dd > *:first-child {
+  margin-top: 0.1em;
+}
+
+ul, ol {
+    list-style-position: outside;
+}
+ol.arabic {
+  list-style-type: decimal;
+}
+ol.loweralpha {
+  list-style-type: lower-alpha;
+}
+ol.upperalpha {
+  list-style-type: upper-alpha;
+}
+ol.lowerroman {
+  list-style-type: lower-roman;
+}
+ol.upperroman {
+  list-style-type: upper-roman;
+}
+
+div.compact ul, div.compact ol,
+div.compact p, div.compact p,
+div.compact div, div.compact div {
+  margin-top: 0.1em;
+  margin-bottom: 0.1em;
+}
+
+tfoot {
+  font-weight: bold;
+}
+td > div.verse {
+  white-space: pre;
+}
+
+div.hdlist {
+  margin-top: 0.8em;
+  margin-bottom: 0.8em;
+}
+div.hdlist tr {
+  padding-bottom: 15px;
+}
+dt.hdlist1.strong, td.hdlist1.strong {
+  font-weight: bold;
+}
+td.hdlist1 {
+  vertical-align: top;
+  font-style: normal;
+  padding-right: 0.8em;
+  color: navy;
+}
+td.hdlist2 {
+  vertical-align: top;
+}
+div.hdlist.compact tr {
+  margin: 0;
+  padding-bottom: 0;
+}
+
+.comment {
+  background: yellow;
+}
+
+.footnote, .footnoteref {
+  font-size: 0.8em;
+}
+
+span.footnote, span.footnoteref {
+  vertical-align: super;
+}
+
+#footnotes {
+  margin: 20px 0 20px 0;
+  padding: 7px 0 0 0;
+}
+
+#footnotes div.footnote {
+  margin: 0 0 5px 0;
+}
+
+#footnotes hr {
+  border: none;
+  border-top: 1px solid silver;
+  height: 1px;
+  text-align: left;
+  margin-left: 0;
+  width: 20%;
+  min-width: 100px;
+}
+
+div.colist td {
+  padding-right: 0.5em;
+  padding-bottom: 0.3em;
+  vertical-align: top;
+}
+div.colist td img {
+  margin-top: 0.3em;
+}
+
+@media print {
+  #footer-badges { display: none; }
+}
+
+#toc {
+  margin-bottom: 2.5em;
+}
+
+#toctitle {
+  color: #527bbd;
+  font-size: 1.1em;
+  font-weight: bold;
+  margin-top: 1.0em;
+  margin-bottom: 0.1em;
+}
+
+div.toclevel0, div.toclevel1, div.toclevel2, div.toclevel3, div.toclevel4 {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+div.toclevel2 {
+  margin-left: 2em;
+  font-size: 0.9em;
+}
+div.toclevel3 {
+  margin-left: 4em;
+  font-size: 0.9em;
+}
+div.toclevel4 {
+  margin-left: 6em;
+  font-size: 0.9em;
+}
+
+span.aqua { color: aqua; }
+span.black { color: black; }
+span.blue { color: blue; }
+span.fuchsia { color: fuchsia; }
+span.gray { color: gray; }
+span.green { color: green; }
+span.lime { color: lime; }
+span.maroon { color: maroon; }
+span.navy { color: navy; }
+span.olive { color: olive; }
+span.purple { color: purple; }
+span.red { color: red; }
+span.silver { color: silver; }
+span.teal { color: teal; }
+span.white { color: white; }
+span.yellow { color: yellow; }
+
+span.aqua-background { background: aqua; }
+span.black-background { background: black; }
+span.blue-background { background: blue; }
+span.fuchsia-background { background: fuchsia; }
+span.gray-background { background: gray; }
+span.green-background { background: green; }
+span.lime-background { background: lime; }
+span.maroon-background { background: maroon; }
+span.navy-background { background: navy; }
+span.olive-background { background: olive; }
+span.purple-background { background: purple; }
+span.red-background { background: red; }
+span.silver-background { background: silver; }
+span.teal-background { background: teal; }
+span.white-background { background: white; }
+span.yellow-background { background: yellow; }
+
+span.big { font-size: 2em; }
+span.small { font-size: 0.6em; }
+
+span.underline { text-decoration: underline; }
+span.overline { text-decoration: overline; }
+span.line-through { text-decoration: line-through; }
+
+div.unbreakable { page-break-inside: avoid; }
+
+
+/*
+ * xhtml11 specific
+ *
+ * */
+
+div.tableblock {
+  margin-top: 1.0em;
+  margin-bottom: 1.5em;
+}
+div.tableblock > table {
+  border: 3px solid #527bbd;
+}
+thead, p.table.header {
+  font-weight: bold;
+  color: #527bbd;
+}
+p.table {
+  margin-top: 0;
+}
+/* Because the table frame attribute is overriden by CSS in most browsers. */
+div.tableblock > table[frame="void"] {
+  border-style: none;
+}
+div.tableblock > table[frame="hsides"] {
+  border-left-style: none;
+  border-right-style: none;
+}
+div.tableblock > table[frame="vsides"] {
+  border-top-style: none;
+  border-bottom-style: none;
+}
+
+
+/*
+ * html5 specific
+ *
+ * */
+
+table.tableblock {
+  margin-top: 1.0em;
+  margin-bottom: 1.5em;
+}
+thead, p.tableblock.header {
+  font-weight: bold;
+  color: #527bbd;
+}
+p.tableblock {
+  margin-top: 0;
+}
+table.tableblock {
+  border-width: 3px;
+  border-spacing: 0px;
+  border-style: solid;
+  border-color: #527bbd;
+  border-collapse: collapse;
+}
+th.tableblock, td.tableblock {
+  border-width: 1px;
+  padding: 4px;
+  border-style: solid;
+  border-color: #527bbd;
+}
+
+table.tableblock.frame-topbot {
+  border-left-style: hidden;
+  border-right-style: hidden;
+}
+table.tableblock.frame-sides {
+  border-top-style: hidden;
+  border-bottom-style: hidden;
+}
+table.tableblock.frame-none {
+  border-style: hidden;
+}
+
+th.tableblock.halign-left, td.tableblock.halign-left {
+  text-align: left;
+}
+th.tableblock.halign-center, td.tableblock.halign-center {
+  text-align: center;
+}
+th.tableblock.halign-right, td.tableblock.halign-right {
+  text-align: right;
+}
+
+th.tableblock.valign-top, td.tableblock.valign-top {
+  vertical-align: top;
+}
+th.tableblock.valign-middle, td.tableblock.valign-middle {
+  vertical-align: middle;
+}
+th.tableblock.valign-bottom, td.tableblock.valign-bottom {
+  vertical-align: bottom;
+}
+
+
+/*
+ * manpage specific
+ *
+ * */
+
+body.manpage h1 {
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+  border-top: 2px solid silver;
+  border-bottom: 2px solid silver;
+}
+body.manpage h2 {
+  border-style: none;
+}
+body.manpage div.sectionbody {
+  margin-left: 3em;
+}
+
+@media print {
+  body.manpage div#toc { display: none; }
+}
+
+
+</style>
+<script type="text/javascript">
+/*<![CDATA[*/
+var asciidoc = {  // Namespace.
+
+/////////////////////////////////////////////////////////////////////
+// Table Of Contents generator
+/////////////////////////////////////////////////////////////////////
+
+/* Author: Mihai Bazon, September 2002
+ * http://students.infoiasi.ro/~mishoo
+ *
+ * Table Of Content generator
+ * Version: 0.4
+ *
+ * Feel free to use this script under the terms of the GNU General Public
+ * License, as long as you do not remove or alter this notice.
+ */
+
+ /* modified by Troy D. Hanson, September 2006. License: GPL */
+ /* modified by Stuart Rackham, 2006, 2009. License: GPL */
+
+// toclevels = 1..4.
+toc: function (toclevels) {
+
+  function getText(el) {
+    var text = "";
+    for (var i = el.firstChild; i != null; i = i.nextSibling) {
+      if (i.nodeType == 3 /* Node.TEXT_NODE */) // IE doesn't speak constants.
+        text += i.data;
+      else if (i.firstChild != null)
+        text += getText(i);
+    }
+    return text;
+  }
+
+  function TocEntry(el, text, toclevel) {
+    this.element = el;
+    this.text = text;
+    this.toclevel = toclevel;
+  }
+
+  function tocEntries(el, toclevels) {
+    var result = new Array;
+    var re = new RegExp('[hH]([1-'+(toclevels+1)+'])');
+    // Function that scans the DOM tree for header elements (the DOM2
+    // nodeIterator API would be a better technique but not supported by all
+    // browsers).
+    var iterate = function (el) {
+      for (var i = el.firstChild; i != null; i = i.nextSibling) {
+        if (i.nodeType == 1 /* Node.ELEMENT_NODE */) {
+          var mo = re.exec(i.tagName);
+          if (mo && (i.getAttribute("class") || i.getAttribute("className")) != "float") {
+            result[result.length] = new TocEntry(i, getText(i), mo[1]-1);
+          }
+          iterate(i);
+        }
+      }
+    }
+    iterate(el);
+    return result;
+  }
+
+  var toc = document.getElementById("toc");
+  if (!toc) {
+    return;
+  }
+
+  // Delete existing TOC entries in case we're reloading the TOC.
+  var tocEntriesToRemove = [];
+  var i;
+  for (i = 0; i < toc.childNodes.length; i++) {
+    var entry = toc.childNodes[i];
+    if (entry.nodeName.toLowerCase() == 'div'
+     && entry.getAttribute("class")
+     && entry.getAttribute("class").match(/^toclevel/))
+      tocEntriesToRemove.push(entry);
+  }
+  for (i = 0; i < tocEntriesToRemove.length; i++) {
+    toc.removeChild(tocEntriesToRemove[i]);
+  }
+
+  // Rebuild TOC entries.
+  var entries = tocEntries(document.getElementById("content"), toclevels);
+  for (var i = 0; i < entries.length; ++i) {
+    var entry = entries[i];
+    if (entry.element.id == "")
+      entry.element.id = "_toc_" + i;
+    var a = document.createElement("a");
+    a.href = "#" + entry.element.id;
+    a.appendChild(document.createTextNode(entry.text));
+    var div = document.createElement("div");
+    div.appendChild(a);
+    div.className = "toclevel" + entry.toclevel;
+    toc.appendChild(div);
+  }
+  if (entries.length == 0)
+    toc.parentNode.removeChild(toc);
+},
+
+
+/////////////////////////////////////////////////////////////////////
+// Footnotes generator
+/////////////////////////////////////////////////////////////////////
+
+/* Based on footnote generation code from:
+ * http://www.brandspankingnew.net/archive/2005/07/format_footnote.html
+ */
+
+footnotes: function () {
+  // Delete existing footnote entries in case we're reloading the footnodes.
+  var i;
+  var noteholder = document.getElementById("footnotes");
+  if (!noteholder) {
+    return;
+  }
+  var entriesToRemove = [];
+  for (i = 0; i < noteholder.childNodes.length; i++) {
+    var entry = noteholder.childNodes[i];
+    if (entry.nodeName.toLowerCase() == 'div' && entry.getAttribute("class") == "footnote")
+      entriesToRemove.push(entry);
+  }
+  for (i = 0; i < entriesToRemove.length; i++) {
+    noteholder.removeChild(entriesToRemove[i]);
+  }
+
+  // Rebuild footnote entries.
+  var cont = document.getElementById("content");
+  var spans = cont.getElementsByTagName("span");
+  var refs = {};
+  var n = 0;
+  for (i=0; i<spans.length; i++) {
+    if (spans[i].className == "footnote") {
+      n++;
+      var note = spans[i].getAttribute("data-note");
+      if (!note) {
+        // Use [\s\S] in place of . so multi-line matches work.
+        // Because JavaScript has no s (dotall) regex flag.
+        note = spans[i].innerHTML.match(/\s*\[([\s\S]*)]\s*/)[1];
+        spans[i].innerHTML =
+          "[<a id='_footnoteref_" + n + "' href='#_footnote_" + n +
+          "' title='View footnote' class='footnote'>" + n + "</a>]";
+        spans[i].setAttribute("data-note", note);
+      }
+      noteholder.innerHTML +=
+        "<div class='footnote' id='_footnote_" + n + "'>" +
+        "<a href='#_footnoteref_" + n + "' title='Return to text'>" +
+        n + "</a>. " + note + "</div>";
+      var id =spans[i].getAttribute("id");
+      if (id != null) refs["#"+id] = n;
+    }
+  }
+  if (n == 0)
+    noteholder.parentNode.removeChild(noteholder);
+  else {
+    // Process footnoterefs.
+    for (i=0; i<spans.length; i++) {
+      if (spans[i].className == "footnoteref") {
+        var href = spans[i].getElementsByTagName("a")[0].getAttribute("href");
+        href = href.match(/#.*/)[0];  // Because IE return full URL.
+        n = refs[href];
+        spans[i].innerHTML =
+          "[<a href='#_footnote_" + n +
+          "' title='View footnote' class='footnote'>" + n + "</a>]";
+      }
+    }
+  }
+},
+
+install: function(toclevels) {
+  var timerId;
+
+  function reinstall() {
+    asciidoc.footnotes();
+    if (toclevels) {
+      asciidoc.toc(toclevels);
+    }
+  }
+
+  function reinstallAndRemoveTimer() {
+    clearInterval(timerId);
+    reinstall();
+  }
+
+  timerId = setInterval(reinstall, 500);
+  if (document.addEventListener)
+    document.addEventListener("DOMContentLoaded", reinstallAndRemoveTimer, false);
+  else
+    window.onload = reinstallAndRemoveTimer;
+}
+
+}
+asciidoc.install();
+/*]]>*/
+</script>
+</head>
+<body class="article">
+<div id="header">
+</div>
+<div id="content">
+<div class="sect1">
+<h2 id="_道德经">道德经</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_道经">道经</h3>
+<div class="sect3">
+<h4 id="_1_道可道_非常道_名可名_非常名_无名天地之始_有名万物之母_故常无欲以观其妙_常有欲以观其徼_此两者同出而异名_同谓之玄_玄之又玄_众妙之门">1.道可道，非常道。名可名，非常名。无名天地之始。有名万物之母。故常无欲以观其妙。常有欲以观其徼。此两者同出而异名，同谓之玄。玄之又玄，众妙之门。</h4>
+</div>
+<div class="sect3">
+<h4 id="_2_天下皆知美之为美_斯恶矣_皆知善之为善_斯不善已_故有无相生_难易相成_长短相形_高下相倾_音声相和_前後相随_是以圣人处无为之事_行不言之教_万物作焉而不辞_生而不有_为而不恃_功成而弗居_夫唯弗居_是以不去">2.天下皆知美之为美，斯恶矣；皆知善之为善，斯不善已。故有无相生，难易相成，长短相形，高下相倾，音声相和，前後相随。是以圣人处无为之事，行不言之教。万物作焉而不辞。生而不有，为而不恃，功成而弗居。夫唯弗居，是以不去。</h4>
+</div>
+<div class="sect3">
+<h4 id="_3_不尚贤_使民不争_不贵难得之货_使民不为盗_不见可欲_使民心不乱_是以圣人之治_虚其心_实其腹_弱其志_强其骨_常使民无知_无欲_使夫智者不敢为也_为无为_则无不治">3.不尚贤，使民不争。不贵难得之货，使民不为盗。不见可欲，使民心不乱。是以圣人之治，虚其心，实其腹，弱其志，强其骨；常使民无知、无欲，使夫智者不敢为也。为无为，则无不治。</h4>
+</div>
+<div class="sect3">
+<h4 id="_4_道冲而用之_或不盈_渊兮似万物之宗_解其纷_和其光_同其尘_湛兮似或存_吾不知谁之子_象帝之先">4.道冲而用之，或不盈。渊兮似万物之宗。解其纷，和其光，同其尘，湛兮似或存。吾不知谁之子，象帝之先。</h4>
+</div>
+<div class="sect3">
+<h4 id="_5_天地不仁_以万物为刍狗_圣人不仁_以百姓为刍狗_天地之间_其犹橐迭乎_虚而不屈_动而愈出_多言数穷_不如守中">5.天地不仁，以万物为刍狗。圣人不仁，以百姓为刍狗。天地之间，其犹橐迭乎？虚而不屈，动而愈出。多言数穷，不如守中。</h4>
+</div>
+<div class="sect3">
+<h4 id="_6_谷神不死是谓玄牝_玄牝之门是谓天地根_绵绵若存_用之不勤">6.谷神不死是谓玄牝。玄牝之门是谓天地根。绵绵若存，用之不勤。</h4>
+</div>
+<div class="sect3">
+<h4 id="_7_天长地久_天地所以能长且久者_以其不自生_故能长生_是以圣人後其身而身先_外其身而身存_非以其无私邪_故能成其私">7.天长地久。天地所以能长且久者，以其不自生，故能长生。是以圣人後其身而身先，外其身而身存。非以其无私邪！故能成其私。</h4>
+</div>
+<div class="sect3">
+<h4 id="_8_上善若水_水善利万物而不争_处众人之所恶_故几於道_居善地_心善渊与善仁_言善信_正善治_事善能_动善时_夫唯不争_故无尤">8.上善若水。水善利万物而不争，处众人之所恶，故几於道。居善地，心善渊与善仁，言善信，正善治，事善能，动善时。夫唯不争，故无尤。</h4>
+</div>
+<div class="sect3">
+<h4 id="_9_持而盈之不如其己_揣而锐之不可长保_金玉满堂莫之能守_富贵而骄_自遗其咎_功遂身退_天之道">9.持而盈之不如其己；揣而锐之不可长保；金玉满堂莫之能守；富贵而骄，自遗其咎。功遂身退，天之道。</h4>
+</div>
+<div class="sect3">
+<h4 id="_10_载营魄抱一_能无离乎_专气致柔_能如婴儿乎_涤除玄览_能无疵乎_爱国治民_能无为乎_天门开阖_能为雌乎_明白四达_能无知乎">10.载营魄抱一，能无离乎？专气致柔，能如婴儿乎？涤除玄览，能无疵乎？爱国治民，能无为乎？天门开阖，能为雌乎？明白四达，能无知乎。</h4>
+</div>
+<div class="sect3">
+<h4 id="_11_三十幅共一毂_当其无_有车之用_埏埴以为器_当其无_有器之用_凿户牖以为室_当其无_有室之用_故有之以为利_无之以为用">11.三十幅共一毂，当其无，有车之用。埏埴以为器，当其无，有器之用。凿户牖以为室，当其无，有室之用。故有之以为利，无之以为用。</h4>
+</div>
+<div class="sect3">
+<h4 id="_12_五色令人目盲_五音令人耳聋_五味令人口爽_驰骋畋猎令人心发狂_难得之货令人行妨_是以圣人_为腹不为目_故去彼取此">12.五色令人目盲，五音令人耳聋，五味令人口爽，驰骋畋猎令人心发狂，难得之货令人行妨。是以圣人，为腹不为目，故去彼取此。</h4>
+</div>
+<div class="sect3">
+<h4 id="_13_宠辱若惊_贵大患若身_何谓宠辱若惊_宠为下_得之若惊失之若惊是谓宠辱若惊_何谓贵大患若身_吾所以有大患者_为吾有身_及吾无身_吾有何患_故贵以身为天下_若可寄天下_爱以身为天下_若可托天下">13.宠辱若惊，贵大患若身。何谓宠辱若惊？宠为下。得之若惊失之若惊是谓宠辱若惊。何谓贵大患若身？吾所以有大患者，为吾有身，及吾无身，吾有何患。故贵以身为天下，若可寄天下。爱以身为天下，若可托天下。</h4>
+</div>
+<div class="sect3">
+<h4 id="_14_视之不见名曰夷_听之不闻名曰希_抟之不得名曰微_此三者不可致诘_故混而为一_其上不_其下不昧_绳绳不可名_复归於无物_是谓无状之状_无物之象_是谓惚恍_迎之不见其首_随之不见其後_执古之道以御今之有_能知古始_是谓道纪">14.视之不见名曰夷。听之不闻名曰希。抟之不得名曰微。此三者不可致诘，故混而为一。其上不??，其下不昧，绳绳不可名，复归於无物。是谓无状之状，无物之象，是谓惚恍。迎之不见其首，随之不见其後。执古之道以御今之有。能知古始，是谓道纪。</h4>
+</div>
+<div class="sect3">
+<h4 id="_15_古之善为士者_微妙玄通_深不可识_夫唯不可识_故强为之容_豫兮若冬涉川_犹兮若畏四邻_俨兮其若容_涣兮若冰之将释_敦兮其若朴_旷兮其若谷_混兮其若浊_澹兮其若海_兮若无止_孰能浊以静之徐清_孰能安以动之徐生_保此道者不欲盈_夫唯不盈故能蔽而新成">15.古之善为士者，微妙玄通，深不可识。夫唯不可识，故强为之容。豫兮若冬涉川；犹兮若畏四邻；俨兮其若容；涣兮若冰之将释；敦兮其若朴；旷兮其若谷；混兮其若浊；澹兮其若海；??兮若无止。孰能浊以静之徐清。孰能安以动之徐生。保此道者不欲盈。夫唯不盈故能蔽而新成。</h4>
+</div>
+<div class="sect3">
+<h4 id="_16_致虚极守静笃_万物并作_吾以观复_夫物芸芸各复归其根_归根曰静_是谓复命_复命曰常_知常曰明_不知常_妄作凶_知常容_容乃公_公乃全_全乃天_天乃道_道乃久_没身不殆">16.致虚极守静笃。万物并作，吾以观复。夫物芸芸各复归其根。归根曰静，是谓复命；复命曰常，知常曰明。不知常，妄作凶。知常容，容乃公，公乃全，全乃天，天乃道，道乃久，没身不殆。</h4>
+</div>
+<div class="sect3">
+<h4 id="_17_太上_下知有之_其次_亲而誉之_其次_畏之_其次_侮之_信不足焉_有不信焉_悠兮其贵言_功成事遂_百姓皆谓_我自然">17.太上，下知有之。其次，亲而誉之。其次，畏之。其次，侮之。信不足焉，有不信焉。悠兮其贵言，功成事遂，百姓皆谓∶我自然。</h4>
+</div>
+<div class="sect3">
+<h4 id="_18_大道废有仁义_慧智出有大伪_六亲不和有孝慈_国家昏乱有忠臣">18.大道废有仁义；慧智出有大伪；六亲不和有孝慈；国家昏乱有忠臣。</h4>
+</div>
+<div class="sect3">
+<h4 id="_19_绝圣弃智_民利百倍_绝仁弃义_民复孝慈_绝巧弃利_盗贼无有_此三者_以为文不足_故令有所属_见素抱朴少私寡欲">19.绝圣弃智，民利百倍；绝仁弃义，民复孝慈；绝巧弃利，盗贼无有；此三者，以为文不足。故令有所属，见素抱朴少私寡欲。</h4>
+</div>
+<div class="sect3">
+<h4 id="_20_绝学无忧_唯之与阿_相去几何_善之与恶_相去若何_人之所畏_不可不畏_荒兮其未央哉_众人熙熙如享太牢_如春登台_我独泊兮其未兆_如婴儿之未孩_兮若无所归_众人皆有馀_而我独若遗_我愚人之心也哉_沌沌兮_俗人昭昭_我独昏昏_俗人察察_我独闷闷_众人皆有以_而我独顽且鄙_我独异於人_而贵食母">20.绝学无忧，唯之与阿，相去几何？善之与恶，相去若何？人之所畏，不可不畏。荒兮其未央哉！众人熙熙如享太牢、如春登台。我独泊兮其未兆，如婴儿之未孩；????兮若无所归。众人皆有馀，而我独若遗。我愚人之心也哉！沌沌兮。俗人昭昭，我独昏昏；俗人察察，我独闷闷。众人皆有以，而我独顽且鄙。我独异於人，而贵食母。</h4>
+</div>
+<div class="sect3">
+<h4 id="_21_孔德之容惟道是从_道之为物惟恍惟惚_惚兮恍兮其中有象_恍兮惚兮其中有物_窈兮冥兮其中有精_其精甚真_其中有信_自古及今_其名不去以阅众甫_吾何以知众甫之状哉_以此">21.孔德之容惟道是从。道之为物惟恍惟惚。惚兮恍兮其中有象。恍兮惚兮其中有物。窈兮冥兮其中有精。其精甚真。其中有信。自古及今，其名不去以阅众甫。吾何以知众甫之状哉！以此。</h4>
+</div>
+<div class="sect3">
+<h4 id="_22_曲则全_枉则直_洼则盈_敝则新少则得_多则惑_是以圣人抱一为天下式_不自见故明_不自是故彰_不自伐故有功_不自矜故长_夫唯不争_故天下莫能与之争_古之所谓_曲则全者_岂虚言哉_诚全而归之">22.曲则全，枉则直，洼则盈，敝则新少则得，多则惑。是以圣人抱一为天下式。不自见故明；不自是故彰；不自伐故有功；不自矜故长；夫唯不争，故天下莫能与之争。古之所谓∶曲则全者」岂虚言哉！诚全而归之。</h4>
+</div>
+<div class="sect3">
+<h4 id="_23_希言自然_故飘风不终朝_骤雨不终日_孰为此者_天地_天地尚不能久_而况於人乎_故从事於道者_同於道_德者同於德_失者同於失_同於道者道亦乐得之_同於德者德亦乐得之_同於失者失於乐得之信不足焉有不信焉">23.希言自然。故飘风不终朝，骤雨不终日。孰为此者？天地。天地尚不能久，而况於人乎？故从事於道者，同於道。德者同於德。失者同於失。同於道者道亦乐得之；同於德者德亦乐得之；同於失者失於乐得之信不足焉有不信焉。</h4>
+</div>
+<div class="sect3">
+<h4 id="_24_企者不立_跨者不行_自见者不明_自是者不彰_自伐者无功_自矜者不长_其在道也曰_馀食赘形_物或恶之_故有道者不处">24.企者不立；跨者不行。自见者不明；自是者不彰。自伐者无功；自矜者不长。其在道也曰∶馀食赘形。物或恶之，故有道者不处。</h4>
+</div>
+<div class="sect3">
+<h4 id="_25_有物混成先天地生_寂兮寥兮独立不改_周行而不殆_可以为天下母_吾不知其名_强字之曰道_强为之名曰大_大曰逝_逝曰远_远曰反_故道大_天大_地大_人亦大_域中有大_而人居其一焉_人法地_地法天_天法道_道法自然">25.有物混成先天地生。寂兮寥兮独立不改，周行而不殆，可以为天下母。吾不知其名，强字之曰道。强为之名曰大。大曰逝，逝曰远，远曰反。故道大、天大、地大、人亦大。域中有大，而人居其一焉。人法地，地法天，天法道，道法自然。</h4>
+</div>
+<div class="sect3">
+<h4 id="_26_重为轻根_静为躁君_是以君子终日行不离轻重_虽有荣观燕处超然_奈何万乘之主而以身轻天下_轻则失根_躁则失君">26.重为轻根，静为躁君。是以君子终日行不离轻重。虽有荣观燕处超然。奈何万乘之主而以身轻天下。轻则失根，躁则失君。</h4>
+</div>
+<div class="sect3">
+<h4 id="_27_善行无辙迹_善言无瑕谪_善数不用筹策_善闭无关楗而不可开_善结无绳约而不可解_是以圣人常善救人_故无弃人_常善救物_故无弃物_是谓袭明_故善人者不善人之师_不善人者善人之资_不贵其师_不爱其资_虽智大迷_是谓要妙">27.善行无辙迹。善言无瑕谪。善数不用筹策。善闭无关楗而不可开。善结无绳约而不可解。是以圣人常善救人，故无弃人。常善救物，故无弃物。是谓袭明。故善人者不善人之师。不善人者善人之资。不贵其师、不爱其资，虽智大迷，是谓要妙。</h4>
+</div>
+<div class="sect3">
+<h4 id="_28_知其雄_守其雌_为天下溪_为天下溪_常德不离_复归於婴儿_知其白_守其黑_为天下式_为天下式_常德不忒_复归於无极_知其荣_守其辱_为天下谷_为天下谷_常德乃足_复归於朴_朴散则为器_圣人用之则为官长_故大制不割">28.知其雄，守其雌，为天下溪。为天下溪，常德不离，复归於婴儿。知其白，守其黑，为天下式。为天下式，常德不忒，复归於无极。知其荣，守其辱，为天下谷。为天下谷，常德乃足，复归於朴。朴散则为器，圣人用之则为官长。故大制不割。</h4>
+</div>
+<div class="sect3">
+<h4 id="_29_将欲取天下而为之_吾见其不得已_天下神器_不可为也_为者败之_执者失之_夫物或行或随_或_或吹_或强或赢_或挫或隳_是以圣人去甚_去奢_去泰">29.将欲取天下而为之，吾见其不得已。天下神器，不可为也，为者败之，执者失之。夫物或行或随、或??或吹、或强或赢、或挫或隳。是以圣人去甚、去奢、去泰。</h4>
+</div>
+<div class="sect3">
+<h4 id="_30_以道佐人主者_不以兵强天下_其事好还_师之所处荆棘生焉_军之後必有凶年_善有果而已_不敢以取强_果而勿矜_果而勿伐_果而勿骄_果而不得已_果而勿强_物壮则老_是谓不道_不道早已">30.以道佐人主者，不以兵强天下。其事好还。师之所处荆棘生焉。军之後必有凶年。善有果而已，不敢以取强。果而勿矜。果而勿伐。果而勿骄。果而不得已。果而勿强。物壮则老，是谓不道，不道早已。</h4>
+</div>
+<div class="sect3">
+<h4 id="_31_夫佳兵者不祥之器_物或恶之_故有道者不处_君子居则贵左_用兵则贵右_兵者不祥之器_非君子之器_不得已而用之_恬淡为上_胜而不美_而美之者_是乐杀人_夫乐杀人者_则不可得志於天下矣_吉事尚左_凶事尚右_偏将军居左_上将军居右_言以丧礼处之_杀人之众_以悲哀泣之_战胜以丧礼处之">31.夫佳兵者不祥之器，物或恶之，故有道者不处。君子居则贵左，用兵则贵右。兵者不祥之器，非君子之器，不得已而用之，恬淡为上。胜而不美，而美之者，是乐杀人。夫乐杀人者，则不可得志於天下矣。吉事尚左，凶事尚右。偏将军居左，上将军居右。言以丧礼处之。杀人之众，以悲哀泣之，战胜以丧礼处之。</h4>
+</div>
+<div class="sect3">
+<h4 id="_32_道常无名_朴虽小天下莫能臣也_侯王若能守之_万物将自宾_天地相合以降甘露_民莫之令而自均_始制有名_名亦既有_夫亦将知止_知止可以不殆_譬道之在天下_犹川谷之於江海">32.道常无名。朴虽小天下莫能臣也。侯王若能守之，万物将自宾。天地相合以降甘露，民莫之令而自均。始制有名，名亦既有，夫亦将知止，知止可以不殆。譬道之在天下，犹川谷之於江海。</h4>
+</div>
+<div class="sect3">
+<h4 id="_33_知人者智_自知者明_胜人者有力_自胜者强_知足者富_强行者有志_不失其所者久_死而不亡者_寿">33.知人者智，自知者明。胜人者有力，自胜者强。知足者富。强行者有志。不失其所者久。死而不亡者，寿。</h4>
+</div>
+<div class="sect3">
+<h4 id="_34_大道泛兮_其可左右_万物恃之以生而不辞_功成而不名有_衣养万物而不为主_常无欲可名於小_万物归焉_而不为主_可名为大_以其终不自为大_故能成其大">34.大道泛兮，其可左右。万物恃之以生而不辞，功成而不名有。衣养万物而不为主，常无欲可名於小。万物归焉，而不为主，可名为大。以其终不自为大，故能成其大。</h4>
+</div>
+<div class="sect3">
+<h4 id="_35_执大象天下往_往而不害安平太_乐与饵_过客止_道之出口淡乎其无味_视之不足见_听之不足闻_用之不足既">35.执大象天下往。往而不害安平太。乐与饵，过客止。道之出口淡乎其无味。视之不足见。听之不足闻。用之不足既。</h4>
+</div>
+<div class="sect3">
+<h4 id="_36_将欲歙之_必固张之_将欲弱之_必固强之_将欲废之_必固兴之_将欲取之_必固与之_是谓微明_柔弱胜刚强_鱼不可脱於渊_国之利器不可以示人">36.将欲歙之，必固张之。将欲弱之，必固强之。将欲废之，必固兴之。将欲取之，必固与之。是谓微明。柔弱胜刚强。鱼不可脱於渊，国之利器不可以示人。</h4>
+</div>
+<div class="sect3">
+<h4 id="_37_道常无为_而无不为_侯王若能守之_万物将自化_化而欲作_吾将镇之以无名之朴_无名之朴_夫亦将无欲_不欲以静_天下将自定">37.道常无为，而无不为。侯王若能守之，万物将自化。化而欲作，吾将镇之以无名之朴。无名之朴，夫亦将无欲。不欲以静，天下将自定。</h4>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_德经">德经</h3>
+<div class="sect3">
+<h4 id="_38_上德不德是以有德_下德不失德是以无德_上德无为而无以为_下德无为而有以为_上仁为之而无以为_上义为之而有以为_上礼为之而莫之以应_则攘臂而扔之_故失道而後德_失德而後仁_失仁而後义_失义而後礼_夫礼者忠信之薄而乱之首_前识者_道之华而愚之始_是以大丈夫_处其厚不居其薄_处其实_不居其华_故去彼取此">38.上德不德是以有德。下德不失德是以无德。上德无为而无以为。下德无为而有以为。上仁为之而无以为。上义为之而有以为。上礼为之而莫之以应，则攘臂而扔之。故失道而後德。失德而後仁。失仁而後义。失义而後礼。夫礼者忠信之薄而乱之首。前识者，道之华而愚之始。是以大丈夫，处其厚不居其薄。处其实，不居其华。故去彼取此。</h4>
+</div>
+<div class="sect3">
+<h4 id="_39_昔之得一者_天得一以清_地得一以宁_神得一以灵_谷得一以盈_万物得一以生_侯王得一以为天下贞_其致之_天无以清将恐裂_地无以宁将恐废_神无以灵将恐歇_谷无以盈将恐竭_万物无以生将恐灭_侯王无以贞将恐蹶_故贵以贱为本_高以下为基_是以侯王自称孤_寡_不谷_此非以贱为本邪_非乎_至誉无誉_不欲_如玉珞珞如石">39.昔之得一者。天得一以清。地得一以宁。神得一以灵。谷得一以盈。万物得一以生。侯王得一以为天下贞。其致之。天无以清将恐裂。地无以宁将恐废。神无以灵将恐歇。谷无以盈将恐竭。万物无以生将恐灭。侯王无以贞将恐蹶。故贵以贱为本，高以下为基。是以侯王自称孤、寡、不谷。此非以贱为本邪？非乎。至誉无誉。不欲????如玉珞珞如石。</h4>
+</div>
+<div class="sect3">
+<h4 id="_40_反者道之动_弱者道之用_天下万物生於有_有生於无">40.反者道之动。弱者道之用。天下万物生於有，有生於无。</h4>
+</div>
+<div class="sect3">
+<h4 id="_41_上士闻道勤而行之_中士闻道若存若亡_下士闻道大笑之_不笑不足以为道_故建言有之_明道若昧_进道若退_夷道若_上德若谷_大白若辱_广德若不足_建德若偷_质真若渝_大方无隅_大器晚成_大音希声_大象无形_道隐无名_夫唯道善贷且成">41.上士闻道勤而行之。中士闻道若存若亡。下士闻道大笑之。不笑不足以为道。故建言有之。明道若昧。进道若退。夷道若??。上德若谷。大白若辱。广德若不足。建德若偷。质真若渝。大方无隅。大器晚成。大音希声。大象无形。道隐无名。夫唯道善贷且成。</h4>
+</div>
+<div class="sect3">
+<h4 id="_42_道生一_一生二_二生三_三生万物_万物负阴而抱阳_冲气以为和_人之所恶_唯孤_寡不谷_而王公以为称_故物或损之而益_或益之而损_人之所教_我亦教之_强梁者_不得其死_吾将以为教父">42.道生一。一生二。二生三。三生万物。万物负阴而抱阳，冲气以为和。人之所恶，唯孤、寡不谷，而王公以为称，故物或损之而益，或益之而损。人之所教，我亦教之，强梁者，不得其死。吾将以为教父。</h4>
+</div>
+<div class="sect3">
+<h4 id="_43_天下之至柔_驰骋天下之至坚_无有入无间_吾是以知无为之有益_不言之教_无为之益天下希及之">43.天下之至柔，驰骋天下之至坚。无有入无间，吾是以知无为之有益。不言之教，无为之益天下希及之。</h4>
+</div>
+<div class="sect3">
+<h4 id="_44_名与身孰亲_身与货孰多_得与亡孰病_是故甚爱必大费_多藏必厚亡_知足不辱_知止不殆_可以长久">44.名与身孰亲。身与货孰多。得与亡孰病。是故甚爱必大费。多藏必厚亡。知足不辱。知止不殆。可以长久。</h4>
+</div>
+<div class="sect3">
+<h4 id="_45_大成若缺_其用不弊_大盈若冲_其用不穷_大直若屈_大巧若拙_大辩若讷_静胜躁_寒胜热_清静为天下正">45.大成若缺，其用不弊。大盈若冲，其用不穷。大直若屈。大巧若拙。大辩若讷。静胜躁，寒胜热。清静为天下正。</h4>
+</div>
+<div class="sect3">
+<h4 id="_46_天下有道_却走马以粪_天下无道_戎马生於郊_祸莫大於不知足_咎莫大於欲得_故知足之足常足矣">46.天下有道，却走马以粪。天下无道，戎马生於郊。祸莫大於不知足。咎莫大於欲得。故知足之足常足矣。</h4>
+</div>
+<div class="sect3">
+<h4 id="_47_不出户知天下_不窥牖见天道_其出弥远_其知弥少_是以圣人不行而知_不见而明_不为而成">47.不出户知天下。不窥牖见天道。其出弥远，其知弥少。是以圣人不行而知。不见而明。不为而成。</h4>
+</div>
+<div class="sect3">
+<h4 id="_48_为学日益_为道日损_损之又损_以至於无为_无为而不为_取天下常以无事_及其有事_不足以取天下">48.为学日益。为道日损。损之又损，以至於无为。无为而不为。取天下常以无事，及其有事，不足以取天下。</h4>
+</div>
+<div class="sect3">
+<h4 id="_49_圣人无常心_以百姓心为心_善者吾善之_不善者吾亦善之德善_信者吾信之_不信者吾亦信之_德信_圣人在天下歙歙焉_为天下浑其心_百姓皆注其耳目_圣人皆孩之">49.圣人无常心。以百姓心为心。善者吾善之。不善者吾亦善之德善。信者吾信之。不信者吾亦信之、德信。圣人在天下歙歙焉，为天下浑其心。百姓皆注其耳目，圣人皆孩之。</h4>
+</div>
+<div class="sect3">
+<h4 id="_50_出生入死_生之徒_十有三_死之徒_十有三_人之生_动之於死地_亦十有三_夫何故_以其生生之厚_盖闻善摄生者_陆行不遇凶虎_入军不被甲兵_凶无所投其角_虎无所用其爪_兵无所容其刃_夫何故_以其无死地">50.出生入死。生之徒，十有三。死之徒，十有三。人之生，动之於死地，亦十有三。夫何故？以其生生之厚。盖闻善摄生者，陆行不遇凶虎，入军不被甲兵。凶无所投其角。虎无所用其爪。兵无所容其刃。夫何故？以其无死地。</h4>
+</div>
+<div class="sect3">
+<h4 id="_51_道生之_德畜之_物形之_势成之_是以万物莫不尊道_而贵德_道之尊_德之贵_夫莫之命而常自然_故道生之_德畜之_长之育之_亭之毒之_养之覆之_生而不有_为而不恃_长而不宰_是谓玄德">51.道生之，德畜之，物形之，势成之。是以万物莫不尊道，而贵德。道之尊，德之贵，夫莫之命而常自然。故道生之，德畜之。长之育之。亭之毒之。养之覆之。生而不有，为而不恃，长而不宰。是谓玄德。</h4>
+</div>
+<div class="sect3">
+<h4 id="_52_天下有始_以为天下母_既得其母_以知其子_既知其子_复守其母_没身不殆_塞其兑_闭其门_终身不勤_开其兑_济其事_终身不救_见其小曰明_守柔曰强_用其光_复归其明_无遗身殃_是为习常">52.天下有始，以为天下母。既得其母，以知其子。既知其子，复守其母，没身不殆。塞其兑，闭其门，终身不勤。开其兑，济其事，终身不救。见其小曰明，守柔曰强。用其光，复归其明，无遗身殃。是为习常。</h4>
+</div>
+<div class="sect3">
+<h4 id="_53_使我介然有知_行於大道_唯施是畏_大道甚夷_而人好径_朝甚除_田甚芜_仓甚虚_服文彩_带利剑_厌饮食_财货有馀_是谓盗夸_非道也哉">53.使我介然有知，行於大道，唯施是畏。大道甚夷，而人好径。朝甚除，田甚芜，仓甚虚。服文彩，带利剑，厌饮食，财货有馀。是谓盗夸。非道也哉。</h4>
+</div>
+<div class="sect3">
+<h4 id="_54_善建者不拔_善抱者不脱_子孙以祭祀不辍_修之於身其德乃真_修之於家其德乃馀_修之於乡其德乃长_修之於邦其德乃丰_修之於天下其德乃普_故以身观身_以家观家_以乡观乡_以邦观邦_以天下观天下_吾何以知天下然哉_以此">54.善建者不拔。善抱者不脱。子孙以祭祀不辍。修之於身其德乃真。修之於家其德乃馀。修之於乡其德乃长。修之於邦其德乃丰。修之於天下其德乃普。故以身观身，以家观家，以乡观乡，以邦观邦，以天下观天下。吾何以知天下然哉？以此。</h4>
+</div>
+<div class="sect3">
+<h4 id="_55_含德之厚比於赤子_毒虫不螫_猛兽不据_攫鸟不抟_骨弱筋柔而握固_未知牝牡之合而全作_精之至也_终日号而不嗄_和之至也_知和曰常_知常曰明_益生曰祥_心使气曰强_物壮则老_谓之不道_不道早已">55.含德之厚比於赤子。毒虫不螫，猛兽不据，攫鸟不抟。骨弱筋柔而握固。未知牝牡之合而全作，精之至也。终日号而不嗄，和之至也。知和曰常。知常曰明。益生曰祥。心使气曰强。物壮则老。谓之不道，不道早已。</h4>
+</div>
+<div class="sect3">
+<h4 id="_56_知者不言_言者不知_挫其锐_解其纷_和其光_同其尘_是谓玄同_故不可得而亲_不可得而疏_不可得而利_不可得而害_不可得而贵_不可得而贱_故为天下贵">56.知者不言。言者不知。挫其锐，解其纷，和其光，同其尘，是谓玄同。故不可得而亲。不可得而疏。不可得而利。不可得而害。不可得而贵。不可得而贱。故为天下贵。</h4>
+</div>
+<div class="sect3">
+<h4 id="_57_以正治国_以奇用兵_以无事取天下_吾何以知其然哉_以此_天下多忌讳而民弥贫_民多利器国家滋昏_人多伎巧奇物泫起_法令滋彰盗贼多有_故圣人云我无为而民自化_我好静而民自正_我无事而民自富_我无欲而民自朴">57.以正治国，以奇用兵，以无事取天下。吾何以知其然哉？以此。天下多忌讳而民弥贫。民多利器国家滋昏。人多伎巧奇物泫起。法令滋彰盗贼多有。故圣人云我无为而民自化。我好静而民自正。我无事而民自富。我无欲而民自朴。</h4>
+</div>
+<div class="sect3">
+<h4 id="_58_其政闷闷_其民淳淳_其政察察_其民缺缺_祸尚福之所倚_福尚祸之所伏_孰知其极_其无正_正复为奇_善复为妖_人之迷其日固久_是以圣人方而不割_廉而不刿_直而不肆_光而不耀">58.其政闷闷，其民淳淳。其政察察，其民缺缺。祸尚福之所倚。福尚祸之所伏。孰知其极，其无正。正复为奇，善复为妖。人之迷其日固久。是以圣人方而不割。廉而不刿。直而不肆。光而不耀。</h4>
+</div>
+<div class="sect3">
+<h4 id="_59_治人事天莫若啬_夫唯啬是谓早服_早服谓之重积德_重积德则无不克_无不克则莫知其极_莫知其极可以有国_有国之母可以长久_是谓深根固柢_长生久视之道">59.治人事天莫若啬。夫唯啬是谓早服。早服谓之重积德。重积德则无不克。无不克则莫知其极。莫知其极可以有国。有国之母可以长久。是谓深根固柢，长生久视之道。</h4>
+</div>
+<div class="sect3">
+<h4 id="_60_治大国若烹小鲜_以道莅天下_其迨ㄞ哄非其鬼不神_其神不伤人_非其神不伤人_圣人亦不伤人_夫两不相伤_故德交归焉">60.治大国若烹小鲜。以道莅天下，其迨ㄞ哄非其鬼不神，其神不伤人。非其神不伤人，圣人亦不伤人。夫两不相伤，故德交归焉。</h4>
+</div>
+<div class="sect3">
+<h4 id="_61_大国者下流_天下之交_天下之牝_牝常以静胜牡_以静为下_故大国以下小国_则取小国_小国以下大国_则取大国_故或下以取_或下而取_大国不过欲兼畜人_小国不过欲入事人_夫两者各得所欲_大者宜为下">61.大国者下流，天下之交。天下之牝。牝常以静胜牡。以静为下。故大国以下小国，则取小国。小国以下大国，则取大国。故或下以取，或下而取。大国不过欲兼畜人。小国不过欲入事人。夫两者各得所欲，大者宜为下。</h4>
+</div>
+<div class="sect3">
+<h4 id="_62_道者万物之奥_善人之宝_不善人之所保_美言可以市尊_美行可以加人_人之不善_何弃之有_故立天子_置三公_虽有拱璧以先驷马_不如坐进此道_古之所以贵此道者何_不曰_求以得_有罪以免邪_故为天下贵">62.道者万物之奥。善人之宝，不善人之所保。美言可以市尊。美行可以加人。人之不善，何弃之有。故立天子、置三公，虽有拱璧以先驷马，不如坐进此道。古之所以贵此道者何。不曰∶求以得，有罪以免邪？故为天下贵。</h4>
+</div>
+<div class="sect3">
+<h4 id="_63_为无为_事无事_味无味_大小多少_报怨以德_图难於其易_为大於其细_天下难事必作於易_天下大事必作於细_是以圣人终不为大_故能成其大_夫轻诺必寡信_多易必多难_是以圣人犹难之_故终无难矣">63.为无为，事无事，味无味。大小多少，报怨以德。图难於其易，为大於其细。天下难事必作於易。天下大事必作於细。是以圣人终不为大，故能成其大。夫轻诺必寡信。多易必多难。是以圣人犹难之，故终无难矣。</h4>
+</div>
+<div class="sect3">
+<h4 id="_64_其安易持_其未兆易谋_其脆易泮_其微易散_为之於未有_治之於未乱_合抱之木生於毫末_九层之台起於累土_千里之行始於足下_为者败之_执者失之_是以圣人无为故无败_无执故无失_民之从事常於几成而败之_慎终如始则无败事_是以圣人欲不欲_不贵难得之货_学不学_复众人之所过_以辅万物之自然而不敢为">64.其安易持，其未兆易谋。其脆易泮，其微易散。为之於未有，治之於未乱。合抱之木生於毫末。九层之台起於累土。千里之行始於足下。为者败之，执者失之。是以圣人无为故无败，无执故无失。民之从事常於几成而败之。慎终如始则无败事。是以圣人欲不欲，不贵难得之货。学不学，复众人之所过，以辅万物之自然而不敢为。</h4>
+</div>
+<div class="sect3">
+<h4 id="_65_古之善为道者_非以明民_将以愚之_民之难治_以其智多_故以智治国_国之贼_不以智治国_国之福_知此两者_亦稽式_常知稽式_是谓玄德_玄德深矣_远矣_与物反矣_然後乃至大顺">65.古之善为道者，非以明民，将以愚之。民之难治，以其智多。故以智治国，国之贼。不以智治国，国之福。知此两者，亦稽式。常知稽式，是谓玄德。玄德深矣、远矣！与物反矣。然後乃至大顺。</h4>
+</div>
+<div class="sect3">
+<h4 id="_66_江海之所以能为百谷王者_以其善下之_故能为百谷王_是以圣人欲上民_必以言下之_欲先民_必以身後之_是以圣人处上而民不重_处前而民不害_是以天下乐推而不厌_以其不争_故天下莫能与之争">66.江海之所以能为百谷王者，以其善下之，故能为百谷王。是以圣人欲上民，必以言下之。欲先民，必以身後之。是以圣人处上而民不重，处前而民不害。是以天下乐推而不厌。以其不争，故天下莫能与之争。</h4>
+</div>
+<div class="sect3">
+<h4 id="_67_天下皆谓我道大似不肖_夫唯大故似不肖_若肖_久矣_其细也夫_我有三宝持而保之_一曰慈_二曰俭_三曰不敢为天下先_慈故能勇_俭故能广_不敢为天下先故能成器长_今舍慈且勇_舍俭且广_舍後且先_死矣_夫慈以战则胜_以守则固_天将救之以慈卫之">67.天下皆谓我道大似不肖。夫唯大故似不肖。若肖，久矣！其细也夫。我有三宝持而保之∶一曰慈，二曰俭，三曰不敢为天下先。慈故能勇，俭故能广，不敢为天下先故能成器长。今舍慈且勇，舍俭且广，舍後且先，死矣！夫慈以战则胜，以守则固。天将救之以慈卫之。</h4>
+</div>
+<div class="sect3">
+<h4 id="_68_善为士者不武_善战者不怒_善胜敌者不与_善用人者为之下_是谓不争之德_是谓用人之力_是谓配天之极">68.善为士者不武。善战者不怒。善胜敌者不与。善用人者为之下。是谓不争之德。是谓用人之力。是谓配天之极。</h4>
+</div>
+<div class="sect3">
+<h4 id="_69_用兵有言_吾不敢为主而为客_不敢进寸而退尺_是谓行无行_攘无臂_扔无敌_执无兵_祸莫大於轻敌_轻敌几丧吾宝_故抗兵相加哀者胜矣">69.用兵有言，吾不敢为主而为客。不敢进寸而退尺。是谓行无行。攘无臂。扔无敌。执无兵。祸莫大於轻敌。轻敌几丧吾宝。故抗兵相加哀者胜矣。</h4>
+</div>
+<div class="sect3">
+<h4 id="_70_吾言甚易知_甚易行_天下莫能知_莫能行_言有宗_事有君_夫唯无知_是以我不知_知我者希_则我者贵_是以圣被褐怀玉">70.吾言甚易知、甚易行。天下莫能知、莫能行。言有宗、事有君。夫唯无知，是以我不知。知我者希，则我者贵。是以圣被褐怀玉。</h4>
+</div>
+<div class="sect3">
+<h4 id="_71_知不知上_不知知病_夫唯病病_是以不病_圣人不病_以其病病_夫唯病病_是以不病">71.知不知上，不知知病。夫唯病病，是以不病。圣人不病，以其病病。夫唯病病，是以不病。</h4>
+</div>
+<div class="sect3">
+<h4 id="_72_民不畏威_则大威至_无狎其所居_无厌其所生_夫唯不厌_是以不厌_是以圣人自知不自见_自爱不自贵_故去彼取此">72.民不畏威，则大威至。无狎其所居，无厌其所生。夫唯不厌，是以不厌。是以圣人自知不自见。自爱不自贵。故去彼取此。</h4>
+</div>
+<div class="sect3">
+<h4 id="_73_勇於敢则杀_勇於不敢则活_此两者或利或害_天之所恶孰知其故_天之道不争而善胜_不言而善应_不召而自来_然而善谋_天网恢恢疏而不失">73.勇於敢则杀。勇於不敢则活。此两者或利或害。天之所恶孰知其故。天之道不争而善胜。不言而善应。不召而自来。??然而善谋。天网恢恢疏而不失。</h4>
+</div>
+<div class="sect3">
+<h4 id="_74_民不畏死_奈何以死惧之_若使民常畏死_而为奇者_吾得执而杀之_孰敢_常有司杀者杀_夫代司杀者杀_是谓代大匠斫_夫代大匠斫者_希有不伤其手矣">74.民不畏死，奈何以死惧之。若使民常畏死，而为奇者，吾得执而杀之，孰敢。常有司杀者杀。夫代司杀者杀，是谓代大匠斫。夫代大匠斫者，希有不伤其手矣。</h4>
+</div>
+<div class="sect3">
+<h4 id="_75_民之饥以其上食税之多_是以饥_民之难治以其上之有为_是以难治_民之轻死以其求生之厚_是以轻死_夫唯无以生为者_是贤於贵生">75.民之饥以其上食税之多，是以饥。民之难治以其上之有为，是以难治。民之轻死以其求生之厚，是以轻死。夫唯无以生为者，是贤於贵生。</h4>
+</div>
+<div class="sect3">
+<h4 id="_76_人之生也柔弱_其死也坚强_草木之生也柔脆_其死也枯槁_故坚强者死之徒_柔弱者生之徒_是以兵强则灭_木强则折_强大处下_柔弱处上">76.人之生也柔弱，其死也坚强。草木之生也柔脆，其死也枯槁。故坚强者死之徒，柔弱者生之徒。是以兵强则灭，木强则折。强大处下，柔弱处上。</h4>
+</div>
+<div class="sect3">
+<h4 id="_77_天之道其犹张弓与_高者抑之_下者举之_有馀者损之_不足者补之_天之道_损有馀而补不足_人之道_则不然_损不足以奉有馀_孰能有馀以奉天下_唯有道者_是以圣人为而不恃_功成而不处_其不欲见贤邪">77.天之道其犹张弓与。高者抑之，下者举之。有馀者损之，不足者补之。天之道，损有馀而补不足。人之道，则不然，损不足以奉有馀。孰能有馀以奉天下，唯有道者。是以圣人为而不恃，功成而不处。其不欲见贤邪！</h4>
+</div>
+<div class="sect3">
+<h4 id="_78_天下莫柔弱於水_而攻坚强者_莫之能胜_以其无以易之_弱之胜强_柔之胜刚_天下莫不知莫能行_是以圣人云_受国之垢是谓社稷主_受国不祥是为天下王_正言若反">78.天下莫柔弱於水。而攻坚强者，莫之能胜。以其无以易之。弱之胜强。柔之胜刚。天下莫不知莫能行。是以圣人云，受国之垢是谓社稷主。受国不祥是为天下王。正言若反。</h4>
+</div>
+<div class="sect3">
+<h4 id="_79_和大怨必有馀怨_安可以为善_是以圣人执左契_而不责於人_有德司契_无德司彻_天道无亲常与善人">79.和大怨必有馀怨，安可以为善。是以圣人执左契，而不责於人。有德司契，无德司彻。天道无亲常与善人。</h4>
+</div>
+<div class="sect3">
+<h4 id="_80_小国寡民_使有什伯之器而不用_使民重死而不远徙_虽有舟舆无所乘之_虽有甲兵无所陈之_使民复结绳而用之_甘其食_美其服_安其居_乐其俗_邻国相望_鸡犬之声相闻_民至老死不相往来">80.小国寡民。使有什伯之器而不用。使民重死而不远徙。虽有舟舆无所乘之。虽有甲兵无所陈之。使民复结绳而用之。甘其食、美其服、安其居、乐其俗。邻国相望，鸡犬之声相闻。民至老死不相往来。</h4>
+</div>
+<div class="sect3">
+<h4 id="_81_信言不美_美言不信_善者不辩_辩者不善_知者不博_博者不知_圣人不积_既以为人己愈有_既以与人己愈多_天之道利而不害_圣人之道为而不争">81.信言不美。美言不信。善者不辩。辩者不善。知者不博。博者不知。圣人不积。既以为人己愈有。既以与人己愈多。天之道利而不害。圣人之道为而不争。</h4>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="footnotes"><hr /></div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2015-05-20 15:17:01 CST
+</div>
+</div>
+</body>
+<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1254706632'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s11.cnzz.com/z_stat.php%3Fid%3D1254706632%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+</html>
