@@ -983,11 +983,36 @@ JavaScript的函数引用与C语言中的函数指针的区别在于，函数引
 </div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="_wed_27_may_2015_09_39_37_am_cst">Wed 27 May 2015 09:39:37 AM CST</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_etc_resolv_conf">/etc/resolv.conf</h3>
+<div class="ulist"><ul>
+<li>
+<p>
+用53端口连VPN，如果用自动分配的DNS服务器则无法上网，用Google DNS则无问题。但是 <em>dhcpcd</em> 或者 <em>dhclient</em> 会经常更改 /etc/resolv.conf，如果要始终使用 Google DNS，如果是 <em>dhcpcd</em> ，最简单的方法是将其放入到 <em>/etc/resolv.conf.head</em> 中。
+</p>
+</li>
+<li>
+<p>
+还有其它方法，例如配置 <em>/etc/dhcpcd.conf</em> ，或者写保护 <em>chattr +i /etc/resolv.conf</em> 。
+</p>
+</li>
+<li>
+<p>
+<em>drill(1)</em> get information of DNS.
+</p>
+</li>
+</ul></div>
+</div>
+</div>
+</div>
 </div>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-05-10 21:03:07 CST
+Last updated 2015-05-27 09:45:49 CST
 </div>
 </div>
 </body>
