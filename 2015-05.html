@@ -1008,11 +1008,39 @@ JavaScript的函数引用与C语言中的函数指针的区别在于，函数引
 </div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="_thu_28_may_2015_02_17_52_pm_cst">Thu 28 May 2015 02:17:52 PM CST</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_openvpn_ipv6">OpenVPN IPv6</h3>
+<div class="ulist"><ul>
+<li>
+<p>
+目前应该是路由有问题。而且53端口不能在实验室的电脑上连VPN。
+</p>
+</li>
+<li>
+<p>
+现在是登录系统后，在 <em>startx</em> 之前加上 <em>proxychains</em> 整个系统的流量都通过ss走。测了一下速度，还可以，因为是IPv6。
+<span class="image">
+<img src="http://www.speedtest.net/result/4391231779.png" alt="my speed" />
+</span>
+</p>
+</li>
+<li>
+<p>
+可以开两个tty, tty1是正常的 <em>startx</em> ，而 tty2 是 <em>proxychains startx</em> 。只是发现在tty2中，zsh会卡住，把zshrc disable掉之后就可以，但很不方便！应该是oh-my-zsh有联网的模块在与proxychains通信？
+</p>
+</li>
+</ul></div>
+</div>
+</div>
+</div>
 </div>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-05-27 09:45:49 CST
+Last updated 2015-05-28 14:32:22 CST
 </div>
 </div>
 </body>
