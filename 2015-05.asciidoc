@@ -103,3 +103,28 @@ s.fullNameReversed(); // "Willison, Simon"
 
 * https://stackoverflow.com/questions/111102/how-do-javascript-closures-work[闭包]
 	** JavaScript的函数引用与C语言中的函数指针的区别在于，函数引用除了指针之外，还包含函数内部的变量，它们在函数返回后依然可以被访问到。
+
+== Thu 21 May 2015 11:14:47 AM CST
+=== http://serverfault.com/questions/62411/how-can-i-sort-du-h-output-by-size[文件大小排序]
+[source, bash]
+du -sh * | sort -h
+
+sort的 '-h' 选项在 http://article.gmane.org/gmane.comp.gnu.core-utils.announce/52[coreutils 7.5]中加入。
+
+== 2015-05-22 Friday 14:07:24
+===  JSON
+* https://robots.thoughtbot.com/jq-is-sed-for-json[jq is sed for json]
+
+=== impress.js
+* http://mkacz91.github.io/Triangulations[Triangulations]
+* http://pkoperek.github.io/bytecode-presentation[bytecode-presentation]
+* http://bartaz.github.io/meetjs/css3d-summit[CSS 3D]
+
+== Mon 25 May 2015 04:54:20 PM CST
+=== Python
+* 函数的参数列表
+	** https://docs.python.org/3/tutorial/controlflow.html#more-on-defining-functions[教程]
+	** 函数的参数已经存放在list中，但直接把list传给函数是不行的，需要加上星号对list进行unpacking。
+* 最大元素的位置
+	** a.index(max(a))
+	** index只返回第一个等于max(a)的元素的下标。

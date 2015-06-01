@@ -39,3 +39,11 @@ DFS
 * https://projecteuler.net/problem=196[PE196 Prime triplets]
 
 素数测试
+
+* http://acm.zju.edu.cn/onlinejudge/showProblem.do?problemCode=1909[ZOJ 1909]
+
+给出一组整数，问是否能够合成四个相等的数。应该是DFS。
+
+* http://acm.zju.edu.cn/onlinejudge/showProblem.do?problemCode=1453[ZOJ 1453]
+
+凸包。

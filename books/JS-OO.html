@@ -735,122 +735,168 @@ asciidoc.install();
 <div id="header">
 </div>
 <div id="content">
+<div class="sect1">
+<h2 id="_ch1">CH1</h2>
+<div class="sectionbody">
 <div class="ulist"><ul>
 <li>
 <p>
-如何从物理上解释 Rate-Distortion函数的凸性。
+五种原始类型：string, number, boolean, null, undefined. 除了null 必须用是否等于 null 来鉴别以外，都可以用 <em>typeof</em> 来鉴别。
 </p>
 </li>
 <li>
 <p>
-<strong>JavaScript</strong> 为什么那么有用？
-</p>
-<div class="ulist"><ul>
-<li>
-<p>
-网景浏览器时代就有了。
+对函数typeof返回 <em>function</em> ，其余都返回 <em>object</em> 。如果要区分是 String, Array 等具体类型，要用 <em>instanceof</em> 。
 </p>
 </li>
 <li>
 <p>
-所有主流浏览器都支持。（<strong>脑洞：为什么都要嵌入到浏览器中，有没有单独的JS解释器？</strong>）
+用字面形式创建函数或者对象。给对象赋的值是JSON格式。与字面形式对应的是用构造函数创建对象。
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+对象和数组字面形式
+</p>
+</li>
+<li>
+<p>
+函数字面形式
+</p>
+</li>
+<li>
+<p>
+正则表达式字面形式
 </p>
 </li>
 </ul></div>
 </li>
 </ul></div>
 <div class="listingblock">
-<div class="content">
-<pre><code>单独的js解释器是有的，我自己电脑上已经装了，就叫 js24 。不知道浏览器里用的是不是也是它。</code></pre>
-</div></div>
+<div class="content"><!-- Generator: GNU source-highlight 3.1.8
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="font-weight: bold"><span style="color: #0000FF">var</span></span> Max <span style="color: #990000">=</span> <span style="font-weight: bold"><span style="color: #0000FF">new</span></span> <span style="font-weight: bold"><span style="color: #000000">Function</span></span><span style="color: #990000">(</span><span style="color: #FF0000">"a, b"</span><span style="color: #990000">,</span> <span style="color: #FF0000">"return a &gt; b ? a : b"</span><span style="color: #990000">)</span> <span style="font-style: italic"><span style="color: #9A1900">// 非字面形式</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">// 字面形式1，函数声明，会被提升到顶部执行</span></span>
+<span style="font-weight: bold"><span style="color: #0000FF">function</span></span> <span style="font-weight: bold"><span style="color: #000000">Max</span></span><span style="color: #990000">(</span>a<span style="color: #990000">,</span> b<span style="color: #990000">)</span> <span style="color: #FF0000">{</span>
+        <span style="font-weight: bold"><span style="color: #0000FF">return</span></span> a <span style="color: #990000">&gt;</span> b <span style="color: #990000">?</span> a <span style="color: #990000">:</span> b<span style="color: #990000">;</span>
+<span style="color: #FF0000">}</span>
+<span style="font-style: italic"><span style="color: #9A1900">// 字面形式2，函数表达式，不会被提升</span></span>
+<span style="font-weight: bold"><span style="color: #0000FF">var</span></span> Max <span style="color: #990000">=</span> <span style="font-weight: bold"><span style="color: #0000FF">function</span></span><span style="color: #990000">(</span>a<span style="color: #990000">,</span> b<span style="color: #990000">)</span> <span style="color: #FF0000">{</span>
+        <span style="font-weight: bold"><span style="color: #0000FF">return</span></span> a <span style="color: #990000">&gt;</span> b <span style="color: #990000">?</span> a <span style="color: #990000">:</span> b<span style="color: #990000">;</span>
+<span style="color: #FF0000">}</span>
+<span style="font-weight: bold"><span style="color: #0000FF">var</span></span> numbers <span style="color: #990000">=</span> <span style="color: #FF6600">/\d+/g</span><span style="color: #990000">;</span></tt></pre></div></div>
 <div class="ulist"><ul>
 <li>
 <p>
-如何妥善地保存gpg密钥？
+<em>JavaScript貌似有一种把数字转换成字符串再处理的倾向。在判等时，需要用三个等号来阻止它这么做。</em>
 </p>
 </li>
 <li>
 <p>
-外部排序。
-</p>
-</li>
-<li>
-<p>
-<strong>Firefox</strong> 和 <strong>Chromium</strong> 的字体机制。
-</p>
-</li>
-<li>
-<p>
-<a href="https://projecteuler.net/problem=374"><em>PE374 Maximum Integer Partition Product</em></a>。把一个正整数N分成若干部分，使得其乘积最大，参考<a href="http://poj.org/showmessage?message_id=13543">POJ 1032</a>。
-</p>
-<div class="literalblock">
-<div class="content">
-<pre><code>令：
-A = 2+3+4+...+(k-1)+k &lt;= N &lt; A + (k+1) = B</code></pre>
-</div></div>
-<div class="literalblock">
-<div class="content">
-<pre><code>Suppose N = A + p, (0 &lt;= p &lt; k+1)</code></pre>
-</div></div>
-<div class="literalblock">
-<div class="content">
-<pre><code>1) p=0, then answer is Set A</code></pre>
-</div></div>
-<div class="literalblock">
-<div class="content">
-<pre><code>2) 1&lt;=p&lt;=k-1 then answer is Set B - {k+1-p}</code></pre>
-</div></div>
-<div class="literalblock">
-<div class="content">
-<pre><code>3) p=k, then answer is Set A - {2} + {k+2}</code></pre>
-</div></div>
-</li>
-<li>
-<p>
-<a href="https://projecteuler.net/problem=193">PE193 SquareFree Number</a>
+原始封装类型：String, Number, Boolean. 在访问原始类型的某些方法时，会自动生成一个对应的封装类型，方法执行完毕后该原始封装类型的对象被摧毁。
 </p>
 </li>
 </ul></div>
-<div class="paragraph"><p>DFS</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_ch2">CH2</h2>
+<div class="sectionbody">
 <div class="ulist"><ul>
 <li>
 <p>
-<a href="https://projecteuler.net/problem=185">PE185 Number Mind</a>
+函数作为参数传递。
 </p>
 </li>
 </ul></div>
-<div class="paragraph"><p>给出一组（22个）16位的数字，及其与目标数字相同的数字个数，确定唯一的目标数字。</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.8
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="font-weight: bold"><span style="color: #0000FF">var</span></span> numbers <span style="color: #990000">=</span> <span style="color: #990000">[</span><span style="color: #993399">1</span><span style="color: #990000">,</span><span style="color: #993399">2</span><span style="color: #990000">,</span><span style="color: #993399">3</span><span style="color: #990000">,</span><span style="color: #993399">4</span><span style="color: #990000">,</span><span style="color: #993399">5</span><span style="color: #990000">,</span><span style="color: #993399">6</span><span style="color: #990000">,</span><span style="color: #993399">65</span><span style="color: #990000">,</span><span style="color: #993399">12</span><span style="color: #990000">]</span> <span style="font-style: italic"><span style="color: #9A1900">// undefined</span></span>
+numbers<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">sort</span></span><span style="color: #990000">()</span> <span style="font-style: italic"><span style="color: #9A1900">// [ 1, 12, 2, 3, 4, 5, 6, 65 ]</span></span>
+numbers<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">sort</span></span><span style="color: #990000">(</span><span style="font-weight: bold"><span style="color: #0000FF">function</span></span><span style="color: #990000">(</span>a<span style="color: #990000">,</span>b<span style="color: #990000">)</span><span style="color: #FF0000">{</span><span style="font-weight: bold"><span style="color: #0000FF">return</span></span> a <span style="color: #990000">-</span> b<span style="color: #FF0000">}</span><span style="color: #990000">)</span> <span style="font-style: italic"><span style="color: #9A1900">// [ 1, 2, 3, 4, 5, 6, 12, 65 ]</span></span></tt></pre></div></div>
 <div class="ulist"><ul>
 <li>
 <p>
-<a href="https://projecteuler.net/problem=196">PE196 Prime triplets</a>
+函数的参数个数并不受定义时形参个数的限制，所有参数都会被默认数组 <em>arguments</em> 接收。但形参个数会被函数的length属性保存。
 </p>
 </li>
 </ul></div>
-<div class="paragraph"><p>素数测试</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.8
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="font-weight: bold"><span style="color: #0000FF">function</span></span> <span style="font-weight: bold"><span style="color: #000000">max</span></span><span style="color: #990000">(</span>a<span style="color: #990000">,</span> b<span style="color: #990000">)</span> <span style="color: #FF0000">{</span>
+        <span style="font-weight: bold"><span style="color: #0000FF">var</span></span> res <span style="color: #990000">=</span> arguments<span style="color: #990000">[</span><span style="color: #993399">0</span><span style="color: #990000">];</span>
+        <span style="font-weight: bold"><span style="color: #0000FF">for</span></span> <span style="color: #990000">(</span><span style="font-weight: bold"><span style="color: #0000FF">var</span></span> i <span style="color: #990000">=</span> <span style="color: #993399">1</span><span style="color: #990000">,</span> len <span style="color: #990000">=</span> arguments<span style="color: #990000">.</span>length<span style="color: #990000">;</span> i <span style="color: #990000">&lt;</span> len<span style="color: #990000">;</span> i<span style="color: #990000">++)</span> <span style="color: #FF0000">{</span>
+                <span style="font-weight: bold"><span style="color: #0000FF">if</span></span><span style="color: #990000">(</span>arguments<span style="color: #990000">[</span>i<span style="color: #990000">]</span> <span style="color: #990000">&gt;</span> res<span style="color: #990000">)</span> <span style="color: #FF0000">{</span>
+                        res <span style="color: #990000">=</span> arguments<span style="color: #990000">[</span>i<span style="color: #990000">];</span>
+                <span style="color: #FF0000">}</span>
+        <span style="color: #FF0000">}</span>
+        <span style="font-weight: bold"><span style="color: #0000FF">return</span></span> res<span style="color: #990000">;</span>
+<span style="color: #FF0000">}</span>
+<span style="font-weight: bold"><span style="color: #0000FF">function</span></span> <span style="font-weight: bold"><span style="color: #000000">reflect</span></span><span style="color: #990000">(</span>a<span style="color: #990000">,</span> b<span style="color: #990000">,</span> c<span style="color: #990000">)</span> <span style="color: #FF0000">{</span>
+        <span style="font-weight: bold"><span style="color: #0000FF">return</span></span> arguments<span style="color: #990000">;</span>
+<span style="color: #FF0000">}</span>
+<span style="font-weight: bold"><span style="color: #000000">max</span></span><span style="color: #990000">(</span><span style="color: #993399">1</span><span style="color: #990000">,</span><span style="color: #993399">2</span><span style="color: #990000">,</span><span style="color: #993399">3</span><span style="color: #990000">,</span><span style="color: #993399">4</span><span style="color: #990000">,</span><span style="color: #993399">32</span><span style="color: #990000">,</span><span style="color: #993399">123</span><span style="color: #990000">,</span><span style="color: #993399">13</span><span style="color: #990000">)</span> <span style="font-style: italic"><span style="color: #9A1900">// 123</span></span>
+<span style="font-weight: bold"><span style="color: #000000">reflect</span></span><span style="color: #990000">(</span><span style="color: #993399">1</span><span style="color: #990000">,</span><span style="color: #993399">2</span><span style="color: #990000">,</span><span style="color: #993399">3</span><span style="color: #990000">,</span><span style="color: #993399">4</span><span style="color: #990000">,</span><span style="color: #993399">32</span><span style="color: #990000">,</span><span style="color: #993399">123</span><span style="color: #990000">,</span><span style="color: #993399">13</span><span style="color: #990000">)</span> <span style="font-style: italic"><span style="color: #9A1900">// { '0': 1, '1': 2, '2': 3, '3': 4, '4': 32, '5': 123, '6': 13 }</span></span></tt></pre></div></div>
 <div class="ulist"><ul>
 <li>
 <p>
-<a href="http://acm.zju.edu.cn/onlinejudge/showProblem.do?problemCode=1909">ZOJ 1909</a>
+由于可接受的函数个数并不由形参决定，因此不能通过函数签名来区分不同的函数，即不能实现通常意义下的重载。只有形参列表不同的两次函数定义，后一种会覆盖掉前一种。考虑到函数是一种对象，这个行为就容易理解了。如果要让函数根据不同的形参产生不同的行为，需要在函数内部手动写判断形参个数和类型的代码。
+</p>
+</li>
+<li>
+<p>
+所有函数作用域内部都有一个this对象，代表调用该函数的对象。this的值可以被改变。 <em>call, apply, bind</em> 方法。
+</p>
+</li>
+<li>
+<p>
+typeof操作符根据对象是否有 <em>call</em> 属性来返回 function还是 object.
 </p>
 </li>
 </ul></div>
-<div class="paragraph"><p>给出一组整数，问是否能够合成四个相等的数。应该是DFS。</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_ch3">CH3</h2>
+<div class="sectionbody">
 <div class="ulist"><ul>
 <li>
 <p>
-<a href="http://acm.zju.edu.cn/onlinejudge/showProblem.do?problemCode=1453">ZOJ 1453</a>
+函数的属性列表可以看作一个哈系表，为新的属性赋值就是增加一个新的条目，调用内部的 <em>Put</em> 方法，修改属性的值调用 <em>Set</em> 方法。用 in 操作符来判断对象是否具有某个属性，用 <em>hasOwnPoperty</em> 方法来检查是否是自有属性。(因为还有原型属性，即所有的对象都具有的属性)
+</p>
+</li>
+<li>
+<p>
+用 <em>delete</em> 操作符来删除对象的一个属性。
+</p>
+</li>
+<li>
+<p>
+Object.keys() 获取对象的可枚举属性名字列表。
+</p>
+</li>
+<li>
+<p>
+访问器属性：用 <em>get</em> 和 <em>set</em> 关键字来定义。
 </p>
 </li>
 </ul></div>
-<div class="paragraph"><p>凸包。</p></div>
+</div>
+</div>
 </div>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-05-22 13:20:55 CST
+Last updated 2015-05-23 11:46:28 CST
 </div>
 </div>
 </body>
-<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1254706632'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s11.cnzz.com/z_stat.php%3Fid%3D1254706632%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
 </html>

@@ -1,0 +1,58 @@
+== CH1
+* 五种原始类型：string, number, boolean, null, undefined. 除了null 必须用是否等于 null 来鉴别以外，都可以用 'typeof' 来鉴别。
+* 对函数typeof返回 'function' ，其余都返回 'object' 。如果要区分是 String, Array 等具体类型，要用 'instanceof' 。
+* 用字面形式创建函数或者对象。给对象赋的值是JSON格式。与字面形式对应的是用构造函数创建对象。
+	** 对象和数组字面形式
+	** 函数字面形式
+	** 正则表达式字面形式
+
+[source, JavaScript]
+var Max = new Function("a, b", "return a > b ? a : b") // 非字面形式
+// 字面形式1，函数声明，会被提升到顶部执行
+function Max(a, b) {
+	return a > b ? a : b;
+}
+// 字面形式2，函数表达式，不会被提升
+var Max = function(a, b) {
+	return a > b ? a : b;
+}
+var numbers = /\d+/g;
+
+* _JavaScript貌似有一种把数字转换成字符串再处理的倾向。在判等时，需要用三个等号来阻止它这么做。_
+* 原始封装类型：String, Number, Boolean. 在访问原始类型的某些方法时，会自动生成一个对应的封装类型，方法执行完毕后该原始封装类型的对象被摧毁。
+
+== CH2
+* 函数作为参数传递。
+[source, JavaScript]
+var numbers = [1,2,3,4,5,6,65,12] // undefined
+numbers.sort() // [ 1, 12, 2, 3, 4, 5, 6, 65 ]
+numbers.sort(function(a,b){return a - b}) // [ 1, 2, 3, 4, 5, 6, 12, 65 ]
+
+* 函数的参数个数并不受定义时形参个数的限制，所有参数都会被默认数组 'arguments' 接收。但形参个数会被函数的length属性保存。
+
+[source, JavaScript]
+function max(a, b) {
+	var res = arguments[0];
+	for (var i = 1, len = arguments.length; i < len; i++) {
+		if(arguments[i] > res) {
+			res = arguments[i];
+		}
+	}
+	return res;
+}
+function reflect(a, b, c) {
+	return arguments;
+}
+max(1,2,3,4,32,123,13) // 123
+reflect(1,2,3,4,32,123,13) // { '0': 1, '1': 2, '2': 3, '3': 4, '4': 32, '5': 123, '6': 13 }
+
+* 由于可接受的函数个数并不由形参决定，因此不能通过函数签名来区分不同的函数，即不能实现通常意义下的重载。只有形参列表不同的两次函数定义，后一种会覆盖掉前一种。考虑到函数是一种对象，这个行为就容易理解了。如果要让函数根据不同的形参产生不同的行为，需要在函数内部手动写判断形参个数和类型的代码。
+
+* 所有函数作用域内部都有一个this对象，代表调用该函数的对象。this的值可以被改变。 'call, apply, bind' 方法。
+* typeof操作符根据对象是否有 'call' 属性来返回 function还是 object.
+
+== CH3
+* 函数的属性列表可以看作一个哈系表，为新的属性赋值就是增加一个新的条目，调用内部的 'Put' 方法，修改属性的值调用 'Set' 方法。用 in 操作符来判断对象是否具有某个属性，用 'hasOwnPoperty' 方法来检查是否是自有属性。(因为还有原型属性，即所有的对象都具有的属性)
+* 用 'delete' 操作符来删除对象的一个属性。
+* Object.keys() 获取对象的可枚举属性名字列表。
+* 访问器属性：用 'get' 和 'set' 关键字来定义。
