@@ -1077,11 +1077,64 @@ index只返回第一个等于max(a)的元素的下标。
 </div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="_wed_27_may_2015_09_39_37_am_cst">Wed 27 May 2015 09:39:37 AM CST</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_etc_resolv_conf">/etc/resolv.conf</h3>
+<div class="ulist"><ul>
+<li>
+<p>
+用53端口连VPN，如果用自动分配的DNS服务器则无法上网，用Google DNS则无问题。但是 <em>dhcpcd</em> 或者 <em>dhclient</em> 会经常更改 /etc/resolv.conf，如果要始终使用 Google DNS，如果是 <em>dhcpcd</em> ，最简单的方法是将其放入到 <em>/etc/resolv.conf.head</em> 中。
+</p>
+</li>
+<li>
+<p>
+还有其它方法，例如配置 <em>/etc/dhcpcd.conf</em> ，或者写保护 <em>chattr +i /etc/resolv.conf</em> 。
+</p>
+</li>
+<li>
+<p>
+<em>drill(1)</em> get information of DNS.
+</p>
+</li>
+</ul></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_thu_28_may_2015_02_17_52_pm_cst">Thu 28 May 2015 02:17:52 PM CST</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_openvpn_ipv6">OpenVPN IPv6</h3>
+<div class="ulist"><ul>
+<li>
+<p>
+目前应该是路由有问题。而且53端口不能在实验室的电脑上连VPN。
+</p>
+</li>
+<li>
+<p>
+现在是登录系统后，在 <em>startx</em> 之前加上 <em>proxychains</em> 整个系统的流量都通过ss走。测了一下速度，还可以，因为是IPv6。
+<span class="image">
+<img src="http://www.speedtest.net/result/4391231779.png" alt="my speed" />
+</span>
+</p>
+</li>
+<li>
+<p>
+可以开两个tty, tty1是正常的 <em>startx</em> ，而 tty2 是 <em>proxychains startx</em> 。只是发现在tty2中，zsh会卡住，把zshrc disable掉之后就可以，但很不方便！应该是oh-my-zsh有联网的模块在与proxychains通信？
+</p>
+</li>
+</ul></div>
+</div>
+</div>
+</div>
 </div>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-05-25 17:40:22 CST
+Last updated 2015-06-01 17:17:03 CST
 </div>
 </div>
 </body>

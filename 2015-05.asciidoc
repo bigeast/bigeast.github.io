@@ -128,3 +128,17 @@ sort的 '-h' 选项在 http://article.gmane.org/gmane.comp.gnu.core-utils.announ
 * 最大元素的位置
 	** a.index(max(a))
 	** index只返回第一个等于max(a)的元素的下标。
+
+== Wed 27 May 2015 09:39:37 AM CST
+=== /etc/resolv.conf
+* 用53端口连VPN，如果用自动分配的DNS服务器则无法上网，用Google DNS则无问题。但是 'dhcpcd' 或者 'dhclient' 会经常更改 /etc/resolv.conf，如果要始终使用 Google DNS，如果是 'dhcpcd' ，最简单的方法是将其放入到 '/etc/resolv.conf.head' 中。
+* 还有其它方法，例如配置 '/etc/dhcpcd.conf' ，或者写保护 'chattr +i /etc/resolv.conf' 。
+* 'drill(1)' get information of DNS.
+
+== Thu 28 May 2015 02:17:52 PM CST
+=== OpenVPN IPv6
+* 目前应该是路由有问题。而且53端口不能在实验室的电脑上连VPN。
+* 现在是登录系统后，在 'startx' 之前加上 'proxychains' 整个系统的流量都通过ss走。测了一下速度，还可以，因为是IPv6。
+image:http://www.speedtest.net/result/4391231779.png[my speed]
+* 可以开两个tty, tty1是正常的 'startx' ，而 tty2 是 'proxychains startx' 。只是发现在tty2中，zsh会卡住，把zshrc disable掉之后就可以，但很不方便！应该是oh-my-zsh有联网的模块在与proxychains通信？
+
