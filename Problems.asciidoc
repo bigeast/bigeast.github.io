@@ -15,6 +15,8 @@
 
 * **Firefox** 和 **Chromium** 的字体机制。
 
+* 'wget -c' 功能的实现。
+
 * https://projecteuler.net/problem=374[_PE374 Maximum Integer Partition Product_]。把一个正整数N分成若干部分，使得其乘积最大，参考http://poj.org/showmessage?message_id=13543[POJ 1032]。
 
 	令：
