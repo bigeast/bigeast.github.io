@@ -1,0 +1,16 @@
+== Fri 05 Jun 2015 09:42:45 AM CST
+=== awk的分割符
+* 命令行选项 '-F,' 指定逗号作为分割符
+* awk命令 _BEGIN{FS = ','; OFS = '\t'}_
+
+== Mon 15 Jun 2015 07:30:42 PM CST
+=== 内核更新后没有重启
+* 会导致一些问题，例如 'mount -t iso9660' 出错
+
+== Fri 19 Jun 2015 10:59:08 AM CST
+=== Windows日志，系统信息查看
+* cmd中， 'ver' 查看系统版本， 'systeminfo' 查看系统详细信息。
+* 'eventvwr.msc' 查看系统事件日志。
+* 'systeminfo | findstr /C:"OS"' Windows也有管道？！
+* 'wmic os get Caption,CSDVersion'
+* Kernel Power Event 41 message.

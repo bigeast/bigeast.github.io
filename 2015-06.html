@@ -735,125 +735,81 @@ asciidoc.install();
 <div id="header">
 </div>
 <div id="content">
+<div class="sect1">
+<h2 id="_fri_05_jun_2015_09_42_45_am_cst">Fri 05 Jun 2015 09:42:45 AM CST</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_awk的分割符">awk的分割符</h3>
 <div class="ulist"><ul>
 <li>
 <p>
-如何从物理上解释 Rate-Distortion函数的凸性。
+命令行选项 <em>-F,</em> 指定逗号作为分割符
 </p>
 </li>
 <li>
 <p>
-<strong>JavaScript</strong> 为什么那么有用？
+awk命令 <em>BEGIN{FS = <em>,</em>; OFS = <em>\t</em>}</em>
 </p>
+</li>
+</ul></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_mon_15_jun_2015_07_30_42_pm_cst">Mon 15 Jun 2015 07:30:42 PM CST</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_内核更新后没有重启">内核更新后没有重启</h3>
 <div class="ulist"><ul>
 <li>
 <p>
-网景浏览器时代就有了。
-</p>
-</li>
-<li>
-<p>
-所有主流浏览器都支持。（<strong>脑洞：为什么都要嵌入到浏览器中，有没有单独的JS解释器？</strong>）
+会导致一些问题，例如 <em>mount -t iso9660</em> 出错
 </p>
 </li>
 </ul></div>
-</li>
-</ul></div>
-<div class="listingblock">
-<div class="content">
-<pre><code>单独的js解释器是有的，我自己电脑上已经装了，就叫 js24 。不知道浏览器里用的是不是也是它。</code></pre>
-</div></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_fri_19_jun_2015_10_59_08_am_cst">Fri 19 Jun 2015 10:59:08 AM CST</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_windows日志_系统信息查看">Windows日志，系统信息查看</h3>
 <div class="ulist"><ul>
 <li>
 <p>
-如何妥善地保存gpg密钥？
+cmd中， <em>ver</em> 查看系统版本， <em>systeminfo</em> 查看系统详细信息。
 </p>
 </li>
 <li>
 <p>
-外部排序。
+<em>eventvwr.msc</em> 查看系统事件日志。
 </p>
 </li>
 <li>
 <p>
-<strong>Firefox</strong> 和 <strong>Chromium</strong> 的字体机制。
+<em>systeminfo | findstr /C:"OS"</em> Windows也有管道？！
 </p>
 </li>
 <li>
 <p>
-<em>wget -c</em> 功能的实现。
+<em>wmic os get Caption,CSDVersion</em>
 </p>
 </li>
 <li>
 <p>
-<a href="https://projecteuler.net/problem=374"><em>PE374 Maximum Integer Partition Product</em></a>。把一个正整数N分成若干部分，使得其乘积最大，参考<a href="http://poj.org/showmessage?message_id=13543">POJ 1032</a>。
-</p>
-<div class="literalblock">
-<div class="content">
-<pre><code>令：
-A = 2+3+4+...+(k-1)+k &lt;= N &lt; A + (k+1) = B</code></pre>
-</div></div>
-<div class="literalblock">
-<div class="content">
-<pre><code>Suppose N = A + p, (0 &lt;= p &lt; k+1)</code></pre>
-</div></div>
-<div class="literalblock">
-<div class="content">
-<pre><code>1) p=0, then answer is Set A</code></pre>
-</div></div>
-<div class="literalblock">
-<div class="content">
-<pre><code>2) 1&lt;=p&lt;=k-1 then answer is Set B - {k+1-p}</code></pre>
-</div></div>
-<div class="literalblock">
-<div class="content">
-<pre><code>3) p=k, then answer is Set A - {2} + {k+2}</code></pre>
-</div></div>
-</li>
-<li>
-<p>
-<a href="https://projecteuler.net/problem=193">PE193 SquareFree Number</a>
+Kernel Power Event 41 message.
 </p>
 </li>
 </ul></div>
-<div class="paragraph"><p>DFS</p></div>
-<div class="ulist"><ul>
-<li>
-<p>
-<a href="https://projecteuler.net/problem=185">PE185 Number Mind</a>
-</p>
-</li>
-</ul></div>
-<div class="paragraph"><p>给出一组（22个）16位的数字，及其与目标数字相同的数字个数，确定唯一的目标数字。</p></div>
-<div class="ulist"><ul>
-<li>
-<p>
-<a href="https://projecteuler.net/problem=196">PE196 Prime triplets</a>
-</p>
-</li>
-</ul></div>
-<div class="paragraph"><p>素数测试</p></div>
-<div class="ulist"><ul>
-<li>
-<p>
-<a href="http://acm.zju.edu.cn/onlinejudge/showProblem.do?problemCode=1909">ZOJ 1909</a>
-</p>
-</li>
-</ul></div>
-<div class="paragraph"><p>给出一组整数，问是否能够合成四个相等的数。应该是DFS。</p></div>
-<div class="ulist"><ul>
-<li>
-<p>
-<a href="http://acm.zju.edu.cn/onlinejudge/showProblem.do?problemCode=1453">ZOJ 1453</a>
-</p>
-</li>
-</ul></div>
-<div class="paragraph"><p>凸包。</p></div>
+</div>
+</div>
+</div>
 </div>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-06-19 09:32:14 CST
+Last updated 2015-06-19 11:27:09 CST
 </div>
 </div>
 </body>
