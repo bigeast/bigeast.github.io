@@ -4,6 +4,7 @@
 |link:2015-03.html[2015-03 笔记]
 |link:2015-04.html[2015-04 笔记]
 |link:2015-05.html[2015-05 笔记]
+|link:2015-06.html[2015-06 笔记]
 |====================
 
 link:Problems.html[Problems to Solve]
@@ -21,6 +22,8 @@ link:books/ddj.html[道德经]
 link:books/linuxfaner.html[Linux就是这个范儿]
 
 link:InternetSocket.html[网络编程基础]
+
+link:books/JS-OO.html[JavaScript面向对象编程]
 
 == Computer Hacks
 link:Source_Code_Tree_Navigation_in_Vim.html[Source Code Tree Navigation in Vim]

@@ -14,3 +14,9 @@
 * 'systeminfo | findstr /C:"OS"' Windows也有管道？！
 * 'wmic os get Caption,CSDVersion'
 * Kernel Power Event 41 message.
+
+== Thu 25 Jun 2015 10:30:17 PM CST
+=== JavaScript Tips
+* 数制转换。
+	** `(100).toString(16)` 100转换成十六进制的字符串。
+	** `parseInt("0xafec", 16)` 十六进制字符串转换成十进制。
