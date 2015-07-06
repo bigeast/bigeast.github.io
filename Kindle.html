@@ -4,7 +4,7 @@
 <head>
 <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
 <meta name="generator" content="AsciiDoc 8.6.9" />
-<title></title>
+<title>Kindle Paperwhite 入手操作</title>
 <style type="text/css">
 /* Shared CSS for AsciiDoc xhtml11 and html5 backends */
 
@@ -733,18 +733,26 @@ asciidoc.install();
 </head>
 <body class="article">
 <div id="header">
+<h1>Kindle Paperwhite 入手操作</h1>
 </div>
 <div id="content">
-<div class="paragraph"><p>Kindle Paperwhite</p></div>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph"><p>在亚马逊官网上买了 Kindle Paperwhite 3，6月30号当天中午就送到了。第一台Kindle，记录一下！</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_推送">推送</h2>
+<div class="sectionbody">
 <div class="ulist"><ul>
 <li>
 <p>
-推送
+官方的说明见<a href="http://www.amazon.cn/gp/help/customer/display.html?nodeId=200767340">Kindle个人文档服务</a>。
 </p>
-<div class="ulist"><ul>
+</li>
 <li>
 <p>
-每个设备有一个对应的推送邮箱地址，国行一般是 <em>@kindle.cn</em>, 可以在 <a href="http://z.cn/myk">这里</a>设置。
+每个设备有一个对应的推送邮箱地址，国行一般是 <em>@kindle.cn</em>, 可以在 <a href="http://z.cn/myk">管理我的内容和设备</a> 中设置。
 </p>
 </li>
 <li>
@@ -752,12 +760,32 @@ asciidoc.install();
 将电子书以附件形式发送到推送邮箱地址，在Kindle设备上就会收到更新。但自己可以控制允许那些邮箱帐号可以给自己推送，如果没有被加入信任列表，那么其发送的电子书是不会被更新到Kindle中的。目前最多可以添加20个邮箱帐号。
 </p>
 </li>
-</ul></div>
+<li>
+<p>
+每封邮件的附件中，书籍的个数不能超过25个，总大小不能超过50M。可以直接发送zip包，但是大小和个数是对未压缩时的文件来说的。
+</p>
 </li>
 <li>
 <p>
-Calibre
+文件格式的限制：不支持epub。
 </p>
+</li>
+<li>
+<p>
+发送的文件会自动保存在亚马逊的云端硬盘中，如果发送的是mobi格式，会自动转换成azw格式保存。
+</p>
+</li>
+<li>
+<p>
+在Kindle上不能删除云端的备份，必须要在 <a href="https://z.cn/myk">https://z.cn/myk</a> 或者 <a href="https://www.amazon.cn/clouddrive/">https://www.amazon.cn/clouddrive/</a> 中才能彻底删除。
+</p>
+</li>
+</ul></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_calibre">Calibre</h2>
+<div class="sectionbody">
 <div class="ulist"><ul>
 <li>
 <p>
@@ -768,8 +796,6 @@ Calibre
 <p>
 <strong>Calibre书库中的电子书推送到Kindle</strong>。设置邮箱地址：<strong>首选项&#8658;通过邮件分享</strong>，需要设置邮件发送方式，之后就可以在书库中右键选中要推送的电子书，发送到Kindle了。
 </p>
-</li>
-</ul></div>
 </li>
 </ul></div>
 <div class="listingblock">
@@ -784,7 +810,7 @@ Calibre
 <p>
 电子书字数统计。
 </p>
-<div class="ulist"><ul>
+</li>
 <li>
 <p>
 在<strong>首选项&#8658;插件&#8658;获取新的插件</strong> 中，搜索 <em>Count Pages</em> 插件并安装。
@@ -799,16 +825,14 @@ Calibre
 <p>
 选择电子书，运行 <em>Count Pages</em> 插件。
 </p>
+</li>
+</ul></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_kindle_连接_archlinux">Kindle 连接 Archlinux</h2>
+<div class="sectionbody">
 <div class="ulist"><ul>
-<li>
-<p>
-Kindle 连接 Archlinux
-</p>
-</li>
-</ul></div>
-</li>
-</ul></div>
-</li>
 <li>
 <p>
 <span class="line-through">目前插上Kindle后，Kindle显示"USB 驱动模式"，是看不了书的。</span> 电脑上只有在 <em>lsusb</em> 中看到有
@@ -834,58 +858,26 @@ Kindle 连接 Archlinux
 <p>
 安装了 <em>gvfs-mtp</em> ，重启。然后还是不行，后来准备在 <em>GNOME</em> 中看，结果 gdm 启动不了，于是开搞 <em>xmonad</em> 。快忘记Kindle的事情时，发现可以识别了。。
 </p>
-<div class="ulist"><ul>
-<li>
-<p>
-Kindle 中 <strong>位置</strong> 的概念
-</p>
 </li>
 </ul></div>
-</li>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_kindle_中_strong_位置_strong_的概念">Kindle 中 <strong>位置</strong> 的概念</h2>
+<div class="sectionbody">
+<div class="ulist"><ul>
 <li>
 <p>
 中文书中，一个位置大约相当于50个汉字。如果位置是 2n k，那么该书大约就有n万个汉字。
 </p>
-<div class="ulist"><ul>
-<li>
-<p>
-关于邮件推送
-</p>
 </li>
 </ul></div>
-</li>
-<li>
-<p>
-邮件白名单大小最多为20个。
-</p>
-</li>
-<li>
-<p>
-每封邮件的附件中，书籍的个数不能超过25个，总大小不能超过50M。可以直接发送zip包，但是大小和个数是对未压缩时的文件来说的。
-</p>
-</li>
-<li>
-<p>
-文件格式的限制：不支持epub。
-</p>
-</li>
-<li>
-<p>
-发送的文件会自动保存在亚马逊的云端硬盘中，如果发送的是mobi格式，会自动转换成azw格式保存。
-</p>
-</li>
-<li>
-<p>
-在Kindle上不能删除云端的备份，必须要在 <a href="https://z.cn/myk">https://z.cn/myk</a> 或者 <a href="https://www.amazon.cn/clouddrive/">https://www.amazon.cn/clouddrive/</a> 中才能彻底删除。
-</p>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_笔记_标注和收藏夹">笔记、标注和收藏夹</h2>
+<div class="sectionbody">
 <div class="ulist"><ul>
-<li>
-<p>
-笔记、标注和收藏夹
-</p>
-</li>
-</ul></div>
-</li>
 <li>
 <p>
 Kindle上打字的体验很差，一般还是只标注出来就行了。
@@ -898,7 +890,7 @@ Kindle上打字的体验很差，一般还是只标注出来就行了。
 </li>
 <li>
 <p>
-amazon.com 用户可以直接在 <a href="https://kindle.amazon.com/your_highlights">这里</a>看到自己的笔记。但好像只有在亚马逊上买的正版书才会被记录。我试了将Kindle注册到amazon.com账户，结果还是不能在该页面看到标注。而且换了帐号后，之前的标注虽然在 txt 中还存在，但是在书中选择笔记，就看不到了。
+amazon.com 用户可以直接在 <a href="https://kindle.amazon.com/your_highlights">这里</a> 看到自己的笔记。但好像只有在亚马逊上买的正版书才会被记录。<span class="line-through">我试了将Kindle注册到amazon.com账户，结果还是不能在该页面看到标注。</span> 而且换了帐号后，之前的标注虽然在 txt 中还存在，但是在书中选择笔记，就看不到了。
 </p>
 </li>
 <li>
@@ -908,7 +900,7 @@ amazon.com 用户可以直接在 <a href="https://kindle.amazon.com/your_highlig
 </li>
 <li>
 <p>
-但 <em>My Clippings.txt</em> 仍然很有用，因为是结构化的，所以可以通过程序自动识别，已经有网站这么做了，<a href="http://clippings.io/">Clippings.io</a>似乎是比较流行的一个。可以在上面给笔记加标签，标注，然后同步到 Evernote/印象笔记 中去。同步笔记可以选择最直接的上传 <em>My Clippings.txt</em> 文件的方式，但是只支持Kindle 电子书和个人文档，这个应用还有Chrome插件，可以支持更多的设备，但是需要付费，算了。
+但 <em>My Clippings.txt</em> 仍然很有用，因为是结构化的，所以可以通过程序自动识别，已经有网站这么做了，<a href="http://clippings.io/">Clippings.io</a> 似乎是比较流行的一个。可以在上面给笔记加标签，标注，然后同步到 Evernote/印象笔记 中去。同步笔记可以选择最直接的上传 <em>My Clippings.txt</em> 文件的方式，但是只支持Kindle 电子书和个人文档，这个应用还有Chrome插件，可以支持更多的设备，但是需要付费，算了。
 </p>
 </li>
 <li>
@@ -918,10 +910,138 @@ amazon.com 用户可以直接在 <a href="https://kindle.amazon.com/your_highlig
 </li>
 </ul></div>
 </div>
+</div>
+<div class="sect1">
+<h2 id="_amazon_com">amazon.com</h2>
+<div class="sectionbody">
+<div class="ulist"><ul>
+<li>
+<p>
+美国亚马逊比中国亚马逊多好多功能。例如登录com帐号会有GoodRead服务，这个在cn帐号上是看不到的。
+</p>
+</li>
+<li>
+<p>
+而且在com帐号的管理内容和设备页面会有很多服务，而cn帐号只有几个。对比如下：
+</p>
+</li>
+</ul></div>
+<div class="tableblock">
+<table rules="all"
+width="30%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="50%" />
+<col width="50%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table">美国</p></td>
+<td align="left" valign="top"><p class="table">中国</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><span class="image">
+<img src="images/amazon.com.services.png" alt="美国" />
+</span></p></td>
+<td align="left" valign="top"><p class="table"><span class="image">
+<img src="images/amazon.cn.services.png" alt="中国" />
+</span></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_如何获得电子书">如何获得电子书</h2>
+<div class="sectionbody">
+<div class="ulist"><ul>
+<li>
+<p>
+<a href="http://www.amazon.cn/Kindle%E5%95%86%E5%BA%97/b?node=116087071">http://www.amazon.cn/Kindle%E5%95%86%E5%BA%97/b?node=116087071</a> Kindle商店。
+</p>
+</li>
+<li>
+<p>
+<a href="http://zbook.pub">http://zbook.pub</a> 特价电子书。
+</p>
+</li>
+<li>
+<p>
+<a href="http://www.readfar.com">http://www.readfar.com</a> 免费帐号每天12本书籍。
+</p>
+</li>
+<li>
+<p>
+<a href="http://readfree.me">http://readfree.me</a> 免费帐号每天3本书籍。
+</p>
+</li>
+<li>
+<p>
+<a href="http://book.zi5.me">http://book.zi5.me</a> 可以推送，下载无限制，但最近貌似不怎么更新了。
+</p>
+</li>
+<li>
+<p>
+<a href="http://www.zoudupai.com">http://www.zoudupai.com</a> 下载无限制。
+</p>
+</li>
+<li>
+<p>
+<a href="http://haodoo.net">http://haodoo.net</a>     繁体字版的书籍（甚至有横版），都是网友自己制作，但质量有保证。是个高质量的社区。
+</p>
+</li>
+<li>
+<p>
+一些总结的帖子
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+<a href="http://www.readfar.com/topics/553909103063e1eb7b00001d">读远</a>
+</p>
+</li>
+<li>
+<p>
+<a href="http://www.douban.com/group/topic/22560046">豆瓣上一个比较早的总结帖</a>
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+网盘
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+<a href="http://pan.baidu.com/share/home?uk=1075874930">http://pan.baidu.com/share/home?uk=1075874930</a> 百度网盘，大杀器！
+</p>
+</li>
+<li>
+<p>
+<a href="http://google.com">http://google.com</a> 通过 <em>site:pan.baidu.com 关键字+mobi</em> 相当靠谱。百度自己不搜索自己的网盘，版权问题吧。。
+</p>
+</li>
+<li>
+<p>
+<a href="http://so.baiduyun.me">http://so.baiduyun.me</a> 网盘搜索，相当靠谱。
+</p>
+</li>
+<li>
+<p>
+<a href="http://www.jiumodiary.com">http://www.jiumodiary.com</a> 简洁的网盘电子书搜索，会单独搜 kindle114 上的帖子，虽然没有帐号，但是有的帖子最后会给出网盘链接，你懂得。
+</p>
+</li>
+</ul></div>
+</li>
+</ul></div>
+</div>
+</div>
+</div>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-07-06 11:57:06 CST
+Last updated 2015-07-06 12:55:25 CST
 </div>
 </div>
 </body>
