@@ -12,6 +12,7 @@ link:Problems.html[Problems to Solve]
 link:leetcode.html[Leetcode]
 
 == Book Notes
+link:Kindle.html[Kindle Paperwhite 3 入手体验]
 
 === 人文
 link:books/YM.html[斯蒂芬·哈珀在读什么]

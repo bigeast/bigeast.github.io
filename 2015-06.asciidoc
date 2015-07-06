@@ -25,3 +25,29 @@
 === http://coolshell.cn/articles/17049.html[CGroup]
 * 'ls /sys/fs/cgroup/' 显示已有的CGroup子系统。
 * 每个子系统下可以有多个控制组，就是用mkdir在子系统目录下新建目录时，新建目录下会自动出现一系列的可配置文件。通过向这些文件中写入数值，可以控制进程的对资源的访问。
+
+== Fri 26 Jun 2015 04:27:30 PM CST
+=== 一个英文字体
+* Latin Modern Mono
+
+== Tue 30 Jun 2015 08:32:25 PM CST
+=== http://happypeter.github.io/tealeaf-http/[Introduction to HTTP]
+* 'curl -X GET'
+* HTTP GUI工具：http://www.telerik.com/download/fiddler[fiddler]
+* 'httpie' 可以在终端中显示高亮的http头部信息。与 'curl -I' 的效果类似。
+* Windows下装 'cURL' 还需要安装CA证书。
+* HTTP是无状态的协议，登录信息等的保存是通过会话、Cookies、AJAX等技术来实现的。
+* 会话数据存储在服务器端。如果会话ID被别人获取，则别人不用用户名和密码就可以登录你的帐号（会话劫持）。
+	** 每次都重置会话。
+	** 给会话设置过期时间。
+	** 全站https。
+* 跨站脚本攻击。用户的输入被服务器执行。
+
+== Wed 01 Jul 2015 10:59:14 PM CST
+=== Xmonad
+* https://wiki.haskell.org/Xmonad/Frequently_asked_questions#I_need_to_find_the_class_title_or_some_other_X_property_of_my_program[自动管理窗口的属性]
+--------------------------------------------------
+	resource (also known as appName) is the first element in WM_CLASS(STRING)
+    className is the second element in WM_CLASS(STRING)
+    title is WM_NAME(STRING) 
+--------------------------------------------------

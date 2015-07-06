@@ -4,7 +4,7 @@
 <head>
 <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
 <meta name="generator" content="AsciiDoc 8.6.9" />
-<title></title>
+<title>Kindle Paperwhite 入手操作</title>
 <style type="text/css">
 /* Shared CSS for AsciiDoc xhtml11 and html5 backends */
 
@@ -733,228 +733,315 @@ asciidoc.install();
 </head>
 <body class="article">
 <div id="header">
+<h1>Kindle Paperwhite 入手操作</h1>
 </div>
 <div id="content">
-<div class="sect1">
-<h2 id="_fri_05_jun_2015_09_42_45_am_cst">Fri 05 Jun 2015 09:42:45 AM CST</h2>
+<div id="preamble">
 <div class="sectionbody">
-<div class="sect2">
-<h3 id="_awk的分割符">awk的分割符</h3>
-<div class="ulist"><ul>
-<li>
-<p>
-命令行选项 <em>-F,</em> 指定逗号作为分割符
-</p>
-</li>
-<li>
-<p>
-awk命令 <em>BEGIN{FS = <em>,</em>; OFS = <em>\t</em>}</em>
-</p>
-</li>
-</ul></div>
-</div>
+<div class="paragraph"><p>在亚马逊官网上买了 Kindle Paperwhite 3，6月30号当天中午就送到了。第一台Kindle，记录一下！</p></div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_mon_15_jun_2015_07_30_42_pm_cst">Mon 15 Jun 2015 07:30:42 PM CST</h2>
+<h2 id="_推送">推送</h2>
 <div class="sectionbody">
-<div class="sect2">
-<h3 id="_内核更新后没有重启">内核更新后没有重启</h3>
 <div class="ulist"><ul>
 <li>
 <p>
-会导致一些问题，例如 <em>mount -t iso9660</em> 出错
+官方的说明见<a href="http://www.amazon.cn/gp/help/customer/display.html?nodeId=200767340">Kindle个人文档服务</a>。
+</p>
+</li>
+<li>
+<p>
+每个设备有一个对应的推送邮箱地址，国行一般是 <em>@kindle.cn</em>, 可以在 <a href="http://z.cn/myk">管理我的内容和设备</a> 中设置。
+</p>
+</li>
+<li>
+<p>
+将电子书以附件形式发送到推送邮箱地址，在Kindle设备上就会收到更新。但自己可以控制允许那些邮箱帐号可以给自己推送，如果没有被加入信任列表，那么其发送的电子书是不会被更新到Kindle中的。目前最多可以添加20个邮箱帐号。
+</p>
+</li>
+<li>
+<p>
+每封邮件的附件中，书籍的个数不能超过25个，总大小不能超过50M。可以直接发送zip包，但是大小和个数是对未压缩时的文件来说的。
+</p>
+</li>
+<li>
+<p>
+文件格式的限制：不支持epub。
+</p>
+</li>
+<li>
+<p>
+发送的文件会自动保存在亚马逊的云端硬盘中，如果发送的是mobi格式，会自动转换成azw格式保存。
+</p>
+</li>
+<li>
+<p>
+在Kindle上不能删除云端的备份，必须要在 <a href="https://z.cn/myk">https://z.cn/myk</a> 或者 <a href="https://www.amazon.cn/clouddrive/">https://www.amazon.cn/clouddrive/</a> 中才能彻底删除。
 </p>
 </li>
 </ul></div>
-</div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_fri_19_jun_2015_10_59_08_am_cst">Fri 19 Jun 2015 10:59:08 AM CST</h2>
+<h2 id="_calibre">Calibre</h2>
 <div class="sectionbody">
-<div class="sect2">
-<h3 id="_windows日志_系统信息查看">Windows日志，系统信息查看</h3>
 <div class="ulist"><ul>
 <li>
 <p>
-cmd中， <em>ver</em> 查看系统版本， <em>systeminfo</em> 查看系统详细信息。
+在电脑上下载的电子书都存入 <em>/media/Data/book/</em> 中，然后在 Calibre 的 <strong>连接/共享</strong> 中选择 <strong>连接到文件夹</strong>，就可以在多出的 <strong>设备</strong> 选项卡中看到所有的电子书了。将需要阅读的电子书添加到书库。
 </p>
 </li>
 <li>
 <p>
-<em>eventvwr.msc</em> 查看系统事件日志。
-</p>
-</li>
-<li>
-<p>
-<em>systeminfo | findstr /C:"OS"</em> Windows也有管道？！
-</p>
-</li>
-<li>
-<p>
-<em>wmic os get Caption,CSDVersion</em>
-</p>
-</li>
-<li>
-<p>
-Kernel Power Event 41 message.
-</p>
-</li>
-</ul></div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_thu_25_jun_2015_10_30_17_pm_cst">Thu 25 Jun 2015 10:30:17 PM CST</h2>
-<div class="sectionbody">
-<div class="sect2">
-<h3 id="_javascript_tips">JavaScript Tips</h3>
-<div class="ulist"><ul>
-<li>
-<p>
-数制转换。
-</p>
-<div class="ulist"><ul>
-<li>
-<p>
-<code>(100).toString(16)</code> 100转换成十六进制的字符串。
-</p>
-</li>
-<li>
-<p>
-<code>parseInt("0xafec", 16)</code> 十六进制字符串转换成十进制。
-</p>
-</li>
-</ul></div>
-</li>
-</ul></div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_fri_26_jun_2015_01_19_49_pm_cst">Fri 26 Jun 2015 01:19:49 PM CST</h2>
-<div class="sectionbody">
-<div class="sect2">
-<h3 id="_a_href_http_coolshell_cn_articles_17049_html_cgroup_a"><a href="http://coolshell.cn/articles/17049.html">CGroup</a></h3>
-<div class="ulist"><ul>
-<li>
-<p>
-<em>ls /sys/fs/cgroup/</em> 显示已有的CGroup子系统。
-</p>
-</li>
-<li>
-<p>
-每个子系统下可以有多个控制组，就是用mkdir在子系统目录下新建目录时，新建目录下会自动出现一系列的可配置文件。通过向这些文件中写入数值，可以控制进程的对资源的访问。
-</p>
-</li>
-</ul></div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_fri_26_jun_2015_04_27_30_pm_cst">Fri 26 Jun 2015 04:27:30 PM CST</h2>
-<div class="sectionbody">
-<div class="sect2">
-<h3 id="_一个英文字体">一个英文字体</h3>
-<div class="ulist"><ul>
-<li>
-<p>
-Latin Modern Mono
-</p>
-</li>
-</ul></div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_tue_30_jun_2015_08_32_25_pm_cst">Tue 30 Jun 2015 08:32:25 PM CST</h2>
-<div class="sectionbody">
-<div class="sect2">
-<h3 id="_a_href_http_happypeter_github_io_tealeaf_http_introduction_to_http_a"><a href="http://happypeter.github.io/tealeaf-http/">Introduction to HTTP</a></h3>
-<div class="ulist"><ul>
-<li>
-<p>
-<em>curl -X GET</em>
-</p>
-</li>
-<li>
-<p>
-HTTP GUI工具：<a href="http://www.telerik.com/download/fiddler">fiddler</a>
-</p>
-</li>
-<li>
-<p>
-<em>httpie</em> 可以在终端中显示高亮的http头部信息。与 <em>curl -I</em> 的效果类似。
-</p>
-</li>
-<li>
-<p>
-Windows下装 <em>cURL</em> 还需要安装CA证书。
-</p>
-</li>
-<li>
-<p>
-HTTP是无状态的协议，登录信息等的保存是通过会话、Cookies、AJAX等技术来实现的。
-</p>
-</li>
-<li>
-<p>
-会话数据存储在服务器端。如果会话ID被别人获取，则别人不用用户名和密码就可以登录你的帐号（会话劫持）。
-</p>
-<div class="ulist"><ul>
-<li>
-<p>
-每次都重置会话。
-</p>
-</li>
-<li>
-<p>
-给会话设置过期时间。
-</p>
-</li>
-<li>
-<p>
-全站https。
-</p>
-</li>
-</ul></div>
-</li>
-<li>
-<p>
-跨站脚本攻击。用户的输入被服务器执行。
-</p>
-</li>
-</ul></div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_wed_01_jul_2015_10_59_14_pm_cst">Wed 01 Jul 2015 10:59:14 PM CST</h2>
-<div class="sectionbody">
-<div class="sect2">
-<h3 id="_xmonad">Xmonad</h3>
-<div class="ulist"><ul>
-<li>
-<p>
-<a href="https://wiki.haskell.org/Xmonad/Frequently_asked_questions#I_need_to_find_the_class_title_or_some_other_X_property_of_my_program">自动管理窗口的属性</a>
+<strong>Calibre书库中的电子书推送到Kindle</strong>。设置邮箱地址：<strong>首选项&#8658;通过邮件分享</strong>，需要设置邮件发送方式，之后就可以在书库中右键选中要推送的电子书，发送到Kindle了。
 </p>
 </li>
 </ul></div>
 <div class="listingblock">
 <div class="content">
-<pre><code>        resource (also known as appName) is the first element in WM_CLASS(STRING)
-    className is the second element in WM_CLASS(STRING)
-    title is WM_NAME(STRING)</code></pre>
+<pre><code>        1. 发信人地址(xxx@mails.tsinghua.edu.cn)
+        2. 主机名(mails.tsinghua.edu.cn)
+        3. 端口(非加密:25，ssl:465)
+        4. 密码</code></pre>
 </div></div>
+<div class="ulist"><ul>
+<li>
+<p>
+电子书字数统计。
+</p>
+</li>
+<li>
+<p>
+在<strong>首选项&#8658;插件&#8658;获取新的插件</strong> 中，搜索 <em>Count Pages</em> 插件并安装。
+</p>
+</li>
+<li>
+<p>
+在<strong>首选项&#8658;添加栏目</strong> 中，添加两个条目pages和words，类型都设为整数。
+</p>
+</li>
+<li>
+<p>
+选择电子书，运行 <em>Count Pages</em> 插件。
+</p>
+</li>
+</ul></div>
 </div>
+</div>
+<div class="sect1">
+<h2 id="_kindle_连接_archlinux">Kindle 连接 Archlinux</h2>
+<div class="sectionbody">
+<div class="ulist"><ul>
+<li>
+<p>
+<span class="line-through">目前插上Kindle后，Kindle显示"USB 驱动模式"，是看不了书的。</span> 电脑上只有在 <em>lsusb</em> 中看到有
+</p>
+</li>
+</ul></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>Bus 004 Device 022: ID 1949:0004 Lab126, Inc. Amazon Kindle 3/4/Paperwhite</code></pre>
+</div></div>
+<div class="ulist"><ul>
+<li>
+<p>
+开始以为是内核太新，但是一看发现用的是 <em>linux-lts</em> 。
+</p>
+</li>
+<li>
+<p>
+<em>go-mtfs</em> 和 <em>mtp-detect</em> 均未能检测出设备。
+</p>
+</li>
+<li>
+<p>
+安装了 <em>gvfs-mtp</em> ，重启。然后还是不行，后来准备在 <em>GNOME</em> 中看，结果 gdm 启动不了，于是开搞 <em>xmonad</em> 。快忘记Kindle的事情时，发现可以识别了。。
+</p>
+</li>
+</ul></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_kindle_中_strong_位置_strong_的概念">Kindle 中 <strong>位置</strong> 的概念</h2>
+<div class="sectionbody">
+<div class="ulist"><ul>
+<li>
+<p>
+中文书中，一个位置大约相当于50个汉字。如果位置是 2n k，那么该书大约就有n万个汉字。
+</p>
+</li>
+</ul></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_笔记_标注和收藏夹">笔记、标注和收藏夹</h2>
+<div class="sectionbody">
+<div class="ulist"><ul>
+<li>
+<p>
+Kindle上打字的体验很差，一般还是只标注出来就行了。
+</p>
+</li>
+<li>
+<p>
+每条标注或者笔记都会统一记录在 <em>documents/My Clippings.txt</em> 中，但这里其实只是一个日志性质的记录，阅读时显示的笔记是存在每本书对应的sdr目录中的mbp1或者mbs文件中的。
+</p>
+</li>
+<li>
+<p>
+amazon.com 用户可以直接在 <a href="https://kindle.amazon.com/your_highlights">这里</a> 看到自己的笔记。但好像只有在亚马逊上买的正版书才会被记录。<span class="line-through">我试了将Kindle注册到amazon.com账户，结果还是不能在该页面看到标注。</span> 而且换了帐号后，之前的标注虽然在 txt 中还存在，但是在书中选择笔记，就看不到了。
+</p>
+</li>
+<li>
+<p>
+收藏夹切换帐号后也会改变。应该也是跟每本书绑定的sdr目录下的文件有关，每登录一次新的帐号都会更新相应的sdr目录。
+</p>
+</li>
+<li>
+<p>
+但 <em>My Clippings.txt</em> 仍然很有用，因为是结构化的，所以可以通过程序自动识别，已经有网站这么做了，<a href="http://clippings.io/">Clippings.io</a> 似乎是比较流行的一个。可以在上面给笔记加标签，标注，然后同步到 Evernote/印象笔记 中去。同步笔记可以选择最直接的上传 <em>My Clippings.txt</em> 文件的方式，但是只支持Kindle 电子书和个人文档，这个应用还有Chrome插件，可以支持更多的设备，但是需要付费，算了。
+</p>
+</li>
+<li>
+<p>
+管理收藏夹是个麻烦事，目前似乎只能一个个添加，不支持批量操作。感觉亚马逊有必要做一个网页接口可以管理收藏夹。老版本的Kindle似乎可以用Calibre来管理，但是目前Calibre还不识别KP3设备，可能再等等会有更新吧。
+</p>
+</li>
+</ul></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_amazon_com">amazon.com</h2>
+<div class="sectionbody">
+<div class="ulist"><ul>
+<li>
+<p>
+美国亚马逊比中国亚马逊多好多功能。例如登录com帐号会有GoodRead服务，这个在cn帐号上是看不到的。
+</p>
+</li>
+<li>
+<p>
+而且在com帐号的管理内容和设备页面会有很多服务，而cn帐号只有几个。对比如下：
+</p>
+</li>
+</ul></div>
+<div class="tableblock">
+<table rules="all"
+width="30%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="50%" />
+<col width="50%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table">美国</p></td>
+<td align="left" valign="top"><p class="table">中国</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><span class="image">
+<img src="images/amazon.com.services.png" alt="美国" />
+</span></p></td>
+<td align="left" valign="top"><p class="table"><span class="image">
+<img src="images/amazon.cn.services.png" alt="中国" />
+</span></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_如何获得电子书">如何获得电子书</h2>
+<div class="sectionbody">
+<div class="ulist"><ul>
+<li>
+<p>
+<a href="http://www.amazon.cn/Kindle%E5%95%86%E5%BA%97/b?node=116087071">http://www.amazon.cn/Kindle%E5%95%86%E5%BA%97/b?node=116087071</a> Kindle商店。
+</p>
+</li>
+<li>
+<p>
+<a href="http://zbook.pub">http://zbook.pub</a> 特价电子书。
+</p>
+</li>
+<li>
+<p>
+<a href="http://www.readfar.com">http://www.readfar.com</a> 免费帐号每天12本书籍。
+</p>
+</li>
+<li>
+<p>
+<a href="http://readfree.me">http://readfree.me</a> 免费帐号每天3本书籍。
+</p>
+</li>
+<li>
+<p>
+<a href="http://book.zi5.me">http://book.zi5.me</a> 可以推送，下载无限制，但最近貌似不怎么更新了。
+</p>
+</li>
+<li>
+<p>
+<a href="http://www.zoudupai.com">http://www.zoudupai.com</a> 下载无限制。
+</p>
+</li>
+<li>
+<p>
+<a href="http://haodoo.net">http://haodoo.net</a>     繁体字版的书籍（甚至有横版），都是网友自己制作，但质量有保证。是个高质量的社区。
+</p>
+</li>
+<li>
+<p>
+一些总结的帖子
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+<a href="http://www.readfar.com/topics/553909103063e1eb7b00001d">读远</a>
+</p>
+</li>
+<li>
+<p>
+<a href="http://www.douban.com/group/topic/22560046">豆瓣上一个比较早的总结帖</a>
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+网盘
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+<a href="http://pan.baidu.com/share/home?uk=1075874930">http://pan.baidu.com/share/home?uk=1075874930</a> 百度网盘，大杀器！
+</p>
+</li>
+<li>
+<p>
+<a href="http://google.com">http://google.com</a> 通过 <em>site:pan.baidu.com 关键字+mobi</em> 相当靠谱。百度自己不搜索自己的网盘，版权问题吧。。
+</p>
+</li>
+<li>
+<p>
+<a href="http://so.baiduyun.me">http://so.baiduyun.me</a> 网盘搜索，相当靠谱。
+</p>
+</li>
+<li>
+<p>
+<a href="http://www.jiumodiary.com">http://www.jiumodiary.com</a> 简洁的网盘电子书搜索，会单独搜 kindle114 上的帖子，虽然没有帐号，但是有的帖子最后会给出网盘链接，你懂得。
+</p>
+</li>
+</ul></div>
+</li>
+</ul></div>
 </div>
 </div>
 </div>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-07-06 13:32:45 CST
+Last updated 2015-07-06 12:55:25 CST
 </div>
 </div>
 </body>
