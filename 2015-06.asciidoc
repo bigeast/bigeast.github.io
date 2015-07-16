@@ -46,3 +46,25 @@
     className is the second element in WM_CLASS(STRING)
     title is WM_NAME(STRING) 
 --------------------------------------------------
+
+== Thu 16 Jul 2015 05:03:34 PM CST
+=== zathura-pdf-mupdf
+* 发现了一个好用的pdf阅读器。
+* zathura以MuPDF作为后端，因此速度很快，跟MuPDF差不多！但是它支持Vim-like的键绑定，还能够查看书签目录，这个是我嫌弃MuPDF的一个原因。
+* 使用方法都在man手册里了。
+* 竟然还可以设置字体。
+* 命令窗口中输入 'set' 后，按Tab可以看到所有可配置的选项。
+* 以后就用它了！
+----------------------------------------
+map [normal] k navigate previous
+map [normal] , navigate previous
+map [normal] j navigate next
+map [normal] . navigate next
+
+map [normal]     <A-1> set "first-page-column 1"
+map [normal]     <A-2> set "first-page-column 2"
+
+set font YaHei\ Consolas\ Hybrid\ 13
+----------------------------------------
+
+* 与apvlv相比，首先是反应速度快，然后可以随时查看目录，就是按 Tab 键切换到 Index 模式。展开和关闭目录列表的快捷键是 'l' 和 'h'
