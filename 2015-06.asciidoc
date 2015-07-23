@@ -21,6 +21,11 @@
 	** `(100).toString(16)` 100转换成十六进制的字符串。
 	** `parseInt("0xafec", 16)` 十六进制字符串转换成十进制。
 
+== Fri 26 Jun 2015 01:19:49 PM CST
+=== http://coolshell.cn/articles/17049.html[CGroup]
+* 'ls /sys/fs/cgroup/' 显示已有的CGroup子系统。
+* 每个子系统下可以有多个控制组，就是用mkdir在子系统目录下新建目录时，新建目录下会自动出现一系列的可配置文件。通过向这些文件中写入数值，可以控制进程的对资源的访问。
+
 == Fri 26 Jun 2015 04:27:30 PM CST
 === 一个英文字体
 * Latin Modern Mono
@@ -37,38 +42,3 @@
 	** 给会话设置过期时间。
 	** 全站https。
 * 跨站脚本攻击。用户的输入被服务器执行。
-
-== Wed 01 Jul 2015 10:59:14 PM CST
-=== Xmonad
-* https://wiki.haskell.org/Xmonad/Frequently_asked_questions#I_need_to_find_the_class_title_or_some_other_X_property_of_my_program[自动管理窗口的属性]
---------------------------------------------------
-	resource (also known as appName) is the first element in WM_CLASS(STRING)
-    className is the second element in WM_CLASS(STRING)
-    title is WM_NAME(STRING) 
---------------------------------------------------
-
-== Thu 16 Jul 2015 05:03:34 PM CST
-=== zathura-pdf-mupdf
-* 发现了一个好用的pdf阅读器。
-* zathura以MuPDF作为后端，因此速度很快，跟MuPDF差不多！但是它支持Vim-like的键绑定，还能够查看书签目录，这个是我嫌弃MuPDF的一个原因。
-* 使用方法都在man手册里了。
-* 竟然还可以设置字体。
-* 命令窗口中输入 'set' 后，按Tab可以看到所有可配置的选项。
-* 以后就用它了！
-----------------------------------------
-map [normal] k navigate previous
-map [normal] , navigate previous
-map [normal] j navigate next
-map [normal] . navigate next
-
-map [normal]     <A-1> set "first-page-column 1"
-map [normal]     <A-2> set "first-page-column 2"
-
-set font YaHei\ Consolas\ Hybrid\ 13
-----------------------------------------
-
-* 与apvlv相比，首先是反应速度快，然后可以随时查看目录，就是按 Tab 键切换到 Index 模式。展开和关闭目录列表的快捷键是 'l' 和 'h'
-
-=== 默认浏览器
-* 'xdg-mime default firefox.desktop x-scheme-handler/http'
-* 'xdg-mime default firefox.desktop x-scheme-handler/https'

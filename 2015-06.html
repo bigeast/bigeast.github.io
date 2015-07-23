@@ -833,6 +833,26 @@ Kernel Power Event 41 message.
 </div>
 </div>
 <div class="sect1">
+<h2 id="_fri_26_jun_2015_01_19_49_pm_cst">Fri 26 Jun 2015 01:19:49 PM CST</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_a_href_http_coolshell_cn_articles_17049_html_cgroup_a"><a href="http://coolshell.cn/articles/17049.html">CGroup</a></h3>
+<div class="ulist"><ul>
+<li>
+<p>
+<em>ls /sys/fs/cgroup/</em> 显示已有的CGroup子系统。
+</p>
+</li>
+<li>
+<p>
+每个子系统下可以有多个控制组，就是用mkdir在子系统目录下新建目录时，新建目录下会自动出现一系列的可配置文件。通过向这些文件中写入数值，可以控制进程的对资源的访问。
+</p>
+</li>
+</ul></div>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="_fri_26_jun_2015_04_27_30_pm_cst">Fri 26 Jun 2015 04:27:30 PM CST</h2>
 <div class="sectionbody">
 <div class="sect2">
@@ -909,91 +929,11 @@ HTTP是无状态的协议，登录信息等的保存是通过会话、Cookies、
 </div>
 </div>
 </div>
-<div class="sect1">
-<h2 id="_wed_01_jul_2015_10_59_14_pm_cst">Wed 01 Jul 2015 10:59:14 PM CST</h2>
-<div class="sectionbody">
-<div class="sect2">
-<h3 id="_xmonad">Xmonad</h3>
-<div class="ulist"><ul>
-<li>
-<p>
-<a href="https://wiki.haskell.org/Xmonad/Frequently_asked_questions#I_need_to_find_the_class_title_or_some_other_X_property_of_my_program">自动管理窗口的属性</a>
-</p>
-</li>
-</ul></div>
-<div class="listingblock">
-<div class="content">
-<pre><code>        resource (also known as appName) is the first element in WM_CLASS(STRING)
-    className is the second element in WM_CLASS(STRING)
-    title is WM_NAME(STRING)</code></pre>
-</div></div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_thu_16_jul_2015_05_03_34_pm_cst">Thu 16 Jul 2015 05:03:34 PM CST</h2>
-<div class="sectionbody">
-<div class="sect2">
-<h3 id="_zathura_pdf_mupdf">zathura-pdf-mupdf</h3>
-<div class="ulist"><ul>
-<li>
-<p>
-发现了一个好用的pdf阅读器。
-</p>
-</li>
-<li>
-<p>
-zathura以MuPDF作为后端，因此速度很快，跟MuPDF差不多！但是它支持Vim-like的键绑定，还能够查看书签目录，这个是我嫌弃MuPDF的一个原因。
-</p>
-</li>
-<li>
-<p>
-使用方法都在man手册里了。
-</p>
-</li>
-<li>
-<p>
-竟然还可以设置字体。
-</p>
-</li>
-<li>
-<p>
-命令窗口中输入 <em>set</em> 后，按Tab可以看到所有可配置的选项。
-</p>
-</li>
-<li>
-<p>
-以后就用它了！
-</p>
-</li>
-</ul></div>
-<div class="listingblock">
-<div class="content">
-<pre><code>map [normal] k navigate previous
-map [normal] , navigate previous
-map [normal] j navigate next
-map [normal] . navigate next
-
-map [normal]     &lt;A-1&gt; set "first-page-column 1"
-map [normal]     &lt;A-2&gt; set "first-page-column 2"
-
-set font YaHei\ Consolas\ Hybrid\ 13</code></pre>
-</div></div>
-<div class="ulist"><ul>
-<li>
-<p>
-与apvlv相比，首先是反应速度快，然后可以随时查看目录，就是按 Tab 键切换到 Index 模式。展开和关闭目录列表的快捷键是 <em>l</em> 和 <em>h</em>
-</p>
-</li>
-</ul></div>
-</div>
-</div>
-</div>
 </div>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-07-16 17:11:07 CST
+Last updated 2015-07-24 00:02:46 CST
 </div>
 </div>
 </body>
