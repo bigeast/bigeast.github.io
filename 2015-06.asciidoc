@@ -68,3 +68,7 @@ set font YaHei\ Consolas\ Hybrid\ 13
 ----------------------------------------
 
 * 与apvlv相比，首先是反应速度快，然后可以随时查看目录，就是按 Tab 键切换到 Index 模式。展开和关闭目录列表的快捷键是 'l' 和 'h'
+
+=== 默认浏览器
+* 'xdg-mime default firefox.desktop x-scheme-handler/http'
+* 'xdg-mime default firefox.desktop x-scheme-handler/https'
