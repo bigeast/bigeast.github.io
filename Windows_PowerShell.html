@@ -4,7 +4,7 @@
 <head>
 <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
 <meta name="generator" content="AsciiDoc 8.6.9" />
-<title></title>
+<title>Windows for Linux cmdline users</title>
 <style type="text/css">
 /* Shared CSS for AsciiDoc xhtml11 and html5 backends */
 
@@ -733,88 +733,75 @@ asciidoc.install();
 </head>
 <body class="article">
 <div id="header">
+<h1>Windows for Linux cmdline users</h1>
 </div>
 <div id="content">
-<div class="sect1">
-<h2 id="_a_href_http_138_128_221_113_8000_我的简历_a"><a href="http://138.128.221.113:8000">我的简历</a></h2>
+<div id="preamble">
 <div class="sectionbody">
-<div class="tableblock">
-<table rules="all"
-width="30%"
-frame="border"
-cellspacing="0" cellpadding="4">
-<col width="100%" />
-<tbody>
-<tr>
-<td align="left" valign="top"><p class="table"><a href="2015-02.html">2015-02 笔记</a></p></td>
-</tr>
-<tr>
-<td align="left" valign="top"><p class="table"><a href="2015-03.html">2015-03 笔记</a></p></td>
-</tr>
-<tr>
-<td align="left" valign="top"><p class="table"><a href="2015-04.html">2015-04 笔记</a></p></td>
-</tr>
-<tr>
-<td align="left" valign="top"><p class="table"><a href="2015-05.html">2015-05 笔记</a></p></td>
-</tr>
-<tr>
-<td align="left" valign="top"><p class="table"><a href="2015-06.html">2015-06 笔记</a></p></td>
-</tr>
-<tr>
-<td align="left" valign="top"><p class="table"><a href="2015-07.html">2015-07 笔记</a></p></td>
-</tr>
-<tr>
-<td align="left" valign="top"><p class="table"><a href="2015-08.html">2015-08 笔记</a></p></td>
-</tr>
-<tr>
-<td align="left" valign="top"><p class="table"><a href="2015-09.html">2015-09 笔记</a></p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="paragraph"><p><a href="Problems.html">Problems to Solve</a></p></div>
-<div class="paragraph"><p><a href="leetcode.html">Leetcode</a></p></div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_book_notes">Book Notes</h2>
-<div class="sectionbody">
-<div class="paragraph"><p><a href="Kindle.html">Kindle Paperwhite 3 入手体验</a>
-<a href="oneplus2.html">一加手机二 入手体验</a></p></div>
-<div class="sect2">
-<h3 id="_人文">人文</h3>
-<div class="paragraph"><p><a href="books/YM.html">斯蒂芬·哈珀在读什么</a></p></div>
-<div class="paragraph"><p><a href="books/ddj.html">道德经</a></p></div>
-</div>
-<div class="sect2">
-<h3 id="_计算机">计算机</h3>
-<div class="paragraph"><p><a href="books/linuxfaner.html">Linux就是这个范儿</a></p></div>
-<div class="paragraph"><p><a href="InternetSocket.html">网络编程基础</a></p></div>
-<div class="paragraph"><p><a href="books/JS-OO.html">JavaScript面向对象编程</a></p></div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_computer_hacks">Computer Hacks</h2>
-<div class="sectionbody">
-<div class="paragraph"><p><a href="Source_Code_Tree_Navigation_in_Vim.html">Source Code Tree Navigation in Vim</a></p></div>
-<div class="paragraph"><p><a href="scrot.html">Scrot屏幕截图</a></p></div>
-<div class="paragraph"><p><a href="pythonchallenge.html">Python Challenge Note</a></p></div>
-<div class="paragraph"><p><a href="VPS-Shadowsocks.html">VPS科学上网</a></p></div>
-<div class="paragraph"><p><a href="Windows_PowerShell.html">Linux用户的Windows生存手册</a></p></div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_translate">Translate</h2>
-<div class="sectionbody">
-<div class="paragraph"><p><a href="Ng.html">Andrew Ng 谈百度深度学习的现状</a></p></div>
+<div class="paragraph"><p>装了Win10之后，惊奇地发现cmd窗口竟然可以最大化了，而且默认字体大小也是宋体而不是点阵宋体了。甚至还有了透明功能。</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+PowerShell 数据是结构化的，比 bash 要强大。
+</p>
+</li>
+<li>
+<p>
+虽然还是不支持readline快捷键，这个实在不方便！于是装了个 <em>clink</em>
+</p>
+</li>
+</ul></div>
+<div class="paragraph"><p>看了知乎的一篇专栏文章 <a href="http://zhuanlan.zhihu.com/always-a-tool/19662365">《Scott Hanselman 的 2014 年 Windows 平台软件推荐（授权翻译，重新发布）》</a>，英文原文 <a href="http://www.hanselman.com/blog/ScottHanselmans2014UltimateDeveloperAndPowerUsersToolListForWindows.aspx">Scott Hanselman&#8217;s 2014 Ultimate Developer and Power Users Tool List for Windows</a>，介绍了一些开发者常用的Windows软件，看完让我感觉自己简直没用过Windows！</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+首先是 <em>Chocolatey</em> ，可以从命令行下载和安装软件。
+</p>
+</li>
+<li>
+<p>
+然后 <em>TeraCopy</em> 据说要比默认的复制工具好用。
+</p>
+</li>
+<li>
+<p>
+<em>AutoHotKey</em> 是来将应用绑定到快捷键上的，这在Linux的常见窗口管理器中简直就是标配，但在Windows里却只能使用默认的。
+</p>
+</li>
+<li>
+<p>
+<em>MarkdownPad 2</em> 是一个markdown编辑器，可以实时渲染，然而在Windows 10 中并不能用，需要装一个一百多兆的什么包，算了。现在用的是另一个。
+</p>
+</li>
+<li>
+<p>
+<em>GitHub for Windows</em> 这个界面和功能都做得超漂亮！虽然用命令行/GitBash/Git GUI/fugitive 都可以进行代码管理，但这个绝对是赞，谁用谁知道！
+</p>
+</li>
+<li>
+<p>
+<em>Fiddle</em> 查看HTTP数据包。excited!
+</p>
+</li>
+<li>
+<p>
+<em>slickrun</em> 就是一个启动器，足够小巧和强大，再也不用将应用快捷方式存到一个固定路径中，然后加入PATH，需要启动的时候 <em>Win+r</em> 了。
+</p>
+</li>
+<li>
+<p>
+<em>Listary</em> 文件搜索，Bug级别！
+</p>
+</li>
+</ul></div>
+<div class="paragraph"><p>其余的还没有试过。不过真心不理解为什么 <em>Total Commander</em> 那么有名，装过好几次都直接卸载了，把资源管理器窗口搞成两个分栏有毛用？而且默认自体那么丑，你以为自己是在Linux上没那么多自体可用？我需要的是 <em>Clover</em> 这样，可以跟浏览器一样开多个Tab的。可惜它在Win 10里不是很稳定！不过感觉默认的资源管理器已经够用了，除了缺少多Tab支持。</p></div>
 </div>
 </div>
 </div>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-09-19 21:35:14 CST
+Last updated 2015-09-19 21:35:05 CST
 </div>
 </div>
 </body>
