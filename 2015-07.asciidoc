@@ -1,3 +1,5 @@
+:source-highlighter: pygments
+:pygments-style: manni
 == Wed 01 Jul 2015 10:59:14 PM CST
 === Xmonad
 * https://wiki.haskell.org/Xmonad/Frequently_asked_questions#I_need_to_find_the_class_title_or_some_other_X_property_of_my_program[自动管理窗口的属性]
@@ -39,3 +41,5 @@ set font YaHei\ Consolas\ Hybrid\ 13
 * '算法导论' 习题7-3。先排序前 2/3，再排序后 2/3，然后再对前 2/3进行排序。复杂度根据 '定理4-1' ，可以知道是 O(n\^log_1.5\^3) = O(n^2.7)，高得可怕。还是有两点想说的：
 	** 其实不一定是 2/3，也可以是 3/4，不过这样做就更复杂了。如果是 1/2，那就"退化"成一般的O(nlogn)的算法了。该算法的正确性并不难get到：三趟排序中，第一、二趟可以确保最大的1/3的元素被按序放置到最后的1/3；[through-line]#第二、三趟排序可以确保最小的1/3的元素被按序放置到前1/3的位置；#第三趟保证了前2/3的元素正确排序。
 	** 我觉得算法导论作者只是在开玩笑，并不是真觉得发明这个算法的几个终身教授名不负实。
+
+:docinfo:

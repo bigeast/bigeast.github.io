@@ -1,3 +1,5 @@
+:source-highlighter: pygments
+:pygments-style: manni
 == 2015-05-09 Saturday 21:30:58
 === Node.js
 * 看了《深入浅出Node.js》，理解是Node.js是一个基于V8引擎的JavaScript解释器，主要用来实现Web服务器，亮点是异步I/O，单线程，是一种处理http://www.kegel.com/c10k.html[C10k问题]的解决方案。
@@ -84,6 +86,7 @@ var avg = function() {
 	** JavaScript是基于原型的，它的类其实是用函数对象来实现的。通过给函数对象的prototype增加新的值，可以动态地为对象增加方法。
 
 [source, javascript]
+----
 function makePerson(first, last) {
   return {
     first: first,
@@ -99,6 +102,8 @@ function makePerson(first, last) {
 s = makePerson("Simon", "Willison")
 s.fullName(); // "Simon Willison"
 s.fullNameReversed(); // "Willison, Simon"
+----
+
 	** 函数嵌套，可以缓解全局变量的问题。
 
 * https://stackoverflow.com/questions/111102/how-do-javascript-closures-work[闭包]
@@ -106,8 +111,11 @@ s.fullNameReversed(); // "Willison, Simon"
 
 == Thu 21 May 2015 11:14:47 AM CST
 === http://serverfault.com/questions/62411/how-can-i-sort-du-h-output-by-size[文件大小排序]
+
 [source, bash]
+----
 du -sh * | sort -h
+----
 
 sort的 '-h' 选项在 http://article.gmane.org/gmane.comp.gnu.core-utils.announce/52[coreutils 7.5]中加入。
 
@@ -142,3 +150,5 @@ sort的 '-h' 选项在 http://article.gmane.org/gmane.comp.gnu.core-utils.announ
 image:http://www.speedtest.net/result/4391231779.png[my speed]
 * 可以开两个tty, tty1是正常的 'startx' ，而 tty2 是 'proxychains startx' 。只是发现在tty2中，zsh会卡住，把zshrc disable掉之后就可以，但很不方便！应该是oh-my-zsh有联网的模块在与proxychains通信？
 
+
+:docinfo:

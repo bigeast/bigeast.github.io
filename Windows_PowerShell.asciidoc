@@ -1,3 +1,5 @@
+:source-highlighter: pygments
+:pygments-style: manni
 = Windows for Linux cmdline users 
 
 装了Win10之后，惊奇地发现cmd窗口竟然可以最大化了，而且默认字体大小也是宋体而不是点阵宋体了。甚至还有了透明功能。
@@ -24,3 +26,5 @@
 * 'Listary' 文件搜索，Bug级别！
 
 其余的还没有试过。不过真心不理解为什么 'Total Commander' 那么有名，装过好几次都直接卸载了，把资源管理器窗口搞成两个分栏有毛用？而且默认自体那么丑，你以为自己是在Linux上没那么多自体可用？我需要的是 'Clover' 这样，可以跟浏览器一样开多个Tab的。可惜它在Win 10里不是很稳定！不过感觉默认的资源管理器已经够用了，除了缺少多Tab支持。
+
+:docinfo:

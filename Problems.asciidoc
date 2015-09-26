@@ -1,3 +1,5 @@
+:source-highlighter: pygments
+:pygments-style: manni
 * 如何从物理上解释 Rate-Distortion函数的凸性。
 
 * **JavaScript** 为什么那么有用？
@@ -49,3 +51,5 @@ DFS
 * http://acm.zju.edu.cn/onlinejudge/showProblem.do?problemCode=1453[ZOJ 1453]
 
 凸包。
+
+:docinfo:

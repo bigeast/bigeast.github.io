@@ -1,3 +1,5 @@
+:source-highlighter: pygments
+:pygments-style: manni
 **通过虚拟主机科学、免费上网**
 
 最近买了一年的VPS，用上了自己的Shadowsocks服务。其实网上有好多免费的(v2ex相应板块)，但是很不稳定，我也是经过一番权衡，终于买了bandwagon的VPS。
@@ -111,3 +113,5 @@ iptables -t nat -A PREROUTING -d 138.128.221.113/32 -p udp -m udp --dport 53 -j 
 总之，目前使用 53 端口的方法可以基本实现免费（每月300G）、无墙上网。笔记本A本身的IPv6通道不受影响。
 
 之后有时间可以继续搞 OpenVPN的IPv6配置。不过现在动力不太大了。。
+
+:docinfo:

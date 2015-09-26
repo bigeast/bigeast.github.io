@@ -1,3 +1,5 @@
+:source-highlighter: pygments
+:pygments-style: manni
 == 2015-04-02 Thursday 23:16:18
 === 自动给文件的某个pattern前加上某段文本
 在cnzz.com上注册了个帐号，想统计一下这个博客的访问流量。需要给每个html文件加上一段代码，肯定不能手动呀，首先想到用 _sed_ ：
@@ -127,11 +129,13 @@ _pwdx_ 之前没见过，是查看一个进程的当前工作目录的。
 查看http头，可以用万能的 _tcpdump_, 还有更合适的 _ngrep_ 。
 
 [source, bash]
+----
 # To print all IPv4 HTTP packets to and from port 80, i.e. print only packets that contain data, not, for example, SYN and FIN
 # packets and ACK-only packets.  (IPv6 is left as an exercise for the reader.)
 $ tcpdump 'tcp port 80 and (((ip[2:2] - ((ip[0]&0xf)<<2)) - ((tcp[12]&0xf0)>>2)) != 0)'
 $ ngrep -q -W byline "GET|POST HTTP"
 $ ngrep -q -W byline tsinghua.edu.cn tcp port 80
+----
 
 === JavaScript
 _js-beautify_, _js24_ 。网站中的JS脚本一般都是经过模糊处理的，就是把变量名替换成单字符的，单行，这种工具叫做 http://jsutility.pjoneil.net[**JavaScript Obfuscator**]
@@ -263,3 +267,5 @@ $ pacman -S bashdb
 
 === autopep8
 pep8能够检查python代码的风格是否符合PEP8规范，但是不能自动纠正。
+
+:docinfo:

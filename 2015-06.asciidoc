@@ -1,3 +1,5 @@
+:source-highlighter: pygments
+:pygments-style: manni
 == Fri 05 Jun 2015 09:42:45 AM CST
 === awk的分割符
 * 命令行选项 '-F,' 指定逗号作为分割符
@@ -42,3 +44,5 @@
 	** 给会话设置过期时间。
 	** 全站https。
 * 跨站脚本攻击。用户的输入被服务器执行。
+
+:docinfo:

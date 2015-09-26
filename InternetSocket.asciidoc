@@ -1,3 +1,5 @@
+:source-highlighter: pygments
+:pygments-style: manni
 == http://beej.us/guide/bgnet/output/html/multipage/index.html[Beej's Guide to Network Programming Using Internet Sockets] 
 
 * socket也用文件描述符来标记，与文件不同的是，它是用 recv(2) 和 send(2) 来读写。
@@ -66,3 +68,5 @@ Connection closed by foreign host.
 * 本机字节序与网络字节序之间的转换
 	** <arpa/inet.h>
 	** htons, htonl, ntohs, ntohl
+
+:docinfo:

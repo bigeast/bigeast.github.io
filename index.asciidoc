@@ -1,3 +1,5 @@
+:source-highlighter: pygments
+:pygments-style: manni
 == link:http://138.128.221.113:8000[我的简历]
 
 [width="30%"]
@@ -46,3 +48,6 @@ link:Windows_PowerShell.html[Linux用户的Windows生存手册]
 
 == Translate
 link:Ng.html[Andrew Ng 谈百度深度学习的现状]
+
+
+:docinfo:

@@ -1,3 +1,5 @@
+:source-highlighter: pygments
+:pygments-style: manni
 == Hints for http://www.pythonchallenge.com[Python Challenge]
 
 === http://www.pythonchallenge.com/pc/def/0.html[0]
@@ -609,3 +611,5 @@ And I also didn't expect that's all!
 === http://www.pythonchallenge.com/pc/hex/ambiguity.html[24]
 
 It's a maze, I think walk through it and mark the path out will show something usefull. 
+
+:docinfo:

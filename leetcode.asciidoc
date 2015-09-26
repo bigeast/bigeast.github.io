@@ -1,13 +1,53 @@
-//:source-highlighter: pygments
-//:pygments-style: manni
+:source-highlighter: pygments
+:pygments-style: manni
+
 == Leetcode
-* https://leetcode.com/problems/maximum-gap[Maximum Gap] *一个无序的数组，在线性时间内找到排好序后，相邻两个元素之间最大的差值。*
+* https://leetcode.com/problems/maximum-gap[Maximum Gap] *一个无序的数组，在线性时间内，找到排好序后，相邻两个元素之间差值的最大值。*
+** https://leetcode.com/discuss/18487/i-solved-it-using-radix-sort[讨论区题解] 思想是，得到最大值 maxv 和最小值 minv 后，可确定最大差值的下限为 _L = (maxv - minv) / (N - 1)_ 。将[minv, maxv] 等距分割成 N - 1 段（或者更多的段，因为每段距离只要短于L，就不需要考虑段内的差值，因此对结果都不会有影响），记录每一段的最大值和最小值，最终比较某段的最小值与它前面一段的最大值之差，最大的差即为答案。 
+
+++++
+<details>
+<summary>
+代码
+</summary>
+++++
+
+[source, C++, numbered]
+----
+int maximumGap(std::vector<int> &num) {
+    for(unsigned bit = 0; bit < 31; bit++)
+    std::stable_partition(num.begin(), num.end(), [bit](int a){
+        return !(a & (1 << bit));
+    });
+    int difference = 0;
+    for(std::size_t i = 1; i < num.size(); i++) {
+        difference = std::max(difference, num[i] - num[i-1]);
+    }
+    return difference;
+}
+----
+
+++++
+</details>
+++++
+
+	** [red]#基数排序#
+
+'''
 
 * https://leetcode.com/problems/merge-two-sorted-lists[Merge Two Sorted Lists] *合并两个有序的链表。*
 
 算法很清楚，主要是看怎么实现。如果用p指向要返回的列表当前位置，注意每次更新的时候是先改变p->next，然后p=p->next。
 
-[source, CPP, numbered]
+++++
+<details>
+<summary>
+代码
+</summary>
+++++
+
+[source, C++, numbered]
+----
 /********************************
  * Author:			bigeast
  * Time:			2015-03-14
@@ -47,8 +87,15 @@ public:
 		return res.next;
     }
 };
+----
 
-=== https://leetcode.com/problems/search-for-a-range[Search for a range] 
+++++
+</details>
+++++
+
+'''
+
+* https://leetcode.com/problems/search-for-a-range[Search for a range] 
 
 **有序数组里的 lower_bound 和 upper_bound**
 
@@ -56,7 +103,15 @@ public:
 
 盯着代码看，就想出来了。找上下界与一般二分查找的不同之处是，在找到目标元素后是否还继续寻找。
 
-[source, CPP]
+++++
+<details>
+<summary>
+代码
+</summary>
+++++
+
+[source, C++]
+-----
 class Solution {
 	public:
 		int lower_bound(int A[], int n, int target)
@@ -122,46 +177,222 @@ class Solution {
 			return range;
 		}
 };
+-----
+
+++++
+</details>
+++++
+
+'''
+'''
 
 === 链表操作
 * https://leetcode.com/problems/reverse-linked-list-ii/[reverse-linked-list-ii]
 
+++++
+<details>
+<summary>
+代码
+</summary>
+++++
+
+[source, C++, numbered]
+----
+/**************************************************
+* Time: Sat 26 Sep 2015 05:31:40 PM CST
+* Author: Bigeast
+* Descriptions: 想好，就能写对
+* Status: AC
+**************************************************/
+
+class Solution {
+public:
+    ListNode* reverseBetween(ListNode* head, int m, int n) {
+        if(m >= n) return head;
+        ListNode ahead(0);
+        ahead.next = head;
+        stack<ListNode *> stk;
+        ListNode *ap = &ahead, *p;
+        int i;
+        for(i = 1; i < m && p; ++i) {
+            ap = ap->next;
+        }
+        p = ap;
+        for(; i <= n && p; ++i) {
+            p = p->next;
+            stk.push(p);
+        }
+        if(p) { // n is not larger than length.
+            ListNode *btail = p->next;
+            while(!stk.empty()) {
+                ap->next = stk.top();
+                stk.pop();
+                ap = ap->next;
+            }
+            ap->next = btail;
+        }
+        return ahead.next;
+    }
+};
+----
+
+++++
+</details>
+++++
+
+
+'''
+
 * https://leetcode.com/problems/swap-nodes-in-pairs/[swap-nodes-in-pairs]
 
+++++
+<details>
+<summary>
+代码
+</summary>
+++++
+
+[source, C++, numbered]
+----
+class Solution {
+	public:
+		ListNode* swapPairs(ListNode* head) {
+			ListNode *p1, *p2, *tmp;
+			p1 = head;
+			if(p1)p2 = p1->next;
+			else return p1;
+			if(p2)
+			{
+				tmp = p2->next;
+				p2->next = p1;
+				p1->next = swapPairs(tmp);
+				return p2;
+			}
+			else return p1;
+		}
+};
+----
+
+++++
+</details>
+++++
+
+
+'''
+
 * https://leetcode.com/problems/reverse-nodes-in-k-group/[reverse-nodes-in-k-group]
+	** 自己的代码写得有点丑。
+
+
+++++
+<details>
+<summary>
+代码
+</summary>
+++++
+
+[source, C++, numbered]
+----
+public ListNode reverseKGroup(ListNode head, int k) {
+    ListNode curr = head;
+    int count = 0;
+    while (curr != null && count != k) { // find the k+1 node
+        curr = curr.next;
+        count++;
+    }
+    if (count == k) { // if k+1 node is found
+        curr = reverseKGroup(curr, k); // reverse list with k+1 node as head
+        // head - head-pointer to direct part, 
+        // curr - head-pointer to reversed part;
+        while (count-- > 0) { // reverse current k-group: 
+            ListNode tmp = head.next; // tmp - next head in direct part
+            head.next = curr; // preappending "direct" head to the reversed list 
+            curr = head; // move head of reversed part to a new node
+            head = tmp; // move "direct" head to the next node in direct part
+        }
+        head = curr;
+    }
+    return head;
+}
+----
+
+++++
+</details>
+++++
+
+	** 顺便看下Java中节点的定义：
+
+++++
+<details>
+<summary>
+ListNode
+</summary>
+++++
+
+[source, Java, numbered]
+----
+public class ListNode {
+    int val;
+    ListNode next;
+    ListNode(int x) { val = x; }
+}
+----
+
+++++
+</details>
+++++
+
+'''
 
 === 连续整数
 * https://leetcode.com/problems/first-missing-positive/[first-missing-positive]
 
+'''
+
 * https://leetcode.com/problems/longest-consecutive-sequence/[longest-consecutive-sequence]
 
-* https://leetcode.com/problems/maximum-gap/[maximum-gap]
-
-O(n)时空复杂度下，找到一个无序数组排好序后相邻元素的最大差值。挺有意思，自己想想。
+'''
 
 === next_permutation
 * https://leetcode.com/problems/next-permutation/[next-permutation]
 	** STL中现成函数 'next_permutation'
 	** 手动实现时，额，方法又忘了。
 
+'''
+
 === 两个有序数组的中值
 * https://leetcode.com/problems/median-of-two-sorted-arrays/[median-of-two-sorted-arrays]
 
+'''
+
 * http://articles.leetcode.com/2011/01/find-k-th-smallest-element-in-union-of.html[答案说明]
+
+'''
 
 === 子集和DFS
 * https://leetcode.com/problems/two-sum/[two-sum]
 
+'''
+
 * https://leetcode.com/problems/3sum/[3sum]
 
+'''
 * https://leetcode.com/problems/4sum/[4sum]
 
+'''
 * https://leetcode.com/problems/generate-parentheses/[generate-parentheses]
 
+'''
 * https://leetcode.com/problems/palindrome-partitioning/[palindrome-partitioning]
 
+'''
 === DP
 * https://leetcode.com/problems/longest-palindromic-substring/[longest-palindromic-substring]
 
+'''
 === 其它
 * https://leetcode.com/problems/palindrome-number/[palindrome-number] *判断是否是回文数字，不能使用额外的空间。*
+
+'''
+
+:docinfo:

@@ -1,3 +1,5 @@
+:source-highlighter: pygments
+:pygments-style: manni
 == Tue 08 Sep 2015 02:23:28 PM CST
 * C\++编译器定义了 '__cplusplus' 宏
 * 'atexit' 系统调用可以在main函数执行完后执行。
@@ -23,3 +25,5 @@
 [source, CPP]
 const int *p = &someInt; //Declares a pointer whose data cannot be changed through the pointer:
 int * const p = &someInt; //Declares a pointer who cannot be changed to point to something else:
+
+:docinfo:

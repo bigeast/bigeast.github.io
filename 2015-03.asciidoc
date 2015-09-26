@@ -1,3 +1,7 @@
+:source-highlighter: pygments
+:pygments-style: manni
+:source-highlighter: pygments
+:pygments-style: manni
 == 2015-03-03 Tuesday 20:02:29
 === xdg-mime设置默认程序
 [source, bash]
@@ -154,6 +158,7 @@ import matplotlib.pylab as plt
 mpl.matplotlib_fname() #显示matplotlibrc文件的位置。
 
 [source, python]
+----
 # The default backend; one of GTK GTKAgg GTKCairo GTK3Agg GTK3Cairo
 # CocoaAgg MacOSX Qt4Agg Qt5Agg TkAgg WX WXAgg Agg Cairo GDK PS PDF SVG
 # Template.
@@ -169,6 +174,7 @@ backend      : GTKAgg
 # QT_API used by Enthought Tool Suite (ETS); valid values are
 # "pyqt" and "pyside".  The "pyqt" setting has the side effect of
 # forcing the use of Version 2 API for QString and QVariant.
+----
 
 == 2015-03-15 Sunday 00:20:06
 === https://github.com/antiboredom/videogrep[videogrep]
@@ -273,9 +279,11 @@ o                             .       .
 这次把步骤记下来，然后把 _xorg-server_ Ignore掉。
 
 [source, bash]
+----
 # 两个包有依赖，要同时卸载？
 $ pacman -U /var/cache/pacman/pkg/virtualbox-guest-utils-4.3.20-1-x86_64.pkg.tar.xz /var/cache/pacman/pkg/xorg-server-1.16.3-2-x86_64.pkg.tar.xz
 $ pacman -U /var/cache/pacman/pkg/xf86-video-modesetting-0.9.0-2-x86_64.pkg.tar.xz
+----
 
 然后在 _/etc/pacman.conf_ 中加入
 
@@ -285,6 +293,7 @@ IgnorePkg = virtualbox xorg-server
 话说virtualbox从4.2.22以来，更新后总是有问题，干脆停掉算了！
 
 === PSNR和MSE的对应关系
+
 [source, python]
 import numpy as np
 import matplotlib.pylab as plt
@@ -368,3 +377,5 @@ rfc(){ gvim /usr/share/doc/rfc/txt/$1.txt }
 但 nohup 和 disown 其实是有些微的差别的。 _type nohup_ 和 _type disown_ 是不一样的， _nohup_ 是/usr/bin下的一个程序，而 _disown_ 是 bash 的内置命令。
 
 默认情况下终端退出时会对其下所有还在运行的 jobs 发送 HUP 信号（猜的），nohup 只能在程序开始执行的时候添加才有用，因此可能是启动程序时，改了该程序的信号处理程序（继续猜）。而 disown 是 bash 内置的，只需让 bash 记住退出的时候不要给相应程序发送HUP信号就可以了，这也说明了为什么可以在程序已经在运行了的时候再 disown 。
+
+:docinfo:
