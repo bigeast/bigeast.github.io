@@ -738,60 +738,67 @@ asciidoc.install();
 <div class="sect1">
 <h2 id="_leetcode">Leetcode</h2>
 <div class="sectionbody">
-<div class="sect2">
-<h3 id="_a_href_https_leetcode_com_problems_maximum_gap_maximum_gap_a_strong_一个无序的数组_在线性时间内找到排好序后_相邻两个元素之间最大的差值_strong"><a href="https://leetcode.com/problems/maximum-gap">Maximum Gap</a> <strong>一个无序的数组，在线性时间内找到排好序后，相邻两个元素之间最大的差值。</strong></h3>
-</div>
-<div class="sect2">
-<h3 id="_a_href_https_leetcode_com_problems_merge_two_sorted_lists_merge_two_sorted_lists_a_strong_合并两个有序的链表_strong"><a href="https://leetcode.com/problems/merge-two-sorted-lists">Merge Two Sorted Lists</a> <strong>合并两个有序的链表。</strong></h3>
+<div class="ulist"><ul>
+<li>
+<p>
+<a href="https://leetcode.com/problems/maximum-gap">Maximum Gap</a> <strong>一个无序的数组，在线性时间内找到排好序后，相邻两个元素之间最大的差值。</strong>
+</p>
+</li>
+<li>
+<p>
+<a href="https://leetcode.com/problems/merge-two-sorted-lists">Merge Two Sorted Lists</a> <strong>合并两个有序的链表。</strong>
+</p>
+</li>
+</ul></div>
 <div class="paragraph"><p>算法很清楚，主要是看怎么实现。如果用p指向要返回的列表当前位置，注意每次更新的时候是先改变p&#8594;next，然后p=p&#8594;next。</p></div>
 <div class="listingblock">
 <div class="content"><!-- Generator: GNU source-highlight 3.1.8
 by Lorenzo Bettini
 http://www.lorenzobettini.it
 http://www.gnu.org/software/src-highlite -->
-<pre><tt><span style="font-style: italic"><span style="color: #9A1900">/********************************</span></span>
-<span style="font-style: italic"><span style="color: #9A1900"> * Author:                      bigeast</span></span>
-<span style="font-style: italic"><span style="color: #9A1900"> * Time:                        2015-03-14</span></span>
-<span style="font-style: italic"><span style="color: #9A1900"> * Description:         AC.</span></span>
-<span style="font-style: italic"><span style="color: #9A1900"> ********************************/</span></span>
-<span style="font-weight: bold"><span style="color: #0000FF">struct</span></span> <span style="color: #008080">ListNode</span> <span style="color: #FF0000">{</span>
-    <span style="color: #009900">int</span> val<span style="color: #990000">;</span>
-    <span style="color: #008080">ListNode</span> <span style="color: #990000">*</span>next<span style="color: #990000">;</span>
-    <span style="font-weight: bold"><span style="color: #000000">ListNode</span></span><span style="color: #990000">(</span><span style="color: #009900">int</span> x<span style="color: #990000">)</span> <span style="color: #990000">:</span> <span style="font-weight: bold"><span style="color: #000000">val</span></span><span style="color: #990000">(</span>x<span style="color: #990000">),</span> <span style="font-weight: bold"><span style="color: #000000">next</span></span><span style="color: #990000">(</span>NULL<span style="color: #990000">)</span> <span style="color: #FF0000">{}</span>
-<span style="color: #FF0000">}</span><span style="color: #990000">;</span>
-<span style="font-weight: bold"><span style="color: #0000FF">class</span></span> <span style="color: #008080">Solution</span> <span style="color: #FF0000">{</span>
-<span style="font-weight: bold"><span style="color: #0000FF">public</span></span><span style="color: #990000">:</span>
-    <span style="color: #008080">ListNode</span> <span style="color: #990000">*</span><span style="font-weight: bold"><span style="color: #000000">mergeTwoLists</span></span><span style="color: #990000">(</span><span style="color: #008080">ListNode</span> <span style="color: #990000">*</span>l1<span style="color: #990000">,</span> <span style="color: #008080">ListNode</span> <span style="color: #990000">*</span>l2<span style="color: #990000">)</span> <span style="color: #FF0000">{</span>
-                <span style="font-weight: bold"><span style="color: #0000FF">struct</span></span> <span style="color: #008080">ListNode</span> <span style="font-weight: bold"><span style="color: #000000">res</span></span><span style="color: #990000">(</span><span style="color: #993399">0</span><span style="color: #990000">),</span> <span style="color: #990000">*</span>p <span style="color: #990000">=</span> <span style="color: #990000">&amp;</span>res<span style="color: #990000">;</span>
-                <span style="font-weight: bold"><span style="color: #0000FF">while</span></span><span style="color: #990000">(</span>l1 <span style="color: #990000">!=</span> NULL <span style="color: #990000">&amp;&amp;</span> l2 <span style="color: #990000">!=</span> NULL<span style="color: #990000">)</span>
-                <span style="color: #FF0000">{</span>
-                        <span style="font-weight: bold"><span style="color: #0000FF">if</span></span><span style="color: #990000">(</span>l1<span style="color: #990000">-&gt;</span>val <span style="color: #990000">&lt;</span> l2<span style="color: #990000">-&gt;</span>val<span style="color: #990000">)</span>
-                        <span style="color: #FF0000">{</span>
-                                p<span style="color: #990000">-&gt;</span>next <span style="color: #990000">=</span> l1<span style="color: #990000">;</span>
-                                l1 <span style="color: #990000">=</span> l1<span style="color: #990000">-&gt;</span>next<span style="color: #990000">;</span>
-                        <span style="color: #FF0000">}</span>
-                        <span style="font-weight: bold"><span style="color: #0000FF">else</span></span>
-                        <span style="color: #FF0000">{</span>
-                                p<span style="color: #990000">-&gt;</span>next <span style="color: #990000">=</span> l2<span style="color: #990000">;</span>
-                                l2 <span style="color: #990000">=</span> l2<span style="color: #990000">-&gt;</span>next<span style="color: #990000">;</span>
-                        <span style="color: #FF0000">}</span>
-                        p <span style="color: #990000">=</span> p<span style="color: #990000">-&gt;</span>next<span style="color: #990000">;</span>
-                <span style="color: #FF0000">}</span>
-                <span style="font-weight: bold"><span style="color: #0000FF">if</span></span><span style="color: #990000">(</span>l1 <span style="color: #990000">==</span> NULL<span style="color: #990000">)</span>
-                <span style="color: #FF0000">{</span>
-                        p <span style="color: #990000">-&gt;</span>next <span style="color: #990000">=</span> l2<span style="color: #990000">;</span>
-                <span style="color: #FF0000">}</span>
-                <span style="font-weight: bold"><span style="color: #0000FF">else</span></span> <span style="font-weight: bold"><span style="color: #0000FF">if</span></span><span style="color: #990000">(</span>l2 <span style="color: #990000">==</span> NULL<span style="color: #990000">)</span>
-                <span style="color: #FF0000">{</span>
-                        p <span style="color: #990000">-&gt;</span>next <span style="color: #990000">=</span> l1<span style="color: #990000">;</span>
-                <span style="color: #FF0000">}</span>
-                <span style="font-weight: bold"><span style="color: #0000FF">return</span></span> res<span style="color: #990000">.</span>next<span style="color: #990000">;</span>
-    <span style="color: #FF0000">}</span>
-<span style="color: #FF0000">}</span><span style="color: #990000">;</span></tt></pre></div></div>
-</div>
+<pre><tt><span style="color: #000000">    1:</span> <span style="font-style: italic"><span style="color: #9A1900">/********************************</span></span>
+<span style="color: #000000">    2:</span> <span style="font-style: italic"><span style="color: #9A1900"> * Author:                      bigeast</span></span>
+<span style="color: #000000">    3:</span> <span style="font-style: italic"><span style="color: #9A1900"> * Time:                        2015-03-14</span></span>
+<span style="color: #000000">    4:</span> <span style="font-style: italic"><span style="color: #9A1900"> * Description:         AC.</span></span>
+<span style="color: #000000">    5:</span> <span style="font-style: italic"><span style="color: #9A1900"> ********************************/</span></span>
+<span style="color: #000000">    6:</span> <span style="font-weight: bold"><span style="color: #0000FF">struct</span></span> <span style="color: #008080">ListNode</span> <span style="color: #FF0000">{</span>
+<span style="color: #000000">    7:</span>     <span style="color: #009900">int</span> val<span style="color: #990000">;</span>
+<span style="color: #000000">    8:</span>     <span style="color: #008080">ListNode</span> <span style="color: #990000">*</span>next<span style="color: #990000">;</span>
+<span style="color: #000000">    9:</span>     <span style="font-weight: bold"><span style="color: #000000">ListNode</span></span><span style="color: #990000">(</span><span style="color: #009900">int</span> x<span style="color: #990000">)</span> <span style="color: #990000">:</span> <span style="font-weight: bold"><span style="color: #000000">val</span></span><span style="color: #990000">(</span>x<span style="color: #990000">),</span> <span style="font-weight: bold"><span style="color: #000000">next</span></span><span style="color: #990000">(</span>NULL<span style="color: #990000">)</span> <span style="color: #FF0000">{}</span>
+<span style="color: #000000">   10:</span> <span style="color: #FF0000">}</span><span style="color: #990000">;</span>
+<span style="color: #000000">   11:</span> <span style="font-weight: bold"><span style="color: #0000FF">class</span></span> <span style="color: #008080">Solution</span> <span style="color: #FF0000">{</span>
+<span style="color: #000000">   12:</span> <span style="font-weight: bold"><span style="color: #0000FF">public</span></span><span style="color: #990000">:</span>
+<span style="color: #000000">   13:</span>     <span style="color: #008080">ListNode</span> <span style="color: #990000">*</span><span style="font-weight: bold"><span style="color: #000000">mergeTwoLists</span></span><span style="color: #990000">(</span><span style="color: #008080">ListNode</span> <span style="color: #990000">*</span>l1<span style="color: #990000">,</span> <span style="color: #008080">ListNode</span> <span style="color: #990000">*</span>l2<span style="color: #990000">)</span> <span style="color: #FF0000">{</span>
+<span style="color: #000000">   14:</span>                 <span style="font-weight: bold"><span style="color: #0000FF">struct</span></span> <span style="color: #008080">ListNode</span> <span style="font-weight: bold"><span style="color: #000000">res</span></span><span style="color: #990000">(</span><span style="color: #993399">0</span><span style="color: #990000">),</span> <span style="color: #990000">*</span>p <span style="color: #990000">=</span> <span style="color: #990000">&amp;</span>res<span style="color: #990000">;</span>
+<span style="color: #000000">   15:</span>                 <span style="font-weight: bold"><span style="color: #0000FF">while</span></span><span style="color: #990000">(</span>l1 <span style="color: #990000">!=</span> NULL <span style="color: #990000">&amp;&amp;</span> l2 <span style="color: #990000">!=</span> NULL<span style="color: #990000">)</span>
+<span style="color: #000000">   16:</span>                 <span style="color: #FF0000">{</span>
+<span style="color: #000000">   17:</span>                         <span style="font-weight: bold"><span style="color: #0000FF">if</span></span><span style="color: #990000">(</span>l1<span style="color: #990000">-&gt;</span>val <span style="color: #990000">&lt;</span> l2<span style="color: #990000">-&gt;</span>val<span style="color: #990000">)</span>
+<span style="color: #000000">   18:</span>                         <span style="color: #FF0000">{</span>
+<span style="color: #000000">   19:</span>                                 p<span style="color: #990000">-&gt;</span>next <span style="color: #990000">=</span> l1<span style="color: #990000">;</span>
+<span style="color: #000000">   20:</span>                                 l1 <span style="color: #990000">=</span> l1<span style="color: #990000">-&gt;</span>next<span style="color: #990000">;</span>
+<span style="color: #000000">   21:</span>                         <span style="color: #FF0000">}</span>
+<span style="color: #000000">   22:</span>                         <span style="font-weight: bold"><span style="color: #0000FF">else</span></span>
+<span style="color: #000000">   23:</span>                         <span style="color: #FF0000">{</span>
+<span style="color: #000000">   24:</span>                                 p<span style="color: #990000">-&gt;</span>next <span style="color: #990000">=</span> l2<span style="color: #990000">;</span>
+<span style="color: #000000">   25:</span>                                 l2 <span style="color: #990000">=</span> l2<span style="color: #990000">-&gt;</span>next<span style="color: #990000">;</span>
+<span style="color: #000000">   26:</span>                         <span style="color: #FF0000">}</span>
+<span style="color: #000000">   27:</span>                         p <span style="color: #990000">=</span> p<span style="color: #990000">-&gt;</span>next<span style="color: #990000">;</span>
+<span style="color: #000000">   28:</span>                 <span style="color: #FF0000">}</span>
+<span style="color: #000000">   29:</span>                 <span style="font-weight: bold"><span style="color: #0000FF">if</span></span><span style="color: #990000">(</span>l1 <span style="color: #990000">==</span> NULL<span style="color: #990000">)</span>
+<span style="color: #000000">   30:</span>                 <span style="color: #FF0000">{</span>
+<span style="color: #000000">   31:</span>                         p <span style="color: #990000">-&gt;</span>next <span style="color: #990000">=</span> l2<span style="color: #990000">;</span>
+<span style="color: #000000">   32:</span>                 <span style="color: #FF0000">}</span>
+<span style="color: #000000">   33:</span>                 <span style="font-weight: bold"><span style="color: #0000FF">else</span></span> <span style="font-weight: bold"><span style="color: #0000FF">if</span></span><span style="color: #990000">(</span>l2 <span style="color: #990000">==</span> NULL<span style="color: #990000">)</span>
+<span style="color: #000000">   34:</span>                 <span style="color: #FF0000">{</span>
+<span style="color: #000000">   35:</span>                         p <span style="color: #990000">-&gt;</span>next <span style="color: #990000">=</span> l1<span style="color: #990000">;</span>
+<span style="color: #000000">   36:</span>                 <span style="color: #FF0000">}</span>
+<span style="color: #000000">   37:</span>                 <span style="font-weight: bold"><span style="color: #0000FF">return</span></span> res<span style="color: #990000">.</span>next<span style="color: #990000">;</span>
+<span style="color: #000000">   38:</span>     <span style="color: #FF0000">}</span>
+<span style="color: #000000">   39:</span> <span style="color: #FF0000">}</span><span style="color: #990000">;</span></tt></pre></div></div>
 <div class="sect2">
-<h3 id="_a_href_https_leetcode_com_problems_search_for_a_range_search_for_a_range_a_strong_有序数组里的_lower_bound_和_upper_bound_strong"><a href="https://leetcode.com/problems/search-for-a-range">Search for a range</a> <strong>有序数组里的 lower_bound 和 upper_bound</strong></h3>
-<div class="paragraph"><p><span class="line-throuth">突然发现自己好像还不会这个。想了一下也没想出来，应该是二分查找稍微变形一下？</span></p></div>
+<h3 id="_a_href_https_leetcode_com_problems_search_for_a_range_search_for_a_range_a"><a href="https://leetcode.com/problems/search-for-a-range">Search for a range</a></h3>
+<div class="paragraph"><p><strong>有序数组里的 lower_bound 和 upper_bound</strong></p></div>
+<div class="paragraph"><p><span class="line-through">突然发现自己好像还不会这个。想了一下也没想出来，应该是二分查找稍微变形一下</span></p></div>
 <div class="paragraph"><p>盯着代码看，就想出来了。找上下界与一般二分查找的不同之处是，在找到目标元素后是否还继续寻找。</p></div>
 <div class="listingblock">
 <div class="content"><!-- Generator: GNU source-highlight 3.1.8
@@ -865,41 +872,132 @@ http://www.gnu.org/software/src-highlite -->
 <span style="color: #FF0000">}</span><span style="color: #990000">;</span></tt></pre></div></div>
 </div>
 <div class="sect2">
-<h3 id="_链表反转">链表反转</h3>
-<div class="paragraph"><p><a href="https://leetcode.com/problems/reverse-linked-list-ii/">https://leetcode.com/problems/reverse-linked-list-ii/</a></p></div>
-<div class="paragraph"><p><a href="https://leetcode.com/problems/swap-nodes-in-pairs/">https://leetcode.com/problems/swap-nodes-in-pairs/</a></p></div>
-<div class="paragraph"><p><a href="https://leetcode.com/problems/reverse-nodes-in-k-group/">https://leetcode.com/problems/reverse-nodes-in-k-group/</a></p></div>
+<h3 id="_链表操作">链表操作</h3>
+<div class="ulist"><ul>
+<li>
+<p>
+<a href="https://leetcode.com/problems/reverse-linked-list-ii/">reverse-linked-list-ii</a>
+</p>
+</li>
+<li>
+<p>
+<a href="https://leetcode.com/problems/swap-nodes-in-pairs/">swap-nodes-in-pairs</a>
+</p>
+</li>
+<li>
+<p>
+<a href="https://leetcode.com/problems/reverse-nodes-in-k-group/">reverse-nodes-in-k-group</a>
+</p>
+</li>
+</ul></div>
 </div>
 <div class="sect2">
 <h3 id="_连续整数">连续整数</h3>
-<div class="paragraph"><p><a href="https://leetcode.com/problems/first-missing-positive/">https://leetcode.com/problems/first-missing-positive/</a></p></div>
-<div class="paragraph"><p><a href="https://leetcode.com/problems/longest-consecutive-sequence/">https://leetcode.com/problems/longest-consecutive-sequence/</a></p></div>
-<div class="paragraph"><p><a href="https://leetcode.com/problems/maximum-gap/">https://leetcode.com/problems/maximum-gap/</a></p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+<a href="https://leetcode.com/problems/first-missing-positive/">first-missing-positive</a>
+</p>
+</li>
+<li>
+<p>
+<a href="https://leetcode.com/problems/longest-consecutive-sequence/">longest-consecutive-sequence</a>
+</p>
+</li>
+<li>
+<p>
+<a href="https://leetcode.com/problems/maximum-gap/">maximum-gap</a>
+</p>
+</li>
+</ul></div>
 <div class="paragraph"><p>O(n)时空复杂度下，找到一个无序数组排好序后相邻元素的最大差值。挺有意思，自己想想。</p></div>
 </div>
 <div class="sect2">
 <h3 id="_next_permutation">next_permutation</h3>
-<div class="paragraph"><p><a href="https://leetcode.com/problems/next-permutation/">https://leetcode.com/problems/next-permutation/</a></p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+<a href="https://leetcode.com/problems/next-permutation/">next-permutation</a>
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+STL中现成函数 <em>next_permutation</em>
+</p>
+</li>
+<li>
+<p>
+手动实现时，额，方法又忘了。
+</p>
+</li>
+</ul></div>
+</li>
+</ul></div>
 </div>
 <div class="sect2">
 <h3 id="_两个有序数组的中值">两个有序数组的中值</h3>
-<div class="paragraph"><p><a href="https://leetcode.com/problems/median-of-two-sorted-arrays/">https://leetcode.com/problems/median-of-two-sorted-arrays/</a></p></div>
-<div class="paragraph"><p><a href="http://articles.leetcode.com/2011/01/find-k-th-smallest-element-in-union-of.html">答案说明</a></p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+<a href="https://leetcode.com/problems/median-of-two-sorted-arrays/">median-of-two-sorted-arrays</a>
+</p>
+</li>
+<li>
+<p>
+<a href="http://articles.leetcode.com/2011/01/find-k-th-smallest-element-in-union-of.html">答案说明</a>
+</p>
+</li>
+</ul></div>
 </div>
 <div class="sect2">
-<h3 id="_子集和_dfs">子集和/DFS</h3>
-<div class="paragraph"><p><a href="https://leetcode.com/problems/3sum/">https://leetcode.com/problems/3sum/</a></p></div>
-<div class="paragraph"><p><a href="https://leetcode.com/problems/4sum/">https://leetcode.com/problems/4sum/</a></p></div>
-<div class="paragraph"><p><a href="https://leetcode.com/problems/generate-parentheses/">https://leetcode.com/problems/generate-parentheses/</a></p></div>
-<div class="paragraph"><p><a href="https://leetcode.com/problems/palindrome-partitioning/">https://leetcode.com/problems/palindrome-partitioning/</a></p></div>
+<h3 id="_子集和dfs">子集和DFS</h3>
+<div class="ulist"><ul>
+<li>
+<p>
+<a href="https://leetcode.com/problems/two-sum/">two-sum</a>
+</p>
+</li>
+<li>
+<p>
+<a href="https://leetcode.com/problems/3sum/">3sum</a>
+</p>
+</li>
+<li>
+<p>
+<a href="https://leetcode.com/problems/4sum/">4sum</a>
+</p>
+</li>
+<li>
+<p>
+<a href="https://leetcode.com/problems/generate-parentheses/">generate-parentheses</a>
+</p>
+</li>
+<li>
+<p>
+<a href="https://leetcode.com/problems/palindrome-partitioning/">palindrome-partitioning</a>
+</p>
+</li>
+</ul></div>
 </div>
 <div class="sect2">
 <h3 id="_dp">DP</h3>
-<div class="paragraph"><p><a href="https://leetcode.com/problems/longest-palindromic-substring/">https://leetcode.com/problems/longest-palindromic-substring/</a></p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+<a href="https://leetcode.com/problems/longest-palindromic-substring/">longest-palindromic-substring</a>
+</p>
+</li>
+</ul></div>
 </div>
 <div class="sect2">
 <h3 id="_其它">其它</h3>
-<div class="paragraph"><p>判断是否是回文数字，不能使用额外的空间。https://leetcode.com/problems/palindrome-number/</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+<a href="https://leetcode.com/problems/palindrome-number/">palindrome-number</a> <strong>判断是否是回文数字，不能使用额外的空间。</strong>
+</p>
+</li>
+</ul></div>
 </div>
 </div>
 </div>
@@ -907,7 +1005,7 @@ http://www.gnu.org/software/src-highlite -->
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-04-18 01:24:51 CST
+Last updated 2015-09-26 14:15:09 CST
 </div>
 </div>
 </body>

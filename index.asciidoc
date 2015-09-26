@@ -18,6 +18,7 @@ link:leetcode.html[Leetcode]
 
 == Book Notes
 link:Kindle.html[Kindle Paperwhite 3 入手体验]
+
 link:oneplus2.html[一加手机二 入手体验]
 
 === 人文
