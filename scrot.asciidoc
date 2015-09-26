@@ -2,6 +2,8 @@
 :pygments-style: manni
 = Scrot屏幕截图
 
+[green]#Sun 27 Sep 2015 12:09:43 AM CST#
+
 **scrot** 是一个轻量级的屏幕截图程序，它的功能很简单，但都很实用。它的选项很容易看懂。
 
 * 直接对整个屏幕截图：

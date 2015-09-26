@@ -1,7 +1,44 @@
 :source-highlighter: pygments
 :pygments-style: manni
-== link:http://138.128.221.113:8000[我的简历]
+== Bigeast's Blog
 
+=== link:http://138.128.221.113:8000[我的简历]
+
+=== 计算机
+link:leetcode.html[Leetcode]
+
+link:Problems.html[Problems to Solve]
+
+link:books/linuxfaner.html[Linux就是这个范儿]
+
+link:InternetSocket.html[网络编程基础]
+
+link:books/JS-OO.html[JavaScript面向对象编程]
+
+
+=== Book Notes
+link:Kindle.html[Kindle Paperwhite 3 入手体验]
+
+link:oneplus2.html[一加手机二 入手体验]
+
+
+=== Computer Hacks
+link:Source_Code_Tree_Navigation_in_Vim.html[Source Code Tree Navigation in Vim]
+
+link:scrot.html[Scrot屏幕截图]
+
+link:pythonchallenge.html[Python Challenge Note]
+
+link:VPS-Shadowsocks.html[VPS科学上网]
+
+link:Windows_PowerShell.html[Linux用户的Windows生存手册]
+
+=== 人文
+link:books/YM.html[斯蒂芬·哈珀在读什么]
+
+link:books/ddj.html[道德经]
+
+=== Notes
 [width="30%"]
 |====================
 |link:2015-02.html[2015-02 笔记] 
@@ -14,40 +51,7 @@
 |link:2015-09.html[2015-09 笔记]
 |====================
 
-link:Problems.html[Problems to Solve]
-
-link:leetcode.html[Leetcode]
-
-== Book Notes
-link:Kindle.html[Kindle Paperwhite 3 入手体验]
-
-link:oneplus2.html[一加手机二 入手体验]
-
-=== 人文
-link:books/YM.html[斯蒂芬·哈珀在读什么]
-
-link:books/ddj.html[道德经]
-
-=== 计算机
-link:books/linuxfaner.html[Linux就是这个范儿]
-
-link:InternetSocket.html[网络编程基础]
-
-link:books/JS-OO.html[JavaScript面向对象编程]
-
-== Computer Hacks
-link:Source_Code_Tree_Navigation_in_Vim.html[Source Code Tree Navigation in Vim]
-
-link:scrot.html[Scrot屏幕截图]
-
-link:pythonchallenge.html[Python Challenge Note]
-
-link:VPS-Shadowsocks.html[VPS科学上网]
-
-link:Windows_PowerShell.html[Linux用户的Windows生存手册]
-
-== Translate
+=== Translate
 link:Ng.html[Andrew Ng 谈百度深度学习的现状]
-
 
 :docinfo:
