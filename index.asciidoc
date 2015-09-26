@@ -41,5 +41,7 @@ link:pythonchallenge.html[Python Challenge Note]
 
 link:VPS-Shadowsocks.html[VPS科学上网]
 
+link:Windows_PowerShell.html[Linux用户的Windows生存手册]
+
 == Translate
 link:Ng.html[Andrew Ng 谈百度深度学习的现状]
