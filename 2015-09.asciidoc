@@ -1,29 +1,34 @@
 :source-highlighter: pygments
 :pygments-style: manni
-== Tue 08 Sep 2015 02:23:28 PM CST
-* C\++编译器定义了 '__cplusplus' 宏
-* 'atexit' 系统调用可以在main函数执行完后执行。
-* 'const' 变量在 C 中是运行时才能确定的，而在 C\++ 中是编译时就需要确定，否则会出现编译错误。
+== 2015-09
+=== Tue 08 Sep 2015 02:23:28 PM CST
+* `C++` 编译器定义了 `__cplusplus` 宏
+* `atexit` 系统调用可以在main函数执行完后执行。
+* `const` 变量在 C 中是运行时才能确定的，而在 `C++` 中是编译时就需要确定，否则会出现编译错误。
 * sizeof
-	** 结构体的 'sizeof' 字节对齐问题。
+	** 结构体的 `sizeof` 字节对齐问题。
 		*** n字节的元素地址能够被n整除，才能使CPU获得最大性能。
-		*** 还要考虑 '分配结构体数组' 时，每个结构体中的成员也需要满足地址整除条件，因此有内存对齐的优化。
-		*** 可以在高级编译选项中指定是否需要自动对齐。VC 中是添加 '#pragma pack(n)'
-	* 结构体中有 'static' 变量时，是不计算在 'sizeof' 中的。
-	* 'sizeof' 操作数是变量名时可以不加括号，是类型名时必须加括号。
-	* 'sizeof(main)' 结果是1。
-	* 类的 'sizeof'
+		*** 还要考虑 *分配结构体数组* 时，每个结构体中的成员也需要满足地址整除条件，因此有内存对齐的优化。
+		*** 可以在高级编译选项中指定是否需要自动对齐。VC 中是添加 `#pragma pack(n)`
+	* 结构体中有 `static` 变量时，是不计算在 `sizeof` 中的。
+	* `sizeof` 操作数是变量名时可以不加括号，是类型名时必须加括号。
+	* `sizeof(main)` 结果是1。
+	* 类的 `sizeof`
 		** 含有虚函数的类中有一个指向虚表的指针。 sizeof的结果与虚函数的多少无关，只要有，就多4或者8。
 		** 非虚函数不增加类的大小
 	* 引用的 size 是其指向的变量的大小。
 * 结构体定义的差别
-	** C\++ 中， 'struct' 与 'class' 等地位，其后的标志可以直接作为结构体类型名去定义变量，而在C中，需完整地写出 'struct XX' ，或者 'typedef struct XX XX'
+	** `C++` 中， `struct` 与 `class` 等地位，其后的标志可以直接作为结构体类型名去定义变量，而在C中，需完整地写出 `struct XX` ，或者 `typedef struct XX XX`
 
 * 引用与指针
 	** 引用不可能指向空，无需进行合法性检查，效率要比指针高。
-	** 'const int *' vs 'int * const'
+	** `const int *` vs `int * const`
 [source, CPP]
 const int *p = &someInt; //Declares a pointer whose data cannot be changed through the pointer:
 int * const p = &someInt; //Declares a pointer who cannot be changed to point to something else:
 
-:docinfo:
+=== Sun 27 Sep 2015 10:19:48 AM CST
+* 此博客使用的一些工具
+	** asciidoctor 的 docinfo 功能。
+	** 语法高亮，用pygments。
+	** 代码折叠，支持JavaScript的话有点麻烦，现在使用的是HTML5的 [red]#details# 和 [red]#summary# 元素，但是只有Chrome支持，Firefox竟然不支持！

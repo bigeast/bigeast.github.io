@@ -873,6 +873,9 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li>
 <p>自己的代码写得有点丑。</p>
 </li>
+<li>
+<p>顺便看下Java中节点的定义：</p>
+</li>
 </ul>
 </div>
 </li>
@@ -929,13 +932,6 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </div>
 </details>
-<div class="ulist">
-<ul>
-<li>
-<p>顺便看下Java中节点的定义：</p>
-</li>
-</ul>
-</div>
 <details>
 <summary>
 ListNode
@@ -956,6 +952,83 @@ ListNode
 </div>
 </details>
 <hr>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://leetcode.com/problems/intersection-of-two-linked-lists/">intersection-of-two-linked-lists</a></p>
+<div class="ulist">
+<ul>
+<li>
+<p>找到两个链表开始相交的地方。</p>
+</li>
+<li>
+<p>方法就是先算出两个链表的长度，然后长的先走一点，与短的对齐，之后两个链表同步，如果有相交，这样一定会碰上。</p>
+</li>
+<li>
+<p><span class="red">有一点技巧就是，有时不能确定两个数组的长短，但是代码中又需要用到他们的长短关系，这时可以做一次判断，如果长短关系不满足假设，则交换参数的位置多调用一次。</span></p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<details>
+<summary>
+代码
+</summary>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="C++"><table class="pyhltable"><tr><td class="linenos"><div class="linenodiv"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24</div></td><td class="code"><span class="tok-k">class</span> <span class="tok-nc">Solution</span> <span class="tok-p">{</span>
+<span class="tok-k">public</span><span class="tok-o">:</span>
+    <span class="tok-kt">int</span> <span class="tok-n">listLength</span><span class="tok-p">(</span><span class="tok-n">ListNode</span> <span class="tok-o">*</span><span class="tok-n">root</span><span class="tok-p">)</span> <span class="tok-p">{</span>
+        <span class="tok-kt">int</span> <span class="tok-n">res</span> <span class="tok-o">=</span> <span class="tok-mi">0</span><span class="tok-p">;</span>
+        <span class="tok-k">while</span><span class="tok-p">(</span><span class="tok-n">root</span><span class="tok-p">)</span> <span class="tok-p">{</span>
+            <span class="tok-n">res</span><span class="tok-o">++</span><span class="tok-p">;</span>
+            <span class="tok-n">root</span> <span class="tok-o">=</span> <span class="tok-n">root</span><span class="tok-o">-&gt;</span><span class="tok-n">next</span><span class="tok-p">;</span>
+        <span class="tok-p">}</span>
+        <span class="tok-k">return</span> <span class="tok-n">res</span><span class="tok-p">;</span>
+    <span class="tok-p">}</span>
+    <span class="tok-n">ListNode</span> <span class="tok-o">*</span><span class="tok-n">getIntersectionNode</span><span class="tok-p">(</span><span class="tok-n">ListNode</span> <span class="tok-o">*</span><span class="tok-n">headA</span><span class="tok-p">,</span> <span class="tok-n">ListNode</span> <span class="tok-o">*</span><span class="tok-n">headB</span><span class="tok-p">)</span> <span class="tok-p">{</span>
+        <span class="tok-kt">int</span> <span class="tok-n">m</span> <span class="tok-o">=</span> <span class="tok-n">listLength</span><span class="tok-p">(</span><span class="tok-n">headA</span><span class="tok-p">),</span> <span class="tok-n">n</span> <span class="tok-o">=</span> <span class="tok-n">listLength</span><span class="tok-p">(</span><span class="tok-n">headB</span><span class="tok-p">);</span>
+        <span class="tok-k">if</span><span class="tok-p">(</span><span class="tok-n">m</span> <span class="tok-o">&lt;</span> <span class="tok-n">n</span><span class="tok-p">)</span> <span class="tok-k">return</span> <span class="tok-n">getIntersectionNode</span><span class="tok-p">(</span><span class="tok-n">headB</span><span class="tok-p">,</span> <span class="tok-n">headA</span><span class="tok-p">);</span>
+        <span class="tok-n">ListNode</span> <span class="tok-o">*</span><span class="tok-n">pA</span> <span class="tok-o">=</span> <span class="tok-n">headA</span><span class="tok-p">,</span> <span class="tok-o">*</span><span class="tok-n">pB</span> <span class="tok-o">=</span> <span class="tok-n">headB</span><span class="tok-p">;</span>
+        <span class="tok-k">for</span><span class="tok-p">(</span><span class="tok-kt">int</span> <span class="tok-n">i</span> <span class="tok-o">=</span> <span class="tok-mi">0</span><span class="tok-p">;</span> <span class="tok-n">i</span> <span class="tok-o">&lt;</span> <span class="tok-n">m</span> <span class="tok-o">-</span> <span class="tok-n">n</span><span class="tok-p">;</span> <span class="tok-o">++</span><span class="tok-n">i</span><span class="tok-p">)</span> <span class="tok-p">{</span>
+            <span class="tok-n">pA</span> <span class="tok-o">=</span> <span class="tok-n">pA</span><span class="tok-o">-&gt;</span><span class="tok-n">next</span><span class="tok-p">;</span>
+        <span class="tok-p">}</span>
+        <span class="tok-k">while</span><span class="tok-p">(</span><span class="tok-n">pA</span> <span class="tok-o">!=</span> <span class="tok-n">pB</span><span class="tok-p">)</span> <span class="tok-p">{</span>
+            <span class="tok-n">pA</span> <span class="tok-o">=</span> <span class="tok-n">pA</span><span class="tok-o">-&gt;</span><span class="tok-n">next</span><span class="tok-p">;</span>
+            <span class="tok-n">pB</span> <span class="tok-o">=</span> <span class="tok-n">pB</span><span class="tok-o">-&gt;</span><span class="tok-n">next</span><span class="tok-p">;</span>
+        <span class="tok-p">}</span>
+        <span class="tok-k">return</span> <span class="tok-n">pA</span><span class="tok-p">;</span>
+    <span class="tok-p">}</span>
+<span class="tok-p">};</span>
+</td></tr></table></code></pre>
+</div>
+</div>
+</details>
 </div>
 <div class="sect2">
 <h3 id="_连续整数">连续整数</h3>
@@ -963,17 +1036,88 @@ ListNode
 <ul>
 <li>
 <p><a href="https://leetcode.com/problems/first-missing-positive/">first-missing-positive</a></p>
+<div class="ulist">
+<ul>
+<li>
+<p>题目中要求是线性时间，常数空间。如果空间没有要求，可以使用桶排序类似的方法。</p>
+</li>
+<li>
+<p>交换次数是线性的。</p>
+</li>
+<li>
+<p>然而实际的运行时间并没有降低。。</p>
 </li>
 </ul>
 </div>
+</li>
+</ul>
+</div>
+<details>
+<summary>
+代码
+</summary>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="C++"><table class="pyhltable"><tr><td class="linenos"><div class="linenodiv"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19</div></td><td class="code"><span class="tok-k">class</span> <span class="tok-nc">Solution</span> <span class="tok-p">{</span>
+<span class="tok-k">public</span><span class="tok-o">:</span>
+    <span class="tok-kt">int</span> <span class="tok-n">firstMissingPositive</span><span class="tok-p">(</span><span class="tok-n">vector</span><span class="tok-o">&lt;</span><span class="tok-kt">int</span><span class="tok-o">&gt;&amp;</span> <span class="tok-n">nums</span><span class="tok-p">)</span> <span class="tok-p">{</span>
+        <span class="tok-kt">int</span> <span class="tok-n">n</span> <span class="tok-o">=</span> <span class="tok-n">nums</span><span class="tok-p">.</span><span class="tok-n">size</span><span class="tok-p">();</span>
+        <span class="tok-k">if</span><span class="tok-p">(</span><span class="tok-n">n</span> <span class="tok-o">==</span> <span class="tok-mi">0</span><span class="tok-p">)</span> <span class="tok-k">return</span> <span class="tok-mi">1</span><span class="tok-p">;</span>
+        <span class="tok-k">for</span><span class="tok-p">(</span><span class="tok-kt">int</span> <span class="tok-n">i</span> <span class="tok-o">=</span> <span class="tok-mi">0</span><span class="tok-p">;</span> <span class="tok-n">i</span> <span class="tok-o">&lt;</span> <span class="tok-n">n</span><span class="tok-p">;</span> <span class="tok-o">++</span><span class="tok-n">i</span><span class="tok-p">)</span> <span class="tok-p">{</span>
+			<span class="tok-c1">// 遇到一个元素就把它放到正确的位置。</span>
+            <span class="tok-k">while</span><span class="tok-p">(</span><span class="tok-n">nums</span><span class="tok-p">[</span><span class="tok-n">i</span><span class="tok-p">]</span> <span class="tok-o">&gt;</span> <span class="tok-mi">0</span> <span class="tok-o">&amp;&amp;</span> <span class="tok-n">nums</span><span class="tok-p">[</span><span class="tok-n">i</span><span class="tok-p">]</span> <span class="tok-o">&lt;=</span> <span class="tok-n">n</span> <span class="tok-o">&amp;&amp;</span> <span class="tok-n">nums</span><span class="tok-p">[</span><span class="tok-n">nums</span><span class="tok-p">[</span><span class="tok-n">i</span><span class="tok-p">]</span> <span class="tok-o">-</span> <span class="tok-mi">1</span><span class="tok-p">]</span> <span class="tok-o">!=</span> <span class="tok-n">nums</span><span class="tok-p">[</span><span class="tok-n">i</span><span class="tok-p">])</span> <span class="tok-p">{</span> <span class="tok-c1">// 继续为新换到i位置的元素找到合适的位置。</span>
+                <span class="tok-n">swap</span><span class="tok-p">(</span><span class="tok-n">nums</span><span class="tok-p">[</span><span class="tok-n">i</span><span class="tok-p">],</span> <span class="tok-n">nums</span><span class="tok-p">[</span><span class="tok-n">nums</span><span class="tok-p">[</span><span class="tok-n">i</span><span class="tok-p">]</span> <span class="tok-o">-</span> <span class="tok-mi">1</span><span class="tok-p">]);</span>
+            <span class="tok-p">}</span>
+        <span class="tok-p">}</span>
+        <span class="tok-k">for</span><span class="tok-p">(</span><span class="tok-kt">int</span> <span class="tok-n">i</span> <span class="tok-o">=</span> <span class="tok-mi">0</span><span class="tok-p">;</span> <span class="tok-n">i</span> <span class="tok-o">&lt;</span> <span class="tok-n">n</span><span class="tok-p">;</span> <span class="tok-o">++</span><span class="tok-n">i</span><span class="tok-p">)</span> <span class="tok-p">{</span>
+			<span class="tok-k">if</span><span class="tok-p">(</span><span class="tok-n">nums</span><span class="tok-p">[</span><span class="tok-n">i</span><span class="tok-p">]</span> <span class="tok-o">!=</span> <span class="tok-n">i</span> <span class="tok-o">+</span> <span class="tok-mi">1</span><span class="tok-p">)</span> <span class="tok-p">{</span>
+				<span class="tok-k">return</span> <span class="tok-n">i</span> <span class="tok-o">+</span> <span class="tok-mi">1</span><span class="tok-p">;</span>
+			<span class="tok-p">}</span>
+        <span class="tok-p">}</span>
+        <span class="tok-k">return</span> <span class="tok-n">n</span> <span class="tok-o">+</span> <span class="tok-mi">1</span><span class="tok-p">;</span>
+    <span class="tok-p">}</span>
+<span class="tok-p">};</span>
+</td></tr></table></code></pre>
+</div>
+</div>
+</details>
 <hr>
 <div class="ulist">
 <ul>
 <li>
 <p><a href="https://leetcode.com/problems/longest-consecutive-sequence/">longest-consecutive-sequence</a></p>
+<div class="ulist">
+<ul>
+<li>
+<p>用哈希表存储元素，方便查找元素是否存在。 <code>C++</code> 中使用 <code>unordered_map</code> 代替哈希表。</p>
+</li>
+<li>
+<p>对与每个元素，向前和向后查找相邻的元素是否存在，若存在则从哈希表中删除（避免重复查找）。</p>
 </li>
 </ul>
 </div>
+</li>
+</ul>
+</div>
+<hr>
 <hr>
 </div>
 <div class="sect2">
@@ -985,16 +1129,71 @@ ListNode
 <div class="ulist">
 <ul>
 <li>
-<p>STL中现成函数 'next_permutation'</p>
+<p>STL中现成函数 <strong>next_permutation</strong></p>
 </li>
 <li>
-<p>手动实现时，额，方法又忘了。</p>
+<p><span class="line-through">手动实现时，额，方法又忘了。</span></p>
+</li>
+<li>
+<p>步骤是：</p>
+<div class="ulist">
+<ul>
+<li>
+<p>找到最后一段不增序列，设为[i, n - 1]</p>
+</li>
+<li>
+<p>在[i, n - 1]中找到最小的比 nums[i - 1] 大的一个数 nums[j]。</p>
+</li>
+<li>
+<p><code>swap(num[i - 1], num[j]);</code></p>
+</li>
+<li>
+<p>对新的[i, n - 1]区间进行排序。</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>关键是查找nums[j]时，如何用二分方法？upper_bound貌似不能直接用！自己实现又容易出错。 <span class="red">在数组递减排序时如何使用lower_bound和upper_bound呢？</span></p>
 </li>
 </ul>
 </div>
 </li>
 </ul>
 </div>
+<details>
+<summary>
+代码
+</summary>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="C++"><table class="pyhltable"><tr><td class="linenos"><div class="linenodiv"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12</div></td><td class="code"><span class="tok-k">class</span> <span class="tok-nc">Solution</span> <span class="tok-p">{</span>
+	<span class="tok-k">public</span><span class="tok-o">:</span>
+		<span class="tok-kt">void</span> <span class="tok-n">nextPermutation</span><span class="tok-p">(</span><span class="tok-n">vector</span><span class="tok-o">&lt;</span><span class="tok-kt">int</span><span class="tok-o">&gt;</span> <span class="tok-o">&amp;</span><span class="tok-n">num</span><span class="tok-p">)</span> <span class="tok-p">{</span>
+			<span class="tok-kt">int</span> <span class="tok-n">i</span><span class="tok-p">,</span> <span class="tok-n">j</span><span class="tok-p">;</span>
+			<span class="tok-k">for</span><span class="tok-p">(</span><span class="tok-n">i</span> <span class="tok-o">=</span> <span class="tok-n">num</span><span class="tok-p">.</span><span class="tok-n">size</span><span class="tok-p">()</span> <span class="tok-o">-</span> <span class="tok-mi">1</span><span class="tok-p">;</span> <span class="tok-n">i</span> <span class="tok-o">&gt;</span> <span class="tok-mi">0</span> <span class="tok-o">&amp;&amp;</span> <span class="tok-n">num</span><span class="tok-p">[</span><span class="tok-n">i</span> <span class="tok-o">-</span> <span class="tok-mi">1</span><span class="tok-p">]</span> <span class="tok-o">&gt;=</span> <span class="tok-n">num</span><span class="tok-p">[</span><span class="tok-n">i</span><span class="tok-p">];</span> <span class="tok-o">--</span><span class="tok-n">i</span><span class="tok-p">);</span>
+			<span class="tok-k">if</span><span class="tok-p">(</span><span class="tok-n">i</span> <span class="tok-o">&gt;</span> <span class="tok-mi">0</span><span class="tok-p">)</span> <span class="tok-p">{</span>
+				<span class="tok-k">for</span><span class="tok-p">(</span><span class="tok-n">j</span> <span class="tok-o">=</span> <span class="tok-n">num</span><span class="tok-p">.</span><span class="tok-n">size</span><span class="tok-p">()</span> <span class="tok-o">-</span> <span class="tok-mi">1</span><span class="tok-p">;</span> <span class="tok-n">j</span> <span class="tok-o">&gt;</span> <span class="tok-n">i</span> <span class="tok-o">&amp;&amp;</span> <span class="tok-n">num</span><span class="tok-p">[</span><span class="tok-n">j</span><span class="tok-p">]</span> <span class="tok-o">&lt;=</span> <span class="tok-n">num</span><span class="tok-p">[</span><span class="tok-n">i</span> <span class="tok-o">-</span> <span class="tok-mi">1</span><span class="tok-p">];</span> <span class="tok-o">--</span><span class="tok-n">j</span><span class="tok-p">);</span>
+				<span class="tok-n">swap</span><span class="tok-p">(</span><span class="tok-n">num</span><span class="tok-p">[</span><span class="tok-n">i</span> <span class="tok-o">-</span> <span class="tok-mi">1</span><span class="tok-p">],</span> <span class="tok-n">num</span><span class="tok-p">[</span><span class="tok-n">j</span><span class="tok-p">]);</span>
+			<span class="tok-p">}</span>
+			<span class="tok-n">sort</span><span class="tok-p">(</span><span class="tok-n">num</span><span class="tok-p">.</span><span class="tok-n">begin</span><span class="tok-p">()</span> <span class="tok-o">+</span> <span class="tok-n">i</span><span class="tok-p">,</span> <span class="tok-n">num</span><span class="tok-p">.</span><span class="tok-n">end</span><span class="tok-p">());</span>
+		<span class="tok-p">}</span>
+<span class="tok-p">};</span>
+</td></tr></table></code></pre>
+</div>
+</div>
+</details>
 <hr>
 </div>
 <div class="sect2">
@@ -1003,17 +1202,128 @@ ListNode
 <ul>
 <li>
 <p><a href="https://leetcode.com/problems/median-of-two-sorted-arrays/">median-of-two-sorted-arrays</a></p>
-</li>
-</ul>
-</div>
-<hr>
 <div class="ulist">
 <ul>
 <li>
+<p>需要有一种比较巧妙的方法来实现，不然会很麻烦。</p>
+</li>
+<li>
+<p>假设两个数组 nums1 和 nums2 的长度分别是 m, n，且 m &#8656; n，则算法复杂度是 <code>O(log m)</code></p>
+</li>
+<li>
+<p>当 <code>m + n</code> 为奇数时，中位数下标是 <code>(m + n + 1) / 2</code> ；当 <code>m + n</code> 为偶数时，中位数为 <code>(m + n + 1) / 2</code> 与 <code>(m + n + 1) / 2 + 1</code> 的均值。</p>
+</li>
+<li>
+<p>将两个数组都分成两个部分，最终的中位数是由两个分界处的四个元素决定的。</p>
+</li>
+<li>
+<p>例如设 nums1[0 &#8230;&#8203; i - 1] 为nums1的第一部分，nums2[0 &#8230;&#8203; j - 1] 为nums2的第一部分。则 <code>m + n</code> 为奇数时，如果 <code>max{nums1[i - 1], nums2[j - 1]}</code> 是中位数，充要条件是 <code>i + j = (m + n + 1) / 2</code> ，且 <code>max{nums1[i - 1], nums2[j - 1]} &lt; min{nums1[i], nums2[j]}</code> 。</p>
+</li>
+<li>
+<p>边界条件好容易出错！！这个太难写对了。</p>
+</li>
+<li>
 <p><a href="http://articles.leetcode.com/2011/01/find-k-th-smallest-element-in-union-of.html">答案说明</a></p>
+</li>
+<li>
+<p>还有一种做法是用两个index分别指向两个数组，每次增加数值小的那个，复杂度O(k)。其实就是模拟归并排序。</p>
 </li>
 </ul>
 </div>
+</li>
+</ul>
+</div>
+<details>
+<summary>
+代码
+</summary>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="C++"><table class="pyhltable"><tr><td class="linenos"><div class="linenodiv"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41</div></td><td class="code"><span class="tok-k">class</span> <span class="tok-nc">Solution</span> <span class="tok-p">{</span>
+	<span class="tok-k">public</span><span class="tok-o">:</span>
+		<span class="tok-kt">double</span> <span class="tok-n">findMedianSortedArrays</span><span class="tok-p">(</span><span class="tok-n">vector</span><span class="tok-o">&lt;</span><span class="tok-kt">int</span><span class="tok-o">&gt;&amp;</span> <span class="tok-n">nums1</span><span class="tok-p">,</span> <span class="tok-n">vector</span><span class="tok-o">&lt;</span><span class="tok-kt">int</span><span class="tok-o">&gt;&amp;</span> <span class="tok-n">nums2</span><span class="tok-p">)</span> <span class="tok-p">{</span>
+			<span class="tok-kt">int</span> <span class="tok-n">m</span> <span class="tok-o">=</span> <span class="tok-n">nums1</span><span class="tok-p">.</span><span class="tok-n">size</span><span class="tok-p">(),</span> <span class="tok-n">n</span> <span class="tok-o">=</span> <span class="tok-n">nums2</span><span class="tok-p">.</span><span class="tok-n">size</span><span class="tok-p">();</span>
+			<span class="tok-k">if</span><span class="tok-p">(</span><span class="tok-n">m</span> <span class="tok-o">&gt;</span> <span class="tok-n">n</span><span class="tok-p">)</span> <span class="tok-k">return</span> <span class="tok-n">findMedianSortedArrays</span><span class="tok-p">(</span><span class="tok-n">nums2</span><span class="tok-p">,</span> <span class="tok-n">nums1</span><span class="tok-p">);</span>
+			<span class="tok-c1">//int lo = 0, hi = m - 1;</span>
+			<span class="tok-kt">int</span> <span class="tok-n">lo</span> <span class="tok-o">=</span> <span class="tok-mi">0</span><span class="tok-p">,</span> <span class="tok-n">hi</span> <span class="tok-o">=</span> <span class="tok-n">m</span><span class="tok-p">;</span>
+			<span class="tok-kt">int</span> <span class="tok-n">i</span><span class="tok-p">,</span> <span class="tok-n">j</span><span class="tok-p">;</span> <span class="tok-c1">// i, j 分别代表 nums1 和 nums2 在合成数组中的前一半中所占的元素个数，注意不是下标！</span>
+			<span class="tok-kt">double</span> <span class="tok-n">res1</span> <span class="tok-o">=</span> <span class="tok-mi">0</span><span class="tok-p">,</span> <span class="tok-n">res2</span> <span class="tok-o">=</span> <span class="tok-mi">0</span><span class="tok-p">,</span> <span class="tok-n">res</span><span class="tok-p">;</span>
+			<span class="tok-k">while</span><span class="tok-p">(</span><span class="tok-n">lo</span> <span class="tok-o">&lt;=</span> <span class="tok-n">hi</span><span class="tok-p">)</span> <span class="tok-p">{</span>
+				<span class="tok-n">i</span> <span class="tok-o">=</span> <span class="tok-n">lo</span> <span class="tok-o">+</span> <span class="tok-p">(</span><span class="tok-n">hi</span> <span class="tok-o">-</span> <span class="tok-n">lo</span><span class="tok-p">)</span> <span class="tok-o">/</span> <span class="tok-mi">2</span><span class="tok-p">;</span>
+				<span class="tok-n">j</span> <span class="tok-o">=</span> <span class="tok-p">(</span><span class="tok-n">m</span> <span class="tok-o">+</span> <span class="tok-n">n</span> <span class="tok-o">+</span> <span class="tok-mi">1</span><span class="tok-p">)</span> <span class="tok-o">/</span> <span class="tok-mi">2</span> <span class="tok-o">-</span> <span class="tok-n">i</span><span class="tok-p">;</span>
+				<span class="tok-k">if</span><span class="tok-p">(</span><span class="tok-n">i</span> <span class="tok-o">&gt;</span> <span class="tok-mi">0</span> <span class="tok-o">&amp;&amp;</span> <span class="tok-n">j</span> <span class="tok-o">&lt;</span> <span class="tok-n">n</span> <span class="tok-o">&amp;&amp;</span> <span class="tok-n">nums1</span><span class="tok-p">[</span><span class="tok-n">i</span> <span class="tok-o">-</span> <span class="tok-mi">1</span><span class="tok-p">]</span> <span class="tok-o">&gt;</span> <span class="tok-n">nums2</span><span class="tok-p">[</span><span class="tok-n">j</span><span class="tok-p">])</span> <span class="tok-c1">// nums2 小了，需要减少 nums1 的长度使它增大。</span>
+					<span class="tok-n">hi</span> <span class="tok-o">=</span> <span class="tok-n">i</span> <span class="tok-o">-</span> <span class="tok-mi">1</span><span class="tok-p">;</span>
+				<span class="tok-k">else</span> <span class="tok-k">if</span><span class="tok-p">(</span><span class="tok-n">j</span> <span class="tok-o">&gt;</span> <span class="tok-mi">0</span> <span class="tok-o">&amp;&amp;</span> <span class="tok-n">i</span> <span class="tok-o">&lt;</span> <span class="tok-n">m</span> <span class="tok-o">&amp;&amp;</span> <span class="tok-n">nums2</span><span class="tok-p">[</span><span class="tok-n">j</span> <span class="tok-o">-</span> <span class="tok-mi">1</span><span class="tok-p">]</span> <span class="tok-o">&gt;</span> <span class="tok-n">nums1</span><span class="tok-p">[</span><span class="tok-n">i</span><span class="tok-p">])</span> <span class="tok-c1">// nums1 小了，需要增大。</span>
+					<span class="tok-n">lo</span> <span class="tok-o">=</span> <span class="tok-n">i</span> <span class="tok-o">+</span> <span class="tok-mi">1</span><span class="tok-p">;</span>
+				<span class="tok-k">else</span> <span class="tok-p">{</span>
+					<span class="tok-k">if</span><span class="tok-p">(</span><span class="tok-n">i</span> <span class="tok-o">==</span> <span class="tok-mi">0</span><span class="tok-p">)</span> <span class="tok-p">{</span>
+						<span class="tok-n">res1</span> <span class="tok-o">=</span> <span class="tok-n">nums2</span><span class="tok-p">[</span><span class="tok-n">j</span> <span class="tok-o">-</span> <span class="tok-mi">1</span><span class="tok-p">];</span>
+					<span class="tok-p">}</span>
+					<span class="tok-k">else</span> <span class="tok-k">if</span><span class="tok-p">(</span><span class="tok-n">j</span> <span class="tok-o">==</span> <span class="tok-mi">0</span><span class="tok-p">)</span> <span class="tok-p">{</span>
+						<span class="tok-n">res1</span> <span class="tok-o">=</span> <span class="tok-n">nums1</span><span class="tok-p">[</span><span class="tok-n">i</span> <span class="tok-o">-</span> <span class="tok-mi">1</span><span class="tok-p">];</span>
+					<span class="tok-p">}</span>
+					<span class="tok-k">else</span> <span class="tok-p">{</span>
+						<span class="tok-n">res1</span> <span class="tok-o">=</span> <span class="tok-n">max</span><span class="tok-p">(</span><span class="tok-n">nums1</span><span class="tok-p">[</span><span class="tok-n">i</span> <span class="tok-o">-</span> <span class="tok-mi">1</span><span class="tok-p">],</span> <span class="tok-n">nums2</span><span class="tok-p">[</span><span class="tok-n">j</span> <span class="tok-o">-</span> <span class="tok-mi">1</span><span class="tok-p">]);</span>
+					<span class="tok-p">}</span>
+					<span class="tok-k">if</span><span class="tok-p">((</span><span class="tok-n">m</span> <span class="tok-o">+</span> <span class="tok-n">n</span><span class="tok-p">)</span> <span class="tok-o">%</span> <span class="tok-mi">2</span> <span class="tok-o">==</span> <span class="tok-mi">0</span><span class="tok-p">)</span> <span class="tok-p">{</span>
+						<span class="tok-k">if</span><span class="tok-p">(</span><span class="tok-n">i</span> <span class="tok-o">==</span> <span class="tok-n">m</span><span class="tok-p">)</span>
+							<span class="tok-n">res2</span> <span class="tok-o">=</span> <span class="tok-n">nums2</span><span class="tok-p">[</span><span class="tok-n">j</span><span class="tok-p">];</span>
+						<span class="tok-k">else</span> <span class="tok-k">if</span><span class="tok-p">(</span><span class="tok-n">j</span> <span class="tok-o">==</span> <span class="tok-n">n</span><span class="tok-p">)</span>
+							<span class="tok-n">res2</span> <span class="tok-o">=</span> <span class="tok-n">nums1</span><span class="tok-p">[</span><span class="tok-n">i</span><span class="tok-p">];</span>
+						<span class="tok-k">else</span>
+							<span class="tok-n">res2</span> <span class="tok-o">=</span> <span class="tok-n">min</span><span class="tok-p">(</span><span class="tok-n">nums1</span><span class="tok-p">[</span><span class="tok-n">i</span><span class="tok-p">],</span> <span class="tok-n">nums2</span><span class="tok-p">[</span><span class="tok-n">j</span><span class="tok-p">]);</span>
+					<span class="tok-p">}</span>
+					<span class="tok-k">break</span><span class="tok-p">;</span>
+				<span class="tok-p">}</span>
+			<span class="tok-p">}</span>
+			<span class="tok-n">res</span> <span class="tok-o">=</span> <span class="tok-p">((</span><span class="tok-n">m</span> <span class="tok-o">+</span> <span class="tok-n">n</span><span class="tok-p">)</span> <span class="tok-o">&amp;</span> <span class="tok-mi">1</span><span class="tok-p">)</span> <span class="tok-o">?</span> <span class="tok-nl">res1</span> <span class="tok-p">:</span> <span class="tok-p">(</span><span class="tok-n">res1</span> <span class="tok-o">+</span> <span class="tok-n">res2</span><span class="tok-p">)</span> <span class="tok-o">/</span> <span class="tok-mf">2.0</span><span class="tok-p">;</span>
+			<span class="tok-k">return</span> <span class="tok-n">res</span><span class="tok-p">;</span>
+		<span class="tok-p">}</span>
+<span class="tok-p">};</span>
+</td></tr></table></code></pre>
+</div>
+</div>
+</details>
 <hr>
 </div>
 <div class="sect2">
@@ -1077,8 +1387,66 @@ ListNode
 <li>
 <p><a href="https://leetcode.com/problems/palindrome-number/">palindrome-number</a> <strong>判断是否是回文数字，不能使用额外的空间。</strong></p>
 </li>
+<li>
+<p><a href="https://leetcode.com/problems/largest-rectangle-in-histogram/">largest-rectangle-in-histogram</a> <span class="red"><strong>直方图所包含的最大矩形</strong></span></p>
+</li>
 </ul>
 </div>
+<details>
+<summary>
+O(n^2)的算法,TLE
+</summary>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="C++"><table class="pyhltable"><tr><td class="linenos"><div class="linenodiv"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23</div></td><td class="code"><span class="tok-k">class</span> <span class="tok-nc">Solution</span> <span class="tok-p">{</span>
+<span class="tok-k">public</span><span class="tok-o">:</span>
+    <span class="tok-kt">int</span> <span class="tok-n">largestRectangleArea</span><span class="tok-p">(</span><span class="tok-n">vector</span><span class="tok-o">&lt;</span><span class="tok-kt">int</span><span class="tok-o">&gt;&amp;</span> <span class="tok-n">height</span><span class="tok-p">)</span> <span class="tok-p">{</span>
+        <span class="tok-kt">int</span> <span class="tok-n">n</span> <span class="tok-o">=</span> <span class="tok-n">height</span><span class="tok-p">.</span><span class="tok-n">size</span><span class="tok-p">();</span>
+        <span class="tok-n">set</span><span class="tok-o">&lt;</span><span class="tok-kt">int</span><span class="tok-o">&gt;</span> <span class="tok-n">S</span><span class="tok-p">;</span>
+        <span class="tok-k">for</span><span class="tok-p">(</span><span class="tok-kt">int</span> <span class="tok-n">i</span> <span class="tok-o">=</span> <span class="tok-mi">0</span><span class="tok-p">;</span> <span class="tok-n">i</span> <span class="tok-o">&lt;</span> <span class="tok-n">n</span><span class="tok-p">;</span> <span class="tok-o">++</span><span class="tok-n">i</span><span class="tok-p">)</span> <span class="tok-p">{</span>
+            <span class="tok-n">S</span><span class="tok-p">.</span><span class="tok-n">insert</span><span class="tok-p">(</span><span class="tok-n">height</span><span class="tok-p">[</span><span class="tok-n">i</span><span class="tok-p">]);</span>
+        <span class="tok-p">}</span>
+        <span class="tok-kt">int</span> <span class="tok-n">res</span> <span class="tok-o">=</span> <span class="tok-mi">0</span><span class="tok-p">;</span>
+        <span class="tok-k">for</span><span class="tok-p">(</span><span class="tok-k">auto</span> <span class="tok-nl">item</span><span class="tok-p">:</span> <span class="tok-n">S</span><span class="tok-p">)</span> <span class="tok-p">{</span>
+            <span class="tok-kt">int</span> <span class="tok-n">area</span> <span class="tok-o">=</span> <span class="tok-mi">0</span><span class="tok-p">;</span>
+            <span class="tok-kt">int</span> <span class="tok-n">span</span><span class="tok-p">,</span> <span class="tok-n">idx</span> <span class="tok-o">=</span> <span class="tok-mi">0</span><span class="tok-p">;</span>
+            <span class="tok-k">while</span><span class="tok-p">(</span><span class="tok-n">idx</span> <span class="tok-o">&lt;</span> <span class="tok-n">n</span><span class="tok-p">)</span> <span class="tok-p">{</span>
+                <span class="tok-n">span</span> <span class="tok-o">=</span> <span class="tok-mi">0</span><span class="tok-p">;</span>
+                <span class="tok-k">while</span><span class="tok-p">(</span><span class="tok-n">item</span> <span class="tok-o">&lt;=</span> <span class="tok-n">height</span><span class="tok-p">[</span><span class="tok-n">idx</span><span class="tok-o">++</span><span class="tok-p">])</span> <span class="tok-p">{</span>
+                    <span class="tok-o">++</span><span class="tok-n">span</span><span class="tok-p">;</span>
+                <span class="tok-p">}</span>
+                <span class="tok-k">if</span><span class="tok-p">(</span><span class="tok-n">span</span> <span class="tok-o">*</span> <span class="tok-n">item</span> <span class="tok-o">&gt;</span> <span class="tok-n">res</span><span class="tok-p">)</span> <span class="tok-n">res</span> <span class="tok-o">=</span> <span class="tok-n">span</span> <span class="tok-o">*</span> <span class="tok-n">item</span><span class="tok-p">;</span>
+            <span class="tok-p">}</span>
+        <span class="tok-p">}</span>
+        <span class="tok-k">return</span> <span class="tok-n">res</span><span class="tok-p">;</span>
+    <span class="tok-p">}</span>
+<span class="tok-p">};</span>
+</td></tr></table></code></pre>
+</div>
+</div>
+</details>
 <hr>
 </div>
 </div>
@@ -1086,7 +1454,7 @@ ListNode
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-09-26 18:07:06 CST
+Last updated 2015-09-27 15:13:28 CST
 <script type="text/javascript" charset="utf-8">
 var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1254706632'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s11.cnzz.com/z_stat.php%3Fid%3D1254706632%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));
 </script>

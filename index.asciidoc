@@ -7,6 +7,8 @@
 === 计算机
 link:leetcode.html[Leetcode]
 
+link:SortAlgo.html[排序算法]
+
 link:Problems.html[Problems to Solve]
 
 link:books/linuxfaner.html[Linux就是这个范儿]

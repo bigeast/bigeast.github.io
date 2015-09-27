@@ -282,6 +282,7 @@ class Solution {
 
 * https://leetcode.com/problems/reverse-nodes-in-k-group/[reverse-nodes-in-k-group]
 	** 自己的代码写得有点丑。
+	** 顺便看下Java中节点的定义：
 
 
 ++++
@@ -320,7 +321,6 @@ public ListNode reverseKGroup(ListNode head, int k) {
 </details>
 ++++
 
-	** 顺便看下Java中节点的定义：
 
 ++++
 <details>
@@ -344,28 +344,207 @@ public class ListNode {
 
 '''
 
+* https://leetcode.com/problems/intersection-of-two-linked-lists/[intersection-of-two-linked-lists]
+	** 找到两个链表开始相交的地方。
+	** 方法就是先算出两个链表的长度，然后长的先走一点，与短的对齐，之后两个链表同步，如果有相交，这样一定会碰上。
+	** [red]#有一点技巧就是，有时不能确定两个数组的长短，但是代码中又需要用到他们的长短关系，这时可以做一次判断，如果长短关系不满足假设，则交换参数的位置多调用一次。#
+	
+++++
+<details>
+<summary>
+代码
+</summary>
+++++
+
+[source, C++, numbered]
+----
+class Solution {
+public:
+    int listLength(ListNode *root) {
+        int res = 0;
+        while(root) {
+            res++;
+            root = root->next;
+        }
+        return res;
+    }
+    ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
+        int m = listLength(headA), n = listLength(headB);
+        if(m < n) return getIntersectionNode(headB, headA);
+        ListNode *pA = headA, *pB = headB;
+        for(int i = 0; i < m - n; ++i) {
+            pA = pA->next;
+        }
+        while(pA != pB) {
+            pA = pA->next;
+            pB = pB->next;
+        }
+        return pA;
+    }
+};
+----
+
+++++
+</details>
+++++
+	
+
 === 连续整数
 * https://leetcode.com/problems/first-missing-positive/[first-missing-positive]
+	** 题目中要求是线性时间，常数空间。如果空间没有要求，可以使用桶排序类似的方法。
+	** 交换次数是线性的。
+	** 然而实际的运行时间并没有降低。。
+
+++++
+<details>
+<summary>
+代码
+</summary>
+++++
+
+[source, C++, numbered]
+----
+class Solution {
+public:
+    int firstMissingPositive(vector<int>& nums) {
+        int n = nums.size();
+        if(n == 0) return 1;
+        for(int i = 0; i < n; ++i) {
+			// 遇到一个元素就把它放到正确的位置。
+            while(nums[i] > 0 && nums[i] <= n && nums[nums[i] - 1] != nums[i]) { // 继续为新换到i位置的元素找到合适的位置。
+                swap(nums[i], nums[nums[i] - 1]);
+            }
+        }
+        for(int i = 0; i < n; ++i) {
+			if(nums[i] != i + 1) {
+				return i + 1;
+			}
+        }
+        return n + 1;
+    }
+};
+----
+
+++++
+</details>
+++++
 
 '''
 
 * https://leetcode.com/problems/longest-consecutive-sequence/[longest-consecutive-sequence]
+	** 用哈希表存储元素，方便查找元素是否存在。 `C++` 中使用 `unordered_map` 代替哈希表。
+	** 对与每个元素，向前和向后查找相邻的元素是否存在，若存在则从哈希表中删除（避免重复查找）。
 
+'''
 '''
 
 === next_permutation
 * https://leetcode.com/problems/next-permutation/[next-permutation]
-	** STL中现成函数 'next_permutation'
-	** 手动实现时，额，方法又忘了。
+	** STL中现成函数 *next_permutation*
+	** [line-through]#手动实现时，额，方法又忘了。#
+	** 步骤是：
+		*** 找到最后一段不增序列，设为[i, n - 1]
+		*** 在[i, n - 1]中找到最小的比 nums[i - 1] 大的一个数 nums[j]。
+		*** `swap(num[i - 1], num[j]);`
+		*** 对新的[i, n - 1]区间进行排序。
+	** 关键是查找nums[j]时，如何用二分方法？upper_bound貌似不能直接用！自己实现又容易出错。 [red]#在数组递减排序时如何使用lower_bound和upper_bound呢？#
+++++
+<details>
+<summary>
+代码
+</summary>
+++++
+
+[source, C++, numbered]
+----
+class Solution {
+	public:
+		void nextPermutation(vector<int> &num) {
+			int i, j;
+			for(i = num.size() - 1; i > 0 && num[i - 1] >= num[i]; --i);
+			if(i > 0) {
+				for(j = num.size() - 1; j > i && num[j] <= num[i - 1]; --j);
+				swap(num[i - 1], num[j]);
+			}
+			sort(num.begin() + i, num.end());
+		}
+};
+----
+
+++++
+</details>
+++++
 
 '''
 
 === 两个有序数组的中值
 * https://leetcode.com/problems/median-of-two-sorted-arrays/[median-of-two-sorted-arrays]
+	** 需要有一种比较巧妙的方法来实现，不然会很麻烦。
+	** 假设两个数组 nums1 和 nums2 的长度分别是 m, n，且 m <= n，则算法复杂度是 `O(log m)`
+	** 当 `m + n` 为奇数时，中位数下标是 `(m + n + 1) / 2` ；当 `m + n` 为偶数时，中位数为 `(m + n + 1) / 2` 与 `(m + n + 1) / 2 + 1` 的均值。
+	** 将两个数组都分成两个部分，最终的中位数是由两个分界处的四个元素决定的。
+	** 例如设 nums1[0 ... i - 1] 为nums1的第一部分，nums2[0 ... j - 1] 为nums2的第一部分。则 `m + n` 为奇数时，如果 `max{nums1[i - 1], nums2[j - 1]}` 是中位数，充要条件是 `i + j = (m + n + 1) / 2` ，且 `max{nums1[i - 1], nums2[j - 1]} < min{nums1[i], nums2[j]}` 。
+	** 边界条件好容易出错！！这个太难写对了。
+	** http://articles.leetcode.com/2011/01/find-k-th-smallest-element-in-union-of.html[答案说明]
+	** 还有一种做法是用两个index分别指向两个数组，每次增加数值小的那个，复杂度O(k)。其实就是模拟归并排序。
 
-'''
+++++
+<details>
+<summary>
+代码
+</summary>
+++++
 
-* http://articles.leetcode.com/2011/01/find-k-th-smallest-element-in-union-of.html[答案说明]
+[source, C++, numbered]
+----
+class Solution {
+	public:
+		double findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2) {
+			int m = nums1.size(), n = nums2.size();
+			if(m > n) return findMedianSortedArrays(nums2, nums1);
+			//int lo = 0, hi = m - 1;
+			int lo = 0, hi = m;
+			int i, j; // i, j 分别代表 nums1 和 nums2 在合成数组中的前一半中所占的元素个数，注意不是下标！
+			double res1 = 0, res2 = 0, res;
+			while(lo <= hi) {
+				i = lo + (hi - lo) / 2;
+				j = (m + n + 1) / 2 - i;
+				if(i > 0 && j < n && nums1[i - 1] > nums2[j]) // nums2 小了，需要减少 nums1 的长度使它增大。
+					hi = i - 1;
+				else if(j > 0 && i < m && nums2[j - 1] > nums1[i]) // nums1 小了，需要增大。
+					lo = i + 1;
+				else {
+					if(i == 0) {
+						res1 = nums2[j - 1];
+					}
+					else if(j == 0) {
+						res1 = nums1[i - 1];
+					}
+					else {
+						res1 = max(nums1[i - 1], nums2[j - 1]);
+					}
+					if((m + n) % 2 == 0) {
+						if(i == m)
+							res2 = nums2[j];
+						else if(j == n)
+							res2 = nums1[i];
+						else
+							res2 = min(nums1[i], nums2[j]);
+					}
+					break;
+				}
+			}
+			res = ((m + n) & 1) ? res1 : (res1 + res2) / 2.0;
+			return res;
+		}
+};
+----
+
+++++
+</details>
+++++
+
+
 
 '''
 
@@ -392,6 +571,47 @@ public class ListNode {
 '''
 === 其它
 * https://leetcode.com/problems/palindrome-number/[palindrome-number] *判断是否是回文数字，不能使用额外的空间。*
+
+
+* https://leetcode.com/problems/largest-rectangle-in-histogram/[largest-rectangle-in-histogram] [red]#*直方图所包含的最大矩形*#
+
+++++
+<details>
+<summary>
+O(n^2)的算法,TLE
+</summary>
+++++
+
+[source, C++, numbered]
+----
+class Solution {
+public:
+    int largestRectangleArea(vector<int>& height) {
+        int n = height.size();
+        set<int> S;
+        for(int i = 0; i < n; ++i) {
+            S.insert(height[i]);
+        }
+        int res = 0;
+        for(auto item: S) {
+            int area = 0;
+            int span, idx = 0;
+            while(idx < n) {
+                span = 0;
+                while(item <= height[idx++]) {
+                    ++span;
+                }
+                if(span * item > res) res = span * item;
+            }
+        }
+        return res;
+    }
+};
+----
+
+++++
+</details>
+++++
 
 '''
 
