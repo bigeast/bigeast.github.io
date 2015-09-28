@@ -5,6 +5,8 @@
 === link:http://138.128.221.113:8000[我的简历]
 
 === 计算机
+link:codingInterview.html[Coding Interview]
+
 link:leetcode.html[Leetcode]
 
 link:SortAlgo.html[排序算法]

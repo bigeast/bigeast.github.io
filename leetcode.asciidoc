@@ -2,8 +2,10 @@
 :pygments-style: manni
 
 == Leetcode
-* https://leetcode.com/problems/maximum-gap[Maximum Gap] *一个无序的数组，在线性时间内，找到排好序后，相邻两个元素之间差值的最大值。*
-** https://leetcode.com/discuss/18487/i-solved-it-using-radix-sort[讨论区题解] 思想是，得到最大值 maxv 和最小值 minv 后，可确定最大差值的下限为 _L = (maxv - minv) / (N - 1)_ 。将[minv, maxv] 等距分割成 N - 1 段（或者更多的段，因为每段距离只要短于L，就不需要考虑段内的差值，因此对结果都不会有影响），记录每一段的最大值和最小值，最终比较某段的最小值与它前面一段的最大值之差，最大的差即为答案。 
+=== 数组
+* https://leetcode.com/problems/maximum-gap[✔ Maximum Gap] *一个无序的数组，在线性时间内，找到排好序后，相邻两个元素之间差值的最大值。*
+	** https://leetcode.com/discuss/18487/i-solved-it-using-radix-sort[讨论区题解] 思想是，得到最大值 maxv 和最小值 minv 后，可确定最大差值的下限为 _L = (maxv - minv) / (N - 1)_ 。将[minv, maxv] 等距分割成 N - 1 段（或者更多的段，因为每段距离只要短于L，就不需要考虑段内的差值，因此对结果都不会有影响），记录每一段的最大值和最小值，最终比较某段的最小值与它前面一段的最大值之差，最大的差即为答案。 
+	** [red]#基数排序#
 
 ++++
 <details>
@@ -31,77 +33,11 @@ int maximumGap(std::vector<int> &num) {
 </details>
 ++++
 
-	** [red]#基数排序#
-
 '''
 
-* https://leetcode.com/problems/merge-two-sorted-lists[Merge Two Sorted Lists] *合并两个有序的链表。*
-
-算法很清楚，主要是看怎么实现。如果用p指向要返回的列表当前位置，注意每次更新的时候是先改变p->next，然后p=p->next。
-
-++++
-<details>
-<summary>
-代码
-</summary>
-++++
-
-[source, C++, numbered]
-----
-/********************************
- * Author:			bigeast
- * Time:			2015-03-14
- * Description:		AC.
- ********************************/
-struct ListNode {
-    int val;
-    ListNode *next;
-    ListNode(int x) : val(x), next(NULL) {}
-};
-class Solution {
-public:
-    ListNode *mergeTwoLists(ListNode *l1, ListNode *l2) {
-		struct ListNode res(0), *p = &res;
-		while(l1 != NULL && l2 != NULL)
-		{
-			if(l1->val < l2->val)
-			{
-				p->next = l1;
-				l1 = l1->next;
-			}
-			else
-			{
-				p->next = l2;
-				l2 = l2->next;
-			}
-			p = p->next;
-		}
-		if(l1 == NULL)
-		{
-			p ->next = l2;
-		}
-		else if(l2 == NULL)
-		{
-			p ->next = l1;
-		}
-		return res.next;
-    }
-};
-----
-
-++++
-</details>
-++++
-
-'''
-
-* https://leetcode.com/problems/search-for-a-range[Search for a range] 
-
-**有序数组里的 lower_bound 和 upper_bound**
-
-[line-through]#突然发现自己好像还不会这个。想了一下也没想出来，应该是二分查找稍微变形一下#
-
-盯着代码看，就想出来了。找上下界与一般二分查找的不同之处是，在找到目标元素后是否还继续寻找。
+* https://leetcode.com/problems/search-for-a-range[✔ Search for a range] *有序数组里的 lower_bound 和 upper_bound*
+	** [line-through]#突然发现自己好像还不会这个。想了一下也没想出来，应该是二分查找稍微变形一下#
+	** 盯着代码看，就想出来了。找上下界与一般二分查找的不同之处是，在找到目标元素后是否还继续寻找。
 
 ++++
 <details>
@@ -184,10 +120,86 @@ class Solution {
 ++++
 
 '''
+
+* https://leetcode.com/problems/rotate-array/[✓ rotate-array] *数组循环移位*
+	* 方法一：使用额外的空间，B[(i + k) % n] = A[i]
+	* 方法二：三次反转。 `reverse(A, 0, k); reverse(A, k, n); reverse(0, n);`
+	* 方法三？
+
+'''
+* https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/[find-minimum-in-rotated-sorted-array] *找到循环移位后的数组的最小值，数组元素无重复*
+	** 二分查找的变形。
+
+* https://leetcode.com/problems/find-minimum-in-rotated-sorted-array-ii/[find-minimum-in-rotated-sorted-array-ii] *找到循环移位后的数组的最小值，数组元素可以重复*
+
 '''
 
+* https://leetcode.com/problems/search-in-rotated-sorted-array/[✓ search-in-rotated-sorted-array] *在循环移位一次的数组中实现二分查找（数组元素无重复）*
+	* A[0]是个分界点。如果 target > A[0]，需要在前一段已排序的数组中二分查找；如果 target < A[0] 则需要在后半段中查找。
+	* 可以先通过二分查找，确定分界点的位置。
+
 === 链表操作
-* https://leetcode.com/problems/reverse-linked-list-ii/[reverse-linked-list-ii]
+* https://leetcode.com/problems/merge-two-sorted-lists[✔ Merge Two Sorted Lists] *合并两个有序的链表。*
+
+	** 算法很清楚，主要是看怎么实现。如果用p指向要返回的列表当前位置，注意每次更新的时候是先改变p->next，然后p=p->next。
+
+++++
+<details>
+<summary>
+代码
+</summary>
+++++
+
+[source, C++, numbered]
+----
+/********************************
+ * Author:			bigeast
+ * Time:			2015-03-14
+ * Description:		AC.
+ ********************************/
+struct ListNode {
+    int val;
+    ListNode *next;
+    ListNode(int x) : val(x), next(NULL) {}
+};
+class Solution {
+public:
+    ListNode *mergeTwoLists(ListNode *l1, ListNode *l2) {
+		struct ListNode res(0), *p = &res;
+		while(l1 != NULL && l2 != NULL)
+		{
+			if(l1->val < l2->val)
+			{
+				p->next = l1;
+				l1 = l1->next;
+			}
+			else
+			{
+				p->next = l2;
+				l2 = l2->next;
+			}
+			p = p->next;
+		}
+		if(l1 == NULL)
+		{
+			p ->next = l2;
+		}
+		else if(l2 == NULL)
+		{
+			p ->next = l1;
+		}
+		return res.next;
+    }
+};
+----
+
+++++
+</details>
+++++
+
+'''
+
+* https://leetcode.com/problems/reverse-linked-list-ii/[✔ reverse-linked-list-ii] *将链表中给定范围内的一段进行反转*
 
 ++++
 <details>
@@ -240,10 +252,9 @@ public:
 </details>
 ++++
 
-
 '''
 
-* https://leetcode.com/problems/swap-nodes-in-pairs/[swap-nodes-in-pairs]
+* https://leetcode.com/problems/swap-nodes-in-pairs/[✔ swap-nodes-in-pairs] *将链表中相邻两个节点交换*
 
 ++++
 <details>
@@ -277,10 +288,9 @@ class Solution {
 </details>
 ++++
 
-
 '''
 
-* https://leetcode.com/problems/reverse-nodes-in-k-group/[reverse-nodes-in-k-group]
+* https://leetcode.com/problems/reverse-nodes-in-k-group/[✔ reverse-nodes-in-k-group] *将链表每k个一组进行反转*
 	** 自己的代码写得有点丑。
 	** 顺便看下Java中节点的定义：
 
@@ -344,8 +354,7 @@ public class ListNode {
 
 '''
 
-* https://leetcode.com/problems/intersection-of-two-linked-lists/[intersection-of-two-linked-lists]
-	** 找到两个链表开始相交的地方。
+* https://leetcode.com/problems/intersection-of-two-linked-lists/[✔ intersection-of-two-linked-lists] *找到两个链表开始相交的地方。*
 	** 方法就是先算出两个链表的长度，然后长的先走一点，与短的对齐，之后两个链表同步，如果有相交，这样一定会碰上。
 	** [red]#有一点技巧就是，有时不能确定两个数组的长短，但是代码中又需要用到他们的长短关系，这时可以做一次判断，如果长短关系不满足假设，则交换参数的位置多调用一次。#
 	
@@ -388,9 +397,13 @@ public:
 </details>
 ++++
 	
+'''
+
+* https://leetcode.com/problems/reorder-list/[reorder-list] *将链表排列成 `1, n - 1, 2, n - 2, 3, n - 3...` 的形式。*
+	** 主要是要求常数级别的空间复杂度，而且必须实际对链表操作，而不能更换值。递归的方法每次都要遍历链表找到最后的数，复杂度是 `O(n^2)` ，会超时。
 
 === 连续整数
-* https://leetcode.com/problems/first-missing-positive/[first-missing-positive]
+* https://leetcode.com/problems/first-missing-positive/[✔ first-missing-positive]
 	** 题目中要求是线性时间，常数空间。如果空间没有要求，可以使用桶排序类似的方法。
 	** 交换次数是线性的。
 	** 然而实际的运行时间并没有降低。。
@@ -431,15 +444,172 @@ public:
 
 '''
 
-* https://leetcode.com/problems/longest-consecutive-sequence/[longest-consecutive-sequence]
+* https://leetcode.com/problems/longest-consecutive-sequence/[✔ longest-consecutive-sequence]
 	** 用哈希表存储元素，方便查找元素是否存在。 `C++` 中使用 `unordered_map` 代替哈希表。
 	** 对与每个元素，向前和向后查找相邻的元素是否存在，若存在则从哈希表中删除（避免重复查找）。
 
 '''
+
+=== 子集和DFS
+* https://leetcode.com/problems/two-sum/[✔ two-sum]
+
 '''
 
-=== next_permutation
-* https://leetcode.com/problems/next-permutation/[next-permutation]
+* https://leetcode.com/problems/3sum/[✔ 3sum]
+
+'''
+* https://leetcode.com/problems/4sum/[4sum]
+
+'''
+* https://leetcode.com/problems/generate-parentheses/[generate-parentheses]
+
+'''
+* https://leetcode.com/problems/palindrome-partitioning/[palindrome-partitioning]
+
+'''
+=== DP
+* https://leetcode.com/problems/longest-palindromic-substring/[longest-palindromic-substring]
+
+'''
+=== 其它
+* [line-through]#https://leetcode.com/problems/palindrome-number/[✔ palindrome-number] *判断是否是回文数字，不能使用额外的空间。*#
+
+
+'''
+* https://leetcode.com/problems/container-with-most-water/[✔ container-with-most-water] *一组整数，选择两个围成隔断，求装水最多的隔断*
+	** 要想比首尾两个挡板围成的隔断面积大，宽度肯定不能更大了，需要寻找高度更高的挡板。
+	** 由于隔断高度 `h = min{hl, hr}` ，因此在寻找新的面积更大的隔断时，两段高度都要严格大于旧隔断的高度 h 。
+	** 两个挡板向中间靠拢，比 h 大就停一下，计算新的隔断面积。因为越早遇到的，宽度越大，必须纳入考虑。
+
+
+++++
+<details>
+<summary>
+代码
+</summary>
+++++
+
+[source, C++, numbered]
+----
+class Solution {
+public:
+    int maxArea(vector<int>& height) {
+		int n = height.size();
+		int lo = 0, hi = n - 1;
+		int ans = 0, h;
+		while(lo < hi) {
+			h = min(height[lo], height[hi]);
+			ans = max(h * (hi - lo), ans);
+			while(height[lo] <= h) ++lo;
+			while(height[hi] <= h) --hi;
+		}
+		return ans;
+    }
+};
+----
+
+++++
+</details>
+++++
+'''
+* https://leetcode.com/problems/trapping-rain-water/[✔ trapping-rain-water] *一组高度为整数的bar，注水过后能保存多少水*
+	** 思路：分别计算每个bar向前和向后的最大值，取两者中较小的一个，就是该bar上方水的高度。
+	** 一开始陷入的误区：找的是向前和向后第一次遇到比当前高的bar，但这是局部值，如果后面遇到更高的，这个就没用了。
+	** 不用考虑水域的连续性，一个bar一个bar来计算结果反而更简单。
+
+++++
+<details>
+<summary>
+代码
+</summary>
+++++
+
+[source, C++, numbered]
+----
+class Solution {
+public:
+    int trap(vector<int>& height) {
+		int n = height.size();
+		if(n == 0) return 0;
+		vector<int> max_forward(n);
+		vector<int> max_backward(n);
+		max_forward[0] = 0;
+		for (int i = 1; i < n; ++i) {
+			max_forward[i] = max(height[i - 1], max_forward[i - 1]);
+		}
+		max_backward[n - 1] = 0;
+		for (int i = n - 2; i > 0; --i) {
+			max_backward[i] = max(height[i + 1], max_backward[i + 1]);
+		}
+		int t, res = 0;
+		for (int i = 1; i < n - 1; ++i) {
+			t = min(max_forward[i], max_backward[i]);
+			res += max(t - height[i], 0);
+		}
+		return res;
+    }
+};
+----
+
+++++
+</details>
+++++
+
+
+'''
+* https://leetcode.com/problems/largest-rectangle-in-histogram/[largest-rectangle-in-histogram] [red]#*直方图所包含的最大矩形*#
+	* 思路一：f[n] 代表以 height[n] 结尾的矩形的最大面积。则：
+		** 初始条件：f[0] = height[0]
+		** 状态转移方程：
+			*** f[n + 1] = f[n] + hegiht[n + 1]，当 height[n + 1] >= height[n]；
+			*** f[n + 1] 要重新计算？[red]#所以这种状态设置似乎不可行#
+	* 思路二：f[n] 代表截止 height[n] 所能形成的矩形的最大面积。则：
+		** 好像更不好做。
+	* 思路三：注意到，最终最大矩形肯定跟某个 height[i] 一样高，否则矩形的面积还可以增加。因此对于每个高度，计算以它为中心，高度不小于它的 height 有多少个。
+	* [red]#奇怪vim-syntastic 当没有包含algorithm头文件时，vector会出现错误！#
+
+++++
+<details>
+<summary>
+O(n^2)的算法,TLE
+</summary>
+++++
+
+[source, C++, numbered]
+----
+class Solution {
+public:
+    int largestRectangleArea(vector<int>& height) {
+        int n = height.size();
+        set<int> S;
+        for(int i = 0; i < n; ++i) {
+            S.insert(height[i]);
+        }
+        int res = 0;
+        for(auto item: S) {
+            int area = 0;
+            int span, idx = 0;
+            while(idx < n) {
+                span = 0;
+                while(item <= height[idx++]) {
+                    ++span;
+                }
+                if(span * item > res) res = span * item;
+            }
+        }
+        return res;
+    }
+};
+----
+
+++++
+</details>
+++++
+
+
+'''
+
+* https://leetcode.com/problems/next-permutation/[✔ next-permutation] *下一个排列*
 	** STL中现成函数 *next_permutation*
 	** [line-through]#手动实现时，额，方法又忘了。#
 	** 步骤是：
@@ -448,6 +618,7 @@ public:
 		*** `swap(num[i - 1], num[j]);`
 		*** 对新的[i, n - 1]区间进行排序。
 	** 关键是查找nums[j]时，如何用二分方法？upper_bound貌似不能直接用！自己实现又容易出错。 [red]#在数组递减排序时如何使用lower_bound和upper_bound呢？#
+
 ++++
 <details>
 <summary>
@@ -477,8 +648,7 @@ class Solution {
 
 '''
 
-=== 两个有序数组的中值
-* https://leetcode.com/problems/median-of-two-sorted-arrays/[median-of-two-sorted-arrays]
+* https://leetcode.com/problems/median-of-two-sorted-arrays/[✔ median-of-two-sorted-arrays] *两个有序数组的中值*
 	** 需要有一种比较巧妙的方法来实现，不然会很麻烦。
 	** 假设两个数组 nums1 和 nums2 的长度分别是 m, n，且 m <= n，则算法复杂度是 `O(log m)`
 	** 当 `m + n` 为奇数时，中位数下标是 `(m + n + 1) / 2` ；当 `m + n` 为偶数时，中位数为 `(m + n + 1) / 2` 与 `(m + n + 1) / 2 + 1` 的均值。
@@ -544,41 +714,15 @@ class Solution {
 </details>
 ++++
 
-
-
 '''
-
-=== 子集和DFS
-* https://leetcode.com/problems/two-sum/[two-sum]
-
-'''
-
-* https://leetcode.com/problems/3sum/[3sum]
-
-'''
-* https://leetcode.com/problems/4sum/[4sum]
-
-'''
-* https://leetcode.com/problems/generate-parentheses/[generate-parentheses]
-
-'''
-* https://leetcode.com/problems/palindrome-partitioning/[palindrome-partitioning]
-
-'''
-=== DP
-* https://leetcode.com/problems/longest-palindromic-substring/[longest-palindromic-substring]
-
-'''
-=== 其它
-* https://leetcode.com/problems/palindrome-number/[palindrome-number] *判断是否是回文数字，不能使用额外的空间。*
-
-
-* https://leetcode.com/problems/largest-rectangle-in-histogram/[largest-rectangle-in-histogram] [red]#*直方图所包含的最大矩形*#
+* https://leetcode.com/problems/combination-sum/[✔ combination-sum] *从集合中找到和为target的所有子集，每个子集从小到大排序*
+	** 很明显的DFS。
+	** 速度竟然也不慢。主要是先将集合排序，然后每次从某个下标开始搜索。
 
 ++++
 <details>
 <summary>
-O(n^2)的算法,TLE
+代码
 </summary>
 ++++
 
@@ -586,25 +730,71 @@ O(n^2)的算法,TLE
 ----
 class Solution {
 public:
-    int largestRectangleArea(vector<int>& height) {
-        int n = height.size();
-        set<int> S;
-        for(int i = 0; i < n; ++i) {
-            S.insert(height[i]);
-        }
-        int res = 0;
-        for(auto item: S) {
-            int area = 0;
-            int span, idx = 0;
-            while(idx < n) {
-                span = 0;
-                while(item <= height[idx++]) {
-                    ++span;
-                }
-                if(span * item > res) res = span * item;
-            }
-        }
-        return res;
+	vector<vector<int>> res;
+	// 当前序列seq的基础上，目标是target, 新元素从cand[idx]开始
+	int dfs(vector<int> &cand, vector<int> &seq, int target, int idx) {
+		if(target < 0) return 1;
+		else if(target == 0) {
+			res.push_back(seq);
+			return 0;
+		}
+		for(int i = idx; i < cand.size() && target >= cand[i]; ++i) {
+			seq.push_back(cand[i]);
+			dfs(cand, seq, target - cand[i], i);
+			seq.pop_back();
+		}
+	}
+    vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
+		vector<int> item;
+		sort(candidates.begin(), candidates.end());
+		int n = candidates.size();
+		dfs(candidates, item, target, 0);
+		return res;
+    }
+};
+----
+
+++++
+</details>
+++++
+
+
+* https://leetcode.com/problems/combination-sum-ii/[✔ combinationSum-sum-ii] *每个元素只能使用一次*
+++++
+<details>
+<summary>
+代码
+</summary>
+++++
+
+[source, C++, numbered]
+----
+class Solution {
+public:
+	vector<vector<int>> res;
+	set<vector<int>> S;
+	// 当前序列seq的基础上，目标是target, 新元素从cand[idx]开始
+	int dfs(vector<int> &cand, vector<int> &seq, int target, int idx) {
+		if(target < 0) return 1;
+		else if(target == 0) {
+			S.insert(seq);
+			return 0;
+		}
+		for(int i = idx; i < cand.size() && target >= cand[i]; ++i) {
+			seq.push_back(cand[i]);
+			dfs(cand, seq, target - cand[i], i + 1);
+			seq.pop_back();
+		}
+	}
+    vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
+		vector<int> item;
+		sort(candidates.begin(), candidates.end());
+		int n = candidates.size();
+		dfs(candidates, item, target, 0);
+		for(auto item: S){
+			res.push_back(item);
+		}
+		return res;
     }
 };
 ----
@@ -614,5 +804,54 @@ public:
 ++++
 
 '''
+
+* https://leetcode.com/problems/combination-sum-iii/[✔ combination-sum-iii] *从1 ... 9 中选择 k 个数字，使得和为 n*
+	* 思路一：由于只有9个数字，问题空间是 `2^9` ，因此遍历所有 `C(9, 3)` 的组合然后看和是否为n即可。
+	* 思路二：用DFS，每次分支为选当前的数还是不选当前的数。
+	* 一个优化是，可以在开始的时候判断下是否无解。事实证明这是个很有必要的优化。
+
+++++
+<details>
+<summary>
+代码
+</summary>
+++++
+
+[source, C++, numbered]
+----
+class Solution {
+public:
+	vector<vector<int>> res;
+	// 从start开始，选n个数，和为target
+	void dfs(vector<int> &seq, int start, int n, int target) {
+		if(target == 0 && n == 0) {
+			res.push_back(seq);
+			return ;
+		}
+		if(target < 0 || n < 0 || start > 9) return ;
+		seq.push_back(start);
+		dfs(seq, start + 1, n - 1, target - start); // 选第start个数
+		seq.pop_back();
+
+		dfs(seq, start + 1, n, target); // 不选第start个数
+	}
+    vector<vector<int>> combinationSum3(int k, int n) {
+		int t = 0;
+		for (int i = 0, s = 9; i < k && i < 9; ++i) {
+			t += s--;
+		}
+		if(t < n) return res; // 最大的k个数之和也比n小，就不用搜索了
+		vector<int> item;
+		dfs(item, 1, k, n);
+		return res;
+    }
+};
+----
+
+++++
+</details>
+++++
+
+
 
 :docinfo:
