@@ -803,7 +803,6 @@ public:
 </details>
 ++++
 
-'''
 
 * https://leetcode.com/problems/combination-sum-iii/[✔ combination-sum-iii] *从1 ... 9 中选择 k 个数字，使得和为 n*
 	* 思路一：由于只有9个数字，问题空间是 `2^9` ，因此遍历所有 `C(9, 3)` 的组合然后看和是否为n即可。
@@ -852,6 +851,14 @@ public:
 </details>
 ++++
 
+'''
 
+* https://leetcode.com/problems/minimum-window-substring/[minimum-window-substring] *给出一个字符串S，一个字母表T，找出S中包含T中所有字符的最短的连续子串（假设最短的只有一个）*
+
+* https://leetcode.com/problems/minimum-size-subarray-sum/[minimum-size-subarray-sum] *在数组中找到最短连续的子段，其和不小于给定值*
+	** 二分答案的方法， `O(nlogn)`
+
+* https://leetcode.com/problems/find-the-duplicate-number/[find-the-duplicate-number] *n + 1个数字全部来自于1 ... n，其中有且仅有一个数字出现了不止一次，找到这个数字。要求不能改变数组，不能使用额外空间，复杂度低于平方级别。*
+	** 不能改变数组，不能使用额外空间，也就是不能对其进行排序了。
 
 :docinfo:

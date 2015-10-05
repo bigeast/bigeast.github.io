@@ -183,6 +183,44 @@ void Merge_Sort(vector<int> &A) {
 
 ==== 快速排序
 
+++++
+<details>
+<summary>
+代码
+</summary>
+++++
+
+[source, C++, numbered]
+----
+int Partition(vector<int> &A, int s, int e) {
+	int pivot = A[e];
+	int pos = s, idx;
+	for (idx = s;idx < e; ++idx) { // 不能等于e
+		if(A[idx] <= pivot) {
+			swap(A[idx], A[pos]);
+			++pos;
+		}
+	}
+	swap(A[idx], A[pos]);
+	return pos;
+}
+void _Quick_Sort(vector<int> &A, int s, int e) {
+	if(s < e) {
+		cout<<s<<" "<<e<<endl;
+		int p = Partition(A, s, e);
+		_Quick_Sort(A, s, p - 1);
+		_Quick_Sort(A, p + 1, e);
+	}
+}
+void Quick_Sort(vector<int> &A) {
+	_Quick_Sort(A, 0, A.size() - 1);
+}
+----
+
+++++
+</details>
+++++
+
 ==== 堆排序
 ==== 计数排序
 ==== 基数排序
