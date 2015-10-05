@@ -17,15 +17,15 @@
 [source, C++, numbered]
 ----
 int maximumGap(std::vector<int> &num) {
-    for(unsigned bit = 0; bit < 31; bit++)
-    std::stable_partition(num.begin(), num.end(), [bit](int a){
-        return !(a & (1 << bit));
-    });
-    int difference = 0;
-    for(std::size_t i = 1; i < num.size(); i++) {
-        difference = std::max(difference, num[i] - num[i-1]);
-    }
-    return difference;
+	for(unsigned bit = 0; bit < 31; bit++)
+	std::stable_partition(num.begin(), num.end(), [bit](int a){
+		return !(a & (1 << bit));
+	});
+	int difference = 0;
+	for(std::size_t i = 1; i < num.size(); i++) {
+		difference = std::max(difference, num[i] - num[i-1]);
+	}
+	return difference;
 }
 ----
 
@@ -122,25 +122,312 @@ class Solution {
 '''
 
 * https://leetcode.com/problems/rotate-array/[✓ rotate-array] *数组循环移位*
-	* 方法一：使用额外的空间，B[(i + k) % n] = A[i]
-	* 方法二：三次反转。 `reverse(A, 0, k); reverse(A, k, n); reverse(0, n);`
-	* 方法三？
+	** 方法一：使用额外的空间，B[(i + k) % n] = A[i]
+	** 方法二：三次反转。 `reverse(A, 0, k); reverse(A, k, n); reverse(0, n);`
+	** 方法三？
 
 '''
 * https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/[find-minimum-in-rotated-sorted-array] *找到循环移位后的数组的最小值，数组元素无重复*
 	** 二分查找的变形。
+	** 但还是有两种不同的思路：
+		*** 思路一：以A[0]为分界，如果A[mid] >= A[0] ，说明是在前段数组中，那么令lo = mid，即低指针始终在前段中；同样可以让高指针始终在后段中。当两个指针相差缩小到1的时候，高指针的位置就是最小元素。
+			**** 其中， `if(num[mid] > num[len - 1])`  也可以和num[hi]比较，目的只是来判断num[mid]是在前半段还是后半段。用 [line-through]#num[0]# num[hi]同样能达到目的。但是用num[lo]就会有问题，因为大于num[lo]并不能保证是在前半段，因为lo可能已经到了后半段的第一个元素了。
+
+			**** 例如 `[2, 1]` ，第一次查找，mid = 0，如果是判断 `if(num[mid] > num[lo])` ，那么会有 `hi = 0` ，最终返回 2 而不是 1。计算改为判断 `if(num[mid] >= num[lo])` ，那么考虑测试用例: `[3,4,5,1,2]` ，(lo, hi, mid) 分别为 (0,4,2), (3,4,3), (4,4,3) ，第二次查找更新时，num[mid] = 1, num[lo] = 1，于是lo += 1，到了2，错过了正确答案。
+		*** [line-through]#思路二：二分查找的目的是找到比其前一个数小的数。#
+
+++++
+<details>
+<summary>
+思路一的代码
+</summary>
+++++
+
+[source, C++, numbered]
+----
+class Solution {
+public:
+    int findMin(vector<int> &num) {
+		int len = num.size();
+		int lo = 0, hi = len - 1, mid;
+		if(num[0] < num[hi]) return num[0];
+		while(lo < hi)
+		{
+			mid = lo + (hi - lo)/2;
+			if(num[mid] > num[len - 1])  // 也可以和num[hi]比较，目的只是来判断num[mid]是在前半段还是后半段。用num[0]，num[hi]同样能达到目的。但是用num[lo]就会有问题，因为大于num[lo]并不能保证是在前半段，因为lo可能已经到了后半段的第一个元素了。
+				lo = mid + 1;
+			else 
+				hi = mid;
+		}
+		return num[lo]; // 也可以返回num[hi]，因为退出时，lo == hi。
+    }
+};
+----
+
+++++
+</details>
+++++
+
 
 * https://leetcode.com/problems/find-minimum-in-rotated-sorted-array-ii/[find-minimum-in-rotated-sorted-array-ii] *找到循环移位后的数组的最小值，数组元素可以重复*
+	** 还是同样的思想，但是需要做一步预处理，即首尾元素相同的情况下，可以先移动其中一个idx，使得首尾元素不同，才能继续后面的判断元素在哪一段中。
+	** 所有元素都相同的情况下，也要正确处理。
+
+
+++++
+<details>
+<summary>
+代码
+</summary>
+++++
+
+[source, C++, numbered]
+----
+class Solution {
+public:
+    int findMin(vector<int> &num) {
+		int n = num.size();
+		if(n == 0) return 0;
+		int lo = 0, hi = n - 1, mid, t;
+		if(num[0] == num[n - 1]) {
+			while(num[lo] == num[0] && lo < hi) ++lo;
+			//while(num[hi] == num[n - 1] && hi > lo) --hi; // 同时删掉两头相同的元素会有问题，考虑：[1,2,1]
+		}
+		while(lo < hi) {
+			mid = lo + (hi - lo) / 2;
+			if(num[mid] > num[n - 1]) {
+				lo = mid + 1;
+				// t = num[mid];
+				// while(num[lo] == t && lo < hi) ++lo; // 找到下一个不等于num[mid]的元素，也可以不要
+			}
+			else hi = mid;
+		}
+		return num[lo];
+    }
+};
+----
+
+++++
+</details>
+++++
 
 '''
 
 * https://leetcode.com/problems/search-in-rotated-sorted-array/[✓ search-in-rotated-sorted-array] *在循环移位一次的数组中实现二分查找（数组元素无重复）*
-	* A[0]是个分界点。如果 target > A[0]，需要在前一段已排序的数组中二分查找；如果 target < A[0] 则需要在后半段中查找。
-	* 可以先通过二分查找，确定分界点的位置。
+	** A[0]是个分界点。如果 target > A[0]，需要在前一段已排序的数组中二分查找；如果 target < A[0] 则需要在后半段中查找。
+	** 可以先通过二分查找，确定分界点的位置。
+
+'''
+
+* https://leetcode.com/problems/move-zeroes/[move-zeroes] *将数组中所有的0都移动到最后，其它元素的相对位置不变*
+	** idx0 始终代表最前面的 0 的下标，idx1代表非零值的下标。idx1 遍历整个数组，当idx1 < idx0时，就交换两者，然后往后找下一个 idx0。复杂度是线性的。
+
+++++
+<details>
+<summary>
+代码
+</summary>
+++++
+
+[source, C++, numbered]
+----
+class Solution {
+public:
+	void moveZeroes(vector<int>& nums) {
+		int n = nums.size();
+		int idx0 = 0, idx1 = 0;
+		while (idx0 < n && idx1 < n) {
+			while (idx1 < n && nums[idx1] == 0) {
+				idx1++;
+			} // find next non-zero number.
+			while (idx0 < n && nums[idx0] != 0) {
+				idx0++;
+			} // find next zero number.
+			if (idx0 < idx1 && idx1 < n) {
+				swap(nums[idx0], nums[idx1]);
+			}
+			idx1++; // look for next non-zero.
+		}
+	}
+};
+----
+
+++++
+</details>
+++++
+
+'''
+
+* https://leetcode.com/problems/sort-colors/[sort-colors] *只包含0,1,2的数组，把0都放在前面，2都放在后面*
+	** 排序是可以的。但是还有线性时间算法。
+	** 线性算法中，有two-pass的
+		*** 统计0，1，2的个数，然后重置数组。
+		*** 根据 *move-zeroes* 中的算法，把0放到前面，2放到后面。
+	** 但one-pass的算法也是有的。
+		*** 方法一：还是基于计数，但在计数的同时把filling的步骤做了，不是简单地设一个counter。假设当前有cnt0, cnt1, cnt2 个 0, 1, 2，如果有三个数组分别有cnt0 + cnt1 + cnt2 个 2，cnt0 + cnt1 个 1，cnt0 个 0 ，那么用后一个覆盖前一个，最后就得到了答案。这种方法可以推广到多个数的情况。
+		*** 方法二：基于交换。维护 idx0 和 idx2，下标 i 遍历整个数组，遇到 0 就与 idx0 位置处的元素交换，并更新idx0；而此时 i 位置上的新值仍有可能是 0 ，那么就继续此过程。idx2的情况类似。当 i < idx0 或者 i > idx2 时终止。
+
+++++
+<details>
+<summary>
+方法一
+</summary>
+++++
+
+[source, C++, numbered]
+----
+class Solution {
+public:
+	void sortColors(vector<int>& nums) {
+		int n = nums.size();
+		int n0 = 0, n1 = 0, n2 = 0;
+		for(int i = 0; i < n; ++i) {
+			if(nums[i] == 0) {
+				nums[n2++] = 2; nums[n1++] = 1; nums[n0++] = 0;
+			}
+			else if(nums[i] == 1) {
+				nums[n2++] = 2; nums[n1++] = 1;
+			}
+			else {
+				nums[n2++] = 2;
+			}
+		}
+		return;
+	}
+};
+----
+
+++++
+</details>
+++++
+		
+++++
+<details>
+<summary>
+方法二
+</summary>
+++++
+
+[source, C++, numbered]
+----
+class Solution {
+public:
+	void sortColors(vector<int>& nums) {
+		int n = nums.size();
+		int idx0 = 0, idx2 = n - 1;
+		for (int i = 0; i <= idx2;) {
+			if(nums[i] == 0) {
+				swap(nums[i++], nums[idx0++]); // 遇到1要i++，因为新的i值是从前面的元素换过来的，不会是1了。
+			}
+			else if(nums[i] == 2) {
+				swap(nums[i], nums[idx2--]); // 遇到2时，不更新i，因为新的nums[i]还有可能是2。
+			}
+			else i++;
+		}
+		return ;
+	}
+};
+----
+
+++++
+</details>
+++++
+
+'''
+* https://leetcode.com/problems/majority-element/[majority-element] *找出数组中出现次数不小于n/2的元素*
+	** *Boyer-Moore Majority Vote Algorithm*
+	** 如果有两个元素出现次数相同怎么处理？leetcode上貌似没考虑这种情况。
+
+++++
+<details>
+<summary>
+代码
+</summary>
+++++
+
+[source, C++, numbered]
+----
+class Solution {
+public:
+    int majorityElement(vector<int>& nums) {
+        int n = nums.size();
+        if(n == 0) return 0;
+        int curr = nums[0], cnt = 1;
+        for(int i = 1; i < n; ++i) {
+            if(nums[i] == curr) ++cnt;
+            else if(cnt > 0) --cnt;
+            else {
+                cnt = 1;
+                curr = nums[i];
+            }
+        }
+        return curr;
+    }
+};
+----
+
+++++
+</details>
+++++
+
+* https://leetcode.com/problems/majority-element-ii/[majority-element-ii] *找到所有出现次数不少于n/3的元素*
+	** 维护两个cnt，如果新元素不等于被统计的两个值，则两个cnt都减一。
+	** 如果存在出现次数不少于 n/3 的元素，则必为最后的 num1，num2中，但num1和num2不一定是答案，因此还需要一次遍历，确定是否真的符合条件。
+
+
+++++
+<details>
+<summary>
+代码
+</summary>
+++++
+
+[source, C++, numbered]
+----
+class Solution {
+	public:
+		vector<int> majorityElement(vector<int>& nums) {
+			int n = nums.size();
+			vector<int> res;
+			if(n == 0) return res;
+			int cnt1 = 0, cnt2 = 0;
+			int num1, num2;
+			for (int i = 0; i < n; ++i) {
+				if(cnt1 && nums[i] == num1) ++cnt1;
+				else if(cnt2 && nums[i] == num2) ++cnt2;
+				else {
+					if(cnt1 == 0) {
+						num1 = nums[i];
+						++cnt1;
+					}
+					else if(cnt2 == 0) {
+						num2 = nums[i];
+						++cnt2;
+					}
+					else {
+						--cnt1;
+						--cnt2;
+					}
+				}
+			}
+			cnt1 = 0; cnt2 = 0;
+			for (int i = 0; i < n; ++i) {
+				if(nums[i] == num1) ++cnt1;
+				else if(nums[i] == num2) ++cnt2;
+			}
+			if(cnt1 > n / 3)res.push_back(num1);
+			if(cnt2 > n / 3)res.push_back(num2);
+			return res;
+		}
+};
+----
+
+++++
+</details>
+++++
 
 === 链表操作
 * https://leetcode.com/problems/merge-two-sorted-lists[✔ Merge Two Sorted Lists] *合并两个有序的链表。*
-
 	** 算法很清楚，主要是看怎么实现。如果用p指向要返回的列表当前位置，注意每次更新的时候是先改变p->next，然后p=p->next。
 
 ++++
@@ -153,18 +440,18 @@ class Solution {
 [source, C++, numbered]
 ----
 /********************************
- * Author:			bigeast
- * Time:			2015-03-14
- * Description:		AC.
- ********************************/
+	* Author:			bigeast
+	* Time:			2015-03-14
+	* Description:		AC.
+	********************************/
 struct ListNode {
-    int val;
-    ListNode *next;
-    ListNode(int x) : val(x), next(NULL) {}
+	int val;
+	ListNode *next;
+	ListNode(int x) : val(x), next(NULL) {}
 };
 class Solution {
 public:
-    ListNode *mergeTwoLists(ListNode *l1, ListNode *l2) {
+	ListNode *mergeTwoLists(ListNode *l1, ListNode *l2) {
 		struct ListNode res(0), *p = &res;
 		while(l1 != NULL && l2 != NULL)
 		{
@@ -189,6 +476,114 @@ public:
 			p ->next = l1;
 		}
 		return res.next;
+	}
+};
+----
+
+++++
+</details>
+++++
+
+'''
+* https://leetcode.com/problems/merge-k-sorted-lists/[✔ merge-k-sorted-lists] *合并k个有序链表*
+
+	** 较好的做法是，利用merge2，每次合并两个。 例如，list0 到 list4，第一次先合并 list4->list0, list3->list1，然后现在只需要合并 list0, list1, list2
+	** 复杂度是 `O(n logk)`
+
+++++
+<details>
+<summary>
+代码
+</summary>
+++++
+
+[source, C++, numbered]
+----
+class Solution {
+public:
+	ListNode* merge2Lists(ListNode *l1, ListNode *l2) {
+		if(!l1 && !l2) return NULL;
+		else if(!l1) return l2;
+		else if(!l2) return l1;
+		ListNode res(0), *p = &res;
+		while(l1 && l2) {
+			if(l1->val < l2->val) {
+				p->next = l1;
+				l1 = l1->next;
+			}
+			else {
+				p->next = l2;
+				l2 = l2->next;
+			}
+			p = p->next;
+		}
+		if(!l1) p->next = l2;
+		else p->next = l1;
+		return res.next;
+	}
+	ListNode* mergeKLists(vector<ListNode*>& lists) {
+		int n = lists.size();
+		if(n == 0) return NULL;
+		while(n > 1) {
+			for(int i = 0; i < n / 2; ++i) { // 注意这里的 n / 2
+				lists[i] = merge2Lists(lists[i], lists[n - 1 - i]);
+			}
+			n = (n + 1) / 2; // 这里必须是 (n + 1) / 2，因为有可能剩下的是一个还未在该轮合并的链表。例如 0, 1, 2中的 1
+		}
+		return lists[0];
+	}
+};
+----
+
+++++
+</details>
+++++
+
+'''
+* https://leetcode.com/problems/sort-list/[sort-list] *链表排序*
+	* 归并方法比较容易实现。
+	* 没有想象中的复杂。宜信实习面试的时候遇到了这个问题，没有很好地解决，直接跪掉了。
+
+++++
+<details>
+<summary>
+</summary>
+++++
+
+[source, C++, numbered]
+----
+class Solution {
+public:
+
+	ListNode* Merge(ListNode *la, ListNode *lb) {
+		ListNode res(0), *p = &res;
+		while(la && lb) {
+			if(la->val < lb->val) {
+				p->next = la;
+				la = la->next;
+			}
+			else {
+				p->next = lb;
+				lb = lb->next;
+			}
+			p = p->next;
+		}
+		if(!la) p->next = lb;
+		else p->next = la;
+		return res.next;
+	}
+    ListNode* sortList(ListNode* head) {
+		int len = 0;
+		ListNode *fast = head, *slow = head;
+		if(!head || !head->next) return head;
+		fast = fast->next;
+		while(fast->next && fast->next->next) {
+			fast = fast->next->next;
+			slow = slow->next;
+		}
+		ListNode *A = head, *B = slow->next;
+		slow->next = NULL;
+		return Merge(sortList(A), sortList(B));
     }
 };
 ----
@@ -196,6 +591,13 @@ public:
 ++++
 </details>
 ++++
+
+'''
+
+* https://leetcode.com/problems/reverse-linked-list/[reverse-linked-list] *链表反转*
+* https://leetcode.com/problems/remove-linked-list-elements/[remove-linked-list-elements] *删除列表中某个值的元素*
+	** 标准的做法是设一个prev指针，开始是NULL。
+	** 二级指针的做法比较难理解，但是优雅。
 
 '''
 
@@ -219,32 +621,32 @@ public:
 
 class Solution {
 public:
-    ListNode* reverseBetween(ListNode* head, int m, int n) {
-        if(m >= n) return head;
-        ListNode ahead(0);
-        ahead.next = head;
-        stack<ListNode *> stk;
-        ListNode *ap = &ahead, *p;
-        int i;
-        for(i = 1; i < m && p; ++i) {
-            ap = ap->next;
-        }
-        p = ap;
-        for(; i <= n && p; ++i) {
-            p = p->next;
-            stk.push(p);
-        }
-        if(p) { // n is not larger than length.
-            ListNode *btail = p->next;
-            while(!stk.empty()) {
-                ap->next = stk.top();
-                stk.pop();
-                ap = ap->next;
-            }
-            ap->next = btail;
-        }
-        return ahead.next;
-    }
+	ListNode* reverseBetween(ListNode* head, int m, int n) {
+		if(m >= n) return head;
+		ListNode ahead(0);
+		ahead.next = head;
+		stack<ListNode *> stk;
+		ListNode *ap = &ahead, *p;
+		int i;
+		for(i = 1; i < m && p; ++i) {
+			ap = ap->next;
+		}
+		p = ap;
+		for(; i <= n && p; ++i) {
+			p = p->next;
+			stk.push(p);
+		}
+		if(p) { // n is not larger than length.
+			ListNode *btail = p->next;
+			while(!stk.empty()) {
+				ap->next = stk.top();
+				stk.pop();
+				ap = ap->next;
+			}
+			ap->next = btail;
+		}
+		return ahead.next;
+	}
 };
 ----
 
@@ -294,7 +696,6 @@ class Solution {
 	** 自己的代码写得有点丑。
 	** 顺便看下Java中节点的定义：
 
-
 ++++
 <details>
 <summary>
@@ -305,32 +706,31 @@ class Solution {
 [source, C++, numbered]
 ----
 public ListNode reverseKGroup(ListNode head, int k) {
-    ListNode curr = head;
-    int count = 0;
-    while (curr != null && count != k) { // find the k+1 node
-        curr = curr.next;
-        count++;
-    }
-    if (count == k) { // if k+1 node is found
-        curr = reverseKGroup(curr, k); // reverse list with k+1 node as head
-        // head - head-pointer to direct part, 
-        // curr - head-pointer to reversed part;
-        while (count-- > 0) { // reverse current k-group: 
-            ListNode tmp = head.next; // tmp - next head in direct part
-            head.next = curr; // preappending "direct" head to the reversed list 
-            curr = head; // move head of reversed part to a new node
-            head = tmp; // move "direct" head to the next node in direct part
-        }
-        head = curr;
-    }
-    return head;
+	ListNode curr = head;
+	int count = 0;
+	while (curr != null && count != k) { // find the k+1 node
+		curr = curr.next;
+		count++;
+	}
+	if (count == k) { // if k+1 node is found
+		curr = reverseKGroup(curr, k); // reverse list with k+1 node as head
+		// head - head-pointer to direct part, 
+		// curr - head-pointer to reversed part;
+		while (count-- > 0) { // reverse current k-group: 
+			ListNode tmp = head.next; // tmp - next head in direct part
+			head.next = curr; // preappending "direct" head to the reversed list 
+			curr = head; // move head of reversed part to a new node
+			head = tmp; // move "direct" head to the next node in direct part
+		}
+		head = curr;
+	}
+	return head;
 }
 ----
 
 ++++
 </details>
 ++++
-
 
 ++++
 <details>
@@ -342,9 +742,9 @@ ListNode
 [source, Java, numbered]
 ----
 public class ListNode {
-    int val;
-    ListNode next;
-    ListNode(int x) { val = x; }
+	int val;
+	ListNode next;
+	ListNode(int x) { val = x; }
 }
 ----
 
@@ -369,27 +769,27 @@ public class ListNode {
 ----
 class Solution {
 public:
-    int listLength(ListNode *root) {
-        int res = 0;
-        while(root) {
-            res++;
-            root = root->next;
-        }
-        return res;
-    }
-    ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
-        int m = listLength(headA), n = listLength(headB);
-        if(m < n) return getIntersectionNode(headB, headA);
-        ListNode *pA = headA, *pB = headB;
-        for(int i = 0; i < m - n; ++i) {
-            pA = pA->next;
-        }
-        while(pA != pB) {
-            pA = pA->next;
-            pB = pB->next;
-        }
-        return pA;
-    }
+	int listLength(ListNode *root) {
+		int res = 0;
+		while(root) {
+			res++;
+			root = root->next;
+		}
+		return res;
+	}
+	ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
+		int m = listLength(headA), n = listLength(headB);
+		if(m < n) return getIntersectionNode(headB, headA);
+		ListNode *pA = headA, *pB = headB;
+		for(int i = 0; i < m - n; ++i) {
+			pA = pA->next;
+		}
+		while(pA != pB) {
+			pA = pA->next;
+			pB = pB->next;
+		}
+		return pA;
+	}
 };
 ----
 
@@ -419,22 +819,22 @@ public:
 ----
 class Solution {
 public:
-    int firstMissingPositive(vector<int>& nums) {
-        int n = nums.size();
-        if(n == 0) return 1;
-        for(int i = 0; i < n; ++i) {
-			// 遇到一个元素就把它放到正确的位置。
-            while(nums[i] > 0 && nums[i] <= n && nums[nums[i] - 1] != nums[i]) { // 继续为新换到i位置的元素找到合适的位置。
-                swap(nums[i], nums[nums[i] - 1]);
-            }
-        }
-        for(int i = 0; i < n; ++i) {
-			if(nums[i] != i + 1) {
-				return i + 1;
-			}
-        }
-        return n + 1;
-    }
+int firstMissingPositive(vector<int>& nums) {
+	int n = nums.size();
+	if(n == 0) return 1;
+	for(int i = 0; i < n; ++i) {
+		// 遇到一个元素就把它放到正确的位置。
+		while(nums[i] > 0 && nums[i] <= n && nums[nums[i] - 1] != nums[i]) { // 继续为新换到i位置的元素找到合适的位置。
+			swap(nums[i], nums[nums[i] - 1]);
+		}
+	}
+	for(int i = 0; i < n; ++i) {
+		if(nums[i] != i + 1) {
+			return i + 1;
+		}
+	}
+	return n + 1;
+}
 };
 ----
 
@@ -451,31 +851,167 @@ public:
 '''
 
 === 子集和DFS
-* https://leetcode.com/problems/two-sum/[✔ two-sum]
+* https://leetcode.com/problems/two-sum/[✔ two-sum] *找出数组中两个和为target的数（答案唯一）*
+	** 注意看数组是否是有序的。此题是无序，则暴力求解是平方级别的。排序后可以线性找出答案。
+	** 用HashMap可以达到线性时间复杂度。
 
 '''
 
-* https://leetcode.com/problems/3sum/[✔ 3sum]
+* https://leetcode.com/problems/3sum/[✔ 3sum] *找到数组中和为0的三元数组*
+	** 先排序，然后枚举最小元素的值A，然后在剩下的数组中找出和为 -A 的两个数。复杂度 `O(n^2)` 。
 
 '''
-* https://leetcode.com/problems/4sum/[4sum]
+
+* https://leetcode.com/problems/3sum-closest/[✔ 3sum-closest] *找到数组中和最接近target的三元数组（答案唯一）*
+	** 与 `3sum` 思想类似。
 
 '''
-* https://leetcode.com/problems/generate-parentheses/[generate-parentheses]
+* https://leetcode.com/problems/4sum/[✔ 4sum]
+	** 与 `3sum` 类似，只是枚举的是前两个最小的元素，复杂度 `O(n^3)` 。注意判重，下标加一的时候看数值是否变化。
+
+++++
+<details>
+<summary>
+代码
+</summary>
+++++
+
+[source, C++, numbered]
+----
+class Solution {
+public:
+    vector<vector<int>> fourSum(vector<int>& nums, int target) {
+		int i, j, k, l;
+		int n = nums.size();
+		int t;
+		sort(nums.begin(), nums.end());
+		vector<vector<int>> res;
+		vector<int> ans(4, 0);
+		for (int i = 0; i < n; ) {
+			ans[0] = nums[i];
+			for (int j = i + 1; j < n;) {
+				ans[1] = nums[j];
+				k = j + 1;
+				l = n - 1;
+				while(k < l) {
+					ans[2] = nums[k];
+					ans[3] = nums[l];
+					t = ans[0] + ans[1] + ans[2] + ans[3];
+					if(t == target) {
+						res.push_back(ans);
+						while(k < n && ans[2] == nums[k]) ++k;
+						while(l >= 0  && ans[3] == nums[l]) --l;
+					}
+					else if(t < target) {
+						while(k < n && ans[2] == nums[k]) ++k;
+					}
+					else {
+						while(l >= 0  && ans[3] == nums[l]) --l;
+					}
+				}
+				while(j < n  && ans[1] == nums[j]) ++j;
+			}
+			while(i < n  && ans[0] == nums[i]) ++i;
+		}
+		return res;
+    }
+};
+----
+
+++++
+</details>
+++++
 
 '''
-* https://leetcode.com/problems/palindrome-partitioning/[palindrome-partitioning]
+* https://leetcode.com/problems/generate-parentheses/[✔ generate-parentheses] *生成所有的n对括号序列*
+	* 保证开括号个数始终大于闭括号。
+
+++++
+<details>
+<summary>
+代码
+</summary>
+++++
+
+[source, C++, numbered]
+----
+class Solution {
+public:
+	vector<string> res;
+	int N;
+	int dfs(string s, int can_in, int can_out) {
+		if(s.size() == 2 * N) {
+			res.push_back(s);
+			return 0;
+		}
+		if(can_in > 0) dfs(s + '(', can_in - 1, can_out + 1);
+		if(can_out > 0) dfs(s + ')', can_in, can_out - 1);
+		return 0;
+	}
+    vector<string> generateParenthesis(int n) {
+		N = n;
+		dfs("", N, 0);
+		return res;
+    }
+};
+----
+
+++++
+</details>
+++++
 
 '''
+
+* https://leetcode.com/problems/palindrome-partitioning/[palindrome-partitioning] *将字符串分成若干段，每段都是回文子串*
+	** DFS
+
+'''
+
+
 === DP
-* https://leetcode.com/problems/longest-palindromic-substring/[longest-palindromic-substring]
+* https://leetcode.com/problems/palindrome-partitioning-ii/[palindrome-partitioning-ii] *一个字符串最少分成多少段，可以使每段都是回文子串*
+
+
+'''
+
+* https://leetcode.com/problems/longest-palindromic-substring/[longest-palindromic-substring] *最长的回文子串*
+	** `O(n^2)` ：枚举回文子串的中间位置，向两边扩张，直到不再回文。更新长度。注意奇偶的情况要分开做。
+	** **更高效的做法是，实时更新当前的最大长度maxLen，在新的字符加入时，只检查以该字符结尾的长度为 maxLen + 1 和 maxLen + 2 的串是否是回文的。**
+
+'''
+
+* https://leetcode.com/problems/edit-distance/[edit-distance] *通过删除、替换、添加字符，把str1变为str2的最小操作步数*
+	** f[i][j] 表示 str[1...i] 与 str2[1...j] 之间的最小编辑距离。（str下标从1开始）
+	** f[i][0] = i, f[0][j] = j;
+	** 如果str1[i] == str2[j], 则 f[i][j] = f[i - 1][j - 1]
+	** 如果删除str1[i]，则编辑距离 f[i][j] = f[i - 1][j] + 1
+	** 如果添加str2[j]，则编辑距离 f[i][j] = f[i][j - 1] + 1
+	** 如果替换str1[i]，则编辑距离 f[i][j] = f[i - 1][j - 1] + 1
+
+'''
+
+* https://leetcode.com/problems/maximal-rectangle/[maximal-rectangle] *MxN的0-1矩阵，求最大的矩形1块的面积*
+	* 用f[i][j]代表以 m[i][j] 结尾的最大面积，问题转化为如何从 f[i - 1][j - 1], f[i - 1][j], f[i][j - 1] 得到 f[i][j]。
+	* 面积不能给出有用的状态转移信息。于是想到要保存 最大矩形的宽和高。但是面积一定的情况下，宽高可以是不唯一的，而不同的宽高会影响到状态的转移结果。重新陷入僵局。
 
 '''
 === 其它
+* https://leetcode.com/problems/word-ladder/[word-ladder] *起始单词到终止单词，每次只允许改一个字母，且中间单词必须在给定的字典中，求最少的变换次数*
+	** `O(n^2)` 时间建立一个图。然后广搜。
+
+'''
+
 * [line-through]#https://leetcode.com/problems/palindrome-number/[✔ palindrome-number] *判断是否是回文数字，不能使用额外的空间。*#
 
 
 '''
+
+* https://leetcode.com/problems/the-skyline-problem/[the-skyline-problem] *柱状图的轮廓*
+	** 记得有一种做法是把一个柱状图看作两个事件，起点和终点。
+	** 想起来了。
+
+'''
+
 * https://leetcode.com/problems/container-with-most-water/[✔ container-with-most-water] *一组整数，选择两个围成隔断，求装水最多的隔断*
 	** 要想比首尾两个挡板围成的隔断面积大，宽度肯定不能更大了，需要寻找高度更高的挡板。
 	** 由于隔断高度 `h = min{hl, hr}` ，因此在寻找新的面积更大的隔断时，两段高度都要严格大于旧隔断的高度 h 。
@@ -493,7 +1029,7 @@ public:
 ----
 class Solution {
 public:
-    int maxArea(vector<int>& height) {
+	int maxArea(vector<int>& height) {
 		int n = height.size();
 		int lo = 0, hi = n - 1;
 		int ans = 0, h;
@@ -504,13 +1040,14 @@ public:
 			while(height[hi] <= h) --hi;
 		}
 		return ans;
-    }
+	}
 };
 ----
 
 ++++
 </details>
 ++++
+
 '''
 * https://leetcode.com/problems/trapping-rain-water/[✔ trapping-rain-water] *一组高度为整数的bar，注水过后能保存多少水*
 	** 思路：分别计算每个bar向前和向后的最大值，取两者中较小的一个，就是该bar上方水的高度。
@@ -528,7 +1065,7 @@ public:
 ----
 class Solution {
 public:
-    int trap(vector<int>& height) {
+	int trap(vector<int>& height) {
 		int n = height.size();
 		if(n == 0) return 0;
 		vector<int> max_forward(n);
@@ -547,7 +1084,7 @@ public:
 			res += max(t - height[i], 0);
 		}
 		return res;
-    }
+	}
 };
 ----
 
@@ -579,26 +1116,26 @@ O(n^2)的算法,TLE
 ----
 class Solution {
 public:
-    int largestRectangleArea(vector<int>& height) {
-        int n = height.size();
-        set<int> S;
-        for(int i = 0; i < n; ++i) {
-            S.insert(height[i]);
-        }
-        int res = 0;
-        for(auto item: S) {
-            int area = 0;
-            int span, idx = 0;
-            while(idx < n) {
-                span = 0;
-                while(item <= height[idx++]) {
-                    ++span;
-                }
-                if(span * item > res) res = span * item;
-            }
-        }
-        return res;
-    }
+	int largestRectangleArea(vector<int>& height) {
+		int n = height.size();
+		set<int> S;
+		for(int i = 0; i < n; ++i) {
+			S.insert(height[i]);
+		}
+		int res = 0;
+		for(auto item: S) {
+			int area = 0;
+			int span, idx = 0;
+			while(idx < n) {
+				span = 0;
+				while(item <= height[idx++]) {
+					++span;
+				}
+				if(span * item > res) res = span * item;
+			}
+		}
+		return res;
+	}
 };
 ----
 
@@ -645,6 +1182,91 @@ class Solution {
 ++++
 </details>
 ++++
+
+'''
+* https://leetcode.com/problems/permutations/[permutations] *生成所有排列（元素各不相同，或者当有相同元素的时候，排列可以出现多次）*
+	** 每次调用next_permutation。
+	** DFS
+
+++++
+<details>
+<summary>
+代码
+</summary>
+++++
+
+[source, C++, numbered]
+----
+class Solution {
+public:
+	void permute(vector<int> &nums, int pos, vector<vector<int>> &res) {
+		if(pos == nums.size()) {
+			res.push_back(nums);
+			return ;
+		}
+		for (int i = pos; i < nums.size(); ++i) {
+			swap(nums[i], nums[pos]);
+			permute(nums, pos + 1, res);
+			swap(nums[i], nums[pos]);
+		}
+		return ;
+	}
+    vector<vector<int>> permute(vector<int>& nums) {
+		vector<vector<int>> res;
+		permute(nums, 0, res);
+		return res;
+    }
+};
+----
+
+++++
+</details>
+++++
+
+'''
+	
+* https://leetcode.com/problems/permutations-ii/[permutations-ii] *生成所有排列（元素可以相同）*
+	** 除了调用next_permutation，也可以用DFS的方法，不过要先排序，然后每次找下一个不同的元素。
+
+++++
+<details>
+<summary>
+代码
+</summary>
+++++
+
+[source, C++, numbered]
+----
+// https://leetcode.com/discuss/25279/a-simple-c-solution-in-only-20-lines
+class Solution {
+public:
+    void recursion(vector<int> num, int i, int j, vector<vector<int> > &res) {
+        if (i == j-1) {
+            res.push_back(num);
+            return;
+        }
+        for (int k = i; k < j; k++) {
+            if (i != k && num[i] == num[k]) continue;
+            swap(num[i], num[k]);
+            recursion(num, i+1, j, res);
+        }
+    }
+    vector<vector<int> > permuteUnique(vector<int> &num) {
+        sort(num.begin(), num.end());
+        vector<vector<int> >res;
+        recursion(num, 0, num.size(), res);
+        return res;
+    }
+};
+----
+
+++++
+</details>
+++++
+
+'''
+
+* https://leetcode.com/problems/permutation-sequence/[permutation-sequence] *返回 1...n 的第k个排列*
 
 '''
 
@@ -744,13 +1366,13 @@ public:
 			seq.pop_back();
 		}
 	}
-    vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
+	vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
 		vector<int> item;
 		sort(candidates.begin(), candidates.end());
 		int n = candidates.size();
 		dfs(candidates, item, target, 0);
 		return res;
-    }
+	}
 };
 ----
 
@@ -760,6 +1382,7 @@ public:
 
 
 * https://leetcode.com/problems/combination-sum-ii/[✔ combinationSum-sum-ii] *每个元素只能使用一次*
+
 ++++
 <details>
 <summary>
@@ -786,7 +1409,7 @@ public:
 			seq.pop_back();
 		}
 	}
-    vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
+	vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
 		vector<int> item;
 		sort(candidates.begin(), candidates.end());
 		int n = candidates.size();
@@ -795,7 +1418,7 @@ public:
 			res.push_back(item);
 		}
 		return res;
-    }
+	}
 };
 ----
 
@@ -835,7 +1458,7 @@ public:
 
 		dfs(seq, start + 1, n, target); // 不选第start个数
 	}
-    vector<vector<int>> combinationSum3(int k, int n) {
+	vector<vector<int>> combinationSum3(int k, int n) {
 		int t = 0;
 		for (int i = 0, s = 9; i < k && i < 9; ++i) {
 			t += s--;
@@ -844,7 +1467,50 @@ public:
 		vector<int> item;
 		dfs(item, 1, k, n);
 		return res;
-    }
+	}
+};
+----
+
+++++
+</details>
+++++
+'''
+
+== Careercup
+
+* http://www.careercup.com/question?id=16759664[smallest-range] *k个有序数组，每个数组拿出一个数，如何使得取出的这k个数区间最小？即 `max{a_k} - min{a_k}` 最小*
+	** k个idx，分别指向每隔数组的当前位置。每次把值最小的那个idx加1，然后更新区间。
+
+'''
+* *两个数组之间的相同元素（集合的交集）*
+
+++++
+<details>
+<summary>
+代码
+</summary>
+++++
+
+[source, C++, numbered]
+----
+class Solution {
+	public:
+		vector<int> setIntersection(vector<int> &A, vector<int> &B) {
+			vector<int> C;
+			sort(A.begin(), A.end());
+			sort(B.begin(), B.end());
+			int ia = 0, ib = 0;
+			for(int ia = 0, ib = 0; ia < na && ib < nb;) {
+				if(A[ia] < B[ib]) ++ia;
+				else if(A[ia] > B[ib]) ++ib;
+				else {
+					C.push_back(A[ia]);
+					++ia;
+					++ib;
+				}
+			}
+			return C;
+		}
 };
 ----
 
@@ -852,6 +1518,55 @@ public:
 </details>
 ++++
 
+'''
 
+* http://www.careercup.com/question?id=15422849[pots-of-gold] *一组整数，A、B两个玩家，每次只能在数组端点处拿走数字，最后拿走数字的人多的剩。谁有必胜策略？* 
+	* 用 f(i, j) 表示面对数组的 i ... j，先手玩家所能得到的最高分值。则 f(i, j) = max{arr[i] + min{f(i + 2, j), f(i + 1, j - 1)}, arr[j] + min{f(i, j - 2), f(i + 1, j - 1)}}
+
+++++
+<details>
+<summary>
+代码
+</summary>
+++++
+
+[source, Python, numbered]
+----
+function max_coin( int *coin, int start, int end ):
+	if start > end:
+		return 0
+	int a = coin[start] + min( max_coin( coin, start+2,end ), max_coin( coin, start+1,end-1 ) )
+	int b = coin[end] + min( max_coin( coin, start+1,end-1 ), max_coin( coin, start,end-2 ) )
+----
+
+++++
+</details>
+++++
+
+'''
+
+* http://www.careercup.com/question?id=6287528252407808[k-Palindrome] *给定一个字符串，判断是否能通过删除不超过k个字符将其变为回文串*
+	** 定义编辑操作只能是删除，然后计算字符串与其反串之间的编辑距离。复杂度 `O(n^2)`
+	** 参考最短编辑距离的方法，在计算f[i][j]时，最多只需用到 f[i - 1][j - k] ... f[i - 1][j + k]，因此复杂度可以降到 `O(nk)`
+'''
+
+* http://www.careercup.com/question?id=19286747[maxium-sub-array-diff] *找到数组中两个不相交的连续子数组，使得它们之间的差值最大*
+	** 两次遍历，第一次从0到n-1，计算 forwardMax[i]，forwardMin[i]；第二次从 n - 1到 0，计算 backwardMax[i]，backwardMin[i]
+	** 最后一次遍历，计算 max(abs(forwardMax[i] - backwardMin[i +1]), abs(forwardMin[i] - backwardMax[i +1]))，并更新答案。
+
+'''
+
+* http://www.careercup.com/question?id=5201559730257920[move-negative] *把一个数组中的负数放在前面，正数放在后面，且保持相对位置*
+	** 与move-zeros、sort-colors类似，但是应该要求更多一些。貌似没有线性解法？
+	** Partition操作是稳定的吗？先找出最小的正数，然后根据它来做Partition如何？
+	** 有个 `O(n logn)` 的解法，分治，两部分 A，B，负数部分是 A1，B1，正数部分是 A2，B2 ，要将它们合并成 A1 B1 A2 B2 ，即交换 B1 与 A2 的位置，可以用数组循环位移的方法，在线性时间，常数空间内解决。
+
+'''
+
+* http://www.careercup.com/question?id=15556758[n-steps-alive] *NxN的矩阵上，等概率地向四个方向前进一格，如果跳出矩阵就会死掉，给出初始坐标(x, y)，求n步后仍未死掉的概率*
+
+'''
+* http://www.careercup.com/question?id=7528760[perfect-shuffle] *a1, a2, ..., an, b1, b2, ..., bn 排列成 a1, b1, a2, b2, ..., an, bn*
+	* 线性时间，常数空间
 
 :docinfo:
