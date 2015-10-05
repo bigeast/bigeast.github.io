@@ -3,7 +3,7 @@
 
 == Leetcode
 === 数组
-* https://leetcode.com/problems/maximum-gap[✔ Maximum Gap] *一个无序的数组，在线性时间内，找到排好序后，相邻两个元素之间差值的最大值。*
+* https://leetcode.com/problems/maximum-gap[☑ Maximum Gap] *一个无序的数组，在线性时间内，找到排好序后，相邻两个元素之间差值的最大值。*
 	** https://leetcode.com/discuss/18487/i-solved-it-using-radix-sort[讨论区题解] 思想是，得到最大值 maxv 和最小值 minv 后，可确定最大差值的下限为 _L = (maxv - minv) / (N - 1)_ 。将[minv, maxv] 等距分割成 N - 1 段（或者更多的段，因为每段距离只要短于L，就不需要考虑段内的差值，因此对结果都不会有影响），记录每一段的最大值和最小值，最终比较某段的最小值与它前面一段的最大值之差，最大的差即为答案。 
 	** [red]#基数排序#
 
@@ -35,7 +35,7 @@ int maximumGap(std::vector<int> &num) {
 
 '''
 
-* https://leetcode.com/problems/search-for-a-range[✔ Search for a range] *有序数组里的 lower_bound 和 upper_bound*
+* https://leetcode.com/problems/search-for-a-range[☑ Search for a range] *有序数组里的 lower_bound 和 upper_bound*
 	** [line-through]#突然发现自己好像还不会这个。想了一下也没想出来，应该是二分查找稍微变形一下#
 	** 盯着代码看，就想出来了。找上下界与一般二分查找的不同之处是，在找到目标元素后是否还继续寻找。
 
@@ -427,7 +427,7 @@ class Solution {
 ++++
 
 === 链表操作
-* https://leetcode.com/problems/merge-two-sorted-lists[✔ Merge Two Sorted Lists] *合并两个有序的链表。*
+* https://leetcode.com/problems/merge-two-sorted-lists[☑ Merge Two Sorted Lists] *合并两个有序的链表。*
 	** 算法很清楚，主要是看怎么实现。如果用p指向要返回的列表当前位置，注意每次更新的时候是先改变p->next，然后p=p->next。
 
 ++++
@@ -485,7 +485,7 @@ public:
 ++++
 
 '''
-* https://leetcode.com/problems/merge-k-sorted-lists/[✔ merge-k-sorted-lists] *合并k个有序链表*
+* https://leetcode.com/problems/merge-k-sorted-lists/[☑ merge-k-sorted-lists] *合并k个有序链表*
 
 	** 较好的做法是，利用merge2，每次合并两个。 例如，list0 到 list4，第一次先合并 list4->list0, list3->list1，然后现在只需要合并 list0, list1, list2
 	** 复杂度是 `O(n logk)`
@@ -599,9 +599,36 @@ public:
 	** 标准的做法是设一个prev指针，开始是NULL。
 	** 二级指针的做法比较难理解，但是优雅。
 
+++++
+<details>
+<summary>
+代码
+</summary>
+++++
+
+[source, C++, numbered]
+----
+class Solution {
+	public:
+		ListNode* removeElements(ListNode* head, int val) {
+			for(ListNode **curr = &head; *curr; ) {
+				if((*curr)->val == val)
+					*curr = (*curr)->next;
+				else
+					curr = &((*curr)->next);
+			}
+			return head;
+		}
+};
+----
+
+++++
+</details>
+++++
+
 '''
 
-* https://leetcode.com/problems/reverse-linked-list-ii/[✔ reverse-linked-list-ii] *将链表中给定范围内的一段进行反转*
+* https://leetcode.com/problems/reverse-linked-list-ii/[☑ reverse-linked-list-ii] *将链表中给定范围内的一段进行反转*
 
 ++++
 <details>
@@ -656,7 +683,7 @@ public:
 
 '''
 
-* https://leetcode.com/problems/swap-nodes-in-pairs/[✔ swap-nodes-in-pairs] *将链表中相邻两个节点交换*
+* https://leetcode.com/problems/swap-nodes-in-pairs/[☑ swap-nodes-in-pairs] *将链表中相邻两个节点交换*
 
 ++++
 <details>
@@ -692,7 +719,7 @@ class Solution {
 
 '''
 
-* https://leetcode.com/problems/reverse-nodes-in-k-group/[✔ reverse-nodes-in-k-group] *将链表每k个一组进行反转*
+* https://leetcode.com/problems/reverse-nodes-in-k-group/[☑ reverse-nodes-in-k-group] *将链表每k个一组进行反转*
 	** 自己的代码写得有点丑。
 	** 顺便看下Java中节点的定义：
 
@@ -754,7 +781,7 @@ public class ListNode {
 
 '''
 
-* https://leetcode.com/problems/intersection-of-two-linked-lists/[✔ intersection-of-two-linked-lists] *找到两个链表开始相交的地方。*
+* https://leetcode.com/problems/intersection-of-two-linked-lists/[☑ intersection-of-two-linked-lists] *找到两个链表开始相交的地方。*
 	** 方法就是先算出两个链表的长度，然后长的先走一点，与短的对齐，之后两个链表同步，如果有相交，这样一定会碰上。
 	** [red]#有一点技巧就是，有时不能确定两个数组的长短，但是代码中又需要用到他们的长短关系，这时可以做一次判断，如果长短关系不满足假设，则交换参数的位置多调用一次。#
 	
@@ -803,7 +830,7 @@ public:
 	** 主要是要求常数级别的空间复杂度，而且必须实际对链表操作，而不能更换值。递归的方法每次都要遍历链表找到最后的数，复杂度是 `O(n^2)` ，会超时。
 
 === 连续整数
-* https://leetcode.com/problems/first-missing-positive/[✔ first-missing-positive]
+* https://leetcode.com/problems/first-missing-positive/[☑ first-missing-positive]
 	** 题目中要求是线性时间，常数空间。如果空间没有要求，可以使用桶排序类似的方法。
 	** 交换次数是线性的。
 	** 然而实际的运行时间并没有降低。。
@@ -844,29 +871,29 @@ int firstMissingPositive(vector<int>& nums) {
 
 '''
 
-* https://leetcode.com/problems/longest-consecutive-sequence/[✔ longest-consecutive-sequence]
+* https://leetcode.com/problems/longest-consecutive-sequence/[☑ longest-consecutive-sequence]
 	** 用哈希表存储元素，方便查找元素是否存在。 `C++` 中使用 `unordered_map` 代替哈希表。
 	** 对与每个元素，向前和向后查找相邻的元素是否存在，若存在则从哈希表中删除（避免重复查找）。
 
 '''
 
 === 子集和DFS
-* https://leetcode.com/problems/two-sum/[✔ two-sum] *找出数组中两个和为target的数（答案唯一）*
+* https://leetcode.com/problems/two-sum/[☑ two-sum] *找出数组中两个和为target的数（答案唯一）*
 	** 注意看数组是否是有序的。此题是无序，则暴力求解是平方级别的。排序后可以线性找出答案。
 	** 用HashMap可以达到线性时间复杂度。
 
 '''
 
-* https://leetcode.com/problems/3sum/[✔ 3sum] *找到数组中和为0的三元数组*
+* https://leetcode.com/problems/3sum/[☑ 3sum] *找到数组中和为0的三元数组*
 	** 先排序，然后枚举最小元素的值A，然后在剩下的数组中找出和为 -A 的两个数。复杂度 `O(n^2)` 。
 
 '''
 
-* https://leetcode.com/problems/3sum-closest/[✔ 3sum-closest] *找到数组中和最接近target的三元数组（答案唯一）*
+* https://leetcode.com/problems/3sum-closest/[☑ 3sum-closest] *找到数组中和最接近target的三元数组（答案唯一）*
 	** 与 `3sum` 思想类似。
 
 '''
-* https://leetcode.com/problems/4sum/[✔ 4sum]
+* https://leetcode.com/problems/4sum/[☑ 4sum]
 	** 与 `3sum` 类似，只是枚举的是前两个最小的元素，复杂度 `O(n^3)` 。注意判重，下标加一的时候看数值是否变化。
 
 ++++
@@ -923,7 +950,7 @@ public:
 ++++
 
 '''
-* https://leetcode.com/problems/generate-parentheses/[✔ generate-parentheses] *生成所有的n对括号序列*
+* https://leetcode.com/problems/generate-parentheses/[☑ generate-parentheses] *生成所有的n对括号序列*
 	* 保证开括号个数始终大于闭括号。
 
 ++++
@@ -1001,18 +1028,18 @@ public:
 
 '''
 
-* [line-through]#https://leetcode.com/problems/palindrome-number/[✔ palindrome-number] *判断是否是回文数字，不能使用额外的空间。*#
+* [line-through]#https://leetcode.com/problems/palindrome-number/[☑ palindrome-number] *判断是否是回文数字，不能使用额外的空间。*#
 
 
 '''
 
-* https://leetcode.com/problems/the-skyline-problem/[the-skyline-problem] *柱状图的轮廓*
+* https://leetcode.com/problems/the-skyline-problem/[the-skyline-problem] [red]#*柱状图的轮廓*#
 	** 记得有一种做法是把一个柱状图看作两个事件，起点和终点。
 	** 想起来了。
 
 '''
 
-* https://leetcode.com/problems/container-with-most-water/[✔ container-with-most-water] *一组整数，选择两个围成隔断，求装水最多的隔断*
+* https://leetcode.com/problems/container-with-most-water/[☑ container-with-most-water] *一组整数，选择两个围成隔断，求装水最多的隔断*
 	** 要想比首尾两个挡板围成的隔断面积大，宽度肯定不能更大了，需要寻找高度更高的挡板。
 	** 由于隔断高度 `h = min{hl, hr}` ，因此在寻找新的面积更大的隔断时，两段高度都要严格大于旧隔断的高度 h 。
 	** 两个挡板向中间靠拢，比 h 大就停一下，计算新的隔断面积。因为越早遇到的，宽度越大，必须纳入考虑。
@@ -1049,7 +1076,7 @@ public:
 ++++
 
 '''
-* https://leetcode.com/problems/trapping-rain-water/[✔ trapping-rain-water] *一组高度为整数的bar，注水过后能保存多少水*
+* https://leetcode.com/problems/trapping-rain-water/[☑ trapping-rain-water] *一组高度为整数的bar，注水过后能保存多少水*
 	** 思路：分别计算每个bar向前和向后的最大值，取两者中较小的一个，就是该bar上方水的高度。
 	** 一开始陷入的误区：找的是向前和向后第一次遇到比当前高的bar，但这是局部值，如果后面遇到更高的，这个就没用了。
 	** 不用考虑水域的连续性，一个bar一个bar来计算结果反而更简单。
@@ -1146,7 +1173,7 @@ public:
 
 '''
 
-* https://leetcode.com/problems/next-permutation/[✔ next-permutation] *下一个排列*
+* https://leetcode.com/problems/next-permutation/[☑ next-permutation] *下一个排列*
 	** STL中现成函数 *next_permutation*
 	** [line-through]#手动实现时，额，方法又忘了。#
 	** 步骤是：
@@ -1270,7 +1297,7 @@ public:
 
 '''
 
-* https://leetcode.com/problems/median-of-two-sorted-arrays/[✔ median-of-two-sorted-arrays] *两个有序数组的中值*
+* https://leetcode.com/problems/median-of-two-sorted-arrays/[☑ median-of-two-sorted-arrays] *两个有序数组的中值*
 	** 需要有一种比较巧妙的方法来实现，不然会很麻烦。
 	** 假设两个数组 nums1 和 nums2 的长度分别是 m, n，且 m <= n，则算法复杂度是 `O(log m)`
 	** 当 `m + n` 为奇数时，中位数下标是 `(m + n + 1) / 2` ；当 `m + n` 为偶数时，中位数为 `(m + n + 1) / 2` 与 `(m + n + 1) / 2 + 1` 的均值。
@@ -1337,7 +1364,7 @@ class Solution {
 ++++
 
 '''
-* https://leetcode.com/problems/combination-sum/[✔ combination-sum] *从集合中找到和为target的所有子集，每个子集从小到大排序*
+* https://leetcode.com/problems/combination-sum/[☑ combination-sum] *从集合中找到和为target的所有子集，每个子集从小到大排序*
 	** 很明显的DFS。
 	** 速度竟然也不慢。主要是先将集合排序，然后每次从某个下标开始搜索。
 
@@ -1381,7 +1408,7 @@ public:
 ++++
 
 
-* https://leetcode.com/problems/combination-sum-ii/[✔ combinationSum-sum-ii] *每个元素只能使用一次*
+* https://leetcode.com/problems/combination-sum-ii/[☑ combinationSum-sum-ii] *每个元素只能使用一次*
 
 ++++
 <details>
@@ -1427,7 +1454,7 @@ public:
 ++++
 
 
-* https://leetcode.com/problems/combination-sum-iii/[✔ combination-sum-iii] *从1 ... 9 中选择 k 个数字，使得和为 n*
+* https://leetcode.com/problems/combination-sum-iii/[☑ combination-sum-iii] *从1 ... 9 中选择 k 个数字，使得和为 n*
 	* 思路一：由于只有9个数字，问题空间是 `2^9` ，因此遍历所有 `C(9, 3)` 的组合然后看和是否为n即可。
 	* 思路二：用DFS，每次分支为选当前的数还是不选当前的数。
 	* 一个优化是，可以在开始的时候判断下是否无解。事实证明这是个很有必要的优化。
@@ -1473,7 +1500,40 @@ public:
 ++++
 </details>
 ++++
+
 '''
+
+
+* https://leetcode.com/problems/minimum-window-substring/[☑ minimum-window-substring] [red]#*给出一个字符串S，一个字母表T，找出S中包含T中所有字符的最短的连续子串（假设最短的只有一个）*#
+	** 设T中的字母出现的次数分别为l1, l2, ..., ln，设置n个队列，每个队列都最多保存li个元素，存的是字母出现位置的下标。遍历S中的元素，加入队列，当所有队列都满时，查找所有队列头的最小值，与当前S中的下标相减，更新最小窗口宽度。
+
+'''
+
+* https://leetcode.com/problems/substring-with-concatenation-of-all-words/[☐ substring-with-concatenation-of-all-words] [red]#字典中单词的长度固定，求字符串中所有只由单词组成的子串#
+
+'''
+
+* https://leetcode.com/problems/sliding-window-maximum/[☐ sliding-window-maximum] [red]#*长度为ｎ的数组，计算出所有k个连续元素中的最大值*#
+	** 堆的话，可以更新最大值，但是无法定位到滑出窗口的元素，因此也无法删除。
+
+'''
+
+* https://leetcode.com/problems/minimum-size-subarray-sum/[☑ minimum-size-subarray-sum] *在数组中找到最短连续的子段，其和不小于给定值*
+	** 二分答案的方法， `O(nlogn)` 
+	** 线性怎么做？还是 *Two Pointers* ，先添加右端元素，使和大于s，然后从左端开始删掉元素，使和不小于s，更新子段长度，继续在右端添加。
+
+'''
+
+* https://leetcode.com/problems/find-the-duplicate-number/[find-the-duplicate-number] *n + 1个数字全部来自于1 ... n，其中有且仅有一个数字出现了不止一次，找到这个数字。要求不能改变数组，不能使用额外空间，复杂度低于平方级别。*
+	** 主要是要求太多：
+		*** You must not modify the array (assume the array is read only).
+    	*** You must use only constant, O(1) extra space.
+    	*** Your runtime complexity should be less than O(n2).
+    	*** There is only one duplicate number in the array, but it could be repeated more than once.
+	** 不能改变数组，不能使用额外空间，也就是不能对其进行排序了。
+	** 也不能用Hash。
+	** 被我想到了算法！那只能是用二分查找了！注意数字大小也是n，跟数字规模一样大，所以这题的复杂度是基于数字大小的。二分枚举一个数字x，然后遍历数组看有多少个元素小于等于它，如果x小于目标元素，那么小于等于x的元素个数应该是x。否则小于等于x的元素个数就会大于x。
+	** 线性算法是，将数组看做链表，a_i = j，看做是第i个结点指向第j个节点。整个数组可能会形成很多环，但是没有元素指向最后一个元素，因此从最后一个元素出发，就不会再回来，即遇到了环，那么这个环的起点位置就是所求，因为至少有两个节点指向它。于是问题转换为求链表中环的开始位置。方法就是快慢指针，两者相交于环中的一个节点，然后让其中一个回到起点（节点n + 1），再让两个指针同时走，再次相交的位置就是答案。
 
 == Careercup
 
@@ -1518,14 +1578,6 @@ class Solution {
 ++++
 
 '''
-
-* https://leetcode.com/problems/minimum-window-substring/[minimum-window-substring] *给出一个字符串S，一个字母表T，找出S中包含T中所有字符的最短的连续子串（假设最短的只有一个）*
-
-* https://leetcode.com/problems/minimum-size-subarray-sum/[minimum-size-subarray-sum] *在数组中找到最短连续的子段，其和不小于给定值*
-	** 二分答案的方法， `O(nlogn)`
-
-* https://leetcode.com/problems/find-the-duplicate-number/[find-the-duplicate-number] *n + 1个数字全部来自于1 ... n，其中有且仅有一个数字出现了不止一次，找到这个数字。要求不能改变数组，不能使用额外空间，复杂度低于平方级别。*
-	** 不能改变数组，不能使用额外空间，也就是不能对其进行排序了。
 
 * http://www.careercup.com/question?id=15422849[pots-of-gold] *一组整数，A、B两个玩家，每次只能在数组端点处拿走数字，最后拿走数字的人多的剩。谁有必胜策略？* 
 	* 用 f(i, j) 表示面对数组的 i ... j，先手玩家所能得到的最高分值。则 f(i, j) = max{arr[i] + min{f(i + 2, j), f(i + 1, j - 1)}, arr[j] + min{f(i, j - 2), f(i + 1, j - 1)}}

@@ -484,7 +484,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="ulist">
 <ul>
 <li>
-<p><a href="https://leetcode.com/problems/maximum-gap">✔ Maximum Gap</a> <strong>一个无序的数组，在线性时间内，找到排好序后，相邻两个元素之间差值的最大值。</strong></p>
+<p><a href="https://leetcode.com/problems/maximum-gap">☑ Maximum Gap</a> <strong>一个无序的数组，在线性时间内，找到排好序后，相邻两个元素之间差值的最大值。</strong></p>
 <div class="ulist">
 <ul>
 <li>
@@ -533,7 +533,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="ulist">
 <ul>
 <li>
-<p><a href="https://leetcode.com/problems/search-for-a-range">✔ Search for a range</a> <strong>有序数组里的 lower_bound 和 upper_bound</strong></p>
+<p><a href="https://leetcode.com/problems/search-for-a-range">☑ Search for a range</a> <strong>有序数组里的 lower_bound 和 upper_bound</strong></p>
 <div class="ulist">
 <ul>
 <li>
@@ -1169,7 +1169,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="ulist">
 <ul>
 <li>
-<p><a href="https://leetcode.com/problems/merge-two-sorted-lists">✔ Merge Two Sorted Lists</a> <strong>合并两个有序的链表。</strong></p>
+<p><a href="https://leetcode.com/problems/merge-two-sorted-lists">☑ Merge Two Sorted Lists</a> <strong>合并两个有序的链表。</strong></p>
 <div class="ulist">
 <ul>
 <li>
@@ -1271,7 +1271,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="ulist">
 <ul>
 <li>
-<p><a href="https://leetcode.com/problems/merge-k-sorted-lists/">✔ merge-k-sorted-lists</a> <strong>合并k个有序链表</strong></p>
+<p><a href="https://leetcode.com/problems/merge-k-sorted-lists/">☑ merge-k-sorted-lists</a> <strong>合并k个有序链表</strong></p>
 <div class="ulist">
 <ul>
 <li>
@@ -1473,11 +1473,44 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </li>
 </ul>
 </div>
+<details>
+<summary>
+代码
+</summary>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="C++"><table class="pyhltable"><tr><td class="linenos"><div class="linenodiv"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12</div></td><td class="code"><span class="tok-k">class</span> <span class="tok-nc">Solution</span> <span class="tok-p">{</span>
+	<span class="tok-k">public</span><span class="tok-o">:</span>
+		<span class="tok-n">ListNode</span><span class="tok-o">*</span> <span class="tok-n">removeElements</span><span class="tok-p">(</span><span class="tok-n">ListNode</span><span class="tok-o">*</span> <span class="tok-n">head</span><span class="tok-p">,</span> <span class="tok-kt">int</span> <span class="tok-n">val</span><span class="tok-p">)</span> <span class="tok-p">{</span>
+			<span class="tok-k">for</span><span class="tok-p">(</span><span class="tok-n">ListNode</span> <span class="tok-o">**</span><span class="tok-n">curr</span> <span class="tok-o">=</span> <span class="tok-o">&amp;</span><span class="tok-n">head</span><span class="tok-p">;</span> <span class="tok-o">*</span><span class="tok-n">curr</span><span class="tok-p">;</span> <span class="tok-p">)</span> <span class="tok-p">{</span>
+				<span class="tok-k">if</span><span class="tok-p">((</span><span class="tok-o">*</span><span class="tok-n">curr</span><span class="tok-p">)</span><span class="tok-o">-&gt;</span><span class="tok-n">val</span> <span class="tok-o">==</span> <span class="tok-n">val</span><span class="tok-p">)</span>
+					<span class="tok-o">*</span><span class="tok-n">curr</span> <span class="tok-o">=</span> <span class="tok-p">(</span><span class="tok-o">*</span><span class="tok-n">curr</span><span class="tok-p">)</span><span class="tok-o">-&gt;</span><span class="tok-n">next</span><span class="tok-p">;</span>
+				<span class="tok-k">else</span>
+					<span class="tok-n">curr</span> <span class="tok-o">=</span> <span class="tok-o">&amp;</span><span class="tok-p">((</span><span class="tok-o">*</span><span class="tok-n">curr</span><span class="tok-p">)</span><span class="tok-o">-&gt;</span><span class="tok-n">next</span><span class="tok-p">);</span>
+			<span class="tok-p">}</span>
+			<span class="tok-k">return</span> <span class="tok-n">head</span><span class="tok-p">;</span>
+		<span class="tok-p">}</span>
+<span class="tok-p">};</span>
+</td></tr></table></code></pre>
+</div>
+</div>
+</details>
 <hr>
 <div class="ulist">
 <ul>
 <li>
-<p><a href="https://leetcode.com/problems/reverse-linked-list-ii/">✔ reverse-linked-list-ii</a> <strong>将链表中给定范围内的一段进行反转</strong></p>
+<p><a href="https://leetcode.com/problems/reverse-linked-list-ii/">☑ reverse-linked-list-ii</a> <strong>将链表中给定范围内的一段进行反转</strong></p>
 </li>
 </ul>
 </div>
@@ -1566,7 +1599,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="ulist">
 <ul>
 <li>
-<p><a href="https://leetcode.com/problems/swap-nodes-in-pairs/">✔ swap-nodes-in-pairs</a> <strong>将链表中相邻两个节点交换</strong></p>
+<p><a href="https://leetcode.com/problems/swap-nodes-in-pairs/">☑ swap-nodes-in-pairs</a> <strong>将链表中相邻两个节点交换</strong></p>
 </li>
 </ul>
 </div>
@@ -1617,7 +1650,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="ulist">
 <ul>
 <li>
-<p><a href="https://leetcode.com/problems/reverse-nodes-in-k-group/">✔ reverse-nodes-in-k-group</a> <strong>将链表每k个一组进行反转</strong></p>
+<p><a href="https://leetcode.com/problems/reverse-nodes-in-k-group/">☑ reverse-nodes-in-k-group</a> <strong>将链表每k个一组进行反转</strong></p>
 <div class="ulist">
 <ul>
 <li>
@@ -1705,7 +1738,7 @@ ListNode
 <div class="ulist">
 <ul>
 <li>
-<p><a href="https://leetcode.com/problems/intersection-of-two-linked-lists/">✔ intersection-of-two-linked-lists</a> <strong>找到两个链表开始相交的地方。</strong></p>
+<p><a href="https://leetcode.com/problems/intersection-of-two-linked-lists/">☑ intersection-of-two-linked-lists</a> <strong>找到两个链表开始相交的地方。</strong></p>
 <div class="ulist">
 <ul>
 <li>
@@ -1797,7 +1830,7 @@ ListNode
 <div class="ulist">
 <ul>
 <li>
-<p><a href="https://leetcode.com/problems/first-missing-positive/">✔ first-missing-positive</a></p>
+<p><a href="https://leetcode.com/problems/first-missing-positive/">☑ first-missing-positive</a></p>
 <div class="ulist">
 <ul>
 <li>
@@ -1865,7 +1898,7 @@ ListNode
 <div class="ulist">
 <ul>
 <li>
-<p><a href="https://leetcode.com/problems/longest-consecutive-sequence/">✔ longest-consecutive-sequence</a></p>
+<p><a href="https://leetcode.com/problems/longest-consecutive-sequence/">☑ longest-consecutive-sequence</a></p>
 <div class="ulist">
 <ul>
 <li>
@@ -1886,7 +1919,7 @@ ListNode
 <div class="ulist">
 <ul>
 <li>
-<p><a href="https://leetcode.com/problems/two-sum/">✔ two-sum</a> <strong>找出数组中两个和为target的数（答案唯一）</strong></p>
+<p><a href="https://leetcode.com/problems/two-sum/">☑ two-sum</a> <strong>找出数组中两个和为target的数（答案唯一）</strong></p>
 <div class="ulist">
 <ul>
 <li>
@@ -1904,7 +1937,7 @@ ListNode
 <div class="ulist">
 <ul>
 <li>
-<p><a href="https://leetcode.com/problems/3sum/">✔ 3sum</a> <strong>找到数组中和为0的三元数组</strong></p>
+<p><a href="https://leetcode.com/problems/3sum/">☑ 3sum</a> <strong>找到数组中和为0的三元数组</strong></p>
 <div class="ulist">
 <ul>
 <li>
@@ -1919,7 +1952,7 @@ ListNode
 <div class="ulist">
 <ul>
 <li>
-<p><a href="https://leetcode.com/problems/3sum-closest/">✔ 3sum-closest</a> <strong>找到数组中和最接近target的三元数组（答案唯一）</strong></p>
+<p><a href="https://leetcode.com/problems/3sum-closest/">☑ 3sum-closest</a> <strong>找到数组中和最接近target的三元数组（答案唯一）</strong></p>
 <div class="ulist">
 <ul>
 <li>
@@ -1934,7 +1967,7 @@ ListNode
 <div class="ulist">
 <ul>
 <li>
-<p><a href="https://leetcode.com/problems/4sum/">✔ 4sum</a></p>
+<p><a href="https://leetcode.com/problems/4sum/">☑ 4sum</a></p>
 <div class="ulist">
 <ul>
 <li>
@@ -2034,7 +2067,7 @@ ListNode
 <div class="ulist">
 <ul>
 <li>
-<p><a href="https://leetcode.com/problems/generate-parentheses/">✔ generate-parentheses</a> <strong>生成所有的n对括号序列</strong></p>
+<p><a href="https://leetcode.com/problems/generate-parentheses/">☑ generate-parentheses</a> <strong>生成所有的n对括号序列</strong></p>
 </li>
 <li>
 <p>保证开括号个数始终大于闭括号。</p>
@@ -2198,7 +2231,7 @@ ListNode
 <div class="ulist">
 <ul>
 <li>
-<p><span class="line-through"><a href="https://leetcode.com/problems/palindrome-number/">✔ palindrome-number</a> <strong>判断是否是回文数字，不能使用额外的空间。</strong></span></p>
+<p><span class="line-through"><a href="https://leetcode.com/problems/palindrome-number/">☑ palindrome-number</a> <strong>判断是否是回文数字，不能使用额外的空间。</strong></span></p>
 </li>
 </ul>
 </div>
@@ -2206,7 +2239,7 @@ ListNode
 <div class="ulist">
 <ul>
 <li>
-<p><a href="https://leetcode.com/problems/the-skyline-problem/">the-skyline-problem</a> <strong>柱状图的轮廓</strong></p>
+<p><a href="https://leetcode.com/problems/the-skyline-problem/">the-skyline-problem</a> <span class="red"><strong>柱状图的轮廓</strong></span></p>
 <div class="ulist">
 <ul>
 <li>
@@ -2224,7 +2257,7 @@ ListNode
 <div class="ulist">
 <ul>
 <li>
-<p><a href="https://leetcode.com/problems/container-with-most-water/">✔ container-with-most-water</a> <strong>一组整数，选择两个围成隔断，求装水最多的隔断</strong></p>
+<p><a href="https://leetcode.com/problems/container-with-most-water/">☑ container-with-most-water</a> <strong>一组整数，选择两个围成隔断，求装水最多的隔断</strong></p>
 <div class="ulist">
 <ul>
 <li>
@@ -2284,7 +2317,7 @@ ListNode
 <div class="ulist">
 <ul>
 <li>
-<p><a href="https://leetcode.com/problems/trapping-rain-water/">✔ trapping-rain-water</a> <strong>一组高度为整数的bar，注水过后能保存多少水</strong></p>
+<p><a href="https://leetcode.com/problems/trapping-rain-water/">☑ trapping-rain-water</a> <strong>一组高度为整数的bar，注水过后能保存多少水</strong></p>
 <div class="ulist">
 <ul>
 <li>
@@ -2462,7 +2495,7 @@ O(n^2)的算法,TLE
 <div class="ulist">
 <ul>
 <li>
-<p><a href="https://leetcode.com/problems/next-permutation/">✔ next-permutation</a> <strong>下一个排列</strong></p>
+<p><a href="https://leetcode.com/problems/next-permutation/">☑ next-permutation</a> <strong>下一个排列</strong></p>
 <div class="ulist">
 <ul>
 <li>
@@ -2676,7 +2709,7 @@ O(n^2)的算法,TLE
 <div class="ulist">
 <ul>
 <li>
-<p><a href="https://leetcode.com/problems/median-of-two-sorted-arrays/">✔ median-of-two-sorted-arrays</a> <strong>两个有序数组的中值</strong></p>
+<p><a href="https://leetcode.com/problems/median-of-two-sorted-arrays/">☑ median-of-two-sorted-arrays</a> <strong>两个有序数组的中值</strong></p>
 <div class="ulist">
 <ul>
 <li>
@@ -2803,7 +2836,7 @@ O(n^2)的算法,TLE
 <div class="ulist">
 <ul>
 <li>
-<p><a href="https://leetcode.com/problems/combination-sum/">✔ combination-sum</a> <strong>从集合中找到和为target的所有子集，每个子集从小到大排序</strong></p>
+<p><a href="https://leetcode.com/problems/combination-sum/">☑ combination-sum</a> <strong>从集合中找到和为target的所有子集，每个子集从小到大排序</strong></p>
 <div class="ulist">
 <ul>
 <li>
@@ -2877,7 +2910,7 @@ O(n^2)的算法,TLE
 <div class="ulist">
 <ul>
 <li>
-<p><a href="https://leetcode.com/problems/combination-sum-ii/">✔ combinationSum-sum-ii</a> <strong>每个元素只能使用一次</strong></p>
+<p><a href="https://leetcode.com/problems/combination-sum-ii/">☑ combinationSum-sum-ii</a> <strong>每个元素只能使用一次</strong></p>
 </li>
 </ul>
 </div>
@@ -2949,7 +2982,7 @@ O(n^2)的算法,TLE
 <div class="ulist">
 <ul>
 <li>
-<p><a href="https://leetcode.com/problems/combination-sum-iii/">✔ combination-sum-iii</a> <strong>从1 &#8230;&#8203; 9 中选择 k 个数字，使得和为 n</strong></p>
+<p><a href="https://leetcode.com/problems/combination-sum-iii/">☑ combination-sum-iii</a> <strong>从1 &#8230;&#8203; 9 中选择 k 个数字，使得和为 n</strong></p>
 </li>
 <li>
 <p>思路一：由于只有9个数字，问题空间是 <code>2^9</code> ，因此遍历所有 <code>C(9, 3)</code> 的组合然后看和是否为n即可。</p>
@@ -3026,6 +3059,104 @@ O(n^2)的算法,TLE
 </div>
 </details>
 <hr>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://leetcode.com/problems/minimum-window-substring/">☑ minimum-window-substring</a> <span class="red"><strong>给出一个字符串S，一个字母表T，找出S中包含T中所有字符的最短的连续子串（假设最短的只有一个）</strong></span></p>
+<div class="ulist">
+<ul>
+<li>
+<p>设T中的字母出现的次数分别为l1, l2, &#8230;&#8203;, ln，设置n个队列，每个队列都最多保存li个元素，存的是字母出现位置的下标。遍历S中的元素，加入队列，当所有队列都满时，查找所有队列头的最小值，与当前S中的下标相减，更新最小窗口宽度。</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<hr>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://leetcode.com/problems/substring-with-concatenation-of-all-words/">☐ substring-with-concatenation-of-all-words</a> <span class="red">字典中单词的长度固定，求字符串中所有只由单词组成的子串</span></p>
+</li>
+</ul>
+</div>
+<hr>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://leetcode.com/problems/sliding-window-maximum/">☐ sliding-window-maximum</a> <span class="red"><strong>长度为ｎ的数组，计算出所有k个连续元素中的最大值</strong></span></p>
+<div class="ulist">
+<ul>
+<li>
+<p>堆的话，可以更新最大值，但是无法定位到滑出窗口的元素，因此也无法删除。</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<hr>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://leetcode.com/problems/minimum-size-subarray-sum/">☑ minimum-size-subarray-sum</a> <strong>在数组中找到最短连续的子段，其和不小于给定值</strong></p>
+<div class="ulist">
+<ul>
+<li>
+<p>二分答案的方法， <code>O(nlogn)</code></p>
+</li>
+<li>
+<p>线性怎么做？还是 <strong>Two Pointers</strong> ，先添加右端元素，使和大于s，然后从左端开始删掉元素，使和不小于s，更新子段长度，继续在右端添加。</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<hr>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://leetcode.com/problems/find-the-duplicate-number/">find-the-duplicate-number</a> <strong>n + 1个数字全部来自于1 &#8230;&#8203; n，其中有且仅有一个数字出现了不止一次，找到这个数字。要求不能改变数组，不能使用额外空间，复杂度低于平方级别。</strong></p>
+<div class="ulist">
+<ul>
+<li>
+<p>主要是要求太多：</p>
+<div class="ulist">
+<ul>
+<li>
+<p>You must not modify the array (assume the array is read only).</p>
+</li>
+<li>
+<p>You must use only constant, O(1) extra space.</p>
+</li>
+<li>
+<p>Your runtime complexity should be less than O(n2).</p>
+</li>
+<li>
+<p>There is only one duplicate number in the array, but it could be repeated more than once.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>不能改变数组，不能使用额外空间，也就是不能对其进行排序了。</p>
+</li>
+<li>
+<p>也不能用Hash。</p>
+</li>
+<li>
+<p>被我想到了算法！那只能是用二分查找了！注意数字大小也是n，跟数字规模一样大，所以这题的复杂度是基于数字大小的。二分枚举一个数字x，然后遍历数组看有多少个元素小于等于它，如果x小于目标元素，那么小于等于x的元素个数应该是x。否则小于等于x的元素个数就会大于x。</p>
+</li>
+<li>
+<p>线性算法是，将数组看做链表，a_i = j，看做是第i个结点指向第j个节点。整个数组可能会形成很多环，但是没有元素指向最后一个元素，因此从最后一个元素出发，就不会再回来，即遇到了环，那么这个环的起点位置就是所求，因为至少有两个节点指向它。于是问题转换为求链表中环的开始位置。方法就是快慢指针，两者相交于环中的一个节点，然后让其中一个回到起点（节点n + 1），再让两个指针同时走，再次相交的位置就是答案。</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
 </div>
 </div>
 </div>
@@ -3104,29 +3235,6 @@ O(n^2)的算法,TLE
 <hr>
 <div class="ulist">
 <ul>
-<li>
-<p><a href="https://leetcode.com/problems/minimum-window-substring/">minimum-window-substring</a> <strong>给出一个字符串S，一个字母表T，找出S中包含T中所有字符的最短的连续子串（假设最短的只有一个）</strong></p>
-</li>
-<li>
-<p><a href="https://leetcode.com/problems/minimum-size-subarray-sum/">minimum-size-subarray-sum</a> <strong>在数组中找到最短连续的子段，其和不小于给定值</strong></p>
-<div class="ulist">
-<ul>
-<li>
-<p>二分答案的方法， <code>O(nlogn)</code></p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p><a href="https://leetcode.com/problems/find-the-duplicate-number/">find-the-duplicate-number</a> <strong>n + 1个数字全部来自于1 &#8230;&#8203; n，其中有且仅有一个数字出现了不止一次，找到这个数字。要求不能改变数组，不能使用额外空间，复杂度低于平方级别。</strong></p>
-<div class="ulist">
-<ul>
-<li>
-<p>不能改变数组，不能使用额外空间，也就是不能对其进行排序了。</p>
-</li>
-</ul>
-</div>
-</li>
 <li>
 <p><a href="http://www.careercup.com/question?id=15422849">pots-of-gold</a> <strong>一组整数，A、B两个玩家，每次只能在数组端点处拿走数字，最后拿走数字的人多的剩。谁有必胜策略？</strong></p>
 </li>
@@ -3231,7 +3339,7 @@ O(n^2)的算法,TLE
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-10-05 13:09:19 CST
+Last updated 2015-10-06 00:18:50 CST
 <script type="text/javascript" charset="utf-8">
 var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1254706632'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s11.cnzz.com/z_stat.php%3Fid%3D1254706632%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));
 </script>
