@@ -121,6 +121,55 @@ class Solution {
 
 '''
 
+* https://leetcode.com/problems/kth-largest-element-in-an-array/[☑ kth-largest-element-in-an-array] *数组第ｋ大元素*
+	* 基于partition的查找。
+
+++++
+<details>
+<summary>
+代码
+</summary>
+++++
+
+[source, C++, numbered]
+----
+class Solution {
+public:
+    int findKthLargest(vector<int>& nums, int k) {
+		int res;
+		int n = nums.size();
+		int lo = 0, hi = n - 1;
+		int pos;
+		while(lo < hi) {
+			pos = lo;
+			for (int i = lo; i < hi; ++i) {
+				if(nums[i] > nums[hi]) {
+					swap(nums[pos], nums[i]);
+					++pos;
+				}
+			}
+			swap(nums[pos], nums[hi]);
+			if(pos - lo == k - 1) return nums[pos];
+			else if(pos - lo < k - 1) {
+				k -= (pos - lo + 1); // 必须排除pivot元素，否则会造成死循环。
+				lo = pos + 1;
+			}
+			else {
+				hi = pos - 1;
+			}
+		}
+		assert(lo == hi);
+		return nums[lo];
+    }
+};
+----
+
+++++
+</details>
+++++
+
+'''
+
 * https://leetcode.com/problems/rotate-array/[✓ rotate-array] *数组循环移位*
 	** 方法一：使用额外的空间，B[(i + k) % n] = A[i]
 	** 方法二：三次反转。 `reverse(A, 0, k); reverse(A, k, n); reverse(0, n);`
@@ -1534,6 +1583,79 @@ public:
 	** 也不能用Hash。
 	** 被我想到了算法！那只能是用二分查找了！注意数字大小也是n，跟数字规模一样大，所以这题的复杂度是基于数字大小的。二分枚举一个数字x，然后遍历数组看有多少个元素小于等于它，如果x小于目标元素，那么小于等于x的元素个数应该是x。否则小于等于x的元素个数就会大于x。
 	** 线性算法是，将数组看做链表，a_i = j，看做是第i个结点指向第j个节点。整个数组可能会形成很多环，但是没有元素指向最后一个元素，因此从最后一个元素出发，就不会再回来，即遇到了环，那么这个环的起点位置就是所求，因为至少有两个节点指向它。于是问题转换为求链表中环的开始位置。方法就是快慢指针，两者相交于环中的一个节点，然后让其中一个回到起点（节点n + 1），再让两个指针同时走，再次相交的位置就是答案。
+
+'''
+
+* https://leetcode.com/problems/jump-game/[☑ jump-game] *数组中每个数字代表从该位置开始，能向下走的步数，求能否从第一个走到最后一个*
+	** DFS 会超时。
+	** 线性的算法是，计算出从起点出发，能达到的最远距离，如果这个距离大于最后一个元素的位置，则可行。
+
+++++
+<details>
+<summary>
+代码
+</summary>
+++++
+
+[source, C++, numbered]
+----
+class Solution {
+public:
+    bool canJump(vector<int>& nums) {
+		int n = nums.size(), maxlen = 0;
+		for (int i = 0; i <= maxlen && i < n; ++i) {
+			maxlen = max(maxlen, nums[i] + i);
+		}
+		return maxlen >= n - 1;
+    }
+};
+----
+
+++++
+</details>
+++++
+
+'''
+
+* https://leetcode.com/problems/jump-game-ii/[jump-game-ii] *求上题中，跳到最后一个元素时，中间节点最少的那个路径*
+	** BFS超时了。没想到这题这么简单，不像Hard。
+	** 每步都会有一个最长距离，每次更新这个最长距离，看什么时候终点落在这个距离范围内。
+
+++++
+<details>
+<summary>
+代码
+</summary>
+++++
+
+[source, C++, numbered]
+----
+class Solution {
+    public:
+        int jump(vector<int>& nums) {
+            int n = nums.size();
+			int start = 0, end = 0;
+			int maxv, steps = 0;
+			while(end < n - 1) {
+				maxv = start + nums[start];
+				for (int i = start + 1; i <= end; ++i) {
+					if(maxv < i + nums[i])
+						maxv = i +nums[i];
+				}
+				start = end + 1;
+				end = maxv;
+				++steps;
+			}
+			return steps;
+        }
+};
+----
+
+++++
+</details>
+++++
+
+'''
 
 == Careercup
 
