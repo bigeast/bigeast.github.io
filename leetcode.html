@@ -542,6 +542,9 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li>
 <p>盯着代码看，就想出来了。找上下界与一般二分查找的不同之处是，在找到目标元素后是否还继续寻找。</p>
 </li>
+<li>
+<p><a href="https://leetcode.com/discuss/18242/clean-iterative-solution-binary-searches-with-explanation">此处</a>的解释比较严谨，要搞明白！其实代码可以很简单，但是需要复杂的证明，说明为什么正确。<span class="red">相比之下我的代码更加直接，只是有些复杂。</span> Bug多多。</p>
+</li>
 </ul>
 </div>
 </li>
@@ -628,7 +631,13 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p><a href="https://leetcode.com/problems/kth-largest-element-in-an-array/">☑ kth-largest-element-in-an-array</a> <strong>数组第ｋ大元素</strong></p>
 </li>
 <li>
-<p>基于partition的查找。</p>
+<p>基于partition的查找。可以自己实现，也可以直接调用 <code>nth_element</code></p>
+</li>
+<li>
+<p>基于堆排序。可以使用 <code>priority_queue</code></p>
+</li>
+<li>
+<p>基于 <code>multiset</code> ，也即二叉查找树。</p>
 </li>
 </ul>
 </div>
@@ -3169,11 +3178,63 @@ O(n^2)的算法,TLE
 <li>
 <p>堆的话，可以更新最大值，但是无法定位到滑出窗口的元素，因此也无法删除。</p>
 </li>
+<li>
+<p>单调队列。队列单调递减，加入元素时，如果后出现的数比先出现的数大，则先出现的数不可能是最大值，故可以删除。因此只需将新元素放到从队尾到队头方向第一个比他大的数后面。要取最大值时，弹出队头元素，并检查其下标是否在窗口中。</p>
+</li>
 </ul>
 </div>
 </li>
 </ul>
 </div>
+<details>
+<summary>
+代码
+</summary>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="C++"><table class="pyhltable"><tr><td class="linenos"><div class="linenodiv"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20</div></td><td class="code"><span class="tok-k">class</span> <span class="tok-nc">Solution</span> <span class="tok-p">{</span>
+<span class="tok-k">public</span><span class="tok-o">:</span>
+    <span class="tok-n">vector</span><span class="tok-o">&lt;</span><span class="tok-kt">int</span><span class="tok-o">&gt;</span> <span class="tok-n">maxSlidingWindow</span><span class="tok-p">(</span><span class="tok-n">vector</span><span class="tok-o">&lt;</span><span class="tok-kt">int</span><span class="tok-o">&gt;&amp;</span> <span class="tok-n">nums</span><span class="tok-p">,</span> <span class="tok-kt">int</span> <span class="tok-n">k</span><span class="tok-p">)</span> <span class="tok-p">{</span>
+		<span class="tok-n">deque</span><span class="tok-o">&lt;</span><span class="tok-kt">int</span><span class="tok-o">&gt;</span> <span class="tok-n">Q</span><span class="tok-p">;</span>
+		<span class="tok-n">vector</span><span class="tok-o">&lt;</span><span class="tok-kt">int</span><span class="tok-o">&gt;</span> <span class="tok-n">res</span><span class="tok-p">;</span>
+		<span class="tok-kt">int</span> <span class="tok-n">n</span> <span class="tok-o">=</span> <span class="tok-n">nums</span><span class="tok-p">.</span><span class="tok-n">size</span><span class="tok-p">();</span>
+		<span class="tok-k">for</span> <span class="tok-p">(</span><span class="tok-kt">int</span> <span class="tok-n">i</span> <span class="tok-o">=</span> <span class="tok-mi">0</span><span class="tok-p">;</span> <span class="tok-n">i</span> <span class="tok-o">&lt;</span> <span class="tok-n">n</span><span class="tok-p">;</span> <span class="tok-o">++</span><span class="tok-n">i</span><span class="tok-p">)</span> <span class="tok-p">{</span>
+			<span class="tok-k">while</span><span class="tok-p">(</span><span class="tok-o">!</span><span class="tok-n">Q</span><span class="tok-p">.</span><span class="tok-n">empty</span><span class="tok-p">()</span> <span class="tok-o">&amp;&amp;</span> <span class="tok-n">nums</span><span class="tok-p">[</span><span class="tok-n">Q</span><span class="tok-p">.</span><span class="tok-n">back</span><span class="tok-p">()]</span> <span class="tok-o">&lt;=</span> <span class="tok-n">nums</span><span class="tok-p">[</span><span class="tok-n">i</span><span class="tok-p">])</span>
+				<span class="tok-n">Q</span><span class="tok-p">.</span><span class="tok-n">pop_back</span><span class="tok-p">();</span>
+			<span class="tok-n">Q</span><span class="tok-p">.</span><span class="tok-n">push_back</span><span class="tok-p">(</span><span class="tok-n">i</span><span class="tok-p">);</span>
+			<span class="tok-k">if</span><span class="tok-p">(</span><span class="tok-n">i</span> <span class="tok-o">&gt;=</span> <span class="tok-n">k</span> <span class="tok-o">-</span> <span class="tok-mi">1</span><span class="tok-p">)</span> <span class="tok-p">{</span>
+				<span class="tok-k">while</span><span class="tok-p">(</span><span class="tok-o">!</span><span class="tok-n">Q</span><span class="tok-p">.</span><span class="tok-n">empty</span><span class="tok-p">()</span> <span class="tok-o">&amp;&amp;</span> <span class="tok-n">i</span> <span class="tok-o">-</span> <span class="tok-n">Q</span><span class="tok-p">.</span><span class="tok-n">front</span><span class="tok-p">()</span> <span class="tok-o">&gt;=</span> <span class="tok-n">k</span><span class="tok-p">)</span> <span class="tok-p">{</span>
+					<span class="tok-n">Q</span><span class="tok-p">.</span><span class="tok-n">pop_front</span><span class="tok-p">();</span>
+				<span class="tok-p">}</span>
+				<span class="tok-n">res</span><span class="tok-p">.</span><span class="tok-n">push_back</span><span class="tok-p">(</span><span class="tok-n">nums</span><span class="tok-p">[</span><span class="tok-n">Q</span><span class="tok-p">.</span><span class="tok-n">front</span><span class="tok-p">()]);</span>
+			<span class="tok-p">}</span>
+		<span class="tok-p">}</span>
+		<span class="tok-k">return</span> <span class="tok-n">res</span><span class="tok-p">;</span>
+    <span class="tok-p">}</span>
+<span class="tok-p">};</span>
+</td></tr></table></code></pre>
+</div>
+</div>
+</details>
 <hr>
 <div class="ulist">
 <ul>
@@ -3530,7 +3591,7 @@ O(n^2)的算法,TLE
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-10-06 16:39:11 CST
+Last updated 2015-10-07 00:20:17 CST
 <script type="text/javascript" charset="utf-8">
 var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1254706632'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s11.cnzz.com/z_stat.php%3Fid%3D1254706632%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));
 </script>

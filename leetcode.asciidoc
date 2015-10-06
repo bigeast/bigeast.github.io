@@ -38,6 +38,9 @@ int maximumGap(std::vector<int> &num) {
 * https://leetcode.com/problems/search-for-a-range[☑ Search for a range] *有序数组里的 lower_bound 和 upper_bound*
 	** [line-through]#突然发现自己好像还不会这个。想了一下也没想出来，应该是二分查找稍微变形一下#
 	** 盯着代码看，就想出来了。找上下界与一般二分查找的不同之处是，在找到目标元素后是否还继续寻找。
+	** https://leetcode.com/discuss/18242/clean-iterative-solution-binary-searches-with-explanation[此处]的解释比较严谨，要搞明白！其实代码可以很简单，但是需要复杂的证明，说明为什么正确。[red]#相比之下我的代码更加直接，只是有些复杂。# Bug多多。
+	
+
 
 ++++
 <details>
@@ -122,7 +125,9 @@ class Solution {
 '''
 
 * https://leetcode.com/problems/kth-largest-element-in-an-array/[☑ kth-largest-element-in-an-array] *数组第ｋ大元素*
-	* 基于partition的查找。
+	* 基于partition的查找。可以自己实现，也可以直接调用 `nth_element`
+	* 基于堆排序。可以使用 `priority_queue`
+	* 基于 `multiset` ，也即二叉查找树。
 
 ++++
 <details>
@@ -1564,6 +1569,42 @@ public:
 
 * https://leetcode.com/problems/sliding-window-maximum/[☐ sliding-window-maximum] [red]#*长度为ｎ的数组，计算出所有k个连续元素中的最大值*#
 	** 堆的话，可以更新最大值，但是无法定位到滑出窗口的元素，因此也无法删除。
+	** 单调队列。队列单调递减，加入元素时，如果后出现的数比先出现的数大，则先出现的数不可能是最大值，故可以删除。因此只需将新元素放到从队尾到队头方向第一个比他大的数后面。要取最大值时，弹出队头元素，并检查其下标是否在窗口中。
+
+++++
+<details>
+<summary>
+代码
+</summary>
+++++
+
+[source, C++, numbered]
+----
+class Solution {
+public:
+    vector<int> maxSlidingWindow(vector<int>& nums, int k) {
+		deque<int> Q;
+		vector<int> res;
+		int n = nums.size();
+		for (int i = 0; i < n; ++i) {
+			while(!Q.empty() && nums[Q.back()] <= nums[i])
+				Q.pop_back();
+			Q.push_back(i);
+			if(i >= k - 1) {
+				while(!Q.empty() && i - Q.front() >= k) {
+					Q.pop_front();
+				}
+				res.push_back(nums[Q.front()]);
+			}
+		}
+		return res;
+    }
+};
+----
+
+++++
+</details>
+++++
 
 '''
 
