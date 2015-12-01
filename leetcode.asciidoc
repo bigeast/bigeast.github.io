@@ -6,6 +6,8 @@
 * https://leetcode.com/problems/maximum-gap[☑ Maximum Gap] *一个无序的数组，在线性时间内，找到排好序后，相邻两个元素之间差值的最大值。*
 	** https://leetcode.com/discuss/18487/i-solved-it-using-radix-sort[讨论区题解] 思想是，得到最大值 maxv 和最小值 minv 后，可确定最大差值的下限为 _L = (maxv - minv) / (N - 1)_ 。将[minv, maxv] 等距分割成 N - 1 段（或者更多的段，因为每段距离只要短于L，就不需要考虑段内的差值，因此对结果都不会有影响），记录每一段的最大值和最小值，最终比较某段的最小值与它前面一段的最大值之差，最大的差即为答案。 
 	** [red]#基数排序#
+	** [green]#如果是求差值的最小值呢？#
+	** 脑洞：任意两个元素差值的最大值，也就是最大和最小值的差。可以用最大子数组的方法做。
 
 ++++
 <details>
@@ -40,8 +42,6 @@ int maximumGap(std::vector<int> &num) {
 	** 盯着代码看，就想出来了。找上下界与一般二分查找的不同之处是，在找到目标元素后是否还继续寻找。
 	** https://leetcode.com/discuss/18242/clean-iterative-solution-binary-searches-with-explanation[此处]的解释比较严谨，要搞明白！其实代码可以很简单，但是需要复杂的证明，说明为什么正确。[red]#相比之下我的代码更加直接，只是有些复杂。# Bug多多。
 	
-
-
 ++++
 <details>
 <summary>
@@ -371,7 +371,7 @@ public:
 		int idx0 = 0, idx2 = n - 1;
 		for (int i = 0; i <= idx2;) {
 			if(nums[i] == 0) {
-				swap(nums[i++], nums[idx0++]); // 遇到1要i++，因为新的i值是从前面的元素换过来的，不会是1了。
+				swap(nums[i++], nums[idx0++]); // 遇到0要i++，因为新的i值是从前面的元素换过来的，不会是0了。
 			}
 			else if(nums[i] == 2) {
 				swap(nums[i], nums[idx2--]); // 遇到2时，不更新i，因为新的nums[i]还有可能是2。
@@ -1770,11 +1770,12 @@ function max_coin( int *coin, int start, int end ):
 * http://www.careercup.com/question?id=6287528252407808[k-Palindrome] *给定一个字符串，判断是否能通过删除不超过k个字符将其变为回文串*
 	** 定义编辑操作只能是删除，然后计算字符串与其反串之间的编辑距离。复杂度 `O(n^2)`
 	** 参考最短编辑距离的方法，在计算f[i][j]时，最多只需用到 f[i - 1][j - k] ... f[i - 1][j + k]，因此复杂度可以降到 `O(nk)`
+
 '''
 
 * http://www.careercup.com/question?id=19286747[maxium-sub-array-diff] *找到数组中两个不相交的连续子数组，使得它们之间的差值最大*
 	** 两次遍历，第一次从0到n-1，计算 forwardMax[i]，forwardMin[i]；第二次从 n - 1到 0，计算 backwardMax[i]，backwardMin[i]
-	** 最后一次遍历，计算 max(abs(forwardMax[i] - backwardMin[i +1]), abs(forwardMin[i] - backwardMax[i +1]))，并更新答案。
+	** 最后一次遍历，计算 max(abs(forwardMax[i] - backwardMin[i + 1]), abs(forwardMin[i] - backwardMax[i + 1]))，并更新答案。
 
 '''
 

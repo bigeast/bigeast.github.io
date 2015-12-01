@@ -493,6 +493,12 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li>
 <p><span class="red">基数排序</span></p>
 </li>
+<li>
+<p><span class="green">如果是求差值的最小值呢？</span></p>
+</li>
+<li>
+<p>脑洞：任意两个元素差值的最大值，也就是最大和最小值的差。可以用最大子数组的方法做。</p>
+</li>
 </ul>
 </div>
 </li>
@@ -1077,7 +1083,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 		<span class="tok-kt">int</span> <span class="tok-n">idx0</span> <span class="tok-o">=</span> <span class="tok-mi">0</span><span class="tok-p">,</span> <span class="tok-n">idx2</span> <span class="tok-o">=</span> <span class="tok-n">n</span> <span class="tok-o">-</span> <span class="tok-mi">1</span><span class="tok-p">;</span>
 		<span class="tok-k">for</span> <span class="tok-p">(</span><span class="tok-kt">int</span> <span class="tok-n">i</span> <span class="tok-o">=</span> <span class="tok-mi">0</span><span class="tok-p">;</span> <span class="tok-n">i</span> <span class="tok-o">&lt;=</span> <span class="tok-n">idx2</span><span class="tok-p">;)</span> <span class="tok-p">{</span>
 			<span class="tok-k">if</span><span class="tok-p">(</span><span class="tok-n">nums</span><span class="tok-p">[</span><span class="tok-n">i</span><span class="tok-p">]</span> <span class="tok-o">==</span> <span class="tok-mi">0</span><span class="tok-p">)</span> <span class="tok-p">{</span>
-				<span class="tok-n">swap</span><span class="tok-p">(</span><span class="tok-n">nums</span><span class="tok-p">[</span><span class="tok-n">i</span><span class="tok-o">++</span><span class="tok-p">],</span> <span class="tok-n">nums</span><span class="tok-p">[</span><span class="tok-n">idx0</span><span class="tok-o">++</span><span class="tok-p">]);</span> <span class="tok-c1">// 遇到1要i++，因为新的i值是从前面的元素换过来的，不会是1了。</span>
+				<span class="tok-n">swap</span><span class="tok-p">(</span><span class="tok-n">nums</span><span class="tok-p">[</span><span class="tok-n">i</span><span class="tok-o">++</span><span class="tok-p">],</span> <span class="tok-n">nums</span><span class="tok-p">[</span><span class="tok-n">idx0</span><span class="tok-o">++</span><span class="tok-p">]);</span> <span class="tok-c1">// 遇到0要i++，因为新的i值是从前面的元素换过来的，不会是0了。</span>
 			<span class="tok-p">}</span>
 			<span class="tok-k">else</span> <span class="tok-k">if</span><span class="tok-p">(</span><span class="tok-n">nums</span><span class="tok-p">[</span><span class="tok-n">i</span><span class="tok-p">]</span> <span class="tok-o">==</span> <span class="tok-mi">2</span><span class="tok-p">)</span> <span class="tok-p">{</span>
 				<span class="tok-n">swap</span><span class="tok-p">(</span><span class="tok-n">nums</span><span class="tok-p">[</span><span class="tok-n">i</span><span class="tok-p">],</span> <span class="tok-n">nums</span><span class="tok-p">[</span><span class="tok-n">idx2</span><span class="tok-o">--</span><span class="tok-p">]);</span> <span class="tok-c1">// 遇到2时，不更新i，因为新的nums[i]还有可能是2。</span>
@@ -3525,12 +3531,16 @@ O(n^2)的算法,TLE
 <p>定义编辑操作只能是删除，然后计算字符串与其反串之间的编辑距离。复杂度 <code>O(n^2)</code></p>
 </li>
 <li>
-<p>参考最短编辑距离的方法，在计算f[i][j]时，最多只需用到 f[i - 1][j - k] &#8230;&#8203; f[i - 1][j + k]，因此复杂度可以降到 <code>O(nk)</code>
-'''</p>
+<p>参考最短编辑距离的方法，在计算f[i][j]时，最多只需用到 f[i - 1][j - k] &#8230;&#8203; f[i - 1][j + k]，因此复杂度可以降到 <code>O(nk)</code></p>
 </li>
 </ul>
 </div>
 </li>
+</ul>
+</div>
+<hr>
+<div class="ulist">
+<ul>
 <li>
 <p><a href="http://www.careercup.com/question?id=19286747">maxium-sub-array-diff</a> <strong>找到数组中两个不相交的连续子数组，使得它们之间的差值最大</strong></p>
 <div class="ulist">
@@ -3539,7 +3549,7 @@ O(n^2)的算法,TLE
 <p>两次遍历，第一次从0到n-1，计算 forwardMax[i]，forwardMin[i]；第二次从 n - 1到 0，计算 backwardMax[i]，backwardMin[i]</p>
 </li>
 <li>
-<p>最后一次遍历，计算 max(abs(forwardMax[i] - backwardMin[i +1]), abs(forwardMin[i] - backwardMax[i +1]))，并更新答案。</p>
+<p>最后一次遍历，计算 max(abs(forwardMax[i] - backwardMin[i + 1]), abs(forwardMin[i] - backwardMax[i + 1]))，并更新答案。</p>
 </li>
 </ul>
 </div>
@@ -3591,7 +3601,7 @@ O(n^2)的算法,TLE
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-10-07 00:20:17 CST
+Last updated 2015-12-01 18:55:57 CST
 <script type="text/javascript" charset="utf-8">
 var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1254706632'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s11.cnzz.com/z_stat.php%3Fid%3D1254706632%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));
 </script>
