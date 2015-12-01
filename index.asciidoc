@@ -2,17 +2,17 @@
 :pygments-style: manni
 == Bigeast's Blog
 
-=== link:http://138.128.221.113:8000[我的简历]
 
-=== 计算机
-link:codingInterview.html[Coding Interview]
+//=== 计算机
+//link:codingInterview.html[Coding Interview]
 
-link:leetcode.html[Leetcode]
+//link:leetcode.html[Leetcode]
 
-link:SortAlgo.html[排序算法]
+//link:SortAlgo.html[排序算法]
 
-link:Problems.html[Problems to Solve]
+//link:Problems.html[Problems to Solve]
 
+=== Book Notes
 link:books/linuxfaner.html[Linux就是这个范儿]
 
 link:InternetSocket.html[网络编程基础]
@@ -20,7 +20,6 @@ link:InternetSocket.html[网络编程基础]
 link:books/JS-OO.html[JavaScript面向对象编程]
 
 
-=== Book Notes
 link:Kindle.html[Kindle Paperwhite 3 入手体验]
 
 link:oneplus2.html[一加手机二 入手体验]
@@ -53,9 +52,12 @@ link:books/ddj.html[道德经]
 |link:2015-07.html[2015-07 笔记]
 |link:2015-08.html[2015-08 笔记]
 |link:2015-09.html[2015-09 笔记]
+|link:2015-12.html[2015-12 笔记]
 |====================
 
 === Translate
 link:Ng.html[Andrew Ng 谈百度深度学习的现状]
+
+=== link:http://138.128.221.113:8000[我的简历]
 
 :docinfo:

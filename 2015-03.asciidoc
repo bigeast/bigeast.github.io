@@ -1,7 +1,5 @@
 :source-highlighter: pygments
 :pygments-style: manni
-:source-highlighter: pygments
-:pygments-style: manni
 == 2015-03-03 Tuesday 20:02:29
 === xdg-mime设置默认程序
 [source, bash]
