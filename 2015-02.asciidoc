@@ -72,7 +72,7 @@ _Alt-n,p_ 上、下滚屏。
 [source, bash]
 /msg alis list social -topic social
 
-也可以在一些http://irc.netsplit.de/channels/?net=freenode&num=10[网站]上搜。可以看到Freenode上排名靠前的都是 _开源软件/操作系统_ 相关的话题。开源软件的流行可能是在其他IRC网络都走向衰退的情况下，Freenode却能增长平稳扩张，成为现在http://royal.pingdom.com/2012/04/24/irc-is-dead-long-live-irc[可能是最大的IRC网络]的原因吧。
+也可以在一些 http://irc.netsplit.de/channels/?net=freenode&num=10[网站] 上搜。可以看到Freenode上排名靠前的都是 _开源软件/操作系统_ 相关的话题。开源软件的流行可能是在其他IRC网络都走向衰退的情况下，Freenode却能增长平稳扩张，成为现在 http://royal.pingdom.com/2012/04/24/irc-is-dead-long-live-irc[可能是最大的IRC网络] 的原因吧。
 
 Freenode虽然是最大，但最高同时在线人数也不超过十万，而且是全世界范围内的。而QQ都上亿了，差距不是一般的大。:)
 
