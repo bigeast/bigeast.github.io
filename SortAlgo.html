@@ -5,7 +5,7 @@
 <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 1.5.2">
-<title>Beej&#8217;s Guide to Network Programming Using Internet Sockets</title>
+<title>排序算法总结</title>
 <style>
 /* Asciidoctor default stylesheet | MIT License | http://asciidoctor.org */
 /* Remove the comments around the @import statement below when using this as a custom stylesheet */
@@ -477,141 +477,368 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div id="content">
 <div class="sect1">
-<h2 id="__a_href_http_beej_us_guide_bgnet_output_html_multipage_index_html_beej_s_guide_to_network_programming_using_internet_sockets_a"><a href="http://beej.us/guide/bgnet/output/html/multipage/index.html">Beej&#8217;s Guide to Network Programming Using Internet Sockets</a></h2>
+<h2 id="_排序算法总结">排序算法总结</h2>
 <div class="sectionbody">
 <div class="ulist">
 <ul>
 <li>
-<p>socket也用文件描述符来标记，与文件不同的是，它是用 recv(2) 和 send(2) 来读写。</p>
+<p>需要占用额外空间： <strong>归并排序、计数排序、基数排序、桶排序。</strong></p>
 </li>
 <li>
-<p>telnet登录到80端口</p>
+<p>不占用额外内存或占用常数的内存： <strong>插入排序、选择排序、冒泡排序、堆排序、快速排序。</strong></p>
+</li>
+<li>
+<p>稳定排序： <strong>插入排序、冒泡排序、归并排序、计数排序、基数排序、桶排序</strong></p>
+</li>
+<li>
+<p>非稳定排序： <strong>选择排序、快排、堆排序</strong></p>
 </li>
 </ul>
 </div>
-<div class="listingblock">
-<div class="content">
-<pre>$ telnet baidu.com 80
-Trying 180.149.132.47...
-Connected to baidu.com.
-Escape character is '^]'.
-GET / HTTP/1.0
-
-HTTP/1.1 200 OK
-Date: Tue, 28 Apr 2015 00:36:27 GMT
-Server: Apache
-Cache-Control: max-age=86400
-Expires: Wed, 29 Apr 2015 00:36:27 GMT
-Last-Modified: Tue, 12 Jan 2010 13:48:00 GMT
-ETag: "51-4b4c7d90"
-Accept-Ranges: bytes
-Content-Length: 81
-Connection: Close
-Content-Type: text/html
-
-&lt;html&gt;
-&lt;meta http-equiv="refresh" content="0;url=http://www.baidu.com/"&gt;
-&lt;/html&gt;
-Connection closed by foreign host.</pre>
-</div>
-</div>
+<div class="sect2">
+<h3 id="_详细说明">详细说明</h3>
+<div class="sect3">
+<h4 id="_插入排序">插入排序</h4>
 <div class="ulist">
 <ul>
 <li>
-<p>两种主要的socket类型：SOCK_STREAM 和 SOCK_DGRAM 。stream套接字用send()发送，datagram套接字用sendto()发送。数据包的包装是内核与硬件的事情。</p>
+<p>每次将新元素插入到已排好序的子数组中。</p>
 </li>
 <li>
-<p>RFC793 TCP</p>
+<p>如果数组已经排好序，复杂度是 <code>O(n)</code> ，优于快排。</p>
 </li>
 <li>
-<p>RFC791 IP</p>
-</li>
-<li>
-<p>RFC768 <strong>UDP</strong>, tftp, dhcpcd</p>
-</li>
-<li>
-<p>ISO/OSI七层模型</p>
+<p><strong>操作次数等于逆序对的个数。</strong></p>
 </li>
 </ul>
 </div>
+<details>
+<summary>
+代码
+</summary>
 <div class="listingblock">
 <div class="content">
-<pre>    Application
-    Presentation
-    Session
-    Transport
-    Network
-    Data Link
-    Physical</pre>
+<pre class="pygments highlight"><code data-lang="C++"><table class="pyhltable"><tr><td class="linenos"><div class="linenodiv"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12</div></td><td class="code"><span class="tok-kt">void</span> <span class="tok-nf">Insertion_Sort</span><span class="tok-p">(</span><span class="tok-n">vector</span><span class="tok-o">&lt;</span><span class="tok-kt">int</span><span class="tok-o">&gt;</span> <span class="tok-o">&amp;</span><span class="tok-n">A</span><span class="tok-p">)</span> <span class="tok-p">{</span>
+	<span class="tok-kt">int</span> <span class="tok-n">n</span> <span class="tok-o">=</span> <span class="tok-n">A</span><span class="tok-p">.</span><span class="tok-n">size</span><span class="tok-p">();</span>
+	<span class="tok-kt">int</span> <span class="tok-n">curr</span><span class="tok-p">;</span>
+	<span class="tok-k">for</span><span class="tok-p">(</span><span class="tok-kt">int</span> <span class="tok-n">i</span> <span class="tok-o">=</span> <span class="tok-mi">1</span><span class="tok-p">,</span> <span class="tok-n">j</span><span class="tok-p">;</span> <span class="tok-n">i</span> <span class="tok-o">&lt;</span> <span class="tok-n">n</span><span class="tok-p">;</span> <span class="tok-o">++</span><span class="tok-n">i</span><span class="tok-p">)</span> <span class="tok-p">{</span> <span class="tok-c1">// A[0]已经排好序，依次将A[1 ... n - 1]插入进去</span>
+		<span class="tok-n">curr</span> <span class="tok-o">=</span> <span class="tok-n">A</span><span class="tok-p">[</span><span class="tok-n">i</span><span class="tok-p">];</span> <span class="tok-c1">// 待插入元素</span>
+		<span class="tok-k">for</span><span class="tok-p">(</span><span class="tok-n">j</span> <span class="tok-o">=</span> <span class="tok-n">i</span> <span class="tok-o">-</span> <span class="tok-mi">1</span><span class="tok-p">;</span> <span class="tok-n">j</span> <span class="tok-o">&gt;=</span> <span class="tok-mi">0</span> <span class="tok-o">&amp;&amp;</span> <span class="tok-n">A</span><span class="tok-p">[</span><span class="tok-n">j</span><span class="tok-p">]</span> <span class="tok-o">&gt;</span> <span class="tok-n">curr</span><span class="tok-p">;</span> <span class="tok-o">--</span><span class="tok-n">j</span><span class="tok-p">)</span> <span class="tok-p">{</span> <span class="tok-c1">// 比 curr 大的就往后挪一位</span>
+			<span class="tok-n">A</span><span class="tok-p">[</span><span class="tok-n">j</span> <span class="tok-o">+</span> <span class="tok-mi">1</span><span class="tok-p">]</span> <span class="tok-o">=</span> <span class="tok-n">A</span><span class="tok-p">[</span><span class="tok-n">j</span><span class="tok-p">];</span>
+		<span class="tok-p">}</span>
+		<span class="tok-n">A</span><span class="tok-p">[</span><span class="tok-n">j</span> <span class="tok-o">+</span> <span class="tok-mi">1</span><span class="tok-p">]</span> <span class="tok-o">=</span> <span class="tok-n">curr</span><span class="tok-p">;</span> <span class="tok-c1">// 把 curr 插在最后一个比它大的位置（该位置的元素已经挪到了后面）</span>
+	<span class="tok-p">}</span>
+	<span class="tok-k">return</span> <span class="tok-p">;</span>
+<span class="tok-p">}</span>
+</td></tr></table></code></pre>
 </div>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p>实际系统中的网络模型更接近于</p>
-</li>
-</ul>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>    Application Layer (telnet, ftp, etc.)
-    Host-to-Host Transport Layer (TCP, UDP)
-    Internet Layer (IP and routing)
-    Network Access Layer (Ethernet, wi-fi, or whatever)</pre>
-</div>
-</div>
+</details>
 <hr>
+</div>
+<div class="sect3">
+<h4 id="_冒泡排序">冒泡排序</h4>
 <div class="ulist">
 <ul>
 <li>
-<p>IPv4 2<sup>32</sup>，IPv6 2<sup>128</sup></p>
+<p>每次在剩余未排序的元素中选择一个最小的放在已排序的数组后面。</p>
 </li>
 <li>
-<p>pipe系统调用的用法</p>
-<div class="ulist">
-<ul>
-<li>
-<p>参数是一个长度为2的整型数组，pipe()之后进行fork()，子进程和父进程一个读一个写。如果子进程读，父进程写，则在子进程中要先关闭fildes[1]（不会去写）, 父进程中要先关闭fildes[0]（不会去读）。</p>
-</li>
-<li>
-<p>能否同时读写，即双向管道？</p>
-</li>
-<li>
-<p>管道机制是怎么实现的，fork之后，两个进程中的描述符是如何保持联系的？</p>
-</li>
-<li>
-<p>文件描述符和文件流的连接：fdopen</p>
-</li>
-<li>
-<p>管道的典型使用方式是，pipe&#8594;fork&#8594;dup2&#8594;exec，这个流程实际上实现了将子进程的stdout或者stdin绑定到一个管道，从而与父进程进行通信。库函数popen()实现的功能与之类似，相当于用bash -c 执行一条命令，然后可以指定父进程对管道是读还是写。</p>
-</li>
-<li>
-<p>管道I/O的原子性。当数据大小不超过PIPE_BUF时，管道的读或者写是原子的。 <em>如何理解?</em></p>
+<p><strong>交换次数等于逆序对的个数。</strong></p>
 </li>
 </ul>
 </div>
-</li>
-<li>
-<p>本机字节序与网络字节序之间的转换</p>
+<details>
+<summary>
+代码
+</summary>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="C++"><table class="pyhltable"><tr><td class="linenos"><div class="linenodiv"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11</div></td><td class="code"><span class="tok-kt">void</span> <span class="tok-nf">Bubble_Sort</span><span class="tok-p">(</span><span class="tok-n">vector</span><span class="tok-o">&lt;</span><span class="tok-kt">int</span><span class="tok-o">&gt;</span> <span class="tok-o">&amp;</span><span class="tok-n">A</span><span class="tok-p">)</span> <span class="tok-p">{</span>
+	<span class="tok-kt">int</span> <span class="tok-n">n</span> <span class="tok-o">=</span> <span class="tok-n">A</span><span class="tok-p">.</span><span class="tok-n">size</span><span class="tok-p">();</span>
+	<span class="tok-k">for</span> <span class="tok-p">(</span><span class="tok-kt">int</span> <span class="tok-n">i</span> <span class="tok-o">=</span> <span class="tok-mi">0</span><span class="tok-p">;</span> <span class="tok-n">i</span> <span class="tok-o">&lt;</span> <span class="tok-n">n</span><span class="tok-p">;</span> <span class="tok-o">++</span><span class="tok-n">i</span><span class="tok-p">)</span> <span class="tok-p">{</span>
+		<span class="tok-k">for</span> <span class="tok-p">(</span><span class="tok-kt">int</span> <span class="tok-n">j</span> <span class="tok-o">=</span> <span class="tok-n">n</span> <span class="tok-o">-</span> <span class="tok-mi">1</span><span class="tok-p">;</span> <span class="tok-n">j</span> <span class="tok-o">&gt;</span> <span class="tok-n">i</span><span class="tok-p">;</span> <span class="tok-o">--</span><span class="tok-n">j</span><span class="tok-p">)</span> <span class="tok-p">{</span> <span class="tok-c1">// 也可以使用递增循环，只不过让大的元素一直下降。</span>
+			<span class="tok-k">if</span><span class="tok-p">(</span><span class="tok-n">A</span><span class="tok-p">[</span><span class="tok-n">j</span><span class="tok-p">]</span> <span class="tok-o">&lt;</span> <span class="tok-n">A</span><span class="tok-p">[</span><span class="tok-n">j</span> <span class="tok-o">-</span> <span class="tok-mi">1</span><span class="tok-p">])</span> <span class="tok-p">{</span> <span class="tok-c1">// 小的元素一直往前上浮</span>
+				<span class="tok-n">swap</span><span class="tok-p">(</span><span class="tok-n">A</span><span class="tok-p">[</span><span class="tok-n">j</span><span class="tok-p">],</span> <span class="tok-n">A</span><span class="tok-p">[</span><span class="tok-n">j</span> <span class="tok-o">-</span> <span class="tok-mi">1</span><span class="tok-p">]);</span>
+			<span class="tok-p">}</span>
+		<span class="tok-p">}</span>
+	<span class="tok-p">}</span>
+	<span class="tok-k">return</span> <span class="tok-p">;</span>
+<span class="tok-p">}</span>
+</td></tr></table></code></pre>
+</div>
+</div>
+</details>
+<hr>
+<hr>
+</div>
+<div class="sect3">
+<h4 id="_选择排序">选择排序</h4>
 <div class="ulist">
 <ul>
 <li>
-<p>&lt;arpa/inet.h&gt;</p>
-</li>
-<li>
-<p>htons, htonl, ntohs, ntohl</p>
+<p>每次选择出一个最小值。</p>
 </li>
 </ul>
 </div>
+<details>
+<summary>
+代码
+</summary>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="C++"><table class="pyhltable"><tr><td class="linenos"><div class="linenodiv"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12</div></td><td class="code"><span class="tok-kt">void</span> <span class="tok-nf">Selection_Sort</span><span class="tok-p">(</span><span class="tok-n">vector</span><span class="tok-o">&lt;</span><span class="tok-kt">int</span><span class="tok-o">&gt;</span> <span class="tok-o">&amp;</span><span class="tok-n">A</span><span class="tok-p">)</span> <span class="tok-p">{</span>
+	<span class="tok-kt">int</span> <span class="tok-n">n</span> <span class="tok-o">=</span> <span class="tok-n">A</span><span class="tok-p">.</span><span class="tok-n">size</span><span class="tok-p">();</span>
+	<span class="tok-k">for</span> <span class="tok-p">(</span><span class="tok-kt">int</span> <span class="tok-n">i</span> <span class="tok-o">=</span> <span class="tok-mi">0</span><span class="tok-p">,</span> <span class="tok-n">idx</span><span class="tok-p">;</span> <span class="tok-n">i</span> <span class="tok-o">&lt;</span> <span class="tok-n">n</span><span class="tok-p">;</span> <span class="tok-o">++</span><span class="tok-n">i</span><span class="tok-p">)</span> <span class="tok-p">{</span> <span class="tok-c1">// 上限可以是 n - 1，因为只剩一个元素时，它自己就是剩余元素中的最小值。</span>
+		<span class="tok-n">idx</span> <span class="tok-o">=</span> <span class="tok-n">i</span><span class="tok-p">;</span>
+		<span class="tok-k">for</span> <span class="tok-p">(</span><span class="tok-kt">int</span> <span class="tok-n">j</span> <span class="tok-o">=</span> <span class="tok-n">i</span> <span class="tok-o">+</span> <span class="tok-mi">1</span><span class="tok-p">;</span> <span class="tok-n">j</span> <span class="tok-o">&lt;</span> <span class="tok-n">n</span><span class="tok-p">;</span> <span class="tok-o">++</span><span class="tok-n">j</span><span class="tok-p">)</span> <span class="tok-p">{</span> <span class="tok-c1">// 找出剩余元素中最小的一个</span>
+			<span class="tok-k">if</span><span class="tok-p">(</span><span class="tok-n">A</span><span class="tok-p">[</span><span class="tok-n">j</span><span class="tok-p">]</span> <span class="tok-o">&lt;</span> <span class="tok-n">A</span><span class="tok-p">[</span><span class="tok-n">idx</span><span class="tok-p">])</span> <span class="tok-p">{</span>
+				<span class="tok-n">idx</span> <span class="tok-o">=</span> <span class="tok-n">j</span><span class="tok-p">;</span>
+			<span class="tok-p">}</span>
+		<span class="tok-p">}</span>
+		<span class="tok-n">swap</span><span class="tok-p">(</span><span class="tok-n">A</span><span class="tok-p">[</span><span class="tok-n">idx</span><span class="tok-p">],</span> <span class="tok-n">A</span><span class="tok-p">[</span><span class="tok-n">i</span><span class="tok-p">]);</span> <span class="tok-c1">// 与当前位置元素交换</span>
+	<span class="tok-p">}</span>
+<span class="tok-p">}</span>
+</td></tr></table></code></pre>
+</div>
+</div>
+</details>
+<hr>
+</div>
+<div class="sect3">
+<h4 id="_归并排序">归并排序</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>需要外部空间。</p>
+</li>
+<li>
+<p>适用于外部排序。</p>
+</li>
+<li>
+<p>注意代码实现的一个技巧，设置哨兵值。</p>
 </li>
 </ul>
+</div>
+<details>
+<summary>
+代码
+</summary>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="C++"><table class="pyhltable"><tr><td class="linenos"><div class="linenodiv"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50</div></td><td class="code"><span class="tok-c1">// merge [s, m - 1] and [m, e]</span>
+<span class="tok-kt">void</span> <span class="tok-nf">Merge</span><span class="tok-p">(</span><span class="tok-n">vector</span><span class="tok-o">&lt;</span><span class="tok-kt">int</span><span class="tok-o">&gt;</span> <span class="tok-o">&amp;</span><span class="tok-n">A</span><span class="tok-p">,</span> <span class="tok-kt">int</span> <span class="tok-n">s</span><span class="tok-p">,</span> <span class="tok-kt">int</span> <span class="tok-n">m</span><span class="tok-p">,</span> <span class="tok-kt">int</span> <span class="tok-n">e</span><span class="tok-p">)</span> <span class="tok-p">{</span>
+	<span class="tok-kt">int</span> <span class="tok-o">*</span><span class="tok-n">L</span> <span class="tok-o">=</span> <span class="tok-nb">NULL</span><span class="tok-p">,</span> <span class="tok-o">*</span><span class="tok-n">R</span> <span class="tok-o">=</span> <span class="tok-nb">NULL</span><span class="tok-p">;</span>
+	<span class="tok-kt">int</span> <span class="tok-n">lena</span> <span class="tok-o">=</span> <span class="tok-n">m</span> <span class="tok-o">-</span> <span class="tok-n">s</span><span class="tok-p">,</span> <span class="tok-n">lenb</span> <span class="tok-o">=</span> <span class="tok-n">e</span> <span class="tok-o">-</span> <span class="tok-n">m</span><span class="tok-p">;</span>
+	<span class="tok-k">if</span><span class="tok-p">(</span><span class="tok-n">lena</span> <span class="tok-o">&gt;</span> <span class="tok-mi">0</span><span class="tok-p">)</span> <span class="tok-n">L</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-kt">int</span><span class="tok-p">[</span><span class="tok-n">lena</span> <span class="tok-o">+</span> <span class="tok-mi">1</span><span class="tok-p">];</span>
+	<span class="tok-k">if</span><span class="tok-p">(</span><span class="tok-n">lenb</span> <span class="tok-o">&gt;</span> <span class="tok-mi">0</span><span class="tok-p">)</span> <span class="tok-n">R</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-kt">int</span><span class="tok-p">[</span><span class="tok-n">lenb</span> <span class="tok-o">+</span> <span class="tok-mi">1</span><span class="tok-p">];</span>
+	<span class="tok-k">for</span> <span class="tok-p">(</span><span class="tok-kt">int</span> <span class="tok-n">i</span> <span class="tok-o">=</span> <span class="tok-n">s</span><span class="tok-p">;</span> <span class="tok-n">i</span> <span class="tok-o">&lt;</span> <span class="tok-n">m</span><span class="tok-p">;</span> <span class="tok-o">++</span><span class="tok-n">i</span><span class="tok-p">)</span>
+		<span class="tok-n">L</span><span class="tok-p">[</span><span class="tok-n">i</span> <span class="tok-o">-</span> <span class="tok-n">s</span><span class="tok-p">]</span> <span class="tok-o">=</span> <span class="tok-n">A</span><span class="tok-p">[</span><span class="tok-n">i</span><span class="tok-p">];</span>
+	<span class="tok-k">for</span> <span class="tok-p">(</span><span class="tok-kt">int</span> <span class="tok-n">i</span> <span class="tok-o">=</span> <span class="tok-n">m</span><span class="tok-p">;</span> <span class="tok-n">i</span> <span class="tok-o">&lt;</span> <span class="tok-n">e</span><span class="tok-p">;</span> <span class="tok-o">++</span><span class="tok-n">i</span><span class="tok-p">)</span>
+		<span class="tok-n">R</span><span class="tok-p">[</span><span class="tok-n">i</span> <span class="tok-o">-</span> <span class="tok-n">m</span><span class="tok-p">]</span> <span class="tok-o">=</span> <span class="tok-n">A</span><span class="tok-p">[</span><span class="tok-n">i</span><span class="tok-p">];</span>
+	<span class="tok-kt">int</span> <span class="tok-n">idxl</span> <span class="tok-o">=</span> <span class="tok-mi">0</span><span class="tok-p">,</span> <span class="tok-n">idxr</span> <span class="tok-o">=</span> <span class="tok-mi">0</span><span class="tok-p">;</span>
+	<span class="tok-c1">// 设置哨兵值后就不需要考虑两个序列谁先结束了</span>
+	<span class="tok-n">L</span><span class="tok-p">[</span><span class="tok-n">lena</span><span class="tok-p">]</span> <span class="tok-o">=</span> <span class="tok-n">INT_MAX</span><span class="tok-p">;</span>
+	<span class="tok-n">R</span><span class="tok-p">[</span><span class="tok-n">lenb</span><span class="tok-p">]</span> <span class="tok-o">=</span> <span class="tok-n">INT_MAX</span><span class="tok-p">;</span>
+	<span class="tok-k">for</span> <span class="tok-p">(</span><span class="tok-kt">int</span> <span class="tok-n">i</span> <span class="tok-o">=</span> <span class="tok-n">s</span><span class="tok-p">;</span> <span class="tok-n">i</span> <span class="tok-o">&lt;</span> <span class="tok-n">e</span><span class="tok-p">;</span> <span class="tok-o">++</span><span class="tok-n">i</span><span class="tok-p">)</span> <span class="tok-p">{</span>
+		<span class="tok-k">if</span><span class="tok-p">(</span><span class="tok-n">L</span><span class="tok-p">[</span><span class="tok-n">idxl</span><span class="tok-p">]</span> <span class="tok-o">&lt;</span> <span class="tok-n">R</span><span class="tok-p">[</span><span class="tok-n">idxr</span><span class="tok-p">])</span>
+			<span class="tok-n">A</span><span class="tok-p">[</span><span class="tok-n">i</span><span class="tok-p">]</span> <span class="tok-o">=</span> <span class="tok-n">L</span><span class="tok-p">[</span><span class="tok-n">idxl</span><span class="tok-o">++</span><span class="tok-p">];</span>
+		<span class="tok-k">else</span>
+			<span class="tok-n">A</span><span class="tok-p">[</span><span class="tok-n">i</span><span class="tok-p">]</span> <span class="tok-o">=</span> <span class="tok-n">R</span><span class="tok-p">[</span><span class="tok-n">idxr</span><span class="tok-o">++</span><span class="tok-p">];</span>
+	<span class="tok-p">}</span>
+	<span class="tok-n">free</span><span class="tok-p">(</span><span class="tok-n">L</span><span class="tok-p">);</span>
+	<span class="tok-n">free</span><span class="tok-p">(</span><span class="tok-n">R</span><span class="tok-p">);</span>
+	<span class="tok-cm">/*</span>
+<span class="tok-cm"> 	 while(idxl &lt; lena &amp;&amp; idxr &lt; lenb) {</span>
+<span class="tok-cm">		if(L[idxl] &lt; R[idxr])</span>
+<span class="tok-cm">			A[idx++] = L[idxl++];</span>
+<span class="tok-cm">		else</span>
+<span class="tok-cm">			A[idx++] = R[idxr++];</span>
+<span class="tok-cm">	}</span>
+<span class="tok-cm">	if(idxl == lena) {</span>
+<span class="tok-cm">		while(idxr &lt; lenb)</span>
+<span class="tok-cm">			A[idx++] = R[idxr++];</span>
+<span class="tok-cm">	}</span>
+<span class="tok-cm">	else{</span>
+<span class="tok-cm">		while(idxl &lt; lena)</span>
+<span class="tok-cm">			A[idx++] = L[idxl++];</span>
+<span class="tok-cm">	}</span>
+<span class="tok-cm">	*/</span>
+	<span class="tok-k">return</span> <span class="tok-p">;</span>
+<span class="tok-p">}</span>
+<span class="tok-kt">void</span> <span class="tok-nf">_Merge_Sort</span><span class="tok-p">(</span><span class="tok-n">vector</span><span class="tok-o">&lt;</span><span class="tok-kt">int</span><span class="tok-o">&gt;</span> <span class="tok-o">&amp;</span><span class="tok-n">A</span><span class="tok-p">,</span> <span class="tok-kt">int</span> <span class="tok-n">s</span><span class="tok-p">,</span> <span class="tok-kt">int</span> <span class="tok-n">e</span><span class="tok-p">)</span> <span class="tok-p">{</span>
+	<span class="tok-k">if</span><span class="tok-p">(</span><span class="tok-n">s</span> <span class="tok-o">+</span> <span class="tok-mi">1</span> <span class="tok-o">&gt;=</span> <span class="tok-n">e</span><span class="tok-p">)</span> <span class="tok-k">return</span> <span class="tok-p">;</span>
+	<span class="tok-kt">int</span> <span class="tok-n">m</span> <span class="tok-o">=</span> <span class="tok-n">s</span> <span class="tok-o">+</span> <span class="tok-p">(</span><span class="tok-n">e</span> <span class="tok-o">-</span> <span class="tok-n">s</span><span class="tok-p">)</span> <span class="tok-o">/</span> <span class="tok-mi">2</span><span class="tok-p">;</span>
+	<span class="tok-n">_Merge_Sort</span><span class="tok-p">(</span><span class="tok-n">A</span><span class="tok-p">,</span> <span class="tok-n">s</span><span class="tok-p">,</span> <span class="tok-n">m</span><span class="tok-p">);</span>
+	<span class="tok-n">_Merge_Sort</span><span class="tok-p">(</span><span class="tok-n">A</span><span class="tok-p">,</span> <span class="tok-n">m</span><span class="tok-p">,</span> <span class="tok-n">e</span><span class="tok-p">);</span>
+	<span class="tok-n">Merge</span><span class="tok-p">(</span><span class="tok-n">A</span><span class="tok-p">,</span> <span class="tok-n">s</span><span class="tok-p">,</span> <span class="tok-n">m</span><span class="tok-p">,</span> <span class="tok-n">e</span><span class="tok-p">);</span>
+<span class="tok-p">}</span>
+<span class="tok-kt">void</span> <span class="tok-nf">Merge_Sort</span><span class="tok-p">(</span><span class="tok-n">vector</span><span class="tok-o">&lt;</span><span class="tok-kt">int</span><span class="tok-o">&gt;</span> <span class="tok-o">&amp;</span><span class="tok-n">A</span><span class="tok-p">)</span> <span class="tok-p">{</span>
+	<span class="tok-n">_Merge_Sort</span><span class="tok-p">(</span><span class="tok-n">A</span><span class="tok-p">,</span> <span class="tok-mi">0</span><span class="tok-p">,</span> <span class="tok-n">A</span><span class="tok-p">.</span><span class="tok-n">size</span><span class="tok-p">());</span>
+<span class="tok-p">}</span>
+</td></tr></table></code></pre>
+</div>
+</div>
+</details>
+</div>
+<div class="sect3">
+<h4 id="_快速排序">快速排序</h4>
+<details>
+<summary>
+代码
+</summary>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="C++"><table class="pyhltable"><tr><td class="linenos"><div class="linenodiv"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23</div></td><td class="code"><span class="tok-kt">int</span> <span class="tok-nf">Partition</span><span class="tok-p">(</span><span class="tok-n">vector</span><span class="tok-o">&lt;</span><span class="tok-kt">int</span><span class="tok-o">&gt;</span> <span class="tok-o">&amp;</span><span class="tok-n">A</span><span class="tok-p">,</span> <span class="tok-kt">int</span> <span class="tok-n">s</span><span class="tok-p">,</span> <span class="tok-kt">int</span> <span class="tok-n">e</span><span class="tok-p">)</span> <span class="tok-p">{</span>
+	<span class="tok-kt">int</span> <span class="tok-n">pivot</span> <span class="tok-o">=</span> <span class="tok-n">A</span><span class="tok-p">[</span><span class="tok-n">e</span><span class="tok-p">];</span>
+	<span class="tok-kt">int</span> <span class="tok-n">pos</span> <span class="tok-o">=</span> <span class="tok-n">s</span><span class="tok-p">,</span> <span class="tok-n">idx</span><span class="tok-p">;</span>
+	<span class="tok-k">for</span> <span class="tok-p">(</span><span class="tok-n">idx</span> <span class="tok-o">=</span> <span class="tok-n">s</span><span class="tok-p">;</span><span class="tok-n">idx</span> <span class="tok-o">&lt;</span> <span class="tok-n">e</span><span class="tok-p">;</span> <span class="tok-o">++</span><span class="tok-n">idx</span><span class="tok-p">)</span> <span class="tok-p">{</span> <span class="tok-c1">// 不能等于e</span>
+		<span class="tok-k">if</span><span class="tok-p">(</span><span class="tok-n">A</span><span class="tok-p">[</span><span class="tok-n">idx</span><span class="tok-p">]</span> <span class="tok-o">&lt;=</span> <span class="tok-n">pivot</span><span class="tok-p">)</span> <span class="tok-p">{</span>
+			<span class="tok-n">swap</span><span class="tok-p">(</span><span class="tok-n">A</span><span class="tok-p">[</span><span class="tok-n">idx</span><span class="tok-p">],</span> <span class="tok-n">A</span><span class="tok-p">[</span><span class="tok-n">pos</span><span class="tok-p">]);</span>
+			<span class="tok-o">++</span><span class="tok-n">pos</span><span class="tok-p">;</span>
+		<span class="tok-p">}</span>
+	<span class="tok-p">}</span>
+	<span class="tok-n">swap</span><span class="tok-p">(</span><span class="tok-n">A</span><span class="tok-p">[</span><span class="tok-n">idx</span><span class="tok-p">],</span> <span class="tok-n">A</span><span class="tok-p">[</span><span class="tok-n">pos</span><span class="tok-p">]);</span>
+	<span class="tok-k">return</span> <span class="tok-n">pos</span><span class="tok-p">;</span>
+<span class="tok-p">}</span>
+<span class="tok-kt">void</span> <span class="tok-nf">_Quick_Sort</span><span class="tok-p">(</span><span class="tok-n">vector</span><span class="tok-o">&lt;</span><span class="tok-kt">int</span><span class="tok-o">&gt;</span> <span class="tok-o">&amp;</span><span class="tok-n">A</span><span class="tok-p">,</span> <span class="tok-kt">int</span> <span class="tok-n">s</span><span class="tok-p">,</span> <span class="tok-kt">int</span> <span class="tok-n">e</span><span class="tok-p">)</span> <span class="tok-p">{</span>
+	<span class="tok-k">if</span><span class="tok-p">(</span><span class="tok-n">s</span> <span class="tok-o">&lt;</span> <span class="tok-n">e</span><span class="tok-p">)</span> <span class="tok-p">{</span>
+		<span class="tok-n">cout</span><span class="tok-o">&lt;&lt;</span><span class="tok-n">s</span><span class="tok-o">&lt;&lt;</span><span class="tok-s">&quot; &quot;</span><span class="tok-o">&lt;&lt;</span><span class="tok-n">e</span><span class="tok-o">&lt;&lt;</span><span class="tok-n">endl</span><span class="tok-p">;</span>
+		<span class="tok-kt">int</span> <span class="tok-n">p</span> <span class="tok-o">=</span> <span class="tok-n">Partition</span><span class="tok-p">(</span><span class="tok-n">A</span><span class="tok-p">,</span> <span class="tok-n">s</span><span class="tok-p">,</span> <span class="tok-n">e</span><span class="tok-p">);</span>
+		<span class="tok-n">_Quick_Sort</span><span class="tok-p">(</span><span class="tok-n">A</span><span class="tok-p">,</span> <span class="tok-n">s</span><span class="tok-p">,</span> <span class="tok-n">p</span> <span class="tok-o">-</span> <span class="tok-mi">1</span><span class="tok-p">);</span>
+		<span class="tok-n">_Quick_Sort</span><span class="tok-p">(</span><span class="tok-n">A</span><span class="tok-p">,</span> <span class="tok-n">p</span> <span class="tok-o">+</span> <span class="tok-mi">1</span><span class="tok-p">,</span> <span class="tok-n">e</span><span class="tok-p">);</span>
+	<span class="tok-p">}</span>
+<span class="tok-p">}</span>
+<span class="tok-kt">void</span> <span class="tok-nf">Quick_Sort</span><span class="tok-p">(</span><span class="tok-n">vector</span><span class="tok-o">&lt;</span><span class="tok-kt">int</span><span class="tok-o">&gt;</span> <span class="tok-o">&amp;</span><span class="tok-n">A</span><span class="tok-p">)</span> <span class="tok-p">{</span>
+	<span class="tok-n">_Quick_Sort</span><span class="tok-p">(</span><span class="tok-n">A</span><span class="tok-p">,</span> <span class="tok-mi">0</span><span class="tok-p">,</span> <span class="tok-n">A</span><span class="tok-p">.</span><span class="tok-n">size</span><span class="tok-p">()</span> <span class="tok-o">-</span> <span class="tok-mi">1</span><span class="tok-p">);</span>
+<span class="tok-p">}</span>
+</td></tr></table></code></pre>
+</div>
+</div>
+</details>
+</div>
+<div class="sect3">
+<h4 id="_堆排序">堆排序</h4>
+
+</div>
+<div class="sect3">
+<h4 id="_计数排序">计数排序</h4>
+
+</div>
+<div class="sect3">
+<h4 id="_基数排序">基数排序</h4>
+
+</div>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-09-26 14:52:20 CST
+Last updated 2015-09-28 13:44:36 CST
 <script type="text/javascript" charset="utf-8">
 var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1254706632'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s11.cnzz.com/z_stat.php%3Fid%3D1254706632%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));
 </script>

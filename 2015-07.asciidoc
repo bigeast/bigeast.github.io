@@ -1,0 +1,45 @@
+:source-highlighter: pygments
+:pygments-style: manni
+== Wed 01 Jul 2015 10:59:14 PM CST
+=== Xmonad
+* https://wiki.haskell.org/Xmonad/Frequently_asked_questions#I_need_to_find_the_class_title_or_some_other_X_property_of_my_program[自动管理窗口的属性]
+--------------------------------------------------
+	resource (also known as appName) is the first element in WM_CLASS(STRING)
+    className is the second element in WM_CLASS(STRING)
+    title is WM_NAME(STRING) 
+--------------------------------------------------
+
+== Thu 16 Jul 2015 05:03:34 PM CST
+=== zathura-pdf-mupdf
+* 发现了一个好用的pdf阅读器。
+* zathura以MuPDF作为后端，因此速度很快，跟MuPDF差不多！但是它支持Vim-like的键绑定，还能够查看书签目录，这个是我嫌弃MuPDF的一个原因。
+* 使用方法都在man手册里了。
+* 竟然还可以设置字体。
+* 命令窗口中输入 'set' 后，按Tab可以看到所有可配置的选项。
+* 以后就用它了！
+----------------------------------------
+map [normal] k navigate previous
+map [normal] , navigate previous
+map [normal] j navigate next
+map [normal] . navigate next
+
+map [normal]     <A-1> set "first-page-column 1"
+map [normal]     <A-2> set "first-page-column 2"
+
+set font YaHei\ Consolas\ Hybrid\ 13
+----------------------------------------
+
+* 与apvlv相比，首先是反应速度快，然后可以随时查看目录，就是按 Tab 键切换到 Index 模式。展开和关闭目录列表的快捷键是 'l' 和 'h'
+* 好像没有Windows版本。
+
+=== 默认浏览器
+* 'xdg-mime default firefox.desktop x-scheme-handler/http'
+* 'xdg-mime default firefox.desktop x-scheme-handler/https'
+
+== Fri 24 Jul 2015 12:03:22 AM CST
+=== Stooge排序
+* '算法导论' 习题7-3。先排序前 2/3，再排序后 2/3，然后再对前 2/3进行排序。复杂度根据 '定理4-1' ，可以知道是 O(n\^log_1.5\^3) = O(n^2.7)，高得可怕。还是有两点想说的：
+	** 其实不一定是 2/3，也可以是 3/4，不过这样做就更复杂了。如果是 1/2，那就"退化"成一般的O(nlogn)的算法了。该算法的正确性并不难get到：三趟排序中，第一、二趟可以确保最大的1/3的元素被按序放置到最后的1/3；[through-line]#第二、三趟排序可以确保最小的1/3的元素被按序放置到前1/3的位置；#第三趟保证了前2/3的元素正确排序。
+	** 我觉得算法导论作者只是在开玩笑，并不是真觉得发明这个算法的几个终身教授名不负实。
+
+:docinfo:

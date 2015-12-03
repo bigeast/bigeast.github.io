@@ -1,0 +1,7 @@
+:source-highlighter: pygments
+:pygments-style: manni
+== Tue 01 Dec 2015 07:00:26 PM CST
+=== 挂载Windows的休眠分区
+* `mount -t ntfs-3g -o ro /dev/sdc1 /media/SSD2` 只能只读挂载，而且必须指明 'ntfs-3g'
+
+:docinfo:

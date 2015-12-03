@@ -1,0 +1,27 @@
+:source-highlighter: pygments
+:pygments-style: manni
+== PowerShell的配置
+据说PowerShell比Linux下的bash之流要强大的多，尝试一下。先下载 https://github.com/lukesampson/scoop[scoop]。
+
+* **主题安装**。使用 https://github.com/lukesampson/concfg[concfg]， `scoop install concfg` ，然后 `concfg import solarized` 。
+* **模块安装**。新模块拷贝到 `C:\Users\bigeast\Documents\WindowsPowerShell\Modules` ，然后 `Import-Module [module-name]` 。
+* **配置文件**。 
+	** `$Profile` 查看配置文件。 
+	** `.$Profile` 重新载入配置文件。
+
+[source, PowerShell, numbered]
+----
+Import-Module PSReadLine
+Set-PSReadlineOption -EditMode Emacs
+#Import-Module PowerTab
+Set-Location ~
+----
+* 常用命令
+	** `Get-Command`
+* 查看系统信息
+	** `systeminfo.exe`
+	** `Get-CimInstance Win32_OperatingSystem | FL *`
+* 查看环境变量
+	** `$env:PATH`
+
+:docinfo:

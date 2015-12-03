@@ -4,11 +4,13 @@
 <meta charset="UTF-8">
 <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="generator" content="Asciidoctor 1.5.2">
-<title>Beej&#8217;s Guide to Network Programming Using Internet Sockets</title>
+<meta name="generator" content="Asciidoctor 1.5.3">
+<title>PowerShell的配置</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /* Asciidoctor default stylesheet | MIT License | http://asciidoctor.org */
-/* Remove the comments around the @import statement below when using this as a custom stylesheet */
+/* Remove comment around @import statement below when using as a custom stylesheet */
+/*@import "https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700";*/
 article,aside,details,figcaption,figure,footer,header,hgroup,main,nav,section,summary{display:block}
 audio,canvas,video{display:inline-block}
 audio:not([controls]){display:none;height:0}
@@ -55,7 +57,6 @@ a:hover{cursor:pointer}
 img,object,embed{max-width:100%;height:auto}
 object,embed{height:100%}
 img{-ms-interpolation-mode:bicubic}
-#map_canvas img,#map_canvas embed,#map_canvas object,.map_canvas img,.map_canvas embed,.map_canvas object{max-width:none!important}
 .left{float:left!important}
 .right{float:right!important}
 .text-left{text-align:left!important}
@@ -63,10 +64,12 @@ img{-ms-interpolation-mode:bicubic}
 .text-center{text-align:center!important}
 .text-justify{text-align:justify!important}
 .hide{display:none}
-.antialiased,body{-webkit-font-smoothing:antialiased}
-img{display:inline-block;vertical-align:middle}
+body{-webkit-font-smoothing:antialiased}
+img,object,svg{display:inline-block;vertical-align:middle}
 textarea{height:auto;min-height:50px}
 select{width:100%}
+.center{margin-left:auto;margin-right:auto}
+.spread{width:100%}
 p.lead,.paragraph.lead>p,#preamble>.sectionbody>.paragraph:first-of-type p{font-size:1.21875em;line-height:1.6}
 .subheader,.admonitionblock td.content>.title,.audioblock>.title,.exampleblock>.title,.imageblock>.title,.listingblock>.title,.literalblock>.title,.stemblock>.title,.openblock>.title,.paragraph>.title,.quoteblock>.title,table.tableblock>.title,.verseblock>.title,.videoblock>.title,.dlist>.title,.olist>.title,.ulist>.title,.qlist>.title,.hdlist>.title{line-height:1.45;color:#7a2518;font-weight:400;margin-top:0;margin-bottom:.25em}
 div,dl,dt,dd,ul,ol,li,h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6,pre,form,p,blockquote,th,td{margin:0;padding:0;direction:ltr}
@@ -109,12 +112,14 @@ blockquote,blockquote p{line-height:1.6;color:rgba(0,0,0,.85)}
 h1{font-size:2.75em}
 h2{font-size:2.3125em}
 h3,#toctitle,.sidebarblock>.content>.title{font-size:1.6875em}
-h4{font-size:1.4375em}}table{background:#fff;margin-bottom:1.25em;border:solid 1px #dedede}
+h4{font-size:1.4375em}}
+table{background:#fff;margin-bottom:1.25em;border:solid 1px #dedede}
 table thead,table tfoot{background:#f7f8f7;font-weight:bold}
 table thead tr th,table thead tr td,table tfoot tr th,table tfoot tr td{padding:.5em .625em .625em;font-size:inherit;color:rgba(0,0,0,.8);text-align:left}
 table tr th,table tr td{padding:.5625em .625em;font-size:inherit;color:rgba(0,0,0,.8)}
 table tr.even,table tr.alt,table tr:nth-of-type(even){background:#f8f8f7}
 table thead tr th,table tfoot tr th,table tbody tr td,table tr td,table tfoot tr td{display:table-cell;line-height:1.6}
+body{tab-size:4}
 h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6{line-height:1.2;word-spacing:-.05em}
 h1 strong,h2 strong,h3 strong,#toctitle strong,.sidebarblock>.content>.title strong,h4 strong,h5 strong,h6 strong{font-weight:400}
 .clearfix:before,.clearfix:after,.float-group:before,.float-group:after{content:" ";display:table}
@@ -122,7 +127,7 @@ h1 strong,h2 strong,h3 strong,#toctitle strong,.sidebarblock>.content>.title str
 *:not(pre)>code{font-size:.9375em;font-style:normal!important;letter-spacing:0;padding:.1em .5ex;word-spacing:-.15em;background-color:#f7f7f8;-webkit-border-radius:4px;border-radius:4px;line-height:1.45;text-rendering:optimizeSpeed}
 pre,pre>code{line-height:1.45;color:rgba(0,0,0,.9);font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;font-weight:400;text-rendering:optimizeSpeed}
 .keyseq{color:rgba(51,51,51,.8)}
-kbd{display:inline-block;color:rgba(0,0,0,.8);font-size:.75em;line-height:1.4;background-color:#f7f7f7;border:1px solid #ccc;-webkit-border-radius:3px;border-radius:3px;-webkit-box-shadow:0 1px 0 rgba(0,0,0,.2),0 0 0 .1em white inset;box-shadow:0 1px 0 rgba(0,0,0,.2),0 0 0 .1em #fff inset;margin:-.15em .15em 0 .15em;padding:.2em .6em .2em .5em;vertical-align:middle;white-space:nowrap}
+kbd{font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;display:inline-block;color:rgba(0,0,0,.8);font-size:.65em;line-height:1.45;background-color:#f7f7f7;border:1px solid #ccc;-webkit-border-radius:3px;border-radius:3px;-webkit-box-shadow:0 1px 0 rgba(0,0,0,.2),0 0 0 .1em white inset;box-shadow:0 1px 0 rgba(0,0,0,.2),0 0 0 .1em #fff inset;margin:0 .15em;padding:.2em .5em;vertical-align:middle;position:relative;top:-.1em;white-space:nowrap}
 .keyseq kbd:first-child{margin-left:0}
 .keyseq kbd:last-child{margin-right:0}
 .menuseq,.menu{color:rgba(0,0,0,.8)}
@@ -153,29 +158,33 @@ p a>code:hover{color:rgba(0,0,0,.9)}
 #toc ul.sectlevel0>li>a{font-style:italic}
 #toc ul.sectlevel0 ul.sectlevel1{margin:.5em 0}
 #toc ul{font-family:"Open Sans","DejaVu Sans",sans-serif;list-style-type:none}
+#toc li{line-height:1.3334;margin-top:.3334em}
 #toc a{text-decoration:none}
 #toc a:active{text-decoration:underline}
 #toctitle{color:#7a2518;font-size:1.2em}
 @media only screen and (min-width:768px){#toctitle{font-size:1.375em}
 body.toc2{padding-left:15em;padding-right:0}
 #toc.toc2{margin-top:0!important;background-color:#f8f8f7;position:fixed;width:15em;left:0;top:0;border-right:1px solid #efefed;border-top-width:0!important;border-bottom-width:0!important;z-index:1000;padding:1.25em 1em;height:100%;overflow:auto}
-#toc.toc2 #toctitle{margin-top:0;font-size:1.2em}
+#toc.toc2 #toctitle{margin-top:0;margin-bottom:.8rem;font-size:1.2em}
 #toc.toc2>ul{font-size:.9em;margin-bottom:0}
 #toc.toc2 ul ul{margin-left:0;padding-left:1em}
 #toc.toc2 ul.sectlevel0 ul.sectlevel1{padding-left:0;margin-top:.5em;margin-bottom:.5em}
 body.toc2.toc-right{padding-left:0;padding-right:15em}
-body.toc2.toc-right #toc.toc2{border-right-width:0;border-left:1px solid #efefed;left:auto;right:0}}@media only screen and (min-width:1280px){body.toc2{padding-left:20em;padding-right:0}
+body.toc2.toc-right #toc.toc2{border-right-width:0;border-left:1px solid #efefed;left:auto;right:0}}
+@media only screen and (min-width:1280px){body.toc2{padding-left:20em;padding-right:0}
 #toc.toc2{width:20em}
 #toc.toc2 #toctitle{font-size:1.375em}
 #toc.toc2>ul{font-size:.95em}
 #toc.toc2 ul ul{padding-left:1.25em}
-body.toc2.toc-right{padding-left:0;padding-right:20em}}#content #toc{border-style:solid;border-width:1px;border-color:#e0e0dc;margin-bottom:1.25em;padding:1.25em;background:#f8f8f7;-webkit-border-radius:4px;border-radius:4px}
+body.toc2.toc-right{padding-left:0;padding-right:20em}}
+#content #toc{border-style:solid;border-width:1px;border-color:#e0e0dc;margin-bottom:1.25em;padding:1.25em;background:#f8f8f7;-webkit-border-radius:4px;border-radius:4px}
 #content #toc>:first-child{margin-top:0}
 #content #toc>:last-child{margin-bottom:0}
 #footer{max-width:100%;background-color:rgba(0,0,0,.8);padding:1.25em}
 #footer-text{color:rgba(255,255,255,.8);line-height:1.44}
 .sect1{padding-bottom:.625em}
-@media only screen and (min-width:768px){.sect1{padding-bottom:1.25em}}.sect1+.sect1{border-top:1px solid #efefed}
+@media only screen and (min-width:768px){.sect1{padding-bottom:1.25em}}
+.sect1+.sect1{border-top:1px solid #efefed}
 #content h1>a.anchor,h2>a.anchor,h3>a.anchor,#toctitle>a.anchor,.sidebarblock>.content>.title>a.anchor,h4>a.anchor,h5>a.anchor,h6>a.anchor{position:absolute;z-index:1001;width:1.5ex;margin-left:-1.5ex;display:block;text-decoration:none!important;visibility:hidden;text-align:center;font-weight:400}
 #content h1>a.anchor:before,h2>a.anchor:before,h3>a.anchor:before,#toctitle>a.anchor:before,.sidebarblock>.content>.title>a.anchor:before,h4>a.anchor:before,h5>a.anchor:before,h6>a.anchor:before{content:"\00A7";font-size:.85em;display:block;padding-top:.1em}
 #content h1:hover>a.anchor,#content h1>a.anchor:hover,h2:hover>a.anchor,h2>a.anchor:hover,h3:hover>a.anchor,#toctitle:hover>a.anchor,.sidebarblock>.content>.title:hover>a.anchor,h3>a.anchor:hover,#toctitle>a.anchor:hover,.sidebarblock>.content>.title>a.anchor:hover,h4:hover>a.anchor,h4>a.anchor:hover,h5:hover>a.anchor,h5>a.anchor:hover,h6:hover>a.anchor,h6>a.anchor:hover{visibility:visible}
@@ -204,7 +213,9 @@ table.tableblock #preamble>.sectionbody>.paragraph:first-of-type p{font-size:inh
 .sidebarblock .literalblock pre,.sidebarblock .listingblock pre:not(.highlight),.sidebarblock .listingblock pre[class="highlight"],.sidebarblock .listingblock pre[class^="highlight "],.sidebarblock .listingblock pre.CodeRay,.sidebarblock .listingblock pre.prettyprint{background:#f2f1f1}
 .literalblock pre,.literalblock pre[class],.listingblock pre,.listingblock pre[class]{-webkit-border-radius:4px;border-radius:4px;word-wrap:break-word;padding:1em;font-size:.8125em}
 .literalblock pre.nowrap,.literalblock pre[class].nowrap,.listingblock pre.nowrap,.listingblock pre[class].nowrap{overflow-x:auto;white-space:pre;word-wrap:normal}
-@media only screen and (min-width:768px){.literalblock pre,.literalblock pre[class],.listingblock pre,.listingblock pre[class]{font-size:.90625em}}@media only screen and (min-width:1280px){.literalblock pre,.literalblock pre[class],.listingblock pre,.listingblock pre[class]{font-size:1em}}.literalblock.output pre{color:#f7f7f8;background-color:rgba(0,0,0,.9)}
+@media only screen and (min-width:768px){.literalblock pre,.literalblock pre[class],.listingblock pre,.listingblock pre[class]{font-size:.90625em}}
+@media only screen and (min-width:1280px){.literalblock pre,.literalblock pre[class],.listingblock pre,.listingblock pre[class]{font-size:1em}}
+.literalblock.output pre{color:#f7f7f8;background-color:rgba(0,0,0,.9)}
 .listingblock pre.highlightjs{padding:0}
 .listingblock pre.highlightjs>code{padding:1em;-webkit-border-radius:4px;border-radius:4px}
 .listingblock pre.prettyprint{border-width:0}
@@ -214,7 +225,7 @@ table.tableblock #preamble>.sectionbody>.paragraph:first-of-type p{font-size:inh
 .listingblock.terminal pre .command:before{content:attr(data-prompt);padding-right:.5em;color:#999}
 .listingblock.terminal pre .command:not([data-prompt]):before{content:"$"}
 table.pyhltable{border-collapse:separate;border:0;margin-bottom:0;background:none}
-table.pyhltable td{vertical-align:top;padding-top:0;padding-bottom:0}
+table.pyhltable td{vertical-align:top;padding-top:0;padding-bottom:0;line-height:1.45}
 table.pyhltable td.code{padding-left:.75em;padding-right:0}
 pre.pygments .lineno,table.pyhltable td:not(.code){color:#999;padding-left:0;padding-right:.5em;border-right:1px solid #ddddd8}
 pre.pygments .lineno{display:inline-block;margin-right:.25em}
@@ -235,13 +246,12 @@ table.pyhltable .linenodiv{background:none!important;padding-right:0!important}
 .verseblock .attribution{margin-top:1.25rem;margin-left:.5ex}
 .quoteblock .attribution,.verseblock .attribution{font-size:.9375em;line-height:1.45;font-style:italic}
 .quoteblock .attribution br,.verseblock .attribution br{display:none}
-.quoteblock .attribution cite,.verseblock .attribution cite{display:block;letter-spacing:-.05em;color:rgba(0,0,0,.6)}
+.quoteblock .attribution cite,.verseblock .attribution cite{display:block;letter-spacing:-.025em;color:rgba(0,0,0,.6)}
 .quoteblock.abstract{margin:0 0 1.25em 0;display:block}
 .quoteblock.abstract blockquote,.quoteblock.abstract blockquote p{text-align:left;word-spacing:0}
 .quoteblock.abstract blockquote:before,.quoteblock.abstract blockquote p:first-of-type:before{display:none}
 table.tableblock{max-width:100%;border-collapse:separate}
 table.tableblock td>.paragraph:last-child p>p:last-child,table.tableblock th>p:last-child,table.tableblock td>p:last-child{margin-bottom:0}
-table.spread{width:100%}
 table.tableblock,th.tableblock,td.tableblock{border:0 solid #dedede}
 table.grid-all th.tableblock,table.grid-all td.tableblock{border-width:0 1px 1px 0}
 table.grid-all tfoot>tr>th.tableblock,table.grid-all tfoot>tr>td.tableblock{border-width:1px 1px 0 0}
@@ -287,8 +297,8 @@ ol.upperroman{list-style-type:upper-roman}
 ol.lowergreek{list-style-type:lower-greek}
 .hdlist>table,.colist>table{border:0;background:none}
 .hdlist>table>tbody>tr,.colist>table>tbody>tr{background:none}
-td.hdlist1{padding-right:.75em;font-weight:bold}
-td.hdlist1,td.hdlist2{vertical-align:top}
+td.hdlist1,td.hdlist2{vertical-align:top;padding:0 .625em}
+td.hdlist1{font-weight:bold;padding-bottom:1.25em}
 .literalblock+.colist,.listingblock+.colist{margin-top:-.5em}
 .colist>table tr>td:first-of-type{padding:0 .75em;line-height:1}
 .colist>table tr>td:last-of-type{padding:.25em 0}
@@ -301,13 +311,14 @@ td.hdlist1,td.hdlist2{vertical-align:top}
 .image.left,.image.right{margin-top:.25em;margin-bottom:.25em;display:inline-block;line-height:0}
 .image.left{margin-right:.625em}
 .image.right{margin-left:.625em}
-a.image{text-decoration:none}
-span.footnote,span.footnoteref{vertical-align:super;font-size:.875em}
-span.footnote a,span.footnoteref a{text-decoration:none}
-span.footnote a:active,span.footnoteref a:active{text-decoration:underline}
+a.image{text-decoration:none;display:inline-block}
+a.image object{pointer-events:none}
+sup.footnote,sup.footnoteref{font-size:.875em;position:static;vertical-align:super}
+sup.footnote a,sup.footnoteref a{text-decoration:none}
+sup.footnote a:active,sup.footnoteref a:active{text-decoration:underline}
 #footnotes{padding-top:.75em;padding-bottom:.75em;margin-bottom:.625em}
 #footnotes hr{width:20%;min-width:6.25em;margin:-.25em 0 .75em 0;border-width:1px 0 0 0}
-#footnotes .footnote{padding:0 .375em;line-height:1.3;font-size:.875em;margin-left:1.2em;text-indent:-1.2em;margin-bottom:.2em}
+#footnotes .footnote{padding:0 .375em 0 .225em;line-height:1.3334;font-size:.875em;margin-left:1.2em;text-indent:-1.05em;margin-bottom:.2em}
 #footnotes .footnote a:first-of-type{font-weight:bold;text-decoration:none}
 #footnotes .footnote:last-of-type{margin-bottom:0}
 #content #footnotes{margin-top:-.625em;margin-bottom:0;padding:.75em 0}
@@ -365,11 +376,10 @@ span.icon>.fa{cursor:default}
 pre .conum[data-value]{position:relative;top:-.125em}
 b.conum *{color:inherit!important}
 .conum:not([data-value]):empty{display:none}
-h1,h2{letter-spacing:-.01em}
-dt,th.tableblock,td.content{text-rendering:optimizeLegibility}
-p,td.content{letter-spacing:-.01em}
-p strong,td.content strong{letter-spacing:-.005em}
-p,blockquote,dt,td.content{font-size:1.0625rem}
+dt,th.tableblock,td.content,div.footnote{text-rendering:optimizeLegibility}
+h1,h2,p,td.content,span.alt{letter-spacing:-.01em}
+p strong,td.content strong,div.footnote strong{letter-spacing:-.005em}
+p,blockquote,dt,td.content,span.alt{font-size:1.0625rem}
 p{margin-bottom:1.25rem}
 .sidebarblock p,.sidebarblock dt,.sidebarblock td.content,p.tableblock{font-size:1em}
 .exampleblock>.content{background-color:#fffef7;border-color:#e0e0dc;-webkit-box-shadow:0 1px 4px #e0e0dc;box-shadow:0 1px 4px #e0e0dc}
@@ -380,9 +390,9 @@ a{color:inherit!important;text-decoration:underline!important}
 a.bare,a[href^="#"],a[href^="mailto:"]{text-decoration:none!important}
 a[href^="http:"]:not(.bare):after,a[href^="https:"]:not(.bare):after{content:"(" attr(href) ")";display:inline-block;font-size:.875em;padding-left:.25em}
 abbr[title]:after{content:" (" attr(title) ")"}
-pre,blockquote,tr,img{page-break-inside:avoid}
+pre,blockquote,tr,img,object,svg{page-break-inside:avoid}
 thead{display:table-header-group}
-img{max-width:100%!important}
+svg{max-width:100%}
 p,blockquote,dt,td.content{font-size:1em;orphans:3;widows:3}
 h2,h3,#toctitle,.sidebarblock>.content>.title{page-break-after:avoid}
 #toc,.sidebarblock,.exampleblock>.content{background:none!important}
@@ -407,69 +417,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 .show-for-print{display:inherit!important}}
 </style>
 <style>
-.listingblock .pygments .hll { background-color: #ffffcc }
-.listingblock .pygments  { background: #f0f3f3; }
-.listingblock .pygments .tok-c { color: #0099FF; font-style: italic } /* Comment */
-.listingblock .pygments .tok-err { color: #AA0000; background-color: #FFAAAA } /* Error */
-.listingblock .pygments .tok-k { color: #006699; font-weight: bold } /* Keyword */
-.listingblock .pygments .tok-o { color: #555555 } /* Operator */
-.listingblock .pygments .tok-cm { color: #0099FF; font-style: italic } /* Comment.Multiline */
-.listingblock .pygments .tok-cp { color: #009999 } /* Comment.Preproc */
-.listingblock .pygments .tok-c1 { color: #0099FF; font-style: italic } /* Comment.Single */
-.listingblock .pygments .tok-cs { color: #0099FF; font-weight: bold; font-style: italic } /* Comment.Special */
-.listingblock .pygments .tok-gd { background-color: #FFCCCC; border: 1px solid #CC0000 } /* Generic.Deleted */
-.listingblock .pygments .tok-ge { font-style: italic } /* Generic.Emph */
-.listingblock .pygments .tok-gr { color: #FF0000 } /* Generic.Error */
-.listingblock .pygments .tok-gh { color: #003300; font-weight: bold } /* Generic.Heading */
-.listingblock .pygments .tok-gi { background-color: #CCFFCC; border: 1px solid #00CC00 } /* Generic.Inserted */
-.listingblock .pygments .tok-go { color: #AAAAAA } /* Generic.Output */
-.listingblock .pygments .tok-gp { color: #000099; font-weight: bold } /* Generic.Prompt */
-.listingblock .pygments .tok-gs { font-weight: bold } /* Generic.Strong */
-.listingblock .pygments .tok-gu { color: #003300; font-weight: bold } /* Generic.Subheading */
-.listingblock .pygments .tok-gt { color: #99CC66 } /* Generic.Traceback */
-.listingblock .pygments .tok-kc { color: #006699; font-weight: bold } /* Keyword.Constant */
-.listingblock .pygments .tok-kd { color: #006699; font-weight: bold } /* Keyword.Declaration */
-.listingblock .pygments .tok-kn { color: #006699; font-weight: bold } /* Keyword.Namespace */
-.listingblock .pygments .tok-kp { color: #006699 } /* Keyword.Pseudo */
-.listingblock .pygments .tok-kr { color: #006699; font-weight: bold } /* Keyword.Reserved */
-.listingblock .pygments .tok-kt { color: #007788; font-weight: bold } /* Keyword.Type */
-.listingblock .pygments .tok-m { color: #FF6600 } /* Literal.Number */
-.listingblock .pygments .tok-s { color: #CC3300 } /* Literal.String */
-.listingblock .pygments .tok-na { color: #330099 } /* Name.Attribute */
-.listingblock .pygments .tok-nb { color: #336666 } /* Name.Builtin */
-.listingblock .pygments .tok-nc { color: #00AA88; font-weight: bold } /* Name.Class */
-.listingblock .pygments .tok-no { color: #336600 } /* Name.Constant */
-.listingblock .pygments .tok-nd { color: #9999FF } /* Name.Decorator */
-.listingblock .pygments .tok-ni { color: #999999; font-weight: bold } /* Name.Entity */
-.listingblock .pygments .tok-ne { color: #CC0000; font-weight: bold } /* Name.Exception */
-.listingblock .pygments .tok-nf { color: #CC00FF } /* Name.Function */
-.listingblock .pygments .tok-nl { color: #9999FF } /* Name.Label */
-.listingblock .pygments .tok-nn { color: #00CCFF; font-weight: bold } /* Name.Namespace */
-.listingblock .pygments .tok-nt { color: #330099; font-weight: bold } /* Name.Tag */
-.listingblock .pygments .tok-nv { color: #003333 } /* Name.Variable */
-.listingblock .pygments .tok-ow { color: #000000; font-weight: bold } /* Operator.Word */
-.listingblock .pygments .tok-w { color: #bbbbbb } /* Text.Whitespace */
-.listingblock .pygments .tok-mb { color: #FF6600 } /* Literal.Number.Bin */
-.listingblock .pygments .tok-mf { color: #FF6600 } /* Literal.Number.Float */
-.listingblock .pygments .tok-mh { color: #FF6600 } /* Literal.Number.Hex */
-.listingblock .pygments .tok-mi { color: #FF6600 } /* Literal.Number.Integer */
-.listingblock .pygments .tok-mo { color: #FF6600 } /* Literal.Number.Oct */
-.listingblock .pygments .tok-sb { color: #CC3300 } /* Literal.String.Backtick */
-.listingblock .pygments .tok-sc { color: #CC3300 } /* Literal.String.Char */
-.listingblock .pygments .tok-sd { color: #CC3300; font-style: italic } /* Literal.String.Doc */
-.listingblock .pygments .tok-s2 { color: #CC3300 } /* Literal.String.Double */
-.listingblock .pygments .tok-se { color: #CC3300; font-weight: bold } /* Literal.String.Escape */
-.listingblock .pygments .tok-sh { color: #CC3300 } /* Literal.String.Heredoc */
-.listingblock .pygments .tok-si { color: #AA0000 } /* Literal.String.Interpol */
-.listingblock .pygments .tok-sx { color: #CC3300 } /* Literal.String.Other */
-.listingblock .pygments .tok-sr { color: #33AAAA } /* Literal.String.Regex */
-.listingblock .pygments .tok-s1 { color: #CC3300 } /* Literal.String.Single */
-.listingblock .pygments .tok-ss { color: #FFCC33 } /* Literal.String.Symbol */
-.listingblock .pygments .tok-bp { color: #336666 } /* Name.Builtin.Pseudo */
-.listingblock .pygments .tok-vc { color: #003333 } /* Name.Variable.Class */
-.listingblock .pygments .tok-vg { color: #003333 } /* Name.Variable.Global */
-.listingblock .pygments .tok-vi { color: #003333 } /* Name.Variable.Instance */
-.listingblock .pygments .tok-il { color: #FF6600 } /* Literal.Number.Integer.Long */
+/* Pygments styles disabled. Pygments is not available. */
 </style>
 </head>
 <body class="article">
@@ -477,129 +425,73 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div id="content">
 <div class="sect1">
-<h2 id="__a_href_http_beej_us_guide_bgnet_output_html_multipage_index_html_beej_s_guide_to_network_programming_using_internet_sockets_a"><a href="http://beej.us/guide/bgnet/output/html/multipage/index.html">Beej&#8217;s Guide to Network Programming Using Internet Sockets</a></h2>
+<h2 id="_powershell的配置">PowerShell的配置</h2>
 <div class="sectionbody">
+<div class="paragraph">
+<p>据说PowerShell比Linux下的bash之流要强大的多，尝试一下。先下载 <a href="https://github.com/lukesampson/scoop">scoop</a>。</p>
+</div>
 <div class="ulist">
 <ul>
 <li>
-<p>socket也用文件描述符来标记，与文件不同的是，它是用 recv(2) 和 send(2) 来读写。</p>
+<p><strong>主题安装</strong>。使用 <a href="https://github.com/lukesampson/concfg">concfg</a>， <code>scoop install concfg</code> ，然后 <code>concfg import solarized</code> 。</p>
 </li>
 <li>
-<p>telnet登录到80端口</p>
+<p><strong>模块安装</strong>。新模块拷贝到 <code>C:\Users\bigeast\Documents\WindowsPowerShell\Modules</code> ，然后 <code>Import-Module [module-name]</code> 。</p>
+</li>
+<li>
+<p><strong>配置文件</strong>。</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>$Profile</code> 查看配置文件。</p>
+</li>
+<li>
+<p><code>.$Profile</code> 重新载入配置文件。</p>
+</li>
+</ul>
+</div>
 </li>
 </ul>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>$ telnet baidu.com 80
-Trying 180.149.132.47...
-Connected to baidu.com.
-Escape character is '^]'.
-GET / HTTP/1.0
-
-HTTP/1.1 200 OK
-Date: Tue, 28 Apr 2015 00:36:27 GMT
-Server: Apache
-Cache-Control: max-age=86400
-Expires: Wed, 29 Apr 2015 00:36:27 GMT
-Last-Modified: Tue, 12 Jan 2010 13:48:00 GMT
-ETag: "51-4b4c7d90"
-Accept-Ranges: bytes
-Content-Length: 81
-Connection: Close
-Content-Type: text/html
-
-&lt;html&gt;
-&lt;meta http-equiv="refresh" content="0;url=http://www.baidu.com/"&gt;
-&lt;/html&gt;
-Connection closed by foreign host.</pre>
+<pre class="pygments highlight"><code data-lang="PowerShell">Import-Module PSReadLine
+Set-PSReadlineOption -EditMode Emacs
+#Import-Module PowerTab
+Set-Location ~</code></pre>
 </div>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>两种主要的socket类型：SOCK_STREAM 和 SOCK_DGRAM 。stream套接字用send()发送，datagram套接字用sendto()发送。数据包的包装是内核与硬件的事情。</p>
-</li>
-<li>
-<p>RFC793 TCP</p>
-</li>
-<li>
-<p>RFC791 IP</p>
-</li>
-<li>
-<p>RFC768 <strong>UDP</strong>, tftp, dhcpcd</p>
-</li>
-<li>
-<p>ISO/OSI七层模型</p>
-</li>
-</ul>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>    Application
-    Presentation
-    Session
-    Transport
-    Network
-    Data Link
-    Physical</pre>
-</div>
-</div>
+<p>常用命令</p>
 <div class="ulist">
 <ul>
 <li>
-<p>实际系统中的网络模型更接近于</p>
-</li>
-</ul>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>    Application Layer (telnet, ftp, etc.)
-    Host-to-Host Transport Layer (TCP, UDP)
-    Internet Layer (IP and routing)
-    Network Access Layer (Ethernet, wi-fi, or whatever)</pre>
-</div>
-</div>
-<hr>
-<div class="ulist">
-<ul>
-<li>
-<p>IPv4 2<sup>32</sup>，IPv6 2<sup>128</sup></p>
-</li>
-<li>
-<p>pipe系统调用的用法</p>
-<div class="ulist">
-<ul>
-<li>
-<p>参数是一个长度为2的整型数组，pipe()之后进行fork()，子进程和父进程一个读一个写。如果子进程读，父进程写，则在子进程中要先关闭fildes[1]（不会去写）, 父进程中要先关闭fildes[0]（不会去读）。</p>
-</li>
-<li>
-<p>能否同时读写，即双向管道？</p>
-</li>
-<li>
-<p>管道机制是怎么实现的，fork之后，两个进程中的描述符是如何保持联系的？</p>
-</li>
-<li>
-<p>文件描述符和文件流的连接：fdopen</p>
-</li>
-<li>
-<p>管道的典型使用方式是，pipe&#8594;fork&#8594;dup2&#8594;exec，这个流程实际上实现了将子进程的stdout或者stdin绑定到一个管道，从而与父进程进行通信。库函数popen()实现的功能与之类似，相当于用bash -c 执行一条命令，然后可以指定父进程对管道是读还是写。</p>
-</li>
-<li>
-<p>管道I/O的原子性。当数据大小不超过PIPE_BUF时，管道的读或者写是原子的。 <em>如何理解?</em></p>
+<p><code>Get-Command</code></p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p>本机字节序与网络字节序之间的转换</p>
+<p>查看系统信息</p>
 <div class="ulist">
 <ul>
 <li>
-<p>&lt;arpa/inet.h&gt;</p>
+<p><code>systeminfo.exe</code></p>
 </li>
 <li>
-<p>htons, htonl, ntohs, ntohl</p>
+<p><code>Get-CimInstance Win32_OperatingSystem | FL *</code></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>查看环境变量</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>$env:PATH</code></p>
 </li>
 </ul>
 </div>
@@ -611,7 +503,7 @@ Connection closed by foreign host.</pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-09-26 14:52:20 CST
+Last updated 2015-12-02 14:51:43 CST
 <script type="text/javascript" charset="utf-8">
 var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1254706632'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s11.cnzz.com/z_stat.php%3Fid%3D1254706632%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));
 </script>

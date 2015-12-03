@@ -1,3 +1,5 @@
+:source-highlighter: pygments
+:pygments-style: manni
 = Kindle Paperwhite 入手操作
 
 在亚马逊官网上买了 Kindle Paperwhite 3，6月30号当天中午就送到了。第一台Kindle，记录一下！
@@ -73,3 +75,5 @@ Bus 004 Device 022: ID 1949:0004 Lab126, Inc. Amazon Kindle 3/4/Paperwhite
 	** http://google.com 通过 'site:pan.baidu.com 关键字+mobi' 相当靠谱。百度自己不搜索自己的网盘，版权问题吧。。
 	** http://so.baiduyun.me 网盘搜索，相当靠谱。
 	** http://www.jiumodiary.com 简洁的网盘电子书搜索，会单独搜 kindle114 上的帖子，虽然没有帐号，但是有的帖子最后会给出网盘链接，你懂得。
+
+:docinfo:

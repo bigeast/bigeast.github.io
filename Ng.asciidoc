@@ -1,3 +1,5 @@
+:source-highlighter: pygments
+:pygments-style: manni
 = 谷歌大脑联合发起人解释为什么他要构造中文神经网络
 Andrew Ng 谈百度深度学习的现状
 
@@ -78,3 +80,5 @@ _以上是在深度学习峰会上的所有采访内容。但是后续我又通�
 技术给国家带来的最大问题是对劳动者的挑战。举个例子，在美国有35万的卡车司机，如果我们能成功地开发出自动驾驶汽车，他们的工作都会受到影响。我想我们需要让政府和商业领袖之间严肃地就这个问题进行商榷，而根本没必要对天花乱坠的关于“邪恶杀手机器人”的报道分心。
 
 _^ **bigeast** 译自 http://medium.com/backchannel/google-brains-co-inventor-tells-why-hes-building-chinese-neural-networks-662d03a8b548/[Google Brain’s Co-inventor Tells Why He’s Building Chinese Neural Networks]^_
+
+:docinfo:

@@ -1,3 +1,5 @@
+:source-highlighter: pygments
+:pygments-style: manni
 = 用Vim阅读代码树
 
 用Vim已经很久了，但从来没有真正用它来看工程文件。也曾用过taglist，但感觉功能有限，或许是我没有仔细看文档，总之不能满足我的要求。
@@ -79,3 +81,5 @@ $cscope -R -b # 仅生成cscope.out，然后退出
 * _:h 29.3_
 * _:h motion.txt_
 * _:h tagsrch.txt_
+
+:docinfo:

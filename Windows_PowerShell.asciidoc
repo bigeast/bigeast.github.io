@@ -1,0 +1,30 @@
+:source-highlighter: pygments
+:pygments-style: manni
+= Windows for Linux cmdline users 
+
+装了Win10之后，惊奇地发现cmd窗口竟然可以最大化了，而且默认字体大小也是宋体而不是点阵宋体了。甚至还有了透明功能。
+
+* PowerShell 数据是结构化的，比 bash 要强大。
+* 虽然还是不支持readline快捷键，这个实在不方便！于是装了个 *clink*
+
+看了知乎的一篇专栏文章 link:http://zhuanlan.zhihu.com/always-a-tool/19662365[《Scott Hanselman 的 2014 年 Windows 平台软件推荐（授权翻译，重新发布）》]，英文原文 link:http://www.hanselman.com/blog/ScottHanselmans2014UltimateDeveloperAndPowerUsersToolListForWindows.aspx[Scott Hanselman*s 2014 Ultimate Developer and Power Users Tool List for Windows]，介绍了一些开发者常用的Windows软件，看完让我感觉自己简直没用过Windows！
+
+* 首先是 *Chocolatey* ，可以从命令行下载和安装软件。
+
+* 然后 *TeraCopy* 据说要比默认的复制工具好用。
+
+* *AutoHotKey* 是来将应用绑定到快捷键上的，这在Linux的常见窗口管理器中简直就是标配，但在Windows里却只能使用默认的。
+
+* *MarkdownPad 2* 是一个markdown编辑器，可以实时渲染，然而在Windows 10 中并不能用，需要装一个一百多兆的什么包，算了。现在用的是另一个。
+
+* *GitHub for Windows* 这个界面和功能都做得超漂亮！虽然用命令行/GitBash/Git GUI/fugitive 都可以进行代码管理，但这个绝对是赞，谁用谁知道！
+
+* *Fiddle* 查看HTTP数据包。excited!
+
+* *slickrun* 就是一个启动器，足够小巧和强大，再也不用将应用快捷方式存到一个固定路径中，然后加入PATH，需要启动的时候 *Win+r* 了。
+
+* *Listary* 文件搜索，Bug级别！
+
+其余的还没有试过。不过真心不理解为什么 *Total Commander* 那么有名，装过好几次都直接卸载了，把资源管理器窗口搞成两个分栏有毛用？而且默认自体那么丑，你以为自己是在Linux上没那么多自体可用？我需要的是 *Clover* 这样，可以跟浏览器一样开多个Tab的。可惜它在Win 10里不是很稳定！不过感觉默认的资源管理器已经够用了，除了缺少多Tab支持。
+
+:docinfo:

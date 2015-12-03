@@ -1,3 +1,52 @@
+:source-highlighter: pygments
+:pygments-style: manni
+== Bigeast's Blog
+
+
+//=== 计算机
+//link:codingInterview.html[Coding Interview]
+
+//link:leetcode.html[Leetcode]
+
+//link:SortAlgo.html[排序算法]
+
+//link:Problems.html[Problems to Solve]
+
+=== Book Notes
+link:books/linuxfaner.html[Linux就是这个范儿]
+
+link:InternetSocket.html[网络编程基础]
+
+link:books/JS-OO.html[JavaScript面向对象编程]
+
+
+link:Kindle.html[Kindle Paperwhite 3 入手体验]
+
+link:oneplus2.html[一加手机二 入手体验]
+
+
+=== Computer Hacks
+link:Firefox.html[Firefox及其插件]
+
+link:PowerShell.html[PowerShell学习记录]
+
+link:Windows_PowerShell.html[Linux用户的Windows生存手册]
+
+link:scrot.html[Scrot屏幕截图]
+
+link:VPS-Shadowsocks.html[VPS科学上网]
+
+link:pythonchallenge.html[Python Challenge Note]
+
+link:Source_Code_Tree_Navigation_in_Vim.html[Source Code Tree Navigation in Vim]
+
+
+=== 人文
+link:books/YM.html[斯蒂芬·哈珀在读什么]
+
+link:books/ddj.html[道德经]
+
+=== Notes
 [width="30%"]
 |====================
 |link:2015-02.html[2015-02 笔记] 
@@ -5,35 +54,15 @@
 |link:2015-04.html[2015-04 笔记]
 |link:2015-05.html[2015-05 笔记]
 |link:2015-06.html[2015-06 笔记]
+|link:2015-07.html[2015-07 笔记]
+|link:2015-08.html[2015-08 笔记]
+|link:2015-09.html[2015-09 笔记]
+|link:2015-12.html[2015-12 笔记]
 |====================
 
-link:Problems.html[Problems to Solve]
-
-link:leetcode.html[Leetcode]
-
-== Book Notes
-link:Kindle.html[Kindle Paperwhite 3 入手体验]
-
-=== 人文
-link:books/YM.html[斯蒂芬·哈珀在读什么]
-
-link:books/ddj.html[道德经]
-
-=== 计算机
-link:books/linuxfaner.html[Linux就是这个范儿]
-
-link:InternetSocket.html[网络编程基础]
-
-link:books/JS-OO.html[JavaScript面向对象编程]
-
-== Computer Hacks
-link:Source_Code_Tree_Navigation_in_Vim.html[Source Code Tree Navigation in Vim]
-
-link:scrot.html[Scrot屏幕截图]
-
-link:pythonchallenge.html[Python Challenge Note]
-
-link:VPS-Shadowsocks.html[VPS科学上网]
-
-== Translate
+=== Translate
 link:Ng.html[Andrew Ng 谈百度深度学习的现状]
+
+=== link:http://138.128.221.113:8000[我的简历]
+
+:docinfo:

@@ -1,0 +1,34 @@
+:source-highlighter: pygments
+:pygments-style: manni
+== Firefox及其插件
+=== Vimperator的配置
+* 主题。 https://github.com/vimpr/vimperator-colors[vimperator-colors]
+* 配置文件： `~/_vimperatorrc`, `~/.vimperatorrc`
+
+[source, vimrc, numbered]
+----
+colorscheme indigo-fx3
+let mapleader=','
+set tabnumbers
+set hintchars=hjklasdfgyuiopqwertnmzxcvb
+
+// disable vimperator for some sites.
+"autocmd LocationChange .* js modes.passAllKeys = false
+"autocmd LocationChange digg\\.com/reader js modes.passAllKeys = true
+ignorekeys add digg.com/reader
+
+nnoremap <Leader>z :nohl<CR>
+
+nnoremap h :tabprevious<CR>
+nnoremap l :tabnext<CR>
+
+inoremap <C-a> <Insert><C-a><Insert>
+nnoremap <Leader>S :source ~/_vimperatorrc<CR>
+nnoremap <Leader>C :!gvim ~/_vimperatorrc<CR>
+----
+=== Firebug
+=== Adblock
+=== LastPass
+=== Stylish
+=== Google Translator
+:docinfo:

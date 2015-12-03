@@ -5,7 +5,7 @@
 <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 1.5.2">
-<title>Beej&#8217;s Guide to Network Programming Using Internet Sockets</title>
+<title>Tue 01 Dec 2015 07:00:26 PM CST</title>
 <style>
 /* Asciidoctor default stylesheet | MIT License | http://asciidoctor.org */
 /* Remove the comments around the @import statement below when using this as a custom stylesheet */
@@ -477,141 +477,24 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div id="content">
 <div class="sect1">
-<h2 id="__a_href_http_beej_us_guide_bgnet_output_html_multipage_index_html_beej_s_guide_to_network_programming_using_internet_sockets_a"><a href="http://beej.us/guide/bgnet/output/html/multipage/index.html">Beej&#8217;s Guide to Network Programming Using Internet Sockets</a></h2>
+<h2 id="_tue_01_dec_2015_07_00_26_pm_cst">Tue 01 Dec 2015 07:00:26 PM CST</h2>
 <div class="sectionbody">
+<div class="sect2">
+<h3 id="_挂载windows的休眠分区">挂载Windows的休眠分区</h3>
 <div class="ulist">
 <ul>
 <li>
-<p>socket也用文件描述符来标记，与文件不同的是，它是用 recv(2) 和 send(2) 来读写。</p>
-</li>
-<li>
-<p>telnet登录到80端口</p>
+<p><code>mount -t ntfs-3g -o ro /dev/sdc1 /media/SSD2</code> 只能只读挂载，而且必须指明 'ntfs-3g'</p>
 </li>
 </ul>
 </div>
-<div class="listingblock">
-<div class="content">
-<pre>$ telnet baidu.com 80
-Trying 180.149.132.47...
-Connected to baidu.com.
-Escape character is '^]'.
-GET / HTTP/1.0
-
-HTTP/1.1 200 OK
-Date: Tue, 28 Apr 2015 00:36:27 GMT
-Server: Apache
-Cache-Control: max-age=86400
-Expires: Wed, 29 Apr 2015 00:36:27 GMT
-Last-Modified: Tue, 12 Jan 2010 13:48:00 GMT
-ETag: "51-4b4c7d90"
-Accept-Ranges: bytes
-Content-Length: 81
-Connection: Close
-Content-Type: text/html
-
-&lt;html&gt;
-&lt;meta http-equiv="refresh" content="0;url=http://www.baidu.com/"&gt;
-&lt;/html&gt;
-Connection closed by foreign host.</pre>
-</div>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>两种主要的socket类型：SOCK_STREAM 和 SOCK_DGRAM 。stream套接字用send()发送，datagram套接字用sendto()发送。数据包的包装是内核与硬件的事情。</p>
-</li>
-<li>
-<p>RFC793 TCP</p>
-</li>
-<li>
-<p>RFC791 IP</p>
-</li>
-<li>
-<p>RFC768 <strong>UDP</strong>, tftp, dhcpcd</p>
-</li>
-<li>
-<p>ISO/OSI七层模型</p>
-</li>
-</ul>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>    Application
-    Presentation
-    Session
-    Transport
-    Network
-    Data Link
-    Physical</pre>
-</div>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>实际系统中的网络模型更接近于</p>
-</li>
-</ul>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>    Application Layer (telnet, ftp, etc.)
-    Host-to-Host Transport Layer (TCP, UDP)
-    Internet Layer (IP and routing)
-    Network Access Layer (Ethernet, wi-fi, or whatever)</pre>
-</div>
-</div>
-<hr>
-<div class="ulist">
-<ul>
-<li>
-<p>IPv4 2<sup>32</sup>，IPv6 2<sup>128</sup></p>
-</li>
-<li>
-<p>pipe系统调用的用法</p>
-<div class="ulist">
-<ul>
-<li>
-<p>参数是一个长度为2的整型数组，pipe()之后进行fork()，子进程和父进程一个读一个写。如果子进程读，父进程写，则在子进程中要先关闭fildes[1]（不会去写）, 父进程中要先关闭fildes[0]（不会去读）。</p>
-</li>
-<li>
-<p>能否同时读写，即双向管道？</p>
-</li>
-<li>
-<p>管道机制是怎么实现的，fork之后，两个进程中的描述符是如何保持联系的？</p>
-</li>
-<li>
-<p>文件描述符和文件流的连接：fdopen</p>
-</li>
-<li>
-<p>管道的典型使用方式是，pipe&#8594;fork&#8594;dup2&#8594;exec，这个流程实际上实现了将子进程的stdout或者stdin绑定到一个管道，从而与父进程进行通信。库函数popen()实现的功能与之类似，相当于用bash -c 执行一条命令，然后可以指定父进程对管道是读还是写。</p>
-</li>
-<li>
-<p>管道I/O的原子性。当数据大小不超过PIPE_BUF时，管道的读或者写是原子的。 <em>如何理解?</em></p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>本机字节序与网络字节序之间的转换</p>
-<div class="ulist">
-<ul>
-<li>
-<p>&lt;arpa/inet.h&gt;</p>
-</li>
-<li>
-<p>htons, htonl, ntohs, ntohl</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-09-26 14:52:20 CST
+Last updated 2015-12-01 19:02:48 CST
 <script type="text/javascript" charset="utf-8">
 var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1254706632'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s11.cnzz.com/z_stat.php%3Fid%3D1254706632%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));
 </script>

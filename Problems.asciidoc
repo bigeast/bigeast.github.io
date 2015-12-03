@@ -1,3 +1,5 @@
+:source-highlighter: pygments
+:pygments-style: manni
 * 如何从物理上解释 Rate-Distortion函数的凸性。
 
 * **JavaScript** 为什么那么有用？
@@ -19,16 +21,19 @@
 
 * https://projecteuler.net/problem=374[_PE374 Maximum Integer Partition Product_]。把一个正整数N分成若干部分，使得其乘积最大，参考http://poj.org/showmessage?message_id=13543[POJ 1032]。
 
-	令：
-	A = 2+3+4+...+(k-1)+k <= N < A + (k+1) = B
-	
-	Suppose N = A + p, (0 <= p < k+1)
-	
-	1) p=0, then answer is Set A
-	
-	2) 1<=p<=k-1 then answer is Set B - {k+1-p}
-	
-	3) p=k, then answer is Set A - {2} + {k+2}
+令：
+
+----
+A = 2+3+4+...+(k-1)+k <= N < A + (k+1) = B
+
+Suppose N = A + p, (0 <= p < k+1)
+
+1) p=0, then answer is Set A
+
+2) 1<=p<=k-1 then answer is Set B - {k+1-p}
+
+3) p=k, then answer is Set A - {2} + {k+2}
+----
 
 * https://projecteuler.net/problem=193[PE193 SquareFree Number]
 
@@ -49,3 +54,5 @@ DFS
 * http://acm.zju.edu.cn/onlinejudge/showProblem.do?problemCode=1453[ZOJ 1453]
 
 凸包。
+
+:docinfo:
