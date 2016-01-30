@@ -26,6 +26,8 @@ link:oneplus2.html[一加手机二 入手体验]
 
 
 === Computer Hacks
+link:blogGeekonomics.html[我如何对待一个让我着迷的博客]
+
 link:Firefox.html[Firefox及其插件]
 
 link:PowerShell.html[PowerShell学习记录]
