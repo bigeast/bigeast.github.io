@@ -1,0 +1,119 @@
+:source-highlighter: pygments :pygments-style: manni
+
+= 我如何对待一个让我着迷的博客
+
+最近迷上了一个博客： http://www.geekonomics10000.com/[
+学而时嬉之] ，在微博上关注博主 http://weibo.com/geekonomics[_@GK同人于野_] 很
+久了，也看过博主的书**《万万没想到：用理工科思维理解世界》**。最近又出了一本新书
+。其中很多观点让我深有同感，这种摆事实讲道理的方法很让我信服。
+
+== 获取所有博文目录
+我订阅了该博客的RSS，但是最早只到2011年。博客上也没有按时间归档的目录，要想按
+时间顺序看，只能一条一条往前翻：
+
+image:images/2016-01-30-164114_844x330_scrot.png[手动找到上一条]
+
+于是干脆写了一个Python脚本来自动获取所有的博文目录：
+
+[source, Python]
+----
+import requests
+import lxml.html
+
+def get_prev(url):
+    tree = lxml.html.fromstring(requests.get(url).content)
+    prev = tree.xpath('//div[@class="alignleft"]/a')[0]
+    return prev
+
+def get_newest():
+    tree = lxml.html.fromstring(requests.get('http://www.geekonomics10000.com').content)
+    newest = tree.xpath('//a[@rel="bookmark"]')[0]
+    return newest
+
+if __name__ == "__main__":
+    curr = get_newest()
+    items = []
+    # f = open("archive.md", 'w')
+    f = open("archive.asciidoc", 'w')
+    N = 1
+    while True:
+        # f.write('[{}]({})\n'.format(curr.text, curr.get('href')))
+        print("Item ",  N)
+        N = N + 1
+        f.write('link:{}[{}]\n\n'.format(curr.get('href'), curr.text))
+        items.append(curr)
+        url = curr.get('href')
+        curr = get_prev(url)
+----
+
+将博文的标题和链接写到asciidoc文档里，然后生成的页面在这里：
+link:geekonomics_archive.html[geekonomics_archive.html]
+
+== 生成MOBI电子书
+
+还可以用Calibre将博文制作成MOBI格式的电子书：
+
+[source, Python]
+----
+from calibre.web.feeds.recipes import BasicNewsRecipe
+
+class GEEKONOMICS(BasicNewsRecipe):
+
+	title = '学而时嬉之'
+	description = '用理工科的思维理解世界'
+
+	no_stylesheets = True
+	remove_tags = [{ 'class': 'navigation' }]
+
+	def parse_index(self):
+		articles = [{ 'title' : '我的新书《智识分子：做个复杂的现代人》', 'url' : 'http://www.geekonomics10000.com/940' }
+		,{ 'title' : '2016新年荐书', 'url' : 'http://www.geekonomics10000.com/934' }
+		,{ 'title' : '美国人说的圣贤之道', 'url' : 'http://www.geekonomics10000.com/926' }
+        # 此处省略N多条
+		,{ 'title' : '长尾理论和web2.0', 'url' : 'http://www.geekonomics10000.com/82' }
+		,{ 'title' : '我看美国 -3- 言论自由与主流媒体', 'url' : 'http://www.geekonomics10000.com/76' }
+		,{ 'title' : '我看美国 -2- 共和党还是民主党', 'url' : 'http://www.geekonomics10000.com/74' }
+		,{ 'title' : '我看美国 -1- 选举的三个境界', 'url' : 'http://www.geekonomics10000.com/72' }
+		,{ 'title' : '我看美国 前言', 'url' : 'http://www.geekonomics10000.com/69' }
+		,{ 'title' : '北京英文路牌和伊斯兰教派', 'url' : 'http://www.geekonomics10000.com/63' }]
+
+		ans = [('用理工科的思维理解世界', articles)]
+		return ans
+----
+
+最后只需运行 'ebook-convert geekonomics.recipe geekonomics.mobi' ，最终的电子
+书的百度云链接： http://pan.baidu.com/s/1c0ZMHAo[http://pan.baidu.com/s/1c0ZMHAo]
+
+== 保存到 Instapaper
+
+虽然我用Pocket比较多，但是Instapaper的API比较简单：
+https://www.instapaper.com/api/simple[Simple Developer API: Adding Pages to
+Instapaper]
+
+只需要用HTTP请求就可以了。认证也没有用OAUT 2.0之类的，而是基本的HTTP认证。
+
+[source, Python]
+----
+#!/bin/env python
+import requests
+
+if __name__ == "__main__":
+    urls = ['http://www.geekonomics10000.com/940'
+            , 'http://www.geekonomics10000.com/934'
+            , 'http://www.geekonomics10000.com/926'
+            , 'http://www.geekonomics10000.com/918'
+            , 'http://www.geekonomics10000.com/915'
+            , 'http://www.geekonomics10000.com/912'
+			, 'http://www.geekonomics10000.com/72'
+			, 'http://www.geekonomics10000.com/69'
+			, 'http://www.geekonomics10000.com/63']
+    for item in urls:
+        r = requests.post('https://www.instapaper.com/api/add', auth =
+				('username', 'password'), data = { 'url' : item} )
+        if r.status_code == 201:
+            print(item, ' saved.')
+        else:
+            print('Error occured.')
+----
+
+:docinfo:
