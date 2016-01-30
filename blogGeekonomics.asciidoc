@@ -1,5 +1,5 @@
-:source-highlighter: pygments :pygments-style: manni
-
+:source-highlighter: pygments 
+:pygments-style: manni
 = 我如何对待一个让我着迷的博客
 
 最近迷上了一个博客： http://www.geekonomics10000.com/[
