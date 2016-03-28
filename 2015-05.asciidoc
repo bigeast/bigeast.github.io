@@ -2,13 +2,13 @@
 :pygments-style: manni
 == 2015-05-09 Saturday 21:30:58
 === Node.js
-* 看了《深入浅出Node.js》，理解是Node.js是一个基于V8引擎的JavaScript解释器，主要用来实现Web服务器，亮点是异步I/O，单线程，是一种处理http://www.kegel.com/c10k.html[C10k问题]的解决方案。
+* 看了《深入浅出Node.js》，理解是Node.js是一个基于V8引擎的JavaScript解释器，主要用来实现Web服务器，亮点是异步I/O，单线程，是一种处理 http://www.kegel.com/c10k.html[C10k问题] 的解决方案。
 * Node之所以用JavaScript来实现，部分原因是其它语言中已经存在了同步I/O的库，而JavaScript没有类似的包袱。
 * `npm -g install` 安装后可以用相应的命令行调用包。安装位置 _/usr/lib/node_modules_
 * 可以用来实现简单的HTTP服务器，与 `python -m http.server` 类似。
 
 === C++
-* C\++中可以在程序的任意位置声明变量是因为声明是C\++中的合法语句，而C中声明语句与其它语句是不同的。
+* Cpp 中可以在程序的任意位置声明变量是因为声明是 Cpp 中的合法语句，而C中声明语句与其它语句是不同的。
 * vector的初始化。
 
 ----------------------------------------------------------------------------------------------------
