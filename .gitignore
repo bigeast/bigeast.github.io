@@ -4,3 +4,8 @@
 !*.html
 !books/
 !images/
+
+!poems/
+!poems/hz
+!poems/hz/*
+poems/hz/*.swp
