@@ -1,0 +1,120 @@
+:source-highlighter: pygments
+:pygments-style: manni
+
+= 二级指针的应用
+
+== 链表中的应用
+
+
+https://leetcode.com/problems/remove-linked-list-elements[remove-linked-list-elements]
+
+通常的做法：
+[source, C++, numbered]
+----
+class Solution {
+public:
+	ListNode* removeElements(ListNode* head, int val) {
+		ListNode *prev = NULL, *p = head;
+		while(p) {
+			if(p->val == val) {
+				if(prev) prev->next = p->next;
+				else head = p->next;
+			}
+			else {
+				prev = p;
+			}
+			p = p->next;
+		}
+		return head;
+	}
+};
+----
+
+使用二级指针的做法：
+
+[source, C++, numbered]
+----
+class Solution {
+public:
+	ListNode* removeElements(ListNode* head, int val) {
+		for(ListNode **curr = &head; *curr; ) {
+			if((*curr)->val == val)
+				*curr = (*curr)->next; // *curr里相当于是prev->next
+			else
+				curr = &((*curr)->next); // 将 *curr 设置为当前节点的next，使得在处理下一个节点时，*curr相当于prev->next
+		}
+		return head;
+	}
+};
+----
+**一个指向链表节点的指针，与改节点的前一个节点的next值相同。**
+
+== 字符串处理中的应用
+=== strtod
+
+[source, C++, numbered]
+-----
+// double strtod(const char *str, char **endptr);
+// 从str开始，忽略尽可能多的空白字符后，读取一个double类型，直到第一个无效字符
+// 出现，如果endptr不为NULL，则将*endptr指向该字符
+
+char s[] = "3.14 -2.17828 6.022e23";
+// 方法一：
+// 如果s不能被解析为double，则将&str作为endptr会出现死循环
+char *p;
+double d;
+for(p = s, d = strtod(p, &p); ; d = strtod(p, &p)) {
+	cout<<d<<endl;
+	if(*p == 0) break;
+}
+// 方法二：
+// 总是能返回需要的结果
+char **pEnd;
+for(p = s, d = strtod(p, &pEnd); p != pEnd; d = strtod(p, &pEnd)) {
+	printf("'%.*s' %lf\n", (pEnd - p), p, d); // 被解析的字符串和解析结果
+	p = pEnd; // 从上次结束的位置开始解析
+}
+
+-----
+
+为何第二个参数是一个二级指针呢？从上面的使用方法中可以看出，该参数的作用是，将
+解析出一个double后，剩下字符串的第一个位置的信息传给外部程序。
+
+位置可以用原始字符串s和一个整数pos来表示，即s+pos，因此也可以用一个指针来表示
+，由于不能返回多个参数，更多的返回值一般通过指针来传递。
+
+例如要返回一个整数，那么可以添加一个 _int *_ 类型的参数，然后在函数内部更改这个
+指针指向的内容，就可以实现将内部运行结果直接传给函数外部变量的目的。如果不用指
+针，而是直接传 _int_ 类型，由于C语言是传值调用，因此虽然把函数外部的一个值（实
+参）传递进去，在函数内部还是会生成一个相同类型的值（形参），当函数运行结束，该
+参数生命周期便结束了，即使形参携带了结果，也不能传递给实参。
+
+在 _strtod_ 函数中，除了要返回 double 的解析结果，还要返回一个剩余字符串起始位
+置的 _char *_ ，因此要添加一个 _&(char *)_ 参数，来传递这个 _char *_ ，仅此而
+已。
+
+=== strtol
+[source, C++, numbered]
+----
+// long strtol(const char *str, char **str_end, int base);
+// 与strtod使用方法类似，只是多了一个base参数，来传递进制数。
+----
+
+=== strtok
+https://sourceware.org/git/?p=glibc.git;a=blob;f=string/strtok.c;h=7a4574db5c80501e47d045ad4347e8a287b32191;hb=HEAD[strtok.c]
+
+* 会改变str内容：每段的第一个delim字符变为'\0'
+* 由于使用了static变量，注意线程安全性。
+* strspn,strcspn，实现方法类似，用delim初始化一个长度为256的数组，然后检查str中的每个字符对应的数组中的值是否为1
+* strpbrk 是 strcspn 的包装函数
+
+[source, C++, numbered]
+----
+// char *strtok(char *str, const char *delimiters)
+// 按说也应该传递指针，但strtok内部有一个静态变量，存着这个指针，当str为NULL时
+// ，就使用这个静态变量作为str，因此不用传位置指针。当str不为NULL时，该静态变
+// 量会更新。
+----
+
+:docinfo:
+
