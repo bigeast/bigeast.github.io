@@ -1,12 +1,13 @@
 :source-highlighter: pygments
 :pygments-style: manni
 
-= 二级指针的应用
+= On Pointer in C/C++
 
 == 链表中的应用
 
+https://meta.slashdot.org/story/12/10/11/0030249/linus-torvalds-answers-your-questions[Linus:  I actually wish more people understood the really core low-level kind of coding.]
 
-https://leetcode.com/problems/remove-linked-list-elements[remove-linked-list-elements]
+https://leetcode.com/problems/remove-linked-list-elements[Leetcode: remove-linked-list-elements]
 
 通常的做法：
 [source, C++, numbered]
@@ -49,7 +50,9 @@ public:
 ----
 **一个指向链表节点的指针，与改节点的前一个节点的next值相同。**
 
-== 字符串处理中的应用
+我看过好几遍，还是觉得不太好懂。不确定是否真的get到了要点。
+
+== 在函数参数中的应用
 === strtod
 
 [source, C++, numbered]
@@ -101,20 +104,38 @@ for(p = s, d = strtod(p, &pEnd); p != pEnd; d = strtod(p, &pEnd)) {
 ----
 
 === strtok
-https://sourceware.org/git/?p=glibc.git;a=blob;f=string/strtok.c;h=7a4574db5c80501e47d045ad4347e8a287b32191;hb=HEAD[strtok.c]
 
-* 会改变str内容：每段的第一个delim字符变为'\0'
+_strtok_ 是一个很特殊的函数，初次使用回感觉比较违反直觉。看下 glibc 中的实现： https://sourceware.org/git/?p=glibc.git;a=blob;f=string/strtok.c;h=7a4574db5c80501e47d045ad4347e8a287b32191;hb=HEAD[strtok.c]
+
+代码很短，因为主要工作交给了 https://sourceware.org/git/?p=glibc.git;a=blob;f=string/strspn.c;h=f0635c156a7a0dae73dba8be0e96b08471d9327d;hb=ab30899d880f9741a409cbc0d7a28399bdac21bf[strspn], https://sourceware.org/git/?p=glibc.git;a=blob;f=string/strpbrk.c;h=fddd473ad7188d0b67d71c34172eb16e3e561fd6;hb=ab30899d880f9741a409cbc0d7a28399bdac21bf[strpbrk] 函数。特殊之处在于，使用了一个 _static
+char *olds_ 来记录每次解析之后，余下字符串的起始位置，而不是使用二级指针参数来
+将该位置传出去。
+
+* **会改变str内容**：每段的第一个delim字符变为'\000'
 * 由于使用了static变量，注意线程安全性。
+* 如果字符串是存在临时堆栈区，函数退出后，栈区内存释放，但strtok里的static变量还可能存着字符串某个位置的地址，成为野指针。
 * strspn,strcspn，实现方法类似，用delim初始化一个长度为256的数组，然后检查str中的每个字符对应的数组中的值是否为1
 * strpbrk 是 strcspn 的包装函数
 
 [source, C++, numbered]
 ----
 // char *strtok(char *str, const char *delimiters)
-// 按说也应该传递指针，但strtok内部有一个静态变量，存着这个指针，当str为NULL时
-// ，就使用这个静态变量作为str，因此不用传位置指针。当str不为NULL时，该静态变
-// 量会更新。
+char s1[] = "test -- big'' eas'    king''";
+char *p;
+for(p = strtok(s1, " -'"); p; p = strtok(NULL, " -'")) {
+  printf("%s\n", p);
+}
 ----
 
-:docinfo:
+按说 strtok 也需要传递指针，但strtok内部有一个静态变量，存着这个指针，当str为
+NULL时，就使用这个静态变量作为str，因此不用传位置指针。当str不为NULL时，该静态
+变量会更新。
 
+== 其它应用
+
+=== 动态数组
+* 动态一维数组（通过指针访问数组）与普通的数组的工作原理类似，多出一个指针。而动态二维数组则多出 M + 1 个指针（一个二级指针和M个一级指针），其中M是数组的行数。
+* 对于数组，编译器在编译阶段就能计算出任意元素的位置，一般不做边界检查（**数组维数信息只在编译时用到，而不是存到某些隐藏变量中**），例如对于数组 A[3][4], A[7] 与 A[1][3] 是相同的。而动态二维数组则不能如此替换。
+
+
+:docinfo:

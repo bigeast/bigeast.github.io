@@ -5,7 +5,7 @@
 <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 1.5.3">
-<title>二级指针的应用</title>
+<title>On Pointer in C/C++</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /* Asciidoctor default stylesheet | MIT License | http://asciidoctor.org */
@@ -484,14 +484,17 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article">
 <div id="header">
-<h1>二级指针的应用</h1>
+<h1>On Pointer in C/C++</h1>
 </div>
 <div id="content">
 <div class="sect1">
 <h2 id="_链表中的应用">链表中的应用</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p><a href="https://leetcode.com/problems/remove-linked-list-elements">remove-linked-list-elements</a></p>
+<p><a href="https://meta.slashdot.org/story/12/10/11/0030249/linus-torvalds-answers-your-questions">Linus:  I actually wish more people understood the really core low-level kind of coding.</a></p>
+</div>
+<div class="paragraph">
+<p><a href="https://leetcode.com/problems/remove-linked-list-elements">Leetcode: remove-linked-list-elements</a></p>
 </div>
 <div class="paragraph">
 <p>通常的做法：</p>
@@ -568,10 +571,13 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="paragraph">
 <p><strong>一个指向链表节点的指针，与改节点的前一个节点的next值相同。</strong></p>
 </div>
+<div class="paragraph">
+<p>我看过好几遍，还是觉得不太好懂。不确定是否真的get到了要点。</p>
+</div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_字符串处理中的应用">字符串处理中的应用</h2>
+<h2 id="_在函数参数中的应用">在函数参数中的应用</h2>
 <div class="sectionbody">
 <div class="sect2">
 <h3 id="_strtod">strtod</h3>
@@ -654,15 +660,23 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="sect2">
 <h3 id="_strtok">strtok</h3>
 <div class="paragraph">
-<p><a href="https://sourceware.org/git/?p=glibc.git;a=blob;f=string/strtok.c;h=7a4574db5c80501e47d045ad4347e8a287b32191;hb=HEAD">strtok.c</a></p>
+<p><em>strtok</em> 是一个很特殊的函数，初次使用回感觉比较违反直觉。看下 glibc 中的实现： <a href="https://sourceware.org/git/?p=glibc.git;a=blob;f=string/strtok.c;h=7a4574db5c80501e47d045ad4347e8a287b32191;hb=HEAD">strtok.c</a></p>
+</div>
+<div class="paragraph">
+<p>代码很短，因为主要工作交给了 <a href="https://sourceware.org/git/?p=glibc.git;a=blob;f=string/strspn.c;h=f0635c156a7a0dae73dba8be0e96b08471d9327d;hb=ab30899d880f9741a409cbc0d7a28399bdac21bf">strspn</a>, <a href="https://sourceware.org/git/?p=glibc.git;a=blob;f=string/strpbrk.c;h=fddd473ad7188d0b67d71c34172eb16e3e561fd6;hb=ab30899d880f9741a409cbc0d7a28399bdac21bf">strpbrk</a> 函数。特殊之处在于，使用了一个 <em>static
+char *olds</em> 来记录每次解析之后，余下字符串的起始位置，而不是使用二级指针参数来
+将该位置传出去。</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>会改变str内容：每段的第一个delim字符变为'\0'</p>
+<p><strong>会改变str内容</strong>：每段的第一个delim字符变为'\000'</p>
 </li>
 <li>
 <p>由于使用了static变量，注意线程安全性。</p>
+</li>
+<li>
+<p>如果字符串是存在临时堆栈区，函数退出后，栈区内存释放，但strtok里的static变量还可能存着字符串某个位置的地址，成为野指针。</p>
 </li>
 <li>
 <p>strspn,strcspn，实现方法类似，用delim初始化一个长度为256的数组，然后检查str中的每个字符对应的数组中的值是否为1</p>
@@ -677,12 +691,39 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <pre class="pygments highlight"><code data-lang="C++"><table class="pyhltable"><tr><td class="linenos"><div class="linenodiv">1
 2
 3
-4</div></td><td class="code"><span class="tok-c1">// char *strtok(char *str, const char *delimiters)</span>
-<span class="tok-c1">// 按说也应该传递指针，但strtok内部有一个静态变量，存着这个指针，当str为NULL时</span>
-<span class="tok-c1">// ，就使用这个静态变量作为str，因此不用传位置指针。当str不为NULL时，该静态变</span>
-<span class="tok-c1">// 量会更新。</span>
+4
+5
+6</div></td><td class="code"><span class="tok-c1">// char *strtok(char *str, const char *delimiters)</span>
+<span class="tok-kt">char</span> <span class="tok-n">s1</span><span class="tok-p">[]</span> <span class="tok-o">=</span> <span class="tok-s">&quot;test -- big&#39;&#39; eas&#39;    king&#39;&#39;&quot;</span><span class="tok-p">;</span>
+<span class="tok-kt">char</span> <span class="tok-o">*</span><span class="tok-n">p</span><span class="tok-p">;</span>
+<span class="tok-k">for</span><span class="tok-p">(</span><span class="tok-n">p</span> <span class="tok-o">=</span> <span class="tok-n">strtok</span><span class="tok-p">(</span><span class="tok-n">s1</span><span class="tok-p">,</span> <span class="tok-s">&quot; -&#39;&quot;</span><span class="tok-p">);</span> <span class="tok-n">p</span><span class="tok-p">;</span> <span class="tok-n">p</span> <span class="tok-o">=</span> <span class="tok-n">strtok</span><span class="tok-p">(</span><span class="tok-nb">NULL</span><span class="tok-p">,</span> <span class="tok-s">&quot; -&#39;&quot;</span><span class="tok-p">))</span> <span class="tok-p">{</span>
+  <span class="tok-n">printf</span><span class="tok-p">(</span><span class="tok-s">&quot;%s</span><span class="tok-se">\n</span><span class="tok-s">&quot;</span><span class="tok-p">,</span> <span class="tok-n">p</span><span class="tok-p">);</span>
+<span class="tok-p">}</span>
 </td></tr></table></code></pre>
 </div>
+</div>
+<div class="paragraph">
+<p>按说 strtok 也需要传递指针，但strtok内部有一个静态变量，存着这个指针，当str为
+NULL时，就使用这个静态变量作为str，因此不用传位置指针。当str不为NULL时，该静态
+变量会更新。</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_其它应用">其它应用</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_动态数组">动态数组</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>动态一维数组（通过指针访问数组）与普通的数组的工作原理类似，多出一个指针。而动态二维数组则多出 M + 1 个指针（一个二级指针和M个一级指针），其中M是数组的行数。</p>
+</li>
+<li>
+<p>对于数组，编译器在编译阶段就能计算出任意元素的位置，一般不做边界检查（<strong>数组维数信息只在编译时用到，而不是存到某些隐藏变量中</strong>），例如对于数组 A[3][4], A[7] 与 A[1][3] 是相同的。而动态二维数组则不能如此替换。</p>
+</li>
+</ul>
 </div>
 </div>
 </div>
@@ -690,7 +731,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2016-06-04 15:41:58 CST
+Last updated 2016-06-04 17:55:25 CST
 <script type="text/javascript" charset="utf-8">
 var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1254706632'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s11.cnzz.com/z_stat.php%3Fid%3D1254706632%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));
 </script>
