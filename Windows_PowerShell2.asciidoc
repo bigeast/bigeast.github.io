@@ -1,0 +1,25 @@
+:source-highlighter: pygments
+:pygments-style: manni
+= PowerShell配置
+== 配置文件
+
+* `C:\Users\bigeast\Documents\WindowsPowerShell`
+* 模块安装： `Install-Module`
+
+== 用PowerShell代替cmd窗口
+`Shift+右键` 可以选择在当前路径下打开命令窗口，而通过修改注册表，可以将cmd窗口换成PowerShell窗口：
+
+* `Win+R` 输入 `regedit` 进入注册表编辑器
+* 找到 `HKEY_CLASSES_ROOT\Directory\Background\shell\cmd\command` ,修改值为 `PowerShell -NoExit Set-Location "%V"`
+
+== https://github.com/lzybkr/PSReadLine[PSReadLine]
+
+安装后需要在 profile.ps1 中添加：
+
+[source, powershell]
+----
+Import-Module PSReadLine
+Set-PSReadLineOption -EditMode Emacs
+----
+
+:docinfo:
