@@ -1,0 +1,31 @@
+=== 计算机程序设计艺术
+
+==== 电子版
+
+http://www-cs-faculty.stanford.edu/~uno/taocp.html[TAOCP] 目前中文只出了三卷，图灵出版社已经在出版第三版的中文版了。但是无论正版还是盗版，都没有高质量的电子版，都是扫描的PDF。对这种类型的书而言，简直就无法看下去。于是在网上苦苦搜寻高质量的电子版，最后终于找到了高质量的英文电子版：
+
+image:../images/taocp_v1_3e.jpg[width=200]
+
+http://gen.lib.rus.ec/book/index.php?md5=3612CEBCEE66E75A23440B97A1B560DB[The Art of Computer Programming, Vol.1: Fundamental Algorithms, 3rd Edition]
+
+image:../images/taocp_v2_3e.jpg[width=200]
+
+http://gen.lib.rus.ec/book/index.php?md5=11C1D24DDD14C46F714572FAF7CEBE6B[The Art of Computer Programming, Vol.2: Seminumerical Algorithms, 3rd Edition]
+
+image:../images/taocp_v3_3e.jpg[width=200]
+
+http://gen.lib.rus.ec/book/index.php?md5=2962406986EBEE7A69434C31612D8BF8[The Art of Computer Programming, Vol.3: Sorting and Searching, 3rd Edition]
+
+image:../images/taocp_v4a.jpg[width=200]
+
+http://gen.lib.rus.ec/book/index.php?md5=0F6692C61304473A228073DAFE5A2853[The Art of Computer Programming, Vol.4A: Combinatorial Algorithms, Part 1]
+
+其中第四卷只出了前半部分，Knuth 是写完几节就发布出 http://www.cs.utsa.edu/~wagner/knuth/[电子版] 。
+
+==== 错误
+第一卷第三版的中文版已经可以买到，但其中错误好多，被我发现了一个：
+
+image:../images/taocp_error.png[width=700]
+
+==== 阅读计划
+
