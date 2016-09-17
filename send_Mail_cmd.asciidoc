@@ -1,0 +1,42 @@
+:source-highlighter: pygments
+:pygments-style: manni
+== 如何从命令行发送邮件
+
+_原理介绍_
+
+=== PowerShell
+
+PowerShell 中内置了发送邮件的命令 `Send-MailMessage` ，下面的脚本把密码加密存储在文本里，这样可以不用每次输入密码，参考的是 http://www.adminarsenal.com/admin-arsenal-blog/secure-password-with-powershell-encrypting-credentials-part-1[Secure Password with PowerShell: Encrypting Credentials – Part 1]
+
+[source, PowerShell]
+-----
+function psMail {
+    param(
+            [Parameter(Mandatory = $true, Position = 0)]
+            [string] $to = "",
+            [string] $s = "",
+            [string] $b = ""
+         )
+
+        $from = "username@domain.com"
+        $SMTPServer = "smtp.domain.com"
+        $File = "C:\Users\video\passwd.txt"
+        $mycredential = new-object -TypeName System.Management.Automation.PSCredential -ArgumentList $from,(Get-Content $File | ConvertTo-SecureString)
+
+        Send-MailMessage -from $from -to $to -subject $s -body $b -smtpserver $SMTPServer -Credential $mycredential
+}
+-----
+
+=== Mutt, mailx, swaks
+
+* _MTA_
+* _MDA_
+
+=== Telnet, mail, sendmail
+
+* _SMTP命令_
+* _TLS的设置_
+
+=== Python
+
+_参考 Calibre 发送邮件的方法_
