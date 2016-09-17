@@ -19,13 +19,14 @@ link:InternetSocket.html[网络编程基础]
 
 link:books/JS-OO.html[JavaScript面向对象编程]
 
-
 link:Kindle.html[Kindle Paperwhite 3 入手体验]
 
 link:oneplus2.html[一加手机二 入手体验]
 
 
 === Computer Hacks
+link:send_Mail_cmd.html[如何从命令行发送邮件]
+
 link:pointerLevel2.html[On Pointer in C/C++]
 
 link:blogGeekonomics.html[我如何对待一个让我着迷的博客]
