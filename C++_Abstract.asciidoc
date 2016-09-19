@@ -1,0 +1,151 @@
+:source-highlighter: pygments
+:pygments-style: manni
+
+== 抽象与 C++ 机器模型
+	Bjarne Stroustrup
+
+=== 摘要
+`C++` 被设计为一门系统编程语言，从最早的年代开始，就已经被用来做嵌入式系统编程和其它资源受限的编程。这篇文章将简要讨论 `C++` 的计算和数据的基本模型如何有助于时间和空间性能，硬件访问和可预测性。如果这就是所有我们所需要的，我们可以只写汇编或者 `C` ，因此我会展示这些基本的特征如何与抽象的机制（例如类、继承和模板）交互，从而控制系统复杂度和提高正确性，并同时不影响期望的可预测性和性能。
+
+=== 理想与限制
+`C++` [ISO, 2003] [Stroustrup, 2000] 实质上被用于各种应用领域，包括科学计算、编译器、操作系统、设备驱动、游戏、分布式系统基础架构、仿真、通信、嵌入式系统应用（例如火星自动驾驶汽车）、航空软件、CAD/CAM系统、普通商业应用、图形学、电子商务网站和大型Web应用（例如航空订票网站）。一些是使用 `C++` 的应用，可以参考 http://www.stroustrup.com/applications.html[http://www.stroustrup.com/applications.html] 。
+
+`C++` 是如何支持如此大范围的应用的呢？基本的回答是：“通过高效使用硬件，还有有效的抽象”。这篇文章的目的是非常简洁地描述 `C++` 的基本机器模型，还有它的抽象机制如何将用户的高级概念映射到这个模型，而不损失来时间和空间的效率。在这一背景下，我们必须首先考察 `C++` 被设计用来支持的一般理想：
+
+* 工作在抽象的最灵活层面
+
+=== 机器模型
+`C++` 直接映射到硬件。它的基本类型（例如 **char**，**int**，**double** ）直接映射到内存实体（例如字节、字和寄存器），对这些类型来说，大部分算术和逻辑运算都被处理器直接支持。指针、数组和引用直接反映了寻址硬件。在 `C++` 程序员的表达和机器的设施之间没有“抽象”，“虚拟”，或者数学模型。这使得生成代码更简单也更好。 `C++` 的模型并不繁复，除了极少数的例外，与 `C` 等同。例如在 `C++` 中没有可能用来表达二阶缓存、内存映射单元、ROM或者特殊目的寄存器。这些概念很难抽象（以一种有用和可抑制的方式），但是在标准库的设施中，甚至对这些如此困难的设施都是有支持的（参见[ISO, 2005]中ROM 能力与硬件接口部分）。使用 `C++` ，只要我们想，我们可以十分接近硬件。
+
+让我举几个例子来说明从 `C++` 到内存的映射。要点不是复杂，而是简明。
+
+基本算术类型被简单地映射到合适大小的内存区域上。一个典型的实现会把 **char** 映射到字节，**int** 映射到字，**double** 到双字。
+
+=== 神话与限制
+
+=== 抽象机制
+
+=== 代码的例子
+类型和操作的选择在编译时做出，这可以带来很大的改进。例如，在一个嵌入式应用中，通过指针来间接操纵设备驱动被证明是瓶颈。解决方法是在设备寄存器地址 _和对象类型中_ ，用模板参数化来代替手动优化的低级 `C` ；这种方式可以带来40%的性能提升。最终的代码也更简短和易于维护[O'Riorden, 2004]。[ISO, 2005]的Section 5 包含了说明这项技术的代码；那里的例子把标准的接口与特殊目的的寄存器相联系。
+
+这些技术能做的事情是很让人惊奇的。可以从STL（ `C++` 标准库的容器和算法框架）一窥究竟[Stroustrup, 2000]。因为STL依赖自由存储，可能不太适用于特殊的嵌入式应用，但是那里的技术是通用的。想要了解更高级/极端的关于“模板元编程”的例子，参考[Abrahams, 2005]，要看更多的例子可以参考Boost库[Boost, 2005]。
+
+一般地，模板可以有整数参数是很重要的。特别地，你可以在编译时做任意的计算； _编译时常数归并_ 仅仅是最简单的例子。
+
+=== 代码例子
+简单地考虑MAN B&W Diesel A/S公司，控制监视大型潜艇柴油机引擎软件的设计者所面临的问题。这些引擎就是不能允许失败（不然一大艘轮船就漂走了），引擎的计算机必须有能力常年工作而不用维护，程序也必须可以移植到新一代的电脑上（因为电脑的换代周期要短于引擎）[Hansen, 2004]。
+
+我们如何计算地又精确又安全？使用不同 _精度_ 的数字？或者检测类似除零和溢出的错误？这对硬件实时来说足够快吗？（在基于25MHz Motorola 68332处理器的用来做 _电子燃油注射_ 的 _蹩脚_ 硬件上）。最终被选择而且现在还在大海上的大型船只上跑着的解决方法涉及到：
+
+* 做一个定点算术的模板类
+    ** 定点数是完全可移植的
+    ** 定点数在相关的处理器上是最高效的
+* 在需要的地方做模板特化
+
+就像所期待和要求的，这个解决方法在时间和空间上都是零冗余。
+
+首先考虑一个做关键计算的函数的例子。我除了改进了缩进，未做任何处理。我被告知如果对引擎了解的话，这段代码很容易阅读。对于看过用糟糕得多的代码来解决简单得多的问题的我来说，我很乐于相信这点：
+
+[source, C++]
+-------------
+StatusType<FixPoint16> EngineClass::InternalLoadEstimation(
+        const StatusType<FixPoint16>& UnsigRelSpeed,
+        const StatusType<FixPoint16>& FuelIndex)
+{
+    StatusType<FixPoint16> sl =UnsigRelSpeed*FuelIndex;
+    StatusType<FixPoint16> IntLoad = sl * (PointSevenFive + sl * (PointFiveFour - PointTwoSeven * sl)) - PointZeroTwo * UnsigRelSpeed * UnsigRelSpeed * UnsigRelSpeed;
+    IntLoad=IntLoad * NoFuelCylCorrFactor.Get();
+    if (IntLoad.GetValue() < FixPoint16ZeroValue)
+        IntLoad = sFIXPOINT16_0
+}
+-------------
+
+16-bit定点类型只是一个普通的类：
+
+[source, C++]
+-------------
+struct FixPoint16 {
+    FixPoint16();
+    FixPoint16(double aVal);
+
+    bool operator==(const FixPoint16& a) const { return val == a.val; }
+    bool operator!=(const FixPoint16&) const;
+    bool operator>(const FixPoint16&) const;
+    bool operator<(const FixPoint16&) const;
+    bool operator>=(const FixPoint16&) const;
+    bool operator<=(const FixPoint16&) const;
+
+    short GetShort() const;
+    float GetFloat() const;
+    double GetDouble() const;
+    private:
+    long val; // e.g. 16.16
+};
+
+-------------
+
+真正的计算（引擎的状态）发生在status类型（利用像 **FixPoint16** 的算术类型参数化）:
+
+[source, C++]
+-------------
+template<class T>
+struct StatusType {
+    StatusType();
+    StatusType(const StatusType &);
+    StatusType(const T aVal, const unsigned long aStat);
+
+    // Member Compound-assignment operator functions:
+    StatusType& operator+=(const StatusType&);
+
+    // Miscellaneous:
+    const T& GetValue() const;
+
+    // Access functions for status bits:
+    bool isOk() const;
+    bool IsValid() const;
+    private:
+    T value;
+    unsigned long fpStatus; // Bit codes defined by type tagFixPoint16Status
+};
+-------------
+
+这个模板类使用了我们在 **complex** 中见过的技术来设计和实现。为了时间和空间性能，它依赖同样的技术和优化。这意味着这些技术（以及支持这些技术的工具）在现实世界中的嵌入式系统环境中是有效的。
+
+引擎和处理器的低级细节用常数来编码，并封装在依赖这些常数的函数中：
+
+[source, C++]
+-------------
+template<class T>
+inline bool StatusType<T>::IsValid() const {
+    return (bool) ((fpStatus & 0x0000FFFF) == VS_VALID);
+}
+template<>
+StatusType<long>& StatusType<long>::operator+=(const StatusType<long>& rhs) {
+    long sum = value + rhs.value;
+    if((value ^ sum) & (rhs.value ^ sum) & LONG_MSB) { // overflow
+        AppendToStatus(VS_OVERFLOW);
+        value = (sum & LONG_MSB ? LONG_MAX : LONG_MIN);
+    }
+    else {
+        value = sum;
+    }
+    AppendToStatus(rhs.GetStatus());
+    return (*this);
+}
+-------------
+
+这个软件的设计者强调（我译自丹麦语）：
+
+* `C++` 不仅仅被当作“更好的 `C` ”来使用
+    ** 我们的结果远远超出了外部顾问的预期，他们在基于 `C` 的类似项目上很有经验。
+* 面向对象技术的大量使用
+    ** 包括类继承和虚函数
+* 泛型编程和模板的大量使用
+    ** 对避免代码重复是必要的
+    ** 对达到最优性能是必要的
+    ** 面向对象和泛型编程的结合使用
+* 一个好的工具连是必要的
+
+代码中没有使用异常（因为是硬件实时程序），而且自由内存分配仅在启动的时候使用，避免了内存耗尽或者碎片的产生。
+
+:docinfo:
