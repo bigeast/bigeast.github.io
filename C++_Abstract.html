@@ -519,11 +519,23 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p>直接使用应用领域的概念（例如带状对角矩阵、游戏头像、还有图形变换）来表达的代码，比使用底层概念（例如字节、指针、数据结构和简单循环）来表达的代码更容易正确实现，更容易理解，因此维护也更容易。“可行”指的是编程语言使用的表现形式、库和工具的可用性、优化器的质量、可用内存的大小、计算机的性能、实时性约束、程序员的北京，以及会限制我们实现这个理想的诸多其它因素。然而这并不是理想情况。工具制造者面临的挑战是使得抽象对于更大领域的应用切实可行（有效、经济、易于管理等）。</p>
 </div>
 <div class="paragraph">
-<p>说到“抽象”，这里并不是指“含糊”或者“不精确”。相反地，理想情况是应用程序概念和源代码中定义的实体之间的一一对应：
-    * 直接在代码中表现概念
-    * 在独立的代码中表现不相关的概念
-    * 直接在代码中表现概念之间的关系
-    * 当合并是合理的情况下（也只有在这种情况下）可以自由地将概念的合并体现在代码中</p>
+<p>说到“抽象”，这里并不是指“含糊”或者“不精确”。相反地，理想情况是应用程序概念和源代码中定义的实体之间的一一对应：</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>直接在代码中表现概念</p>
+</li>
+<li>
+<p>在独立的代码中表现不相关的概念</p>
+</li>
+<li>
+<p>直接在代码中表现概念之间的关系</p>
+</li>
+<li>
+<p>当合并是合理的情况下（也只有在这种情况下）可以自由地将概念的合并体现在代码中</p>
+</li>
+</ul>
 </div>
 <div class="paragraph">
 <p>“概念之间的关系”的例子有继承（面向对象编程）和参数化类型和算法（泛型编程）。</p>
@@ -532,23 +544,91 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p>这篇文章是关于把这些想法应用到嵌入式系统编程中，特别是在需要使用底层编程的技术硬件实时和高可靠性嵌入式系统编程中。</p>
 </div>
 <div class="paragraph">
-<p>嵌入式系统编程的特殊性在哪里呢？就想很多编程问题的回答一样，这个问题很难回答，因为“嵌入式系统编程”没有一个被广泛接受的定义。该领域从独立工具（例如自动开车窗器）微小的控制器、立体声放大器、电饭煲、数码相机、到大型交换机和整个飞机控制系统。我想强调的是除了最微小的系统之外的所有系统：在4-bit微处理器可能实现不了ISO C++，但是任何比它更强大的系统都可以从这里描述的理想和技术中获益。从系统设计观点看的要点如下：
-* 系统不只是一台计算机
-    <strong> 它是一个包含一台或者多台计算机的“小工具”/系统
-* 正确性
-    </strong> “硬件的错误”通常不能被当作借口
-* 可靠性要求
-    <strong> 通常比“普通的办公应用”要求更严格
-* 资源限制
-    </strong> 大多数嵌入式系统的内存或时间都受限
-* 实时性限制
-    <strong> 强制或者软性deadline
-* 没有操作员
-    </strong> 只有“小工具”的使用者
-* 长服务生命期
-    <strong> 在该工具数年的服务生命期中程序不能被更新
-* 一些系统不能被拿下来维护
-    </strong> 一点都不允许或者几天才可以维护一次</p>
+<p>嵌入式系统编程的特殊性在哪里呢？就想很多编程问题的回答一样，这个问题很难回答，因为“嵌入式系统编程”没有一个被广泛接受的定义。该领域从独立工具（例如自动开车窗器）微小的控制器、立体声放大器、电饭煲、数码相机、到大型交换机和整个飞机控制系统。我想强调的是除了最微小的系统之外的所有系统：在4-bit微处理器可能实现不了ISO C++，但是任何比它更强大的系统都可以从这里描述的理想和技术中获益。从系统设计观点看的要点如下：</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>系统不只是一台计算机</p>
+<div class="ulist">
+<ul>
+<li>
+<p>它是一个包含一台或者多台计算机的“小工具”/系统</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>正确性</p>
+<div class="ulist">
+<ul>
+<li>
+<p>“硬件的错误”通常不能被当作借口</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>可靠性要求</p>
+<div class="ulist">
+<ul>
+<li>
+<p>通常比“普通的办公应用”要求更严格</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>资源限制</p>
+<div class="ulist">
+<ul>
+<li>
+<p>大多数嵌入式系统的内存或时间都受限</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>实时性限制</p>
+<div class="ulist">
+<ul>
+<li>
+<p>强制或者软性deadline</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>没有操作员</p>
+<div class="ulist">
+<ul>
+<li>
+<p>只有“小工具”的使用者</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>长服务生命期</p>
+<div class="ulist">
+<ul>
+<li>
+<p>在该工具数年的服务生命期中程序不能被更新</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>一些系统不能被拿下来维护</p>
+<div class="ulist">
+<ul>
+<li>
+<p>一点都不允许或者几天才可以维护一次</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
 </div>
 <div class="paragraph">
 <p>在这个领域中，C++ 可以提供那些汇编和 C 所不能提供的呢？尤其是， C++ 的抽象机制对它与 C 共享的机器模型增加了什么呢？关于更多 C 和 C++ 之间的讨论，参见[Stroustrup, 2002]</p>
@@ -635,7 +715,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="pygments highlight"><code data-lang="C++"><span class="tok-k">class</span> <span class="tok-nc">complex</span> <span class="tok-p">{</span> <span class="tok-kt">double</span> <span class="tok-n">re</span><span class="tok-p">,</span> <span class="tok-n">im</span><span class="tok-p">;</span> <span class="tok-cm">/* ... */</span> <span class="tok-p">}</span><span class="tok-err">；</span>
+<pre class="pygments highlight"><code data-lang="C++"><span class="tok-k">class</span> <span class="tok-nc">complex</span> <span class="tok-p">{</span> <span class="tok-kt">double</span> <span class="tok-n">re</span><span class="tok-p">,</span> <span class="tok-n">im</span><span class="tok-p">;</span> <span class="tok-cm">/* ... */</span> <span class="tok-p">};</span>
 <span class="tok-n">complex</span> <span class="tok-n">a</span><span class="tok-p">[]</span><span class="tok-o">=</span> <span class="tok-p">{</span> <span class="tok-p">{</span><span class="tok-mi">1</span><span class="tok-p">,</span> <span class="tok-mi">2</span><span class="tok-p">},</span> <span class="tok-p">{</span><span class="tok-mi">3</span><span class="tok-p">,</span> <span class="tok-mi">4</span><span class="tok-p">}};</span></code></pre>
 </div>
 </div>
@@ -875,7 +955,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2016-09-22 02:31:24 中国标准时间
+Last updated 2016-09-22 02:37:52 中国标准时间
 </div>
 </div>
 </body>
