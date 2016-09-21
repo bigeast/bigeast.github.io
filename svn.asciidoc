@@ -1,0 +1,13 @@
+:source-highlighter: pygments
+:pygments-style: manni
+== svn的简单使用
+
+* svn checkout url
+* 每个svn仓库，都有三个目录：branches, trunk, tags
+* 如何下载所有的tags？
+    ** 写脚本，一个个checkout。缺点是容易出错，速度慢，不好调试。没有成功。
+* svnsync 需要有管理员账户
+* synrdump 是个选择！
+
+
+:docinfo:
