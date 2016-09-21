@@ -5,7 +5,7 @@
 <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 1.5.3">
-<title>通过虚拟主机科学、免费上网</title>
+<title>如何从命令行发送邮件</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /* Asciidoctor default stylesheet | MIT License | http://asciidoctor.org */
@@ -487,175 +487,66 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div id="content">
 <div class="sect1">
-<h2 id="_通过虚拟主机科学_免费上网">通过虚拟主机科学、免费上网</h2>
+<h2 id="_如何从命令行发送邮件">如何从命令行发送邮件</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>最近买了一年的VPS，用上了自己的Shadowsocks服务。其实网上有好多免费的(v2ex相应板块)，但是很不稳定，我也是经过一番权衡，终于买了bandwagon的VPS。</p>
-</div>
-<div class="paragraph">
-<p>由于支持IPv6的VPS要贵出好多，有点浪费，而只支持IPv4的VPS不仅便宜，而且也可以用通过隧道的方法支持IPv6。</p>
-</div>
-<div class="paragraph">
-<p>bandwagon的3.99$/年的VPS很实惠了，折合人民币才二十多块钱，每月100G流量。我买了5.99$/年的，每月300G流量，内存150M。系统装的是CentOS，由于是虚拟主机，装系统鼠标一点就行了。。只是浏览器中的命令行窗口貌似功能有限，还是直接ssh比较靠谱。首先先新建一个用户，visudo加上sudo权限。然后配置sshd，主要是安全性，禁止密码登录，禁止root登录。</p>
-</div>
-<div class="listingblock">
-<div class="title">/etc/ssh/sshd_config</div>
-<div class="content">
-<pre>PasswordAuthentication no
-PermitRootLogin no</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>但是在这之前记得把自己的ssh公钥复制到远程主机上：</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="pygments highlight"><code data-lang="bash">cat ~/.ssh/id_rsa.pub <span class="tok-p">|</span> ssh -p port bigeast@X.X.X.X <span class="tok-s1">&#39;cat &gt;&gt; ~/.ssh/authorized_keys&#39;</span></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>新申请了PayPal帐号付的款，不一定要绑定信用卡的，银联卡也可以，很方便。</p>
-</div>
-<div class="paragraph">
-<p>YouTube看视频不卡，速度大概1M左右，毕竟是通过了一层隧道。</p>
-</div>
-<div class="paragraph">
-<p>Shadowsocks不能设置全局代理，如果应用程序不支持设置外部代理，可以用proxychains等工具启动。我经常是</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="pygments highlight"><code data-lang="bash">proxychains youtube-dl <span class="tok-s2">&quot;url&quot;</span></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>来下载YouTube视频。</p>
-</div>
-<div class="paragraph">
-<p><strong>参考</strong> :</p>
-</div>
-<div class="paragraph">
-<p><a href="http://wiki.ssnode.me/index.php?option=com_content&amp;view=article&amp;id=8:bandwagonhost-shadowsocks&amp;catid=9&amp;Itemid=101">VPS购买</a></p>
-</div>
-<div class="paragraph">
-<p><a href="http://www.cybermilitia.net/2013/07/22/ipv6-tunnel-on-openvz/">IPv6隧道</a></p>
+<p><em>原理介绍</em></p>
 </div>
 <div class="sect2">
-<h3 id="_tue_26_may_2015_05_35_13_pm_cst">Tue 26 May 2015 05:35:13 PM CST</h3>
+<h3 id="_powershell">PowerShell</h3>
 <div class="paragraph">
-<p>Shadowsocks不能全局代理，不如OpenVPN方便。今天试了下安装OpenVPN服务器。</p>
+<p>PowerShell 中内置了发送邮件的命令 <code>Send-MailMessage</code> ，下面的脚本把密码加密存储在文本里，这样可以不用每次输入密码，参考的是 <a href="http://www.adminarsenal.com/admin-arsenal-blog/secure-password-with-powershell-encrypting-credentials-part-1">Secure Password with PowerShell: Encrypting Credentials – Part 1</a></p>
 </div>
-<div class="paragraph">
-<p>OpenVPN最大的不同是会生成一块虚拟网卡，这样就把不在同一个局域网里的主机放到了一个虚拟主机中。支持两种类型的网卡，TUN和TAP，TAP更接近真实的物理网卡，会有广播之类的流量出现，而TUN只是点对点之间传递数据。所以一般可以选择TUN。</p>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="PowerShell"><span class="tok-k">function</span> <span class="tok-n">psMail</span> <span class="tok-p">{</span>
+    <span class="tok-k">param</span><span class="tok-p">(</span>
+            <span class="tok-p">[</span><span class="tok-k">Parameter</span><span class="tok-p">(</span><span class="tok-k">Mandatory</span> <span class="tok-p">=</span> <span class="tok-nv">$true</span><span class="tok-p">,</span> <span class="tok-k">Position</span> <span class="tok-p">=</span> <span class="tok-n">0</span><span class="tok-p">)]</span>
+            <span class="tok-no">[string]</span> <span class="tok-nv">$to</span> <span class="tok-p">=</span> <span class="tok-s2">&quot;&quot;</span><span class="tok-p">,</span>
+            <span class="tok-no">[string]</span> <span class="tok-nv">$s</span> <span class="tok-p">=</span> <span class="tok-s2">&quot;&quot;</span><span class="tok-p">,</span>
+            <span class="tok-no">[string]</span> <span class="tok-nv">$b</span> <span class="tok-p">=</span> <span class="tok-s2">&quot;&quot;</span>
+         <span class="tok-p">)</span>
+
+        <span class="tok-nv">$from</span> <span class="tok-p">=</span> <span class="tok-s2">&quot;username@domain.com&quot;</span>
+        <span class="tok-nv">$SMTPServer</span> <span class="tok-p">=</span> <span class="tok-s2">&quot;smtp.domain.com&quot;</span>
+        <span class="tok-nv">$File</span> <span class="tok-p">=</span> <span class="tok-s2">&quot;C:\Users\video\passwd.txt&quot;</span>
+        <span class="tok-nv">$mycredential</span> <span class="tok-p">=</span> <span class="tok-nb">new-object</span> <span class="tok-n">-TypeName</span> <span class="tok-n">System</span><span class="tok-p">.</span><span class="tok-n">Management</span><span class="tok-p">.</span><span class="tok-n">Automation</span><span class="tok-p">.</span><span class="tok-n">PSCredential</span> <span class="tok-n">-ArgumentList</span> <span class="tok-nv">$from</span><span class="tok-p">,(</span><span class="tok-nb">Get-Content</span> <span class="tok-nv">$File</span> <span class="tok-p">|</span> <span class="tok-nb">ConvertTo-SecureString</span><span class="tok-p">)</span>
+
+        <span class="tok-nb">Send-MailMessage</span> <span class="tok-n">-from</span> <span class="tok-nv">$from</span> <span class="tok-n">-to</span> <span class="tok-nv">$to</span> <span class="tok-n">-subject</span> <span class="tok-nv">$s</span> <span class="tok-n">-body</span> <span class="tok-nv">$b</span> <span class="tok-n">-smtpserver</span> <span class="tok-nv">$SMTPServer</span> <span class="tok-n">-Credential</span> <span class="tok-nv">$mycredential</span>
+<span class="tok-p">}</span></code></pre>
 </div>
-<div class="paragraph">
-<p>目前VPS是通过https://tunnelbroker.net/[HE IPv6 tunel]来访问IPv6，我宿舍的笔记本可以IPv6+IPv4，但实验室的IPv6有问题，据师兄说从来都不能上。而且实验室只有一个网口，是通过路由器把所有主机连起来，只要一个人登录校园网账户，则所有人都是用这个人的流量，如果挂上一天，最少四五个G就没了。</p>
 </div>
-<div class="paragraph">
-<p>而通过VPN可以通过宿舍的电脑访问互联网，这样别人是用不了我的流量的。之前用Shadowsocks这样干过，但是不能访问IPv6。</p>
 </div>
-<div class="paragraph">
-<p>我最初的目标是：</p>
-</div>
+<div class="sect2">
+<h3 id="_mutt_mailx_swaks">Mutt, mailx, swaks</h3>
 <div class="ulist">
 <ul>
 <li>
-<p>1. VPS与宿舍的笔记本A通过IPv6连接，不走校园网流量。</p>
+<p><em>MTA</em></p>
 </li>
 <li>
-<p>2. 笔记本A与实验室主机B通过IPv4连接，走的是校内的流量。</p>
-</li>
-<li>
-<p>3. 如果B也能够访问到VPS，那么也能够上Google。我看了配置文件里的选项，只有一个 'client-to-client' 貌似是有关的。</p>
+<p><em>MDA</em></p>
 </li>
 </ul>
 </div>
-<div class="paragraph">
-<p>OpenVPN的配置比Shadowsocks复杂多了，首先要通过 'easy-rsa' 生成各种证书和密钥，然后配置文件也比较复杂，跟 'mutt' 有一拼。搞了好久，最后是卡在防火墙上， 'iptables' 规则设置不对。网上查了好多也没找到解决方法。</p>
 </div>
-<div class="paragraph">
-<p>首先，需要确定内核中开启了IP转发功能：
-./etc/sysctl.d/30-ipforward.conf</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>net.ipv4.ip_forward=1
-net.ipv6.conf.default.forwarding=1
-net.ipv6.conf.all.forwarding=1</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>然后开启 'iptables.service' 服务：</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>systemctl start iptables.service
-systemctl enable iptables.service # 开机启动</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>我先在笔记本A上开启了 'openvpn server' 会多出一块网卡 'tun0' ，IP是 10.9.0.1 。
-然后在主机B上开启 'openvpn client' ，同样会多出 'tun0' ，IP是 10.9.0.8。
-这两个地址之间可以互相ping通，但是目前B是不能通过A访问互联网的。还需要在服务器A上配置防火墙规则：</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>iptables -t nat -A POSTROUTING -s 10.9.0.0/24 -o eth0 -j MASQUERADE
-iptables -A FORWARD -i eth0 -o tun0 -j ACCEPT
-iptables -A FORWARD -i tun0 -o eth0 -j ACCEPT</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>然后通过 'iptables-save &gt; /etc/iptables/iptables.rules' 永久写入，以后再次启动 'iptables.service' 后就会自动加载这些规则。
-上面的三条命令中，第一条是设置网络地址转换(NAT)规则，如果IP包的源地址是在该虚拟局域网中，那么就通过服务器的真实网卡eth0发送。它是在POSTROUTING规则上添加的，代表这个包已经经过路由抵达了 'tun0' ，等待被处理。
-MASQUERADE是善变、伪装的意思，就是说如果 eth0 的外部IP地址可以不断变化，但不影响正常的转发。
-后两条是允许在 'eth0' 和 'tun0' 之间转发IP包。没有这条规则，客户端从 'tun0' 路由过来的请求就不能传到 'eth0' ，也就不能访问互联网了。</p>
-</div>
-<div class="paragraph">
-<p>但是这几条规则在VPS当作服务器的情况下是不行的，因为我的VPS是通过 OpenVZ 搭建的，没有真实的物理网卡，只有 'venet0' ，它是不支持 MASQUERADE的。http://safesrv.net/install-openvpn-on-centos/[此处的教程]提到了可以通过 SNAT，即静态NAT来实现类似的功能。 <span class="line-through">但该方法在 'OpenVZ + CentOS 7' 上并不管用。</span></p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>iptables -t nat -A POSTROUTING -s 10.9.0.0/24 ! -d 10.9.0.0/24 -j SNAT --to-source 138.128.221.113</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>意思从该虚拟局域网路由过来的包，如果目的地址是在局域网之外，那么就根据 SNAT 由服务器转发出去。</p>
-</div>
-<div class="paragraph">
-<p>目前为止，都是IPv4环境下。OpenVPN 2.3.X之后，也有了IPv6支持，需要在配置文件中加上 'proto udp6' ，然后设置 'server-ipv6' 选项。
-<a href="https://wiki.nyr.es/ipv6_tunnel_broker_openvpn_openvz">ipv6_tunnel_broker_openvpn_openvz</a> 是我找到的唯一的一篇介绍用非原生IPv6的VPS作为 IPv6 OpenVPN 服务器的文章。不过目前还没有成功，以后可以继续搞。但是主要收获是在该博主的 Github 页面上找到了https://github.com/Nyr/openvpn-install [openvpn-install]，是一个自动生成OpenVPN密钥和配置文件的脚本。生成的配置文件是一个文件，所有的key都通过inline的方式写在里面。但是我运行的时候出现了解析错误，有人说是文件编码问题，不能用UTF-8来编，但我用 'file(1)' 看了一下本来就是ASCII文本文件。所以问题暂时解决不了了。</p>
-</div>
-<div class="paragraph">
-<p>不过在执行这个自动化安装脚本的时候，有一个选项是说，要不要通过53端口来访问OpenVPN。当然要。之后可以看到它给 iptables 加上了这么一条规则：</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>iptables -t nat -A PREROUTING -d 138.128.221.113/32 -p udp -m udp --dport 53 -j REDIRECT --to-ports 1194</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>就是服务器的配置文件不用做任何修改，如果客户端是访问服务器的53端口，那么就先重定向到1194端口！</p>
-</div>
-<div class="paragraph">
-<p>这个方法的好处是，通过53端口的流量一般是不被ISP统计的（ping 走的是 53端口）。在没有登录校园网帐号时， ping 外网的地址是不会有回应的，但其实外网是收到了 ping 请求，只是它的回应被学校给拦截了。如果服务器端做了端口转发，那么就相当于通过53端口传输了非ICMP的数据。</p>
-</div>
-<div class="paragraph">
-<p><strong>不过就算服务器获取了客户端的真实内容，它如何把响应返回给客户端而不被拦截呢？</strong></p>
-</div>
-<div class="paragraph">
-<p>总之，目前使用 53 端口的方法可以基本实现免费（每月300G）、无墙上网。笔记本A本身的IPv6通道不受影响。</p>
-</div>
-<div class="paragraph">
-<p>之后有时间可以继续搞 OpenVPN的IPv6配置。不过现在动力不太大了。。</p>
+<div class="sect2">
+<h3 id="_telnet_mail_sendmail">Telnet, mail, sendmail</h3>
+<div class="ulist">
+<ul>
+<li>
+<p><em>SMTP命令</em></p>
+</li>
+<li>
+<p><em>TLS的设置</em></p>
+</li>
+</ul>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_16_09_17_10_18_32_saturday">16/09/17/10:18:32/Saturday</h3>
+<h3 id="_python">Python</h3>
 <div class="paragraph">
-<p>最近IPv6隧道又上不去了。开始以为是校园网IPv6又抽风，然而后来发现并不是。现象就是IPv4的Shadowsocks可以照常使用，但IPv6却总是超时。</p>
-</div>
-<div class="paragraph">
-<p>本地主机和VPS都有公开的IPv6地址，而且都能连接到ipv6.google.com等IPv6网站，但却无法互相ping通！</p>
+<p><em>参考 Calibre 发送邮件的方法</em></p>
 </div>
 </div>
 </div>
@@ -663,7 +554,7 @@ MASQUERADE是善变、伪装的意思，就是说如果 eth0 的外部IP地址�
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2016-09-17 11:00:05 CST
+Last updated 2016-09-17 13:24:09 CST
 <script type="text/javascript" charset="utf-8">
 var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1254706632'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s11.cnzz.com/z_stat.php%3Fid%3D1254706632%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));
 </script>

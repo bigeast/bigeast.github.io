@@ -1,6 +1,6 @@
 :source-highlighter: pygments
 :pygments-style: manni
-**通过虚拟主机科学、免费上网**
+== 通过虚拟主机科学、免费上网
 
 最近买了一年的VPS，用上了自己的Shadowsocks服务。其实网上有好多免费的(v2ex相应板块)，但是很不稳定，我也是经过一番权衡，终于买了bandwagon的VPS。
 
@@ -37,8 +37,7 @@ http://wiki.ssnode.me/index.php?option=com_content&view=article&id=8:bandwagonho
 
 http://www.cybermilitia.net/2013/07/22/ipv6-tunnel-on-openvz/[IPv6隧道]
 
-Tue 26 May 2015 05:35:13 PM CST
---------------------------------
+=== Tue 26 May 2015 05:35:13 PM CST
 
 Shadowsocks不能全局代理，不如OpenVPN方便。今天试了下安装OpenVPN服务器。
 
@@ -113,5 +112,12 @@ iptables -t nat -A PREROUTING -d 138.128.221.113/32 -p udp -m udp --dport 53 -j 
 总之，目前使用 53 端口的方法可以基本实现免费（每月300G）、无墙上网。笔记本A本身的IPv6通道不受影响。
 
 之后有时间可以继续搞 OpenVPN的IPv6配置。不过现在动力不太大了。。
+
+=== 16/09/17/10:18:32/Saturday 
+
+最近IPv6隧道又上不去了。开始以为是校园网IPv6又抽风，然而后来发现并不是。现象就是IPv4的Shadowsocks可以照常使用，但IPv6却总是超时。
+
+本地主机和VPS都有公开的IPv6地址，而且都能连接到ipv6.google.com等IPv6网站，但却无法互相ping通！
+
 
 :docinfo:
