@@ -489,10 +489,8 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="sect1">
 <h2 id="_抽象与_c_机器模型">抽象与 C++ 机器模型</h2>
 <div class="sectionbody">
-<div class="literalblock">
-<div class="content">
-<pre>Bjarne Stroustrup</pre>
-</div>
+<div class="paragraph">
+<p>Bjarne Stroustrup</p>
 </div>
 <div class="sect2">
 <h3 id="_摘要">摘要</h3>
@@ -683,7 +681,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p><span class="image"><img src="images/cpp_model_inheritance.svg" alt="cpp model inheritance" width="300"></span></p>
 </div>
 <div class="paragraph">
-<p>只有当我们加入虚函数（C++ 的提供运行时多态的机制），才需要添加一些辅助的数据结构，它们也只是些函数的列表：</p>
+<p>只有当我们加入虚函数（C++ 提供的运行时多态机制），才需要添加一些辅助的数据结构，它们也只是些函数的列表：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -735,13 +733,110 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="sect2">
 <h3 id="_神话与限制">神话与限制</h3>
 <div class="paragraph">
-<p>有一种态度并不罕见，是说“如果某个东西是优雅、可行、高阶、普适、可读的，等等，那么它必然很慢而且很复杂。” 这种态度是如此根深蒂固，以至于有些人实质上拒绝使用 C 未提供的 C++ 的所有功能，而不觉得需要证据。这是不幸的，因为。。</p>
+<p>有一种态度并不罕见，是说“如果某个东西是优雅、可行、高阶、普适、可读的，等等，那么它必然很慢而且很复杂。” 这种态度是如此根深蒂固，以至于有些人实质上拒绝使用 C 未提供的 C++ 的所有功能，而不觉得需要证据。这是不幸的，因为底层的替代者涉及到更底层的抽象、更多的错误和更多的维护困难等，这些都需要额外的工作。摆弄比特、字节、指针和数组应该是最后的防线而不是首要选择。 C++ 对“高级特性”的代价和收益做出权衡，例如类、继承、模板、自由存储（堆）、异常和标准库。如果你需要这些设施提供的功能，你极少（如果可能）能够手动写出更好的选择。ISO C++ 标准委员会的性能技术报告[ISO, 2005]为这一主张提供了数据和论据。</p>
+</div>
+<div class="paragraph">
+<p>显然，我们不应该在每个问题上都使用 C++ 的所有特性。尤其是，不是每个特性都适合硬实时应用，因为它们的性能不是100%可预测的（即，我们不能事先精确地声称到底要做多少操作，如果不知道它被如何使用或者它被使用时程序的状态的话。）</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>自由存储（<strong>new/delete</strong>）：内存分配的时间依赖于可用的自由内存和碎片，会使得性能随着时间恶化。这意味着对于很多系统，不能使用自由存储或者只能被用于程序启动时（没有内存释放意味着没有碎片）。可选方案是静态分配，栈式分配和使用内存池。</p>
+</li>
+<li>
+<p>RTTI(<strong>dynamic_cast/typeid</strong>)：小型嵌入式系统中很少会用到，因此对这样的系统就不要使用它。实现 <strong>dynamic_cast</strong> 是可能使程序变快并且可预测的[Gibbs, 2005]，但是目前的各种实现都没有做到这点。</p>
+</li>
+<li>
+<p>异常(<strong>throw/catch</strong>)：处理异常所需要的时间取决于抛出点和捕获点的距离（用函数调用次数来衡量）和在次过程中需要被销毁的对象个数。没有合适的工具这是很难预测的，这类工具现在还没有出现。所以我不建议对硬实时系统使用异常；这么做是一个研究性问题，我期望会在接下来的十年中被解决。就目前来说，当需要硬实时的时候，我们必须使用更多传统的错处理策略，并且在有软实时要求的大型嵌入式系统中也要限制异常的使用。</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>C++ 其余的机制（包括类、类继承和模板）都可以而且已经被成功应用于硬实时代码中。自然地，这需要对这些设施和它们到硬件的映射的了解，但这与其它语言的情况类似。为硬实时或高可用系统写代还要求慎重和一个好的编译器（参见 <a href="http://www.stroustrup.com/compilers.html" class="bare">http://www.stroustrup.com/compilers.html</a> ）。值得注意的是对很多类型的应用来说， <em>现代的异常实现性能只有不使用异常代码性能的5%不到</em> ——不使用异常的代码必须用备选的异常处理代码（返回错误代码、显式测试等）来扩充。对于可以使用异常的应用，我认为他们的首选策略也应该是错误处理[Stroustrup, 2000]。</p>
+</div>
+<div class="paragraph">
+<p>用于嵌入式系统编程的编译器有一些开关，可以禁掉不需要的特性（例如在硬实时应用中）。不管怎么说，它们的使用在代码中也容易看出。</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_抽象机制">抽象机制</h3>
 <div class="paragraph">
-<p>这段代码的性能依赖于内联函数调用。人们已经正确地意识到，当一个大的函数被调用多次时（无论是很多不同的调用，还是仅有几个调用但是有很多不同的模板参数），内联会导致代码膨胀。然而，这种论调对小函数（例如 <strong>complex</strong> 定义的 '=' 和 '' 操作符）不适用，此时实际的操作比函数 <em>preamble</em> 和返回值又小又快。在这些情况下，相比普通的函数和函数调用，内联在时间和空间上都有性能提升。事实上，类对象和内联函数的一个流行的应用就是实现参数化，这个参数可以是单个机器指令，例如 '&lt;' [Stroustrup, 1999]</p>
+<p>C++提供的主要抽象机制是类、类的继承和模板。这里我会集中于模板因为它们是现代静态的类型安全且高性能的代码的关键工具。模板是编译时重组机制，意味着与等价的手写代码相比，没有运行时和空间开销。模板允许你将类和函数用类型和整数参数化。说得专业点，它们提供参数化多态作为类继承的ad-hoc多态性的补充。通常，系统地使用模板被称作“泛型编程”，作为系统使用类继承的“面向对象编程”的补充。两种编程范式都依赖于类。</p>
+</div>
+<div class="paragraph">
+<p>我会先展示一些简单的“教材示例”来说明一般性的技术和取舍。之后，我会展示一些来自大型潜艇柴油引擎的代码,这些代码使用相同的技术来提供可靠性、安全性和性能。</p>
+</div>
+<div class="paragraph">
+<p>这里是 C++ 标准库中 complex 类型的稍微简化过的版本。它是一个使用标量类型参数化的模板类：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="C++"><span class="tok-k">template</span><span class="tok-o">&lt;</span><span class="tok-k">class</span> <span class="tok-nc">Scalar</span><span class="tok-o">&gt;</span>
+<span class="tok-k">class</span> <span class="tok-nc">complex</span> <span class="tok-p">{</span>
+    <span class="tok-n">Scalar</span> <span class="tok-n">re</span><span class="tok-p">,</span> <span class="tok-n">im</span><span class="tok-p">;</span>
+<span class="tok-k">public</span><span class="tok-o">:</span>
+    <span class="tok-n">complex</span><span class="tok-p">()</span> <span class="tok-p">{}</span>
+    <span class="tok-n">complex</span><span class="tok-p">(</span><span class="tok-n">Scalar</span> <span class="tok-n">x</span><span class="tok-p">)</span><span class="tok-o">:</span> <span class="tok-n">re</span><span class="tok-p">(</span><span class="tok-n">x</span><span class="tok-p">)</span> <span class="tok-p">{}</span>
+    <span class="tok-n">complex</span><span class="tok-p">(</span><span class="tok-n">Scalar</span> <span class="tok-n">x</span><span class="tok-p">,</span> <span class="tok-n">Scalar</span> <span class="tok-n">y</span><span class="tok-p">)</span><span class="tok-o">:</span> <span class="tok-n">re</span><span class="tok-p">(</span><span class="tok-n">x</span><span class="tok-p">),</span> <span class="tok-n">im</span><span class="tok-p">(</span><span class="tok-n">y</span><span class="tok-p">)</span> <span class="tok-p">{}</span>
+
+    <span class="tok-n">complex</span><span class="tok-o">&amp;</span> <span class="tok-k">operator</span><span class="tok-o">+=</span><span class="tok-p">(</span><span class="tok-n">complex</span> <span class="tok-n">z</span><span class="tok-p">)</span> <span class="tok-p">{</span>
+        <span class="tok-n">re</span> <span class="tok-o">+=</span> <span class="tok-n">z</span><span class="tok-p">.</span><span class="tok-n">re</span><span class="tok-p">;</span>
+        <span class="tok-n">im</span> <span class="tok-o">+=</span> <span class="tok-n">z</span><span class="tok-p">.</span><span class="tok-n">im</span><span class="tok-p">;</span>
+        <span class="tok-k">return</span> <span class="tok-o">*</span><span class="tok-k">this</span><span class="tok-p">;</span>
+    <span class="tok-p">}</span>
+    <span class="tok-n">complex</span><span class="tok-o">&amp;</span> <span class="tok-k">operator</span><span class="tok-o">+=</span><span class="tok-p">(</span><span class="tok-n">Scalar</span> <span class="tok-n">x</span><span class="tok-p">)</span> <span class="tok-p">{</span>
+        <span class="tok-n">re</span> <span class="tok-o">+=</span> <span class="tok-n">x</span><span class="tok-p">;</span>
+        <span class="tok-k">return</span> <span class="tok-o">*</span><span class="tok-k">this</span><span class="tok-p">;</span>
+    <span class="tok-p">}</span>
+
+    <span class="tok-c1">// ...</span>
+<span class="tok-p">};</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>这是一个完美的普通类定义，提供了数据成员（定义了该类型的对象的布局）和函数成员（定义了合法操作）。 <strong>template&lt;class Scalar&gt;</strong> 说明 <strong>complex</strong> 接受一个类型参数（它被用来作为标量类型）。有了这个定义——不需要其它东西——我们可以这么写：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="C++"><span class="tok-n">complex</span><span class="tok-o">&lt;</span><span class="tok-kt">double</span><span class="tok-o">&gt;</span> <span class="tok-n">z</span><span class="tok-p">(</span><span class="tok-mi">1</span><span class="tok-p">,</span><span class="tok-mi">2</span><span class="tok-p">);</span> <span class="tok-c1">// z.re = 1; z.im = 2;</span>
+<span class="tok-n">complex</span><span class="tok-o">&lt;</span><span class="tok-kt">float</span><span class="tok-o">&gt;</span> <span class="tok-n">z2</span> <span class="tok-o">=</span> <span class="tok-mi">3</span><span class="tok-p">;</span> <span class="tok-c1">//z2.re = 3;</span>
+<span class="tok-n">z</span> <span class="tok-o">+=</span> <span class="tok-n">z2</span><span class="tok-p">;</span> <span class="tok-c1">// z.re = z.re + z2.re; z.im = z.im + z2.im;</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>注释说明了实际生成的代码。要点是这里没有间接冗余。所进行的操作与语义要求的在机器层面是精确一致的。一个 <strong>complex&lt;double&gt;</strong> 会被分配两个 <strong>double</strong> （再无其它）而 <strong>complex&lt;float&gt;</strong> 会被分配两个 <strong>floate</strong>。<strong>complex&lt;int&gt;</strong>可作为一个很好的 <strong>Point</strong> 类型。模板类 <strong>complex</strong> 本身并不生成任何代码或者空间，而且由于我们没有使用接受一个标量的 += 操作符，它也不会生成代码。如果优化器足够优秀，就算被使用的 $+= 操作符版本也不会有代码生成。 <em>相反</em> ，所有操作都倾向于给出注释中给出的代码。</p>
+</div>
+<div class="paragraph">
+<p>有两种 += 的版本来保证最优性能，而不必由优化器来做出英雄式的努力。例如，考虑：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="C++"><span class="tok-n">z</span> <span class="tok-o">+=</span> <span class="tok-mi">2</span><span class="tok-p">;</span> <span class="tok-c1">// z.re += 2;</span>
+<span class="tok-n">z</span> <span class="tok-o">+=</span> <span class="tok-p">(</span><span class="tok-mi">2</span><span class="tok-p">,</span><span class="tok-mi">0</span><span class="tok-p">);</span> <span class="tok-c1">// z.re += 2; z.im += 0;</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>一个好的优化器会消除第二条语句中多余的 <strong>z.im += 0</strong> 。然而，为仅增加实部提供一个独立的实现，我们可以不依赖于那么聪明的优化器。通过这种方式，重载可以作为提升性能的工具。</p>
+</div>
+<div class="paragraph">
+<p>我们可以使用 += 操作符来定义一个传统的二目运算符 + ：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="C++"><span class="tok-k">template</span><span class="tok-o">&lt;</span><span class="tok-k">class</span> <span class="tok-nc">S</span><span class="tok-o">&gt;</span>
+<span class="tok-n">complex</span><span class="tok-o">&lt;</span><span class="tok-n">S</span><span class="tok-o">&gt;</span> <span class="tok-k">operator</span><span class="tok-o">+</span><span class="tok-p">(</span><span class="tok-n">complex</span><span class="tok-o">&lt;</span><span class="tok-n">S</span><span class="tok-o">&gt;</span> <span class="tok-n">x</span><span class="tok-p">,</span> <span class="tok-n">complex</span><span class="tok-o">&lt;</span><span class="tok-n">S</span><span class="tok-o">&gt;</span> <span class="tok-n">y</span><span class="tok-p">)</span> <span class="tok-p">{</span>
+    <span class="tok-n">complex</span><span class="tok-o">&lt;</span><span class="tok-n">S</span><span class="tok-o">&gt;</span> <span class="tok-n">r</span> <span class="tok-o">=</span> <span class="tok-n">x</span><span class="tok-p">;</span> <span class="tok-c1">// r.re = x.re; r.im = y.im;</span>
+    <span class="tok-n">r</span> <span class="tok-o">+=</span> <span class="tok-n">y</span><span class="tok-p">;</span> <span class="tok-c1">// r.re += y.re; r.im += y.im;</span>
+<span class="tok-p">};</span>
+<span class="tok-c1">//define complex variables x and y</span>
+<span class="tok-n">complex</span><span class="tok-o">&lt;</span><span class="tok-kt">double</span><span class="tok-o">&gt;</span> <span class="tok-n">z</span> <span class="tok-o">=</span> <span class="tok-n">x</span> <span class="tok-o">+</span> <span class="tok-n">y</span><span class="tok-p">;</span> <span class="tok-c1">// z.re = x.re + y.re; z.im = x.im + y.im;</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>注释仍旧表示现有的优化器为这段代码生成的优化代码。基本上, 模板将上面描述的类的映射到实现模型以使内存得到更好利用，而且简单函数调用的内联保证类内存的更好利用。这里“好”的意思是“优化器生成的最优”，而那么好的优化器是不常见的。可以用上面的例子对你的编译器和优化器做一个简单的初步测试，看它是否合适一个应用。</p>
+</div>
+<div class="paragraph">
+<p>这段代码的性能依赖于内联函数调用。人们已经正确地意识到，当一个大的函数被调用多次时（无论是很多不同的调用，还是仅有几个调用但是有很多不同的模板参数），内联会导致代码膨胀。然而，这种论调对小函数（例如 <strong>complex</strong> 定义的 += 和 + 操作符）不适用，此时实际的操作比函数 <em>preamble</em> 和返回值又小又快。在这些情况下，相比普通的函数和函数调用，内联在时间和空间上都有性能提升。事实上，类对象和内联函数的一个流行的应用就是实现参数化，这个参数可以是单个机器指令，例如 '&lt;' [Stroustrup, 1999]</p>
 </div>
 <div class="paragraph">
 <p>将一个大函数内联通常是个很坏的主意。这样做通常揭示了程序员的大意或是优化器做得太差。</p>
@@ -769,7 +864,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p>类型和操作的选择在编译时做出，这可以带来很大的改进。例如，在一个嵌入式应用中，通过指针来间接操纵设备驱动被证明是瓶颈。解决方法是在设备寄存器地址 <em>和对象类型中</em> ，用模板参数化来代替手动优化的低级 C ；这种方式可以带来40%的性能提升。最终的代码也更简短和易于维护[O&#8217;Riorden, 2004]。[ISO, 2005]的Section 5 包含了说明这项技术的代码；那里的例子把标准的接口与特殊目的的寄存器相联系。</p>
 </div>
 <div class="paragraph">
-<p>这些技术能做的事情是很让人惊奇的。可以从STL（ C++ 标准库的容器和算法框架）一窥究竟[Stroustrup, 2000]。因为STL依赖自由存储，可能不太适用于特殊的嵌入式应用，但是那里的技术是通用的。想要了解更高级/极端的关于“模板元编程”的例子，参考[Abrahams, 2005]，要看更多的例子可以参考Boost库[Boost, 2005]。</p>
+<p>这些技术能做的事情是很让人惊奇的。可以从 STL（ C++ 标准库的容器和算法框架）一窥究竟[Stroustrup, 2000]。因为STL依赖自由存储，可能不太适用于特殊的嵌入式应用，但是那里的技术是通用的。想要了解更高级/极端的关于“模板元编程”的例子，参考[Abrahams, 2005]，要看更多的例子可以参考Boost库[Boost, 2005]。</p>
 </div>
 <div class="paragraph">
 <p>一般地，模板可以有整数参数是很重要的。特别地，你可以在编译时做任意的计算； <em>编译时常数归并</em> 仅仅是最简单的例子。</p>
@@ -950,12 +1045,48 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p>代码中没有使用异常（因为是硬件实时程序），而且自由内存分配仅在启动的时候使用，避免了内存耗尽或者碎片的产生。</p>
 </div>
 </div>
+<div class="sect2">
+<h3 id="_参考文献">参考文献</h3>
+<div class="paragraph">
+<p>[Abrahams, 2005]  David Abrahams and Aleksey Gurtovoy: “C++ Template Metaprogramming: Concepts, Tools, and Techniques from Boost and Beyond", Addison Wesley. 2005. ISBN 0-321-22725-5.</p>
+</div>
+<div class="paragraph">
+<p>[Boost, 2005] www.boost.org.</p>
+</div>
+<div class="paragraph">
+<p>[Gibbs, 2005]  Michael Gibbs and Bjarne Stroustrup: “Fast Dynamic Casting”.  Software-Practice&amp;Experience. Wiley. To appear 2005.</p>
+</div>
+<div class="paragraph">
+<p>[Hansen, 2004] Mogens Hansen: “C++ I embedded systemer”. Elektronik 04.  Odense Congress Center. September 2004. And personal communication.</p>
+</div>
+<div class="paragraph">
+<p>[O’Riorden, 200 Martin J. O’Riordan: “C++ For Embedded Systems”. And personal communications.</p>
+</div>
+<div class="paragraph">
+<p>[ISO, 2003] “The C++ Standard” (ISO/IEC 14882:2002). Wiley 2003. ISBN 0 470 84674-7.</p>
+</div>
+<div class="paragraph">
+<p>[ISO, 2005] “Technical Report on C++ Performance”. ISO.IEC PDTR 18015. (<a href="http://www.research.att.com/~bs/performanceTR.pdf" class="bare">http://www.research.att.com/~bs/performanceTR.pdf</a>).</p>
+</div>
+<div class="paragraph">
+<p>[Stroustrup, 19 Bjarne Stroustrup: “The Design and Evolution of C++”. Addison Wesley, 1994. ISBN 0-201-54330-3.</p>
+</div>
+<div class="paragraph">
+<p>[Stroustrup, 1 Bjarne Stroustrup: “Learning standard C as a new language”.  C/C Users Journal. May 1999</p>
+</div>
+<div class="paragraph">
+<p>[Stroustrup, 2000]  Bjarne Stroustrup: “The C++ Programming Language”. Addison Wesley. 2000. ISBN 0-201-70073-5.</p>
+</div>
+<div class="paragraph">
+<p>[Stroustrup, 2002]  B. Stroustrup: “C and C++: Siblings”, “C and C++: A Case for Compatibility”, “C and C++: Case Studies in Compatibility”. The C/C++ Users Journal. July, August, and September 2002.</p>
+</div>
+</div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2016-09-22 02:37:52 中国标准时间
+Last updated 2016-09-22 11:31:35 中国标准时间
 </div>
 </div>
 </body>
