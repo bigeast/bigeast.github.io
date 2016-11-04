@@ -25,6 +25,8 @@ link:oneplus2.html[一加手机二 入手体验]
 
 
 === Computer Hacks
+link: x264_source_review_macro.html[x264源码阅读笔记：宏的使用]
+
 link:send_Mail_cmd.html[如何从命令行发送邮件]
 
 link:pointerLevel2.html[On Pointer in C/C++]
@@ -67,6 +69,7 @@ link:books/ddj.html[道德经]
 
 === Translate
 link:Ng.html[Andrew Ng 谈百度深度学习的现状]
+link:C++_Abstract.html[抽象与C++机器模型]
 
 === link:http://138.128.221.113:8000[我的简历]
 
