@@ -672,10 +672,10 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </div>
 <div class="paragraph">
-<p>不懂。。</p>
+<p><span class="line-through">不懂。。 额，那啥（玩儿脱了：|），看看 <strong>ALWAYS_INLINE</strong> 这个宏吧😂！</span></p>
 </div>
 <div class="paragraph">
-<p>额，那啥（玩儿脱了：|），看看 <strong>ALWAYS_INLINE</strong> 这个宏吧😂！</p>
+<p>准备在stackoverflow上提问的时候，在电脑上运行了下，发现上面的分析是错误的，t并不是只取1,0，因为负数右移，使用1来填充，右移31位就是全1，与操作后，保持不变。如果a&gt;=b，那么t是0；如果a&lt;b，那么t的值是a-b，经过"a-=t;b+=t;"之后，a,b互换。前三条语句其实是把max(a,b)赋给a，min(a,b)赋给b。整个函数最终返回的是 <code>min(max(a,b), max(min(a, b), c))</code> ，至于这个为什么是中值，额，非常不想把六种情况都带进去验证，肯定有更直观的解释！继续想！！</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -719,7 +719,7 @@ MSVC++ 5.0  _MSC_VER == 1100</pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2016-11-04 21:37:58 中国标准时间
+Last updated 2016-11-04 23:01:25 中国标准时间
 </div>
 </div>
 </body>
