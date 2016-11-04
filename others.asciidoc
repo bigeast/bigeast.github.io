@@ -1,0 +1,49 @@
+[width="30%"]
+|====================
+|link:2015notes/2015-02.html[2015-02 笔记] 
+|link:2015notes/2015-03.html[2015-03 笔记]
+|link:2015notes/2015-04.html[2015-04 笔记]
+|link:2015notes/2015-05.html[2015-05 笔记]
+|link:2015notes/2015-06.html[2015-06 笔记]
+|link:2015notes/2015-07.html[2015-07 笔记]
+|link:2015notes/2015-08.html[2015-08 笔记]
+|link:2015notes/2015-09.html[2015-09 笔记]
+|link:2015notes/2015-12.html[2015-12 笔记]
+|====================
+
+'''
+link:bigeastOJ.html[bigeast on OJ]
+
+link:http://138.128.221.113:8000[我的简历]
+
+link:codingInterview.html[Coding Interview]
+
+link:leetcode.html[Leetcode]
+
+link:SortAlgo.html[排序算法]
+
+link:Problems.html[Problems to Solve]
+
+link:MathPuzzles.html[数学智力题]
+
+'''
+link:Kindle.html[Kindle Paperwhite 3 入手体验]
+
+link:oneplus2.html[一加手机二 入手体验]
+
+link:scrot.html[Scrot屏幕截图]
+
+link:books/linuxfaner.html[Linux就是这个范儿]
+
+link:InternetSocket.html[网络编程基础]
+
+link:books/JS-OO.html[JavaScript面向对象编程]
+
+'''
+link:books/YM.html[斯蒂芬·哈珀在读什么]
+
+link:Mac_OS_X_背后的故事.html[Mac_OS_X_背后的故事]
+
+link:BeijingFolding.html[北京折叠]
+
+link:poems/英雄.html[英雄]

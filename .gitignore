@@ -9,3 +9,6 @@
 !poems/hz
 !poems/hz/*
 poems/hz/*.swp
+
+!2015notes/
+!2015notes/*

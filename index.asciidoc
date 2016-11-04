@@ -2,30 +2,7 @@
 :pygments-style: manni
 == Bigeast's Blog
 
-
-//=== 计算机
-//link:codingInterview.html[Coding Interview]
-
-//link:leetcode.html[Leetcode]
-
-//link:SortAlgo.html[排序算法]
-
-//link:Problems.html[Problems to Solve]
-
-=== Book Notes
-link:books/linuxfaner.html[Linux就是这个范儿]
-
-link:InternetSocket.html[网络编程基础]
-
-link:books/JS-OO.html[JavaScript面向对象编程]
-
-link:Kindle.html[Kindle Paperwhite 3 入手体验]
-
-link:oneplus2.html[一加手机二 入手体验]
-
-
-=== Computer Hacks
-link: x264_source_review_macro.html[x264源码阅读笔记：宏的使用]
+link:x264_source_review_macro.html[x264源码阅读笔记：宏的使用]
 
 link:send_Mail_cmd.html[如何从命令行发送邮件]
 
@@ -39,7 +16,6 @@ link:PowerShell.html[PowerShell学习记录]
 
 link:Windows_PowerShell.html[Linux用户的Windows生存手册]
 
-link:scrot.html[Scrot屏幕截图]
 
 link:VPS-Shadowsocks.html[VPS科学上网]
 
@@ -47,30 +23,16 @@ link:pythonchallenge.html[Python Challenge Note]
 
 link:Source_Code_Tree_Navigation_in_Vim.html[Source Code Tree Navigation in Vim]
 
+=== 翻译
+link:CPP_Abstract.html[抽象与CPP机器模型]
 
-=== 人文
-link:books/YM.html[斯蒂芬·哈珀在读什么]
+link:Ng.html[Andrew Ng 谈百度深度学习的现状]
+
+=== link:others.html[其它]
 
 link:books/ddj.html[道德经]
 
-// === Notes
-// [width="30%"]
-// |====================
-// |link:2015-02.html[2015-02 笔记] 
-// |link:2015-03.html[2015-03 笔记]
-// |link:2015-04.html[2015-04 笔记]
-// |link:2015-05.html[2015-05 笔记]
-// |link:2015-06.html[2015-06 笔记]
-// |link:2015-07.html[2015-07 笔记]
-// |link:2015-08.html[2015-08 笔记]
-// |link:2015-09.html[2015-09 笔记]
-// |link:2015-12.html[2015-12 笔记]
-// |====================
+link:poems/index.html[海子的诗]
 
-=== Translate
-link:Ng.html[Andrew Ng 谈百度深度学习的现状]
-link:C++_Abstract.html[抽象与C++机器模型]
-
-=== link:http://138.128.221.113:8000[我的简历]
 
 :docinfo:
