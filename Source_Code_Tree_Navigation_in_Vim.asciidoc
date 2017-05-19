@@ -11,24 +11,33 @@ ctags也用过，但也没有深入研究过，因为需求也不是很强烈。
 == 跨文件跳转到定义
 
 在VS中快捷键是 _F12_ ，然后 _Ctrl+-_ 返回。在Vim的内置功能中也有跳转到定义的功能，按 _gd_ 即可，但这只是基于文本的搜索，没有分析语法，而且只能在当前文件中搜索，不是很实用。标准的解决方案应该是用 http://ctags.sourceforge.net/[ctags] 生成tags文件，然后在Vim中就可以用 
+
 * _:tag <varname>_ 
 * 或者 _Ctrl+]_ （写到这里突然想到了Vim的帮助文档的tags就是这么跳转的）
-* 甚至 _Ctrl+鼠标左键_ 来跳转到定义了。具体做法如下：
-* 按　_Ctrl+t_　从一个tag返回到原来的位置。或者　_Ctrl+o_ ，用Vim本身的上一个位置返回（如果移动了很多次，需要按好多次才能返回到原来位置）。
+* 甚至 _Ctrl+鼠标左键_ 
 
-* 首先系统需要安装ctags，这个通过软件源或者http://ctags.sourceforge.net/[ctags官方网站]都可以安装。
+来跳转到定义了。具体做法如下：
+
+* 按　_Ctrl+t_　从一个tag返回到原来的位置。或者　_Ctrl+o_ ，用Vim本身的上一个位置返回（如果移动了很多次，需要按好多次才能返回到原来位置）。
+* 首先系统需要安装ctags，这个通过软件源或者 http://ctags.sourceforge.net/[ctags官方网站] 都可以安装。
 * 在工程目录下生成tags文件：
+
 [source, bash]
-$ctags -R # 遍历所有目录，默认输出文件是 tags
-$ctags -e -R # 同上，但是生成的TAGS是给Emacs用的
+----
+ctags -R # 遍历所有目录，默认输出文件是 tags
+ctags -e -R # 同上，但是生成的TAGS是给Emacs用的
+----
 
 * 在 _~/.vimrc_ 中添加
+
 [source, bash]
+----
 set tags=./tags;/
+----
 
-这是Stackoverflow上http://stackoverflow.com/questions/563616/vim-and-ctags-tips-and-tricks[有个答案]给出的解决方案，目的是先在当前目录下找tags，如果没有，就一直向上层目录搜索，直到根目录。这样就只需要生成一个tags文件就行了。
+这是Stackoverflow上 http://stackoverflow.com/questions/563616/vim-and-ctags-tips-and-tricks[有个答案] 给出的解决方案，目的是先在当前目录下找tags，如果没有，就一直向上层目录搜索，直到根目录。这样就只需要生成一个tags文件就行了。
 
-之所以要这样设置，是因为默认的_set tags=./tags,./TAGS,tags,TAGS_ 不好用。实际的代码文件往往分散在工程文件下的多个子目录下，如果Vim默认只在当前目录下搜索tags或者TAGS，就需要分别为每个目录生成tags文件。另外如果没有设置 _set autochdir_ ，在子目录A中，打开了另外子目录B中的某个源文件file.c，此时Vim并不会改变你的当前目录到B，而仍旧在A目录下寻找B/file.c的tags，当然不是想要的结果！不知道Vim的默认选项为什么这么设计（此处省略一万字吐槽）。
+之所以要这样设置，是因为默认的 _set tags=./tags,./TAGS,tags,TAGS_ 不好用。实际的代码文件往往分散在工程文件下的多个子目录下，如果Vim默认只在当前目录下搜索tags或者TAGS，就需要分别为每个目录生成tags文件。另外如果没有设置 _set autochdir_ ，在子目录A中，打开了另外子目录B中的某个源文件file.c，此时Vim并不会改变你的当前目录到B，而仍旧在A目录下寻找B/file.c的tags，当然不是想要的结果！不知道Vim的默认选项为什么这么设计（此处省略一万字吐槽）。
 
 另外，还可以直接 _vim -t main_ 来直接打开含有main函数的文件并把光标也放到main上！
 
@@ -47,8 +56,10 @@ https://github.com/mileszs/ack.vim[ack.vim], https://github.com/rking/ag.vim[ag.
 在VS中要右键->调用浏览器。在Vim中需要用到cscope。
 
 [source, bash]
-$cscope -R #　在源文件根目录下生成cscope.out，并打开cscope自带的ncurse界面。但每次进行新的搜索时，需要退出vim
-$cscope -R -b # 仅生成cscope.out，然后退出
+----
+cscope -R #　在源文件根目录下生成cscope.out，并打开cscope自带的ncurse界面。但每次进行新的搜索时，需要退出vim
+cscope -R -b # 仅生成cscope.out，然后退出
+----
 
 * 源文件根目录下打开Vim，输入 _:cscope add cscope.out_ 命令，连接到已生成的cscope数据库。
 * _:cscope help_ 查看帮助
